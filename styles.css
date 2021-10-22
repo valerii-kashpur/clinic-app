@@ -13,7 +13,9 @@ body {
   color: #202225;
 }
 
-input:active, :hover, :focus {
+input:active,
+:hover,
+:focus {
   outline: 0;
   outline-offset: 0;
 }
@@ -48,11 +50,13 @@ input:active, :hover, :focus {
   line-height: 110%;
   color: #202225;
   height: 89.71vh;
+  padding-left: 32px;
+  padding-right: 32px;
 }
 
 .aside__container {
   margin: 0 auto;
-  width: 256px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -80,7 +84,7 @@ input:active, :hover, :focus {
 }
 
 .aside__form__signUp__input {
-  width: 256px;
+  width: 100%;
   height: 40px;
   border: 1px solid #dce0ec;
   background-color: #ffffff;
@@ -88,6 +92,10 @@ input:active, :hover, :focus {
   border-radius: 8px;
   padding: 0;
   padding-left: 48px;
+  padding-right: 16px;
+}
+.aside__form__signUp__input.password {
+  padding-right: 48px;
 }
 
 .aside__form__signUp__input::placeholder {
@@ -151,8 +159,8 @@ input:active, :hover, :focus {
   color: #202225;
 }
 .aside__form__signUp__input:invalid,
-.aside__form__signUp__input:invalid{
-  border-color: #F6657F;
+.aside__form__signUp__input:invalid {
+  border-color: #f6657f;
   filter: drop-shadow(0px 4px 32px rgba(218, 228, 255, 0.16));
 }
 
@@ -207,7 +215,7 @@ input:active, :hover, :focus {
   width: 24px;
   height: 24px;
   top: 8px;
-  left: 216px;
+  right: 18px;
   background-repeat: no-repeat;
   background-size: cover;
   background: url("./media/eye-off.svg");
@@ -221,11 +229,13 @@ input:active, :hover, :focus {
 /* aside__link */
 
 .aside__link__wrapper {
+  display: flex;
   padding-bottom: 44px;
   margin-top: auto;
 }
 
 .aside__signIn__link__wrapper {
+  display: flex;
   margin-top: auto;
   padding-top: 24px;
   padding-bottom: 44px;
@@ -235,6 +245,7 @@ input:active, :hover, :focus {
 .aside__link__signIn,
 .aside__link__forgotPassword {
   margin: 0;
+  margin-right: 12px;
 
   font-size: 15px;
   line-height: 21px;
@@ -309,7 +320,7 @@ input:active, :hover, :focus {
     top: 0;
     right: 0;
     border-radius: 0;
-    width: 72.93vw;
+    width: 560px;
     /* padding-left: 96px; */
     height: 100%;
   }
@@ -336,13 +347,13 @@ input:active, :hover, :focus {
   }
 
   .signUp__input__firstName,
-.signUp__input__lastName,
-.signUp__input__email,
-.signUp__input__password,
-.signUp__input__confirmPassword {
-  font-size: 17px;
-  line-height: 24px;
-}
+  .signUp__input__lastName,
+  .signUp__input__email,
+  .signUp__input__password,
+  .signUp__input__confirmPassword {
+    font-size: 17px;
+    line-height: 24px;
+  }
 
   .singUp__input__wrapper:not(:last-of-type) {
     margin-bottom: 40px;
@@ -352,6 +363,11 @@ input:active, :hover, :focus {
     width: 368px;
     height: 56px;
     padding-left: 64px;
+    padding-right: 24px;
+  }
+
+  .aside__form__signUp__input.password {
+    padding-right: 64px;
   }
 
   .signUp__input__password__eye {
@@ -388,7 +404,6 @@ input:active, :hover, :focus {
 
   .aside__link__signUp {
     margin-top: 0px;
-    margin-right: 12px;
     font-size: 15px;
     line-height: 21px;
   }
@@ -443,5 +458,12 @@ input:active, :hover, :focus {
   .aside {
     width: 560px;
     /* padding-left: 96px; */
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .aside__link__wrapper,
+  .aside__signIn__link__wrapper {
+    flex-direction: column;
   }
 }
