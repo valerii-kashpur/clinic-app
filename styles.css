@@ -20,51 +20,33 @@ input:active,
   outline-offset: 0;
 }
 
-/* ------------image----------- */
-/* .image {
-  width: 320px;
-  height: 242px;
-  background-image: url("./media/bg.jpg");
-  background-size: cover;
-} */
-
-.image {
-  /* Set rules to fill background */
-  min-height: 100%;
-  min-width: 1024px;
-
-  /* Set up proportionate scaling */
-  width: 100%;
-  height: auto;
-
-  /* Set up positioning */
-  position: fixed;
-  top: 0;
-  left: 0;
+.container.aside__signUp,
+.container.aside__signIn,
+.container.aside__restorePassword {
+  padding-top: 72px;
+  background: url(./media/bg.jpg) no-repeat;
+  background-size: 100%;
+  overflow: hidden;
 }
 
+/* ./media/bg.jpg */
+
 .main {
-  /* width: 100vw;
-  height: 100vh;
-  background-image: url("./media/bg.jpg");
-  background-size: 100vw;
-  background-repeat: no-repeat; */
+  min-width: 100%;
+  min-height: 100%;
 }
 
 /* ------------aside----------- */
 
 .aside {
-  position: relative;
   padding-top: 32px;
-  width: 100vw;
-  top: 10.29vh;
   border-radius: 24px 24px 0px 0px;
   background-color: #f9faff;
   font-weight: 600;
   font-size: 24px;
   line-height: 110%;
   color: #202225;
-  height: 89.71vh;
+  height: 90vh;
   padding-left: 32px;
   padding-right: 32px;
 }
@@ -327,8 +309,12 @@ input:active,
 /* ----------- MEDIA ----------- */
 
 @media screen and (min-width: 768px) {
-  .main {
-    background-size: 100vw 100vh;
+  .container.aside__signUp,
+  .container.aside__signIn,
+  .container.aside__restorePassword {
+    padding-top: 0px;
+    background: url(./media/bg.jpg) no-repeat;
+    background-size: cover;
   }
 
   .aside {
@@ -347,11 +333,11 @@ input:active,
   }
 
   .aside.signUp {
-    padding-top: 16.4vh;
+    padding-top: 16vh;
   }
   .aside.signIn,
   .aside.restorePass {
-    padding-top: 25.78vh;
+    padding-top: 26vh;
   }
 
   .aside__title {
@@ -456,7 +442,7 @@ input:active,
   .aside__signIn__link__wrapper {
     display: flex;
     padding-top: 40px;
-    padding-bottom: 7.81vh;
+    padding-bottom: 8vh;
   }
   .aside__link__signIn {
     margin-top: 0px;
