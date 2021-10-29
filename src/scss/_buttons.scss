@@ -1,0 +1,91 @@
+@import "_vars.scss";
+
+.aside__form__signUp__button,
+.aside__form__signIn__button,
+.aside__form__restorePass__button {
+  margin-top: 32px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: $aside-button-border-radius;
+  border: none;
+
+  background-color: $accent-color;
+  color: $button-text-color;
+
+  font-weight: $bold-font-weight;
+  font-size: $mobile-font-size;
+  line-height: 19px;
+}
+
+.aside__form__signUp__button {
+  width: 122px;
+}
+.aside__form__signIn__button {
+  width: 118px;
+}
+.aside__form__restorePass__button {
+  width: 198px;
+}
+
+.form__button__vector {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin-left: 8px;
+
+  background: url("../media/angle-right-b.svg");
+  background-repeat: no-repeat;
+}
+
+@media screen and (min-width: 768px) {
+  .aside__form__signUp__button,
+  .aside__form__signIn__button,
+  .aside__form__restorePass__button {
+    margin-top: 64px;
+    height: 56px;
+
+    font-size: 17px;
+    line-height: 24px;
+  }
+  .aside__form__signUp__button {
+    width: 146px;
+  }
+  .aside__form__signIn__button {
+    width: 138px;
+  }
+  .aside__form__restorePass__button {
+    width: 214px;
+  }
+}
+
+// DOCTOR VIEW
+
+.nav__buttons__patients,
+.nav__buttons__resolutions {
+  width: 120px;
+  height: 40px;
+  border-radius: 8px;
+  border: none;
+}
+
+.nav__buttons__patients {
+  margin-right: 24px;
+
+  background: #7297ff;
+  color: white;
+}
+
+.nav__buttons__resolutions {
+  background: #ffffff;
+  color: #7297ff;
+}
+
+@media screen and (min-width: 768px) {
+  .nav__buttons__patients,
+  .nav__buttons__resolutions {
+    width: 160px;
+  }
+}
