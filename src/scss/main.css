@@ -58,7 +58,7 @@ body {
   font-family: Poppins;
   font-style: normal;
   font-weight: normal;
-  font-size: 15;
+  font-size: 15px;
   line-height: 19px;
   color: #202225;
 }
@@ -89,7 +89,7 @@ input:active,
   background-color: #7297ff;
   color: #ffffff;
   font-weight: 600;
-  font-size: 15;
+  font-size: 15px;
   line-height: 19px;
 }
 
@@ -206,7 +206,7 @@ input:active,
 .email,
 .aside__input__password,
 .aside__input__confirmPassword {
-  font-size: 15;
+  font-size: 15px;
   line-height: 21px;
   color: #202225;
 }
@@ -450,7 +450,7 @@ input:active,
 .aside__link__forgotPassword {
   margin: 0;
   margin-right: 12px;
-  font-size: 15;
+  font-size: 15px;
   line-height: 21px;
   color: #a1abc9;
 }
@@ -463,7 +463,7 @@ input:active,
 .aside__link__signIn_accent,
 .restorePass__notification__accent {
   font-weight: 600;
-  font-size: 15;
+  font-size: 15px;
   line-height: 130%;
   text-decoration: underline;
   color: #7297ff;
@@ -556,7 +556,7 @@ input:active,
   min-width: 256px;
   margin: 0;
   margin-bottom: 24px;
-  font-size: 15;
+  font-size: 15px;
   line-height: 130%;
   font-weight: normal;
   color: #a1abc9;
@@ -916,7 +916,7 @@ input:active,
 
 @media screen and (min-width: 1440px) {
   .patients__list__item {
-    min-width: none;
+    min-width: 0;
     width: 406px;
   }
 }
