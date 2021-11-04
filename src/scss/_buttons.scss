@@ -1,4 +1,6 @@
 @import "_vars.scss";
+@import "_mixines.scss";
+
 
 .aside__form__signUp__button,
 .aside__form__signIn__button,
@@ -9,14 +11,14 @@
   align-items: center;
   justify-content: center;
 
-  border-radius: $aside-button-border-radius;
+  @include aside-button-border-radius;
   border: none;
 
   background-color: $accent-color;
   color: $button-text-color;
 
-  font-weight: $bold-font-weight;
-  font-size: $mobile-font-size;
+  @include bold-font-weight;
+  @include mobile-font-size;
   line-height: 19px;
 }
 

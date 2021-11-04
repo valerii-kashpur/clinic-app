@@ -1,4 +1,5 @@
 @import "_vars.scss";
+@import "_mixines.scss";
 
 .container.clinicApp {
   background-color: $doctor-view-container-background-collor;
@@ -92,6 +93,25 @@
   overflow-y: scroll;
 }
 
+// SCROLLBAR
+
+.clinicApp__patients__list{
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+  &::-webkit-scrollbar-track {
+    background: $doctor-view-container-background-collor;
+    opacity: 0.32;
+    border-radius: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    width: 12px;
+    background: #dce0ec;
+    opacity: 0.56;
+    border-radius: 8px;
+  }
+}
+
 .patients__list__item {
   padding-left: 24px;
   padding-right: 16px;
@@ -131,7 +151,7 @@
 }
 
 .patientInfo__status__name {
-  font-weight: $bold-font-weight;
+  @include bold-font-weight;
   font-size: 17px;
   line-height: 130%;
 }
@@ -183,7 +203,7 @@
 }
 
 .list__item__time {
-  font-weight: $bold-font-weight;
+  @include bold-font-weight;
   &::before {
     background-image: url("../media/clock-three.svg");
   }
@@ -222,7 +242,7 @@
   }
 
   .header__user__name {
-    font-weight: $bold-font-weight;
+    @include bold-font-weight;
   }
 
   .header__user__role {
@@ -264,28 +284,6 @@
     flex-wrap: wrap;
   }
 
-  /* width */
-  ::-webkit-scrollbar {
-    width: 20px;
-  }
-
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #dce0ec;
-    opacity: 0.32;
-    border-radius: $doctor-view-border-radus;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
-      drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  }
-
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    height: 106px;
-    background: #dce0ec;
-    opacity: 0.56;
-    border-radius: $doctor-view-border-radus;
-  }
-
   .patients__list__item {
     padding: 24px 32px;
     padding-bottom: 40px;
@@ -311,6 +309,7 @@
 .empty__list {
   display: flex;
   align-items: flex-end;
+  justify-content: center;
   height: 64vh;
   padding-bottom: 108px;
   text-align: center;
@@ -324,7 +323,7 @@
 .empty__list__text {
   max-width: 461px;
 
-  font-size: $mobile-font-size;
+  @include bold-font-weight;
   line-height: 21px;
 
   color: $secondary-text-color;

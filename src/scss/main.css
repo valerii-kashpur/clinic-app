@@ -58,7 +58,7 @@ body {
   font-family: Poppins;
   font-style: normal;
   font-weight: normal;
-  font-size: 15px;
+  font-size: 15;
   line-height: 19px;
   color: #202225;
 }
@@ -89,7 +89,7 @@ input:active,
   background-color: #7297ff;
   color: #ffffff;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 15;
   line-height: 19px;
 }
 
@@ -206,7 +206,7 @@ input:active,
 .email,
 .aside__input__password,
 .aside__input__confirmPassword {
-  font-size: 15px;
+  font-size: 15;
   line-height: 21px;
   color: #202225;
 }
@@ -450,7 +450,7 @@ input:active,
 .aside__link__forgotPassword {
   margin: 0;
   margin-right: 12px;
-  font-size: 15px;
+  font-size: 15;
   line-height: 21px;
   color: #a1abc9;
 }
@@ -463,7 +463,7 @@ input:active,
 .aside__link__signIn_accent,
 .restorePass__notification__accent {
   font-weight: 600;
-  font-size: 15px;
+  font-size: 15;
   line-height: 130%;
   text-decoration: underline;
   color: #7297ff;
@@ -556,7 +556,7 @@ input:active,
   min-width: 256px;
   margin: 0;
   margin-bottom: 24px;
-  font-size: 15px;
+  font-size: 15;
   line-height: 130%;
   font-weight: normal;
   color: #a1abc9;
@@ -681,6 +681,23 @@ input:active,
           flex-direction: column;
   gap: 24px 20px;
   overflow-y: scroll;
+}
+
+.clinicApp__patients__list::-webkit-scrollbar {
+  width: 12px;
+}
+
+.clinicApp__patients__list::-webkit-scrollbar-track {
+  background: #e4ebff;
+  opacity: 0.32;
+  border-radius: 8px;
+}
+
+.clinicApp__patients__list::-webkit-scrollbar-thumb {
+  width: 12px;
+  background: #dce0ec;
+  opacity: 0.56;
+  border-radius: 8px;
 }
 
 .patients__list__item {
@@ -852,25 +869,6 @@ input:active,
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
   }
-  /* width */
-  ::-webkit-scrollbar {
-    width: 20px;
-  }
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #dce0ec;
-    opacity: 0.32;
-    border-radius: 8px;
-    -webkit-filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-            filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  }
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    height: 106px;
-    background: #dce0ec;
-    opacity: 0.56;
-    border-radius: 8px;
-  }
   .patients__list__item {
     padding: 24px 32px;
     padding-bottom: 40px;
@@ -897,6 +895,9 @@ input:active,
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   height: 64vh;
   padding-bottom: 108px;
   text-align: center;
@@ -908,7 +909,7 @@ input:active,
 
 .empty__list__text {
   max-width: 461px;
-  font-size: 15px;
+  font-weight: 600;
   line-height: 21px;
   color: #a1abc9;
 }

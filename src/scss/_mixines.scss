@@ -1,0 +1,28 @@
+// BORDER RADIUS
+@mixin aside-input-border-radius {
+    border-radius: 8px;
+}
+@mixin aside-button-border-radius {
+    border-radius: 8px;
+}
+@mixin doctor-view-border-radus {
+    border-radius: 8px;
+}
+
+// TEXT STYLES
+
+@mixin font-family {
+    font-family: Poppins;
+}
+@mixin font-style {
+    font-style: normal;
+}
+@mixin font-weight {
+    font-weight: normal;
+}
+@mixin bold-font-weight {
+    font-weight: 600;
+}
+@mixin mobile-font-size {
+    font-size: 15;
+}
