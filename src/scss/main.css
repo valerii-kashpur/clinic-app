@@ -657,6 +657,10 @@ input:active,
   display: -ms-flexbox;
   display: flex;
   margin-left: auto;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-right: 40px;
 }
 
 .section__nav__search {
@@ -670,6 +674,12 @@ input:active,
   height: 24px;
 }
 
+.section__nav__search__input,
+.section__nav__select__span,
+.section__nav__select_tag {
+  display: none;
+}
+
 .clinicApp__patients__list {
   margin-top: 16px;
   display: -webkit-box;
@@ -681,23 +691,6 @@ input:active,
           flex-direction: column;
   gap: 24px 20px;
   overflow-y: scroll;
-}
-
-.clinicApp__patients__list::-webkit-scrollbar {
-  width: 12px;
-}
-
-.clinicApp__patients__list::-webkit-scrollbar-track {
-  background: #e4ebff;
-  opacity: 0.32;
-  border-radius: 8px;
-}
-
-.clinicApp__patients__list::-webkit-scrollbar-thumb {
-  width: 12px;
-  background: #dce0ec;
-  opacity: 0.56;
-  border-radius: 8px;
 }
 
 .patients__list__item {
@@ -869,6 +862,20 @@ input:active,
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
   }
+  .clinicApp__patients__list::-webkit-scrollbar {
+    width: 12px;
+  }
+  .clinicApp__patients__list::-webkit-scrollbar-track {
+    background: #e4ebff;
+    opacity: 0.32;
+    border-radius: 8px;
+  }
+  .clinicApp__patients__list::-webkit-scrollbar-thumb {
+    width: 12px;
+    background: #dce0ec;
+    opacity: 0.56;
+    border-radius: 8px;
+  }
   .patients__list__item {
     padding: 24px 32px;
     padding-bottom: 40px;
@@ -924,6 +931,43 @@ input:active,
 @media screen and (min-width: 1920px) {
   .clinicApp__cards__section {
     padding-right: 24px;
+  }
+  .section__nav__select {
+    display: none;
+  }
+  .section__nav__search__input,
+  .section__nav__select__span,
+  .section__nav__select_tag {
+    display: block;
+  }
+  .section__nav__search__input {
+    border: none;
+    width: 90px;
+    margin-right: 10px;
+    color: #a1abc9;
+  }
+  .section__nav__search__input::-webkit-input-placeholder {
+    color: #a1abc9;
+  }
+  .section__nav__search__input:-ms-input-placeholder {
+    color: #a1abc9;
+  }
+  .section__nav__search__input::-ms-input-placeholder {
+    color: #a1abc9;
+  }
+  .section__nav__search__input::placeholder {
+    color: #a1abc9;
+  }
+  .section__nav__search {
+    margin-right: 16px;
+  }
+  .section__nav__select__span {
+    margin-right: 16px;
+    color: #a1abc9;
+  }
+  .section__nav__select_tag {
+    color: #7297ff;
+    border: none;
   }
 }
 /*# sourceMappingURL=main.css.map */
