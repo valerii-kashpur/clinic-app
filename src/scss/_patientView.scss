@@ -1,0 +1,21 @@
+.section__nav__select_span{
+    display: none;
+}
+.section__nav__select_desctop{
+    display: none;
+}
+
+@media screen and (min-width: 1920px) {
+    .section__nav__select_span{
+        display: block;
+        margin-right: 16px;
+
+        color: $secondary-text-color;
+    }
+    .section__nav__select_desctop{
+        display: block;
+
+        color: $accent-color;
+        border: none;
+    }
+}
