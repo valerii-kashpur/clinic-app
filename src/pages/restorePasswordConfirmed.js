@@ -1,17 +1,41 @@
 import React from "react";
 import RestorePassAside from "../components/RestorePassAside";
+import styled from "styled-components";
+
+const NotificationText = styled.p`
+  min-width: 256px;
+  margin: 0;
+  margin-bottom: 24px;
+
+  font-size: 15px;
+  line-height: 130%;
+  font-weight: normal;
+
+  color: #a1abc9;
+
+  @media screen and (min-width: 768px) {
+    width: 368px;
+  } ;
+`;
+
+const EmailLInk = styled.a`
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 130%;
+  text-decoration: underline;
+
+  color: #7297ff;
+`;
 
 const restorePasswordConfirmed = () => {
   return (
     <RestorePassAside title="Restore Password">
-      <div className="restorePass__notification_wrapper">
-        <p className="restorePass__notification">
+      <div>
+        <NotificationText>
           An email has been sent to{" "}
-          <a href="/" className="restorePass__notification__accent">
-            example@exam.com.
-          </a>{" "}
-          Check your inbox, and click the reset link provided.
-        </p>
+          <EmailLInk href="/">example@exam.com.</EmailLInk> Check your inbox,
+          and click the reset link provided.
+        </NotificationText>
       </div>
     </RestorePassAside>
   );

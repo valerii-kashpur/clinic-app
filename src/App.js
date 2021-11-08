@@ -6,11 +6,11 @@ import restorePasswordConfirmed from './pages/restorePasswordConfirmed';
 import SignIn from './pages/signIn';
 import SignUp from './pages/signUp';
 
-import "./scss/main.css";
+import "./main.css";
 
 function App() {
   return (
-    <main id="root">
+    <main id="main">
       <Switch>
         <Route path="/sign-in" component={SignIn} />
         <Route path="/sign-up" component={SignUp} />

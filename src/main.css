@@ -1,11 +1,10 @@
-@import "_vars.scss";
-@import "_mixines.scss";
-
+@charset "UTF-8";
 /* Указываем box sizing */
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 /* Убираем внутренние отступы */
@@ -34,7 +33,6 @@ dd {
 
 /* Выставляем основные настройки по-умолчанию для body */
 body {
-  // min-height: 100vh;
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
 }
@@ -57,13 +55,12 @@ img {
 }
 
 body {
-  @include font-family;
-  @include font-style;
-  @include font-weight;
-  @include mobile-font-size;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
   line-height: 19px;
-
-  color: $aside-text-color;
+  color: #202225;
 }
 
 input:active,
