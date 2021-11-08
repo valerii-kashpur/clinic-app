@@ -1,0 +1,380 @@
+@import "_vars.scss";
+@import "_mixines.scss";
+
+.container.clinicApp {
+  background-color: $doctor-view-container-background-collor;
+}
+
+.clinicApp__header {
+  display: flex;
+  height: 72px;
+  padding-left: 24px;
+  padding-right: 24px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__logo__wrapper {
+  display: flex;
+}
+
+.clinicApp__logo {
+  width: 132px;
+  height: 32px;
+}
+
+.header__user__wrapper {
+  position: relative;
+}
+
+.header__user__name__wrapper {
+  display: none;
+  text-align: end;
+}
+
+.header__user__status {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  right: 0;
+
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+
+  background-image: radial-gradient(
+    ellipse at center,
+    $pointer-collor 40%,
+    $doctor-view-container-background-collor 40%,
+    $doctor-view-container-background-collor 100%
+  );
+}
+
+.clinicApp__cards__section {
+  padding-top: 40px;
+  padding-left: 24px;
+  padding-right: 24px;
+
+  background: $doctor-view-background-collor;
+  box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.32);
+  border-radius: 16px 16px 0px 0px;
+}
+
+.clinicApp__nav__buttons {
+  display: flex;
+}
+
+.clinicApp__section__nav {
+  margin-top: 40px;
+  display: flex;
+}
+
+.section__nav__items__wrapper {
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+  padding-right: 40px;
+}
+
+.section__nav__search {
+  margin-right: 24px;
+
+  width: 24px;
+  height: 24px;
+}
+.section__nav__select {
+  width: 24px;
+  height: 24px;
+}
+
+.section__nav__search__input,
+.section__nav__select__span,
+.section__nav__select_tag {
+  display: none;
+}
+
+.clinicApp__patients__list {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px 20px;
+  overflow-y: scroll;
+}
+
+.patients__list__item {
+  padding-left: 24px;
+  padding-right: 16px;
+  padding-top: 16px;
+  padding-bottom: 24px;
+  height: 100%;
+
+  background-color: #ffffff;
+  box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.24);
+  border-radius: 12px;
+}
+
+.list__item__patientInfo__wrapper {
+  position: relative;
+  padding-bottom: 16px;
+
+  display: flex;
+  align-items: center;
+  &::after {
+    position: absolute;
+    content: "";
+
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+
+    background: #dce0ec;
+    opacity: 0.5;
+  }
+}
+
+.list__item__patient__img {
+  width: 48px;
+  height: 48px;
+  margin-right: 16px;
+}
+
+.patientInfo__status__name {
+  @include bold-font-weight;
+  font-size: 17px;
+  line-height: 130%;
+}
+
+.patientInfo__AppointmentInfo {
+  font-size: 13px;
+  line-height: 130%;
+  color: $secondary-text-color;
+}
+
+.list__item__patientInfo__more {
+  width: 24px;
+  height: 24px;
+  margin-left: auto;
+}
+
+.patientInfo__status__wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.patientInfo__status {
+  display: block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+
+  border-radius: 50%;
+  background-color: $pointer-collor;
+}
+
+.list__item__time,
+.list__item__description {
+  position: relative;
+  margin-top: 16px;
+  padding-left: 36px;
+  &::before {
+    position: absolute;
+    content: "";
+
+    top: 0;
+    left: 0;
+
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+.list__item__time {
+  @include bold-font-weight;
+  &::before {
+    background-image: url("../media/clock-three.svg");
+  }
+}
+
+.list__item__description {
+  margin-top: 23px;
+
+  line-height: 140%;
+  &::before {
+    background-image: url("../media/clipboard-blank.svg");
+  }
+}
+
+// MEDIA
+
+@media screen and (min-width: 768px) {
+  .container.clinicApp {
+    padding: 0 64px;
+    padding-bottom: 48px;
+    height: 100vh;
+  }
+
+  .clinicApp__header {
+    height: 80px;
+  }
+
+  .header__user__wrapper {
+    display: flex;
+    text-align: end;
+  }
+
+  .header__user__name__wrapper {
+    display: block;
+    margin-right: 16px;
+  }
+
+  .header__user__name {
+    @include bold-font-weight;
+  }
+
+  .header__user__role {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 130%;
+
+    color: $secondary-text-color;
+  }
+
+  .clinicApp__section__nav {
+    margin-top: 56px;
+    padding-right: 8px;
+  }
+
+  .section__nav__title {
+    font-size: 24px;
+    line-height: 110%;
+  }
+
+  .clinicApp__cards__section {
+    padding-left: 48px;
+    padding-right: 48px;
+
+    border-radius: 16px;
+    height: 92%;
+  }
+
+  .section__nav__search {
+    margin-right: 32px;
+  }
+
+  .clinicApp__patients__list {
+    margin-top: 42px;
+    padding-bottom: 24px;
+    min-height: 400px;
+    max-height: calc(100% - 200px);
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  // SCROLLBAR
+
+  .clinicApp__patients__list {
+    &::-webkit-scrollbar {
+      width: 12px;
+    }
+    &::-webkit-scrollbar-track {
+      background: $doctor-view-container-background-collor;
+      opacity: 0.32;
+      border-radius: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+      width: 12px;
+      background: #dce0ec;
+      opacity: 0.56;
+      border-radius: 8px;
+    }
+  }
+
+  .patients__list__item {
+    padding: 24px 32px;
+    padding-bottom: 40px;
+    min-width: 524px;
+  }
+
+  .list__item__patientInfo__wrapper {
+    padding-bottom: 24px;
+  }
+
+  .list__item__time {
+    padding-top: 24px;
+    &::before {
+      top: 20px;
+    }
+  }
+
+  .list__item__description {
+    margin-top: 16px;
+  }
+}
+
+.empty__list {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 64vh;
+  padding-bottom: 108px;
+  text-align: center;
+
+  background: url(../media/medical-history.png) no-repeat;
+  background-position-x: center;
+  background-position-y: 29%;
+  background-size: 120px 120px;
+}
+
+.empty__list__text {
+  max-width: 461px;
+
+  @include bold-font-weight;
+  line-height: 21px;
+
+  color: $secondary-text-color;
+}
+
+@media screen and (min-width: 1440px) {
+  .patients__list__item {
+    min-width: 0;
+    width: 406px;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .clinicApp__cards__section {
+    padding-right: 24px;
+  }
+
+  .section__nav__select{
+    display: none;
+  }
+
+  .section__nav__search__input,
+  .section__nav__select__span,
+  .section__nav__select_tag {
+    display: block;
+  }
+  .section__nav__search__input{
+    border: none;
+    width: 90px;
+    margin-right: 10px;
+    color: $secondary-text-color;
+    &::placeholder{
+      color: $secondary-text-color;
+    }
+  }
+  .section__nav__search{
+    margin-right: 16px;
+  }
+  .section__nav__select__span{
+    margin-right: 16px;
+    color: $secondary-text-color;
+  }
+  .section__nav__select_tag{
+    color: $accent-color;
+    border: none;
+  }
+}

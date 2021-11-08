@@ -1,0 +1,973 @@
+@charset "UTF-8";
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+/* Убираем внутренние отступы */
+ul,
+ol {
+  padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Выставляем основные настройки по-умолчанию для body */
+body {
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+}
+
+/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
+ul,
+ol {
+  list-style: none;
+}
+
+/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Упрощаем работу с изображениями */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+body {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 19px;
+  color: #202225;
+}
+
+input:active,
+:hover,
+:focus {
+  outline: 0;
+  outline-offset: 0;
+}
+
+.aside__form__signUp__button,
+.aside__form__signIn__button,
+.aside__form__restorePass__button {
+  margin-top: 32px;
+  height: 48px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 8px;
+  border: none;
+  background-color: #7297ff;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 19px;
+}
+
+.aside__form__signUp__button {
+  width: 122px;
+}
+
+.aside__form__signIn__button {
+  width: 118px;
+}
+
+.aside__form__restorePass__button {
+  width: 198px;
+}
+
+.form__button__vector {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin-left: 8px;
+  background: url("../media/angle-right-b.svg");
+  background-repeat: no-repeat;
+}
+
+@media screen and (min-width: 768px) {
+  .aside__form__signUp__button,
+  .aside__form__signIn__button,
+  .aside__form__restorePass__button {
+    margin-top: 64px;
+    height: 56px;
+    font-size: 17px;
+    line-height: 24px;
+  }
+  .aside__form__signUp__button {
+    width: 146px;
+  }
+  .aside__form__signIn__button {
+    width: 138px;
+  }
+  .aside__form__restorePass__button {
+    width: 214px;
+  }
+}
+
+.nav__buttons__patients,
+.nav__buttons__resolutions {
+  width: 120px;
+  height: 40px;
+  border-radius: 8px;
+  border: none;
+}
+
+.nav__buttons__patients {
+  margin-right: 24px;
+  background: #7297ff;
+  color: white;
+}
+
+.nav__buttons__resolutions {
+  background: #ffffff;
+  color: #7297ff;
+}
+
+@media screen and (min-width: 768px) {
+  .nav__buttons__patients,
+  .nav__buttons__resolutions {
+    width: 160px;
+  }
+}
+
+.aside__form__input__wrapper {
+  position: relative;
+}
+
+.aside__form__input {
+  width: 100%;
+  height: 40px;
+  padding: 0;
+  padding-left: 48px;
+  padding-right: 16px;
+  border: 1px solid #dce0ec;
+  border-radius: 8px;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.16);
+          box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.16);
+}
+
+.aside__form__input.password {
+  padding-right: 48px;
+}
+
+.aside__form__input::-webkit-input-placeholder {
+  color: #a1abc9;
+  line-height: 24px;
+}
+
+.aside__form__input:-ms-input-placeholder {
+  color: #a1abc9;
+  line-height: 24px;
+}
+
+.aside__form__input::-ms-input-placeholder {
+  color: #a1abc9;
+  line-height: 24px;
+}
+
+.aside__form__input::placeholder {
+  color: #a1abc9;
+  line-height: 24px;
+}
+
+.firstName,
+.lastName,
+.email,
+.aside__input__password,
+.aside__input__confirmPassword {
+  font-size: 15px;
+  line-height: 21px;
+  color: #202225;
+}
+
+.aside__form__input.error {
+  border: 1px solid #ff2567;
+  -webkit-filter: drop-shadow(0px 4px 32px rgba(218, 228, 255, 0.16));
+          filter: drop-shadow(0px 4px 32px rgba(218, 228, 255, 0.16));
+}
+
+.firstName::before,
+.lastName::before,
+.email::before,
+.aside__input__password::before,
+.aside__input__confirmPassword::before {
+  position: absolute;
+  z-index: 10;
+  top: 8px;
+  left: 16px;
+  content: "";
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.firstName::before,
+.lastName::before {
+  z-index: 10;
+  background: url("../media/user.svg");
+}
+
+.singUp__input__error__email,
+.singUp__input__error__password {
+  margin-top: 14px;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: -0.24px;
+  color: #f6657f;
+}
+
+.singUp__input__error__email.hidden,
+.singUp__input__error__password.hidden {
+  display: none;
+}
+
+.email::before {
+  background: url("../media/email.svg");
+}
+
+.aside__input__password::before {
+  background: url("../media/lock.svg");
+}
+
+.aside__input__confirmPassword::before {
+  background: url("../media/check.svg");
+}
+
+.aside__input__password__eye,
+.aside__input__password__eye__confirm {
+  position: absolute;
+  top: 8px;
+  right: 18px;
+  z-index: 10;
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background: url("../media/eye-off.svg");
+}
+
+@media screen and (min-width: 768px) {
+  .firstName,
+  .lastName,
+  .email,
+  .aside__input__password,
+  .aside__input__confirmPassword {
+    font-size: 17px;
+    line-height: 24px;
+  }
+  .aside__form__input__wrapper:not(:last-of-type) {
+    margin-bottom: 40px;
+  }
+  .aside__form__input {
+    width: 368px;
+    height: 56px;
+    padding-left: 64px;
+    padding-right: 24px;
+  }
+  .aside__form__input.password {
+    padding-right: 64px;
+  }
+  .aside__input__password__eye,
+  .aside__input__password__eye__confirm {
+    top: 16px;
+    left: 320px;
+  }
+  .firstName::before,
+  .lastName::before,
+  .email::before,
+  .aside__input__password::before,
+  .aside__input__confirmPassword::before {
+    top: 16px;
+    left: 24px;
+  }
+  .aside__form__input {
+    font-size: 17px;
+    line-height: 24px;
+  }
+  .aside__form__input::-webkit-input-placeholder {
+    font-size: 17px;
+    line-height: 24px;
+  }
+  .aside__form__input:-ms-input-placeholder {
+    font-size: 17px;
+    line-height: 24px;
+  }
+  .aside__form__input::-ms-input-placeholder {
+    font-size: 17px;
+    line-height: 24px;
+  }
+  .aside__form__input::placeholder {
+    font-size: 17px;
+    line-height: 24px;
+  }
+}
+
+.container.aside__signUp,
+.container.aside__signIn,
+.container.aside__restorePassword {
+  padding-top: 72px;
+  background-size: 100%;
+  overflow: hidden;
+  background: url(../media/bg.jpg) no-repeat;
+}
+
+.main {
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.aside {
+  padding-top: 32px;
+  padding-left: 32px;
+  padding-right: 32px;
+  border-radius: 24px 24px 0px 0px;
+  height: calc(90vh - 2px);
+  background-color: #f9faff;
+}
+
+.aside__wrapper {
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.aside__title {
+  margin: 0;
+  margin-bottom: 24px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.aside__title_wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 24px;
+}
+
+.aside__link__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-bottom: 44px;
+  margin-top: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .container.aside__signUp,
+  .container.aside__signIn,
+  .container.aside__restorePassword {
+    padding-top: 0px;
+    background: url(../media/bg.jpg) no-repeat;
+    background-size: cover;
+  }
+  .aside {
+    margin-left: auto;
+    top: 0;
+    border-radius: 0;
+    width: 560px;
+    height: 100vh;
+  }
+  .aside__wrapper {
+    margin: 0 auto;
+    width: 368px;
+  }
+  .aside__title {
+    margin-bottom: 40px;
+  }
+  .aside__title_wrapper {
+    margin-bottom: 32px;
+  }
+  .aside__link__wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding-top: 40px;
+  }
+  .aside__title {
+    font-size: 24px;
+    line-height: 26px;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .aside {
+    width: 560px;
+  }
+}
+
+.aside__signIn__link__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: auto;
+  padding-top: 24px;
+  padding-bottom: 44px;
+}
+
+.aside__link__signUp,
+.aside__link__signIn,
+.aside__link__forgotPassword {
+  margin: 0;
+  margin-right: 12px;
+  font-size: 15px;
+  line-height: 21px;
+  color: #a1abc9;
+}
+
+.aside__link__forgotPassword {
+  margin-top: 32px;
+}
+
+.aside__link__signUp_accent,
+.aside__link__signIn_accent,
+.restorePass__notification__accent {
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 130%;
+  text-decoration: underline;
+  color: #7297ff;
+}
+
+.aside__link__signIn_accent {
+  margin-left: 0px;
+}
+
+@media screen and (min-width: 768px) {
+  .aside__link__signUp {
+    margin-top: 0px;
+    font-size: 15px;
+    line-height: 21px;
+  }
+  .aside__link__signUp_accent {
+    margin-top: 0px;
+    font-size: 15px;
+    line-height: 19px;
+  }
+  .aside__link__signIn_accent {
+    font-size: 15px;
+    line-height: 22px;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .aside__link__wrapper,
+  .aside__signIn__link__wrapper {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+.aside__form__signUp {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.aside__form__input__wrapper:not(:last-of-type) {
+  margin-bottom: 24px;
+}
+
+@media screen and (min-width: 768px) {
+  .aside.signUp {
+    padding-top: 16vh;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .aside.signIn {
+    padding-top: 26vh;
+  }
+  .aside__signIn__link__wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding-top: 40px;
+    padding-bottom: 8vh;
+  }
+  .aside__link__signIn {
+    margin-top: 0px;
+    margin-right: 12px;
+    font-size: 15px;
+    line-height: 21px;
+  }
+}
+
+.aside__title.restorePass {
+  margin: 0;
+}
+
+.aside__title__angle {
+  width: 24px;
+  height: 24px;
+  margin-right: 16px;
+  background: url("../media/angle-left-b.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.restorePass__notification {
+  min-width: 256px;
+  margin: 0;
+  margin-bottom: 24px;
+  font-size: 15px;
+  line-height: 130%;
+  font-weight: normal;
+  color: #a1abc9;
+}
+
+.aside__form__restorePass__button {
+  width: 214px;
+}
+
+.restorePass__notification__accent {
+  margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .aside.restorePass {
+    padding-top: 26vh;
+  }
+  .restorePass__notification {
+    width: 368px;
+  }
+}
+
+.container.clinicApp {
+  background-color: #e4ebff;
+}
+
+.clinicApp__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 72px;
+  padding-left: 24px;
+  padding-right: 24px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.header__logo__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.clinicApp__logo {
+  width: 132px;
+  height: 32px;
+}
+
+.header__user__wrapper {
+  position: relative;
+}
+
+.header__user__name__wrapper {
+  display: none;
+  text-align: end;
+}
+
+.header__user__status {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  background-image: radial-gradient(ellipse at center, #34c197 40%, #e4ebff 40%, #e4ebff 100%);
+}
+
+.clinicApp__cards__section {
+  padding-top: 40px;
+  padding-left: 24px;
+  padding-right: 24px;
+  background: #f9faff;
+  -webkit-box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.32);
+          box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.32);
+  border-radius: 16px 16px 0px 0px;
+}
+
+.clinicApp__nav__buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.clinicApp__section__nav {
+  margin-top: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.section__nav__items__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: auto;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-right: 40px;
+}
+
+.section__nav__search {
+  margin-right: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.section__nav__select {
+  width: 24px;
+  height: 24px;
+}
+
+.section__nav__search__input,
+.section__nav__select__span,
+.section__nav__select_tag {
+  display: none;
+}
+
+.clinicApp__patients__list {
+  margin-top: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 24px 20px;
+  overflow-y: scroll;
+}
+
+.patients__list__item {
+  padding-left: 24px;
+  padding-right: 16px;
+  padding-top: 16px;
+  padding-bottom: 24px;
+  height: 100%;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.24);
+          box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.24);
+  border-radius: 12px;
+}
+
+.list__item__patientInfo__wrapper {
+  position: relative;
+  padding-bottom: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.list__item__patientInfo__wrapper::after {
+  position: absolute;
+  content: "";
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #dce0ec;
+  opacity: 0.5;
+}
+
+.list__item__patient__img {
+  width: 48px;
+  height: 48px;
+  margin-right: 16px;
+}
+
+.patientInfo__status__name {
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 130%;
+}
+
+.patientInfo__AppointmentInfo {
+  font-size: 13px;
+  line-height: 130%;
+  color: #a1abc9;
+}
+
+.list__item__patientInfo__more {
+  width: 24px;
+  height: 24px;
+  margin-left: auto;
+}
+
+.patientInfo__status__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.patientInfo__status {
+  display: block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background-color: #34c197;
+}
+
+.list__item__time,
+.list__item__description {
+  position: relative;
+  margin-top: 16px;
+  padding-left: 36px;
+}
+
+.list__item__time::before,
+.list__item__description::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.list__item__time {
+  font-weight: 600;
+}
+
+.list__item__time::before {
+  background-image: url("../media/clock-three.svg");
+}
+
+.list__item__description {
+  margin-top: 23px;
+  line-height: 140%;
+}
+
+.list__item__description::before {
+  background-image: url("../media/clipboard-blank.svg");
+}
+
+@media screen and (min-width: 768px) {
+  .container.clinicApp {
+    padding: 0 64px;
+    padding-bottom: 48px;
+    height: 100vh;
+  }
+  .clinicApp__header {
+    height: 80px;
+  }
+  .header__user__wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    text-align: end;
+  }
+  .header__user__name__wrapper {
+    display: block;
+    margin-right: 16px;
+  }
+  .header__user__name {
+    font-weight: 600;
+  }
+  .header__user__role {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 130%;
+    color: #a1abc9;
+  }
+  .clinicApp__section__nav {
+    margin-top: 56px;
+    padding-right: 8px;
+  }
+  .section__nav__title {
+    font-size: 24px;
+    line-height: 110%;
+  }
+  .clinicApp__cards__section {
+    padding-left: 48px;
+    padding-right: 48px;
+    border-radius: 16px;
+    height: 92%;
+  }
+  .section__nav__search {
+    margin-right: 32px;
+  }
+  .clinicApp__patients__list {
+    margin-top: 42px;
+    padding-bottom: 24px;
+    min-height: 400px;
+    max-height: calc(100% - 200px);
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  .clinicApp__patients__list::-webkit-scrollbar {
+    width: 12px;
+  }
+  .clinicApp__patients__list::-webkit-scrollbar-track {
+    background: #e4ebff;
+    opacity: 0.32;
+    border-radius: 8px;
+  }
+  .clinicApp__patients__list::-webkit-scrollbar-thumb {
+    width: 12px;
+    background: #dce0ec;
+    opacity: 0.56;
+    border-radius: 8px;
+  }
+  .patients__list__item {
+    padding: 24px 32px;
+    padding-bottom: 40px;
+    min-width: 524px;
+  }
+  .list__item__patientInfo__wrapper {
+    padding-bottom: 24px;
+  }
+  .list__item__time {
+    padding-top: 24px;
+  }
+  .list__item__time::before {
+    top: 20px;
+  }
+  .list__item__description {
+    margin-top: 16px;
+  }
+}
+
+.empty__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 64vh;
+  padding-bottom: 108px;
+  text-align: center;
+  background: url(../media/medical-history.png) no-repeat;
+  background-position-x: center;
+  background-position-y: 29%;
+  background-size: 120px 120px;
+}
+
+.empty__list__text {
+  max-width: 461px;
+  font-weight: 600;
+  line-height: 21px;
+  color: #a1abc9;
+}
+
+@media screen and (min-width: 1440px) {
+  .patients__list__item {
+    min-width: 0;
+    width: 406px;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .clinicApp__cards__section {
+    padding-right: 24px;
+  }
+  .section__nav__select {
+    display: none;
+  }
+  .section__nav__search__input,
+  .section__nav__select__span,
+  .section__nav__select_tag {
+    display: block;
+  }
+  .section__nav__search__input {
+    border: none;
+    width: 90px;
+    margin-right: 10px;
+    color: #a1abc9;
+  }
+  .section__nav__search__input::-webkit-input-placeholder {
+    color: #a1abc9;
+  }
+  .section__nav__search__input:-ms-input-placeholder {
+    color: #a1abc9;
+  }
+  .section__nav__search__input::-ms-input-placeholder {
+    color: #a1abc9;
+  }
+  .section__nav__search__input::placeholder {
+    color: #a1abc9;
+  }
+  .section__nav__search {
+    margin-right: 16px;
+  }
+  .section__nav__select__span {
+    margin-right: 16px;
+    color: #a1abc9;
+  }
+  .section__nav__select_tag {
+    color: #7297ff;
+    border: none;
+  }
+}
+/*# sourceMappingURL=main.css.map */
