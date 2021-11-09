@@ -1,13 +1,9 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
-
-import PatientsListItem from "./PatientsListItem";
-
 // MEDIA
-import avatar from "../media/ZaharyAvatar.png";
-
-//  Styles ---------------------------------------------------------------------------------------------
+import avatar from "../media/doctorItemAvatar.png";
+import AppointmentListItem from "./AppointmentListItem";
 
 const List = styled.ul`
   margin-top: 16px;
@@ -43,17 +39,15 @@ const List = styled.ul`
   } ;
 `;
 
-//  ---------------------------------------------------------------------------------------------
-
-const PatientsList = ({ users }) => {
+const AppointmentsList = ({ appointments }) => {
   return (
     <List>
-      {users.map((user) => (
-        <PatientsListItem
+      {appointments.map((user) => (
+        <AppointmentListItem
           key={uuidv4()}
           avatar={avatar}
           name={user.name}
-          appointment={user.appointment}
+          profession={user.profession}
           time={user.time}
           description={user.description}
         />
@@ -62,4 +56,4 @@ const PatientsList = ({ users }) => {
   );
 };
 
-export default PatientsList;
+export default AppointmentsList;

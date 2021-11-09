@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import AuthAside from "../components/AuthAside";
 import { Link } from "react-router-dom";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import styled from "styled-components";
+
+import AuthAside from "../components/AuthAside";
+import AuthPageInputs from "../components/AuthPageInputs";
 
 // media
 import userSvg from "../media/user.svg";
@@ -13,6 +15,7 @@ import checkSvg from "../media/check.svg";
 import eyeOff from "../media/eye-off.svg";
 import angleRight from "../media/angle-right-b.svg";
 
+
 const SignUpSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string()
@@ -20,6 +23,8 @@ const SignUpSchema = Yup.object().shape({
     .max(16, "Too Long!")
     .required("Required"),
 });
+
+//  Styles ---------------------------------------------------------------------------------------------
 
 const AsideLinkWrapper = styled.div`
   display: flex;
@@ -107,47 +112,6 @@ const FormInputWrapper = styled.div`
   } ;
 `;
 
-const Input = styled(Field)`
-  width: 100%;
-  height: 40px;
-
-  padding: 0;
-  padding-left: 48px;
-  padding-right: ${(props) => (props.password ? "48px" : "16px")};
-
-  border: ${(props) =>
-    props.errored ? "1px solid #ff2567" : "1px solid #dce0ec"};
-  border-radius: 8px;
-
-  background-color: #f9faff;
-  box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.16);
-  filter: ${(props) =>
-    props.errored
-      ? "drop-shadow(0px 4px 32px rgba(218, 228, 255, 0.16))"
-      : "none"};
-
-  &::placeholder {
-    color: #a1abc9;
-    font-size: 15px;
-    line-height: 24px;
-  }
-
-  @media screen and (min-width: 768px) {
-    width: 368px;
-    height: 56px;
-    padding-left: 64px;
-    padding-right: ${(props) => (props.password ? "64px" : "24px")};
-
-    font-size: 17px;
-    line-height: 24px;
-
-    &::placeholder {
-      font-size: 17px;
-      line-height: 24px;
-    }
-  } ;
-`;
-
 const ErrorMessage = styled.p`
   position: absolute;
   margin-top: 14px;
@@ -216,6 +180,8 @@ const ButtonVector = styled.span`
   background-repeat: no-repeat;
 `;
 
+//  --------------------------------------------------------------------------------------------------
+
 const SignUp = () => {
   const [passwordToggle, setPasswordToggle] = useState(false);
   const [passwordConfirmToggle, setPasswordConfirmToggle] = useState(false);
@@ -235,13 +201,17 @@ const SignUp = () => {
         {({ errors, touched }) => (
           <AsideForm action="">
             <FormInputWrapper svg={userSvg}>
-              <Input name="firstName" type="text" placeholder="First name" />
+              <AuthPageInputs
+                name="firstName"
+                type="text"
+                placeholder="First name"
+              />
             </FormInputWrapper>
             <FormInputWrapper svg={userSvg}>
-              <Input name="lastName" placeholder="Last name" />
+              <AuthPageInputs name="lastName" placeholder="Last name" />
             </FormInputWrapper>
             <FormInputWrapper svg={emailSvg}>
-              <Input
+              <AuthPageInputs
                 name="email"
                 type="email"
                 placeholder="Email"
@@ -252,7 +222,7 @@ const SignUp = () => {
               ) : null}
             </FormInputWrapper>
             <FormInputWrapper svg={lockSvg}>
-              <Input
+              <AuthPageInputs
                 name="password"
                 type={passwordToggle ? "text" : "password"}
                 placeholder="Password"
@@ -267,7 +237,7 @@ const SignUp = () => {
               ) : null}
             </FormInputWrapper>
             <FormInputWrapper svg={checkSvg}>
-              <Input
+              <AuthPageInputs
                 name="confirmPassword"
                 type={passwordConfirmToggle ? "text" : "password"}
                 placeholder="Confirm Password"

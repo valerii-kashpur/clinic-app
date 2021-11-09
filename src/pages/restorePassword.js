@@ -1,12 +1,17 @@
 import React from "react";
-import RestorePassAside from "../components/RestorePassAside";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import styled from "styled-components";
+
+import RestorePassAside from "../components/RestorePassAside";
+import AuthPageInputs from "../components/AuthPageInputs";
+
 
 // media
 import emailSvg from "../media/email.svg";
 import angleRight from "../media/angle-right-b.svg";
+
+//  Styles ---------------------------------------------------------------------------------------------
 
 const RestorePasswordSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -69,47 +74,6 @@ const FormInputWrapper = styled.div`
   } ;
 `;
 
-const Input = styled(Field)`
-  width: 100%;
-  height: 40px;
-
-  padding: 0;
-  padding-left: 48px;
-  padding-right: ${(props) => (props.password ? "48px" : "16px")};
-
-  border: ${(props) =>
-    props.errored ? "1px solid #ff2567" : "1px solid #dce0ec"};
-  border-radius: 8px;
-
-  background-color: #f9faff;
-  box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.16);
-  filter: ${(props) =>
-    props.errored
-      ? "drop-shadow(0px 4px 32px rgba(218, 228, 255, 0.16))"
-      : "none"};
-
-  &::placeholder {
-    color: #a1abc9;
-    font-size: 15px;
-    line-height: 24px;
-  }
-
-  @media screen and (min-width: 768px) {
-    width: 368px;
-    height: 56px;
-    padding-left: 64px;
-    padding-right: ${(props) => (props.password ? "64px" : "24px")};
-
-    font-size: 17px;
-    line-height: 24px;
-
-    &::placeholder {
-      font-size: 17px;
-      line-height: 24px;
-    }
-  } ;
-`;
-
 const ErrorMessage = styled.p`
   margin-top: 14px;
 
@@ -157,8 +121,8 @@ const ButtonVector = styled.span`
   background: url(${angleRight});
   background-repeat: no-repeat;
 `;
-
-const restorePassword = () => {
+// -------------------------------------------------------------------------------------------------
+const RestorePassword = () => {
   return (
     <RestorePassAside title="Restore Password">
       <div>
@@ -179,7 +143,7 @@ const restorePassword = () => {
           {({ errors, touched }) => (
             <AsideForm action="">
               <FormInputWrapper svg={emailSvg}>
-                <Input
+                <AuthPageInputs
                   name="email"
                   type="email"
                   placeholder="Email"
@@ -200,4 +164,4 @@ const restorePassword = () => {
   );
 };
 
-export default restorePassword;
+export default RestorePassword;

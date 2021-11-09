@@ -2,6 +2,7 @@ import React from "react";
 import RestorePassAside from "../components/RestorePassAside";
 import styled from "styled-components";
 
+//  Styles ---------------------------------------------------------------------------------------------
 const NotificationText = styled.p`
   min-width: 256px;
   margin: 0;
@@ -26,8 +27,9 @@ const EmailLInk = styled.a`
 
   color: #7297ff;
 `;
+//  ---------------------------------------------------------------------------------------------
 
-const restorePasswordConfirmed = () => {
+const RestorePasswordConfirmed = () => {
   return (
     <RestorePassAside title="Restore Password">
       <div>
@@ -41,4 +43,4 @@ const restorePasswordConfirmed = () => {
   );
 };
 
-export default restorePasswordConfirmed;
+export default RestorePasswordConfirmed;

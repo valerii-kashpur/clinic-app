@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import ViewPagesWrapper from "../components/ViewPagesWrapper.js";
-import AppoinmentsList from "../components/AppoinmentsList";
+import AppointmentsList from "../components/AppointmentsList";
 import styled from "styled-components";
 
 import { appointmentsData } from "../appointmentsData.js";
 
 // IMAGES
-import avatar from "../media/avatar.png";
+import avatar from "../media/patientAvatar.png";
 import slider from "../media/sliders-v-alt.svg";
 import emptyImg from "../media/medical-history.png";
 
+//  Styles ---------------------------------------------------------------------------------------------
 const NavButtonsWrapper = styled.div`
   display: flex;
 `;
@@ -116,6 +117,7 @@ const UppointmentCreateButton = styled.button`
     color: white;
   } ;
 `;
+//  ---------------------------------------------------------------------------------------------
 
 const PatientView = () => {
   const [appointments, setAppointments] = useState([]);
@@ -144,7 +146,7 @@ const PatientView = () => {
         </NavgationItemsWrapper>
       </NavigationWrapper>
       {appointments.length > 0 ? (
-        <AppoinmentsList appointments={appointments} />
+        <AppointmentsList appointments={appointments} />
       ) : (
         <EmptyListBlock>
           <EmptyListText>

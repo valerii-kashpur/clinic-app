@@ -1,45 +1,11 @@
 import React from "react";
-import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
-// MEDIA
-import avatar from "../media/ZaharyAvatar.png";
+
+// media
 import moreVertical from "../media/more-vertical.svg";
 import timeSvg from "../media/clock-three.svg";
-import clipboardSvg from "../media/clipboard-blank.svg";
+import reasonSvg from "../media/reason.svg";
 
-const List = styled.ul`
-  margin-top: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px 20px;
-  overflow: auto;
-
-  @media screen and (min-width: 768px) {
-    margin-top: 42px;
-    padding-bottom: 24px;
-    min-height: 400px;
-    max-height: calc(100% - 200px);
-    flex-direction: row;
-    flex-wrap: wrap;
-
-    /* scrollbar */
-
-    &::-webkit-scrollbar {
-      width: 12px;
-    }
-    &::-webkit-scrollbar-track {
-      background: #e4ebff;
-      opacity: 0.32;
-      border-radius: 8px;
-    }
-    &::-webkit-scrollbar-thumb {
-      width: 12px;
-      background: #dce0ec;
-      opacity: 0.56;
-      border-radius: 8px;
-    }
-  } ;
-`;
 const ListItem = styled.li`
   padding-left: 24px;
   padding-right: 16px;
@@ -120,36 +86,32 @@ const ListItemInfoText = styled.p`
     height: 24px;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image:url(${props => props.description ? clipboardSvg : timeSvg});
+    background-image:url(${props => props.description ? reasonSvg : timeSvg});
   }
   @media screen and (min-width: 768px) {
     margin-top: ${props => props.description ? "24px" : "23px"};
   } ;
 `;
 
-const AppoinmentsList = ({ appointments }) => {
+const AppointmentListItem = ({avatar, name, profession, time, description}) => {
   return (
-    <List>
-      {appointments.map((user) => (
-        <ListItem key={uuidv4()}>
-          <ListItemInfoWrapper>
-            <ListItemInfoAvatar src={avatar} alt="" />
-            <div>
-              <ListItemInfoName>{user.name}</ListItemInfoName>
-              <ListItemStatusWrapper>
-                <ListItemStatusProffesion>
-                  {user.profession}
-                </ListItemStatusProffesion>
-              </ListItemStatusWrapper>
-            </div>
-            <ListItemMore src={moreVertical} alt="" />
-          </ListItemInfoWrapper>
-          <ListItemInfoText>{user.time}</ListItemInfoText>
-          <ListItemInfoText description>{user.description}</ListItemInfoText>
-        </ListItem>
-      ))}
-    </List>
+    <ListItem>
+      <ListItemInfoWrapper>
+        <ListItemInfoAvatar src={avatar} alt="" />
+        <div>
+          <ListItemInfoName>{name}</ListItemInfoName>
+          <ListItemStatusWrapper>
+            <ListItemStatusProffesion>
+              {profession}
+            </ListItemStatusProffesion>
+          </ListItemStatusWrapper>
+        </div>
+        <ListItemMore src={moreVertical} alt="" />
+      </ListItemInfoWrapper>
+      <ListItemInfoText>{time}</ListItemInfoText>
+      <ListItemInfoText description>{description}</ListItemInfoText>
+    </ListItem>
   );
 };
 
-export default AppoinmentsList;
+export default AppointmentListItem;

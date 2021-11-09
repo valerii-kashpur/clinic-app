@@ -10,6 +10,8 @@ import search from "../media/search.svg";
 import slider from "../media/sliders-v-alt.svg";
 import emptyImg from "../media/medical-history.png";
 
+//  Styles ---------------------------------------------------------------------------------------------
+
 const NavButtonsWrapper = styled.div`
   display: flex;
 `;
@@ -132,6 +134,8 @@ const EmptyListText = styled.p`
 
   color: #a1abc9;
 `;
+
+//  ---------------------------------------------------------------------------------------------
 
 const DoctorView = () => {
   const [users, setUsers] = useState([]);
