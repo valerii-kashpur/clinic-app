@@ -2,8 +2,8 @@ import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 // MEDIA
-import avatar from "../media/doctorItemAvatar.png";
-import AppointmentListItem from "./AppointmentListItem";
+import avatar from "media/doctorItemAvatar.png";
+import AppointmentListItem from "./AppointmentListItem/AppointmentListItem";
 
 const List = styled.ul`
   margin-top: 16px;
@@ -12,7 +12,7 @@ const List = styled.ul`
   gap: 24px 20px;
   overflow: auto;
 
-  @media screen and (min-width: 768px) {
+  @media ${(props) => props.theme.media.tablet} {
     margin-top: 42px;
     padding-bottom: 24px;
     min-height: 400px;
@@ -26,15 +26,16 @@ const List = styled.ul`
       width: 12px;
     }
     &::-webkit-scrollbar-track {
-      background: #e4ebff;
+      background: ${(props) =>
+        props.theme.colors.viewPagesContainerBackgroundColor};
       opacity: 0.32;
-      border-radius: 8px;
+      border-radius: ${(props) => props.theme.borderRadius.borderRadius};
     }
     &::-webkit-scrollbar-thumb {
       width: 12px;
-      background: #dce0ec;
+      background: ${(props) => props.theme.colors.asideInputBorderColor};
       opacity: 0.56;
-      border-radius: 8px;
+      border-radius: ${(props) => props.theme.borderRadius.borderRadius};
     }
   } ;
 `;

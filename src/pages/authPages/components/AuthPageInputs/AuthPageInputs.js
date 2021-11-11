@@ -11,10 +11,12 @@ const Input = styled(Field)`
   padding-right: ${(props) => (props.password ? "48px" : "16px")};
 
   border: ${(props) =>
-    props.errored ? "1px solid #ff2567" : "1px solid #dce0ec"};
-  border-radius: 8px;
+    props.errored
+      ? props.theme.inputsBorders.asideInputErrorBorder
+      : props.theme.inputsBorders.asideInputBorder};
+  border-radius: ${(props) => props.theme.borderRadius.borderRadius};
 
-  background-color: #f9faff;
+  background-color: ${(props) => props.theme.colors.asideBackgroundColor};
   box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.16);
   filter: ${(props) =>
     props.errored
@@ -22,12 +24,12 @@ const Input = styled(Field)`
       : "none"};
 
   &::placeholder {
-    color: #a1abc9;
-    font-size: 15px;
+    color: ${(props) => props.theme.colors.secondaryTextColor};
+    font-size: ${(props) => props.theme.fonts.mobileFontSize};
     line-height: 24px;
   }
 
-  @media screen and (min-width: 768px) {
+  @media ${(props) => props.theme.media.tablet} {
     width: 368px;
     height: 56px;
     padding-left: 64px;

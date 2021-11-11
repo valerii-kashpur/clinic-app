@@ -1,8 +1,5 @@
-import React from "react";
 import styled from "styled-components";
-
-// media
-import bgImage from "../media/bg.jpg";
+import bgImage from "media/bg.jpg";
 
 const Container = styled.div`
   padding-top: 72px;
@@ -11,7 +8,7 @@ const Container = styled.div`
   overflow: hidden;
   background: url(${bgImage}) no-repeat;
 
-  @media screen and (min-width: 768px) {
+  @media ${(props) => props.theme.media.tablet} {
     padding-top: 0px;
     background: url(${bgImage}) no-repeat;
     background-size: cover;
@@ -26,9 +23,9 @@ const Aside = styled.aside`
   border-radius: 24px 24px 0px 0px;
   height: calc(90vh - 2px);
 
-  background-color: #f9faff;
+  background-color: ${(props) => props.theme.colors.asideBackgroundColor};
 
-  @media screen and (min-width: 768px) {
+  @media ${(props) => props.theme.media.tablet} {
     margin-left: auto;
     top: 0;
     border-radius: 0;
@@ -38,7 +35,7 @@ const Aside = styled.aside`
     padding-top: ${(props) => props.padding};
   }
 
-  @media screen and (min-width: 1920px) {
+  @media ${(props) => props.theme.media.desktop} {
     width: 560px;
   } ;
 `;
@@ -51,7 +48,7 @@ const AsideWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media screen and (min-width: 768px) {
+  @media ${(props) => props.theme.media.tablet} {
     margin: 0 auto;
     width: 368px;
   }
@@ -61,28 +58,20 @@ const AsideTitle = styled.h2`
   margin: 0;
   margin-bottom: 24px;
 
-  font-weight: 600;
+  font-weight: ${(props) => props.theme.fonts.boldFontWeight};
   font-size: 20px;
   line-height: 24px;
 
-  @media screen and (min-width: 768px) {
+  @media ${(props) => props.theme.media.tablet} {
     margin-bottom: 40px;
     font-size: 24px;
     line-height: 26px;
   } ;
 `;
 
-const AuthAside = ({ asidePadding, title, children }) => {
-  return (
-    <Container>
-      <Aside padding={asidePadding}>
-        <AsideWrapper>
-          <AsideTitle>{title}</AsideTitle>
-          {children}
-        </AsideWrapper>
-      </Aside>
-    </Container>
-  );
+export const styles = {
+  Container,
+  Aside,
+  AsideWrapper,
+  AsideTitle,
 };
-
-export default AuthAside;

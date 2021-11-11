@@ -1,10 +1,8 @@
-import React from "react";
 import styled from "styled-components";
 
 // media
-import moreVertical from "../media/more-vertical.svg";
-import timeSvg from "../media/clock-three.svg";
-import reasonSvg from "../media/reason.svg";
+import timeSvg from "media/clock-three.svg";
+import reasonSvg from "media/reason.svg";
 
 const ListItem = styled.li`
   padding-left: 24px;
@@ -13,11 +11,11 @@ const ListItem = styled.li`
   padding-bottom: 24px;
   height: 100%;
 
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.colors.inputBackgroundColor};
   box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.24);
   border-radius: 12px;
 
-  @media screen and (min-width: 768px) {
+  @media ${(props) => props.theme.media.tablet} {
     padding: 24px 32px;
     padding-bottom: 40px;
     min-width: 524px;
@@ -43,7 +41,7 @@ const ListItemInfoWrapper = styled.div`
     width: 100%;
     height: 1px;
 
-    background: #dce0ec;
+    background: ${(props) => props.theme.colors.asideInputBorderColor};
     opacity: 0.5;
   }
 `;
@@ -53,7 +51,7 @@ const ListItemInfoAvatar = styled.img`
   margin-right: 16px;
 `;
 const ListItemInfoName = styled.p`
-  font-weight: 600;
+  font-weight: ${(props) => props.theme.fonts.boldFontWeight};
   font-size: 17px;
   line-height: 130%;
 `;
@@ -64,7 +62,7 @@ const ListItemStatusWrapper = styled.div`
 const ListItemStatusProffesion = styled.p`
   font-size: 13px;
   line-height: 130%;
-  color: #a1abc9;
+  color: ${(props) => props.theme.colors.secondaryTextColor};
 `;
 const ListItemMore = styled.img`
   width: 24px;
@@ -73,7 +71,7 @@ const ListItemMore = styled.img`
 `;
 const ListItemInfoText = styled.p`
   position: relative;
-  margin-top: ${props => props.description ? "23px" : "16px"};
+  margin-top: ${(props) => (props.description ? "23px" : "16px")};
   padding-left: 36px;
   &::before {
     position: absolute;
@@ -86,32 +84,21 @@ const ListItemInfoText = styled.p`
     height: 24px;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image:url(${props => props.description ? reasonSvg : timeSvg});
+    background-image: url(${(props) =>
+      props.description ? reasonSvg : timeSvg});
   }
-  @media screen and (min-width: 768px) {
-    margin-top: ${props => props.description ? "24px" : "23px"};
+  @media ${(props) => props.theme.media.tablet} {
+    margin-top: ${(props) => (props.description ? "24px" : "23px")};
   } ;
 `;
 
-const AppointmentListItem = ({avatar, name, profession, time, description}) => {
-  return (
-    <ListItem>
-      <ListItemInfoWrapper>
-        <ListItemInfoAvatar src={avatar} alt="" />
-        <div>
-          <ListItemInfoName>{name}</ListItemInfoName>
-          <ListItemStatusWrapper>
-            <ListItemStatusProffesion>
-              {profession}
-            </ListItemStatusProffesion>
-          </ListItemStatusWrapper>
-        </div>
-        <ListItemMore src={moreVertical} alt="" />
-      </ListItemInfoWrapper>
-      <ListItemInfoText>{time}</ListItemInfoText>
-      <ListItemInfoText description>{description}</ListItemInfoText>
-    </ListItem>
-  );
+export const styles = {
+  ListItem,
+  ListItemInfoWrapper,
+  ListItemInfoAvatar,
+  ListItemInfoName,
+  ListItemStatusWrapper,
+  ListItemStatusProffesion,
+  ListItemMore,
+  ListItemInfoText,
 };
-
-export default AppointmentListItem;
