@@ -11,6 +11,7 @@ export const theme = {
     viewPagesBackgroundColor: "#f9faff",
     viewPagesContainerBackgroundColor: "#e4ebff",
     pointerColor: "#34c197",
+    disabledBackground: "#DCE0EC",
   },
   inputsBorders: {
     asideInputBorder: "1px solid #dce0ec",

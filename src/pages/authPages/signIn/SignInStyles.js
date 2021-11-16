@@ -6,12 +6,12 @@ import styled from "styled-components";
 import eyeOff from "media/eye-off.svg";
 import angleRight from "media/angle-right-b.svg";
 
-const AsideForm = styled(Form)`
+export const AsideForm = styled(Form)`
   display: flex;
   flex-direction: column;
 `;
 
-const FormInputWrapper = styled.div`
+export const FormInputWrapper = styled.div`
   margin-bottom: 24px;
   position: relative;
 
@@ -47,7 +47,7 @@ const FormInputWrapper = styled.div`
   } ;
 `;
 
-const PasswordEyeSpan = styled.span`
+export const PasswordEyeSpan = styled.span`
   position: absolute;
   top: ${(props) => props.theme.borderRadius.borderRadius};
   right: 18px;
@@ -66,7 +66,7 @@ const PasswordEyeSpan = styled.span`
   } ;
 `;
 
-const ErrorMessage = styled.p`
+export const ErrorMessage = styled.p`
   margin-top: 14px;
   position: absolute;
 
@@ -77,7 +77,7 @@ const ErrorMessage = styled.p`
   color: ${(props) => props.theme.colors.errorTextColor};
 `;
 
-const Button = styled.button`
+export const Button = styled.button`
   width: 118px;
   margin-top: 32px;
   height: 48px;
@@ -105,7 +105,7 @@ const Button = styled.button`
   }
 `;
 
-const ButtonVector = styled.span`
+export const ButtonVector = styled.span`
   display: inline-block;
   width: 24px;
   height: 24px;
@@ -115,7 +115,7 @@ const ButtonVector = styled.span`
   background-repeat: no-repeat;
 `;
 
-const AsideLinkText = styled.p`
+export const AsideLinkText = styled.p`
   margin: 0;
   margin-right: 12px;
   margin-top: 32px;
@@ -133,7 +133,7 @@ const AsideLinkText = styled.p`
   } ;
 `;
 
-const AsideLinkWrapper = styled.div`
+export const AsideLinkWrapper = styled.div`
   display: flex;
   padding-bottom: 44px;
   margin-top: auto;
@@ -147,7 +147,7 @@ const AsideLinkWrapper = styled.div`
   }
 `;
 
-const AsideLink = styled(Link)`
+export const AsideLink = styled(Link)`
   font-weight: ${(props) => props.theme.fonts.boldFontWeight};
   font-size: ${(props) => props.theme.fonts.mobileFontSize};
   line-height: 130%;
@@ -160,15 +160,3 @@ const AsideLink = styled(Link)`
     line-height: 19px;
   } ;
 `;
-
-export const styles = {
-  AsideForm,
-  FormInputWrapper,
-  PasswordEyeSpan,
-  ErrorMessage,
-  Button,
-  ButtonVector,
-  AsideLinkText,
-  AsideLinkWrapper,
-  AsideLink,
-};
