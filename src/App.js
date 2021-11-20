@@ -1,19 +1,22 @@
 import React, { Suspense } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
-import {routes} from "utils/routes";
-import "./main.css";
+import { Switch, Redirect } from "react-router-dom";
+import mapedRoutes from "routes/routes";
+import GlobalStyle from "styles/globalStyles";
+
 
 function App() {
   return (
+    <>
+    <GlobalStyle/>
     <main id="main">
       <Suspense fallback={<div>Loading...</div>}>
         <Switch>
-          {routes.map(({path, component}) =>  <Route path={path} component={component} key={uuidv4()}/>)}
-          <Redirect to="/sign-in" />
+          {mapedRoutes}
+          <Redirect to="/patient-view/make-appointment" />
         </Switch>
       </Suspense>
     </main>
+    </>
   );
 }
 

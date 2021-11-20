@@ -86,9 +86,6 @@ const AppCardsSection = styled.section`
     border-radius: 16px;
     height: 92%;
   }
-  @media ${(props) => props.theme.media.desktop} {
-    padding-right: 24px;
-  } ;
 `;
 
 export const styles = {

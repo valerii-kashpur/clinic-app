@@ -1,4 +1,6 @@
 import { lazy } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { Route } from "react-router-dom";
 
 const SignIn = lazy(() => import("pages/authPages/signIn/SignIn"));
 const SignUp = lazy(() => import("pages/authPages/signUp/SignUp"));
@@ -14,8 +16,11 @@ const DoctorView = lazy(() =>
 const PatientView = lazy(() =>
   import("pages/privatePages/patientView/PatientView")
 );
+const PatientMakeAppointment = lazy(() =>
+  import("pages/privatePages/patientMakeAppointment/PatientMakeAppointment")
+);
 
-export const routes = [
+const ROUTES = [
   {
     path: "/sign-in",
     component: SignIn,
@@ -37,7 +42,17 @@ export const routes = [
     component: DoctorView,
   },
   {
+    path: "/patient-view/make-appointment",
+    component: PatientMakeAppointment,
+  },
+  {
     path: "/patient-view",
     component: PatientView,
   },
 ];
+
+const mapedRoutes = ROUTES.map(({ path, component }) => (
+  <Route path={path} component={component} key={uuidv4()} />
+));
+
+export default mapedRoutes;
