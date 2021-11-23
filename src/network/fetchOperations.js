@@ -58,9 +58,9 @@ export const getProfile = (persistToken) => (dispatch) => {
     .catch((error) => notify(error.response.status, error.response.data));
 };
 
-export const getPatientAppointment = () => (dispatch) => {
+export const getPatientAppointment = (dateStatus) => (dispatch) => {
   axios
-    .get("appointments/patient/me?offset=0&limit=40")
+    .get(`appointments/patient/me?offset=0&limit=20&dateStatus=${dateStatus}`)
     .then((response) => dispatch(setPatientAppointments(response.data)))
     .catch((error) => notify(error.response.status, error.response.data));
 };

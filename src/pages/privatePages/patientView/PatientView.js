@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ViewPagesWrapper from "../components/ViewPagesWrapper/ViewPagesWrapper.js";
 import AppointmentsList from "./components/AppointmentsList";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,10 +11,11 @@ import * as Styled from "./PatientViewStyles";
 import slider from "media/sliders-v-alt.svg";
 
 const PatientView = () => {
-  const appointments = useSelector(state => patientAppointments(state));
+  const [dateStatus, setDateStatus] = useState("Upcoming");
   const history = useHistory();
-  const userRole = useSelector((state) => userRoleName(state));
   const dispatch = useDispatch();
+  const appointments = useSelector((state) => patientAppointments(state));
+  const userRole = useSelector((state) => userRoleName(state));
 
   useEffect(() => {
     if (!userRole) {
@@ -23,8 +24,8 @@ const PatientView = () => {
   }, [userRole, history]);
 
   useEffect(() => {
-    dispatch(getPatientAppointment());
-  }, [dispatch]);
+    dispatch(getPatientAppointment(dateStatus));
+  }, [dispatch, dateStatus]);
 
   return (
     <ViewPagesWrapper>
@@ -38,8 +39,11 @@ const PatientView = () => {
         <Styled.NavgationItemsWrapper>
           <Styled.NavigationItemSelect src={slider} alt="" />
           <Styled.NavigationSelectSpan>Show:</Styled.NavigationSelectSpan>
-          <Styled.NavigationSelectDesktop>
-            <option value="">Upcoming</option>
+          <Styled.NavigationSelectDesktop
+            onChange={(e) => setDateStatus(e.target.value)}
+          >
+            <option value="Upcoming">Upcoming</option>
+            <option value="Outdate">Outdate</option>
           </Styled.NavigationSelectDesktop>
           <Styled.UppointmentCreateButton to="/patient-view/make-appointment">
             + create an uppointment
