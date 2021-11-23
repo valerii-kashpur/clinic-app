@@ -45,7 +45,26 @@ const Input = styled(Field)`
   } ;
 `;
 
-const AuthPageInputs = ({ name, type, placeholder, errored, password }) => {
+const ErrorMessage = styled.p`
+  position: absolute;
+  margin-top: 14px;
+
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: -0.24px;
+
+  color: ${(props) => props.theme.colors.errorTextColor};
+`;
+
+const AuthPageInputs = ({
+  name,
+  type,
+  placeholder,
+  errored,
+  password,
+  errors,
+  touched
+}) => {
   return (
     <>
       <Input
@@ -55,6 +74,9 @@ const AuthPageInputs = ({ name, type, placeholder, errored, password }) => {
         errored={errored}
         password={password}
       />
+      {errors && touched ? (
+        <ErrorMessage>{errors}</ErrorMessage>
+      ) : null}
     </>
   );
 };

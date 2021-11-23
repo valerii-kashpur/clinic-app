@@ -1,8 +1,9 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
+import moment from "moment";
 import styled from "styled-components";
+
 // MEDIA
-import avatar from "media/doctorItemAvatar.png";
 import AppointmentListItem from "./AppointmentListItem/AppointmentListItem";
 
 const List = styled.ul`
@@ -43,16 +44,19 @@ const List = styled.ul`
 const AppointmentsList = ({ appointments }) => {
   return (
     <List>
-      {appointments.map((user) => (
-        <AppointmentListItem
-          key={uuidv4()}
-          avatar={avatar}
-          name={user.name}
-          profession={user.profession}
-          time={user.time}
-          description={user.description}
-        />
-      ))}
+      {appointments.map(({ doctor, visit_date, reason }) => {
+        const date = moment(visit_date).format("ddd MMM DD YYYY, h a");
+        return (
+          <AppointmentListItem
+            key={uuidv4()}
+            avatar={doctor.photo}
+            name={doctor.first_name + " " + doctor.last_name}
+            profession={doctor.specialization_name}
+            time={date}
+            description={reason}
+          />
+        );
+      })}
     </List>
   );
 };

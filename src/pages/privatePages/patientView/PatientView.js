@@ -1,63 +1,60 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ViewPagesWrapper from "../components/ViewPagesWrapper/ViewPagesWrapper.js";
 import AppointmentsList from "./components/AppointmentsList";
-import { styles } from "./PatientViewStyles";
-
-import { appointmentsData } from "utils/appointmentsData";
+import { useSelector, useDispatch } from "react-redux";
+import { patientAppointments, userRoleName } from "Redux/selectors";
+import { useHistory } from "react-router-dom";
+import { getPatientAppointment } from "network/fetchOperations.js";
+import * as Styled from "./PatientViewStyles";
 
 // IMAGES
-import avatar from "media/patientAvatar.png";
 import slider from "media/sliders-v-alt.svg";
 
-const {
-  NavButtonsWrapper,
-  NavButton,
-  NavigationWrapper,
-  NavSectionTitle,
-  NavgationItemsWrapper,
-  NavigationItemSelect,
-  NavigationSelectSpan,
-  NavigationSelectDesktop,
-  EmptyListBlock,
-  EmptyListText,
-  UppointmentCreateButton,
-} = styles;
-
 const PatientView = () => {
-  const [appointments, setAppointments] = useState([]);
+  const appointments = useSelector(state => patientAppointments(state));
+  const history = useHistory();
+  const userRole = useSelector((state) => userRoleName(state));
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    setAppointments(appointmentsData);
-  }, []);
+    if (!userRole) {
+      history.replace("/sign-in");
+    }
+  }, [userRole, history]);
+
+  useEffect(() => {
+    dispatch(getPatientAppointment());
+  }, [dispatch]);
 
   return (
-    <ViewPagesWrapper name="Larry Primston" role="Patient" avatar={avatar}>
-      <NavButtonsWrapper>
-        <NavButton>Profile</NavButton>
-        <NavButton current>Appointments</NavButton>
-        <NavButton>resolutions</NavButton>
-      </NavButtonsWrapper>
-      <NavigationWrapper>
-        <NavSectionTitle>My Appointments</NavSectionTitle>
-        <NavgationItemsWrapper>
-          <NavigationItemSelect src={slider} alt="" />
-          <NavigationSelectSpan>Show:</NavigationSelectSpan>
-          <NavigationSelectDesktop>
+    <ViewPagesWrapper>
+      <Styled.NavButtonsWrapper>
+        <Styled.NavButton>Profile</Styled.NavButton>
+        <Styled.NavButton current>Appointments</Styled.NavButton>
+        <Styled.NavButton>resolutions</Styled.NavButton>
+      </Styled.NavButtonsWrapper>
+      <Styled.NavigationWrapper>
+        <Styled.NavSectionTitle>My Appointments</Styled.NavSectionTitle>
+        <Styled.NavgationItemsWrapper>
+          <Styled.NavigationItemSelect src={slider} alt="" />
+          <Styled.NavigationSelectSpan>Show:</Styled.NavigationSelectSpan>
+          <Styled.NavigationSelectDesktop>
             <option value="">Upcoming</option>
-          </NavigationSelectDesktop>
-          <UppointmentCreateButton>
+          </Styled.NavigationSelectDesktop>
+          <Styled.UppointmentCreateButton to="/patient-view/make-appointment">
             + create an uppointment
-          </UppointmentCreateButton>
-        </NavgationItemsWrapper>
-      </NavigationWrapper>
+          </Styled.UppointmentCreateButton>
+        </Styled.NavgationItemsWrapper>
+      </Styled.NavigationWrapper>
       {appointments.length > 0 ? (
         <AppointmentsList appointments={appointments} />
       ) : (
-        <EmptyListBlock>
-          <EmptyListText>
+        <Styled.EmptyListBlock>
+          <Styled.EmptyListText>
             You have no patients yet. To create a patient profile, please
             contact your administrator.
-          </EmptyListText>
-        </EmptyListBlock>
+          </Styled.EmptyListText>
+        </Styled.EmptyListBlock>
       )}
     </ViewPagesWrapper>
   );

@@ -5,17 +5,24 @@ export const Wrapper = styled.div`
   flex-wrap: wrap;
   width: 464px;
   gap: 16px;
+  &>div{
+    width: 104px;
+    height: 40px;
+  }
 `;
 
 export const Label = styled.label`
-  display: inline-block;
-  padding: 8px 16px;
+  display: flex;
+  width: 104px;
+  height: 40px;
+  justify-content: center;
+  align-items:center;
 
   font-family: Poppins;
   font-style: normal;
   font-weight: 600;
   font-size: 15px;
-  line-height: 130%;
+  line-height: 19px;
   background-color: ${(props) => (props.notReady ? "#DCE0EC" : "#ffffff")};
   box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.24);
   border-radius: 8px;
@@ -35,7 +42,13 @@ export const Label = styled.label`
     border: 1px solid #7297ff;
     color: #7297ff;
   `
-      : null}
+      : null};
+
+  ${({ notReady }) =>
+    notReady &&
+    `
+    pointer-events: none;
+  `};
 `;
 
 export const Input = styled.input`

@@ -16,7 +16,7 @@ const RestorePassAside = ({ title, children }) => {
       <Aside>
         <AsideWrapper>
           <AsideTitleWrapper>
-            <StyledLink to="/"></StyledLink>
+            <StyledLink to="/sign-in"></StyledLink>
             <AsideTitle>{title}</AsideTitle>
           </AsideTitleWrapper>
           {children}

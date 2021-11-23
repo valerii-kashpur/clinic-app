@@ -1,6 +1,7 @@
 import { lazy } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { Route } from "react-router-dom";
+import PrivateRoutes from "./PrivateRoutes";
+import PublicRoutes from "./PublicRoutes";
 
 const SignIn = lazy(() => import("pages/authPages/signIn/SignIn"));
 const SignUp = lazy(() => import("pages/authPages/signUp/SignUp"));
@@ -22,37 +23,61 @@ const PatientMakeAppointment = lazy(() =>
 
 const ROUTES = [
   {
-    path: "/sign-in",
-    component: SignIn,
-  },
-  {
-    path: "/sign-up",
-    component: SignUp,
-  },
-  {
-    path: "/restore-password-confirmed",
-    component: RestorePasswordConfirmed,
-  },
-  {
-    path: "/restore-password",
-    component: RestorePassword,
-  },
-  {
     path: "/doctor-view",
     component: DoctorView,
+    private: true,
+    onlyForRole: "Doctor",
   },
   {
     path: "/patient-view/make-appointment",
     component: PatientMakeAppointment,
+    private: true,
+    onlyForRole: "Patient",
   },
   {
     path: "/patient-view",
     component: PatientView,
+    private: true,
+    onlyForRole: "Patient",
+  },
+  {
+    path: "/sign-in",
+    component: SignIn,
+    private: false,
+  },
+  {
+    path: "/sign-up",
+    component: SignUp,
+    private: false,
+  },
+  {
+    path: "/restore-password-confirmed",
+    component: RestorePasswordConfirmed,
+    private: false,
+  },
+  {
+    path: "/restore-password",
+    component: RestorePassword,
+    private: false,
   },
 ];
 
-const mapedRoutes = ROUTES.map(({ path, component }) => (
-  <Route path={path} component={component} key={uuidv4()} />
-));
+const mapedRoutes = (userRoleName) =>
+  ROUTES.map((route) => {
+    return route.private && userRoleName === route.onlyForRole ? (
+      <PrivateRoutes
+        path={route.path}
+        component={route.component}
+        forRole={route.onlyForRole}
+        key={uuidv4()}
+      />
+    ) : (
+      <PublicRoutes
+        path={route.path}
+        component={route.component}
+        key={uuidv4()}
+      />
+    );
+  });
 
 export default mapedRoutes;

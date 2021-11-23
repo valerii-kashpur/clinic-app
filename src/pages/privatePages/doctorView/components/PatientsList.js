@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import moment from "moment";
 import styled from "styled-components";
 
 import PatientsListItem from "./PatientsListItem/PatientsListItem";
-
-// MEDIA
-import avatar from "media/ZaharyAvatar.png";
+import EditAppointmentModal from "./EditAppointmentModal";
 
 //  Styles ---------------------------------------------------------------------------------------------
 
@@ -46,20 +45,41 @@ const List = styled.ul`
 
 //  ---------------------------------------------------------------------------------------------
 
-const PatientsList = ({ users }) => {
+const PatientsList = ({ appointments }) => {
+  const [modalPropItems, setModalPropItems] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
+  function toggleModal(e) {
+    setIsOpen(!isOpen);
+  }
+
   return (
-    <List>
-      {users.map((user) => (
-        <PatientsListItem
-          key={uuidv4()}
-          avatar={avatar}
-          name={user.name}
-          appointment={user.appointment}
-          time={user.time}
-          description={user.description}
-        />
-      ))}
-    </List>
+    <>
+      <List>
+        {appointments.map(({ patient, reason, status, visit_date, id }) => {
+          const date = moment(visit_date).format("ddd MMM DD YYYY, h a");
+          return (
+            <PatientsListItem
+              key={uuidv4()}
+              avatar={patient.photo}
+              name={patient.first_name + " " + patient.last_name}
+              appointment={status}
+              time={date}
+              description={reason}
+              id={id}
+              visitDate={visit_date}
+              getModalProps={setModalPropItems}
+              openModal={toggleModal}
+            />
+          );
+        })}
+      </List>
+      <EditAppointmentModal
+        isOpen={isOpen}
+        toggleModal={toggleModal}
+        modalPropItems={modalPropItems}
+      />
+    </>
   );
 };
 

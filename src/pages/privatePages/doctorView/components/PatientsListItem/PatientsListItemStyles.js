@@ -4,7 +4,7 @@ import styled from "styled-components";
 import timeSvg from "media/clock-three.svg";
 import clipboardSvg from "media/clipboard-blank.svg";
 
-const ListItem = styled.li`
+export const ListItem = styled.li`
   padding-left: 24px;
   padding-right: 16px;
   padding-top: 16px;
@@ -27,7 +27,7 @@ const ListItem = styled.li`
   }
 `;
 
-const ListItemInfoWrapper = styled.div`
+export const ListItemInfoWrapper = styled.div`
   position: relative;
   padding-bottom: 16px;
 
@@ -47,24 +47,24 @@ const ListItemInfoWrapper = styled.div`
   }
 `;
 
-const ListItemInfoAvatar = styled.img`
+export const ListItemInfoAvatar = styled.img`
   width: 48px;
   height: 48px;
   margin-right: 16px;
 `;
 
-const ListItemInfoName = styled.p`
+export const ListItemInfoName = styled.p`
   font-weight: ${(props) => props.theme.fonts.boldFontWeight};
   font-size: 17px;
   line-height: 130%;
 `;
 
-const ListItemStatusWrapper = styled.div`
+export const ListItemStatusWrapper = styled.div`
   display: flex;
   align-items: center;
 `;
 
-const ListItemStatus = styled.span`
+export const ListItemStatus = styled.span`
   display: block;
   width: ${(props) => props.theme.borderRadius.borderRadius};
   height: ${(props) => props.theme.borderRadius.borderRadius};
@@ -74,13 +74,13 @@ const ListItemStatus = styled.span`
   background-color: ${(props) => props.theme.colors.pointerColor};
 `;
 
-const ListItemStatusAppointment = styled.p`
+export const ListItemStatusAppointment = styled.p`
   font-size: 13px;
   line-height: 130%;
   color: ${(props) => props.theme.colors.secondaryTextColor};
 `;
 
-const ListItemInfoText = styled.p`
+export const ListItemInfoText = styled.p`
   position: relative;
   margin-top: ${(props) => (props.description ? "23px" : "16px")};
   padding-left: 36px;
@@ -95,28 +95,15 @@ const ListItemInfoText = styled.p`
     height: 24px;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url(${(props) =>
-      props.description ? clipboardSvg : timeSvg});
+    background-image: url(${(props) =>props.description ? clipboardSvg : timeSvg});
   }
   @media ${(props) => props.theme.media.tablet} {
     margin-top: ${(props) => (props.description ? "24px" : "23px")};
   } ;
 `;
 
-const ListItemMore = styled.img`
+export const ListItemMore = styled.img`
   width: 24px;
   height: 24px;
   margin-left: auto;
 `;
-
-export const styles = {
-  ListItem,
-  ListItemInfoWrapper,
-  ListItemInfoAvatar,
-  ListItemInfoName,
-  ListItemStatusWrapper,
-  ListItemStatus,
-  ListItemStatusAppointment,
-  ListItemInfoText,
-  ListItemMore,
-};
