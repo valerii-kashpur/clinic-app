@@ -65,9 +65,9 @@ export const getPatientAppointment = () => (dispatch) => {
     .catch((error) => notify(error.response.status, error.response.data));
 };
 
-export const getDoctorAppointment = () => (dispatch) => {
+export const getDoctorAppointment = (sortBy) => (dispatch) => {
   axios
-    .get("appointments/doctor/me?offset=0&limit=40")
+    .get(`appointments/doctor/me?offset=0&limit=20&sortBy=${sortBy}`)
     .then((response) => dispatch(setDoctorAppointments(response.data)))
     .catch((error) => notify(error.response.status, error.response.data));
 };

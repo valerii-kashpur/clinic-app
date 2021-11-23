@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ViewPagesWrapper from "../components/ViewPagesWrapper/ViewPagesWrapper.js";
 import PatientsList from "./components/PatientsList";
 import { useSelector } from "react-redux";
@@ -14,9 +14,10 @@ import { useDispatch } from "react-redux";
 import { getDoctorAppointment } from "network/fetchOperations.js";
 
 const DoctorView = () => {
+  const [sortBy, setSortBy] = useState("dateSort")
   const history = useHistory();
-  const userRole = useSelector((state) => userRoleName(state));
   const dispatch = useDispatch();
+  const userRole = useSelector((state) => userRoleName(state));
   const appointments = useSelector((state) => doctorAppointments(state));
 
   useEffect(() => {
@@ -26,8 +27,8 @@ const DoctorView = () => {
   }, [userRole, history]);
 
   useEffect(() => {
-    dispatch(getDoctorAppointment());
-  }, [dispatch]);
+    dispatch(getDoctorAppointment(sortBy));
+  }, [dispatch, sortBy]);
 
   return (
     <ViewPagesWrapper name="Miranda Nelson" role="doctor" avatar={avatar}>
@@ -42,8 +43,10 @@ const DoctorView = () => {
           <Styled.NavigationSearchInput type="text" placeholder="Search" />
           <Styled.NavigationItemSelect src={slider} alt="" />
           <Styled.NavigationSelectSpan>Sort by:</Styled.NavigationSelectSpan>
-          <Styled.NavigationSelect name="Date" id="">
-            <option>Date</option>
+          <Styled.NavigationSelect name="Date" id="" onChange={e => setSortBy(e.target.value)}>
+            <option value="dateSort">Date</option>
+            <option value="firstNameSort">Name</option>
+            <option value="lastNameSort">Last Name</option>
           </Styled.NavigationSelect>
         </Styled.NavgationItemsWrapper>
       </Styled.NavigationWrapper>
