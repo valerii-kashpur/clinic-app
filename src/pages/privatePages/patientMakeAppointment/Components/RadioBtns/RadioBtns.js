@@ -1,6 +1,7 @@
 import moment from "moment";
 import { getDoctorsFreeTimeByDateAndId } from "network/fetchOperations";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { v4 as uuid4 } from "uuid";
 import * as Styled from "./RadioBtnsStyles";
 
@@ -20,27 +21,24 @@ const time = [
   "T17:00:00.000Z",
 ];
 
-const RadioBtns = ({
-  pickedDate,
-  onSelected,
-  doctorsId
-}) => {
+const RadioBtns = ({ pickedDate, onSelected, doctorsId }) => {
   const [selectedRadio, setSelectedRadio] = useState("");
   const [doctorsFreeTime, setDoctorsFreeTime] = useState([]);
   const isSelectedRadio = (value) => selectedRadio === value;
+  const dispatch = useDispatch();
 
   const handleRadioClick = (e) => {
     setSelectedRadio(e.currentTarget.value);
   };
 
   useEffect(() => {
-    setSelectedRadio("")
-  }, [pickedDate])
+    setSelectedRadio("");
+  }, [pickedDate]);
 
   useEffect(() => {
     if (pickedDate) {
-      getDoctorsFreeTimeByDateAndId(pickedDate, doctorsId).then((response) =>
-        setDoctorsFreeTime(response)
+      dispatch(getDoctorsFreeTimeByDateAndId(pickedDate, doctorsId)).then(
+        (response) => setDoctorsFreeTime(response)
       );
     }
   }, [pickedDate, doctorsId]);
@@ -56,9 +54,9 @@ const RadioBtns = ({
   };
 
   const getDisabled = (time) => {
-    if(pickedDate){
-      return !doctorsFreeTime.includes(pickedDate.substring(0, 10)+time)
-    };
+    if (pickedDate) {
+      return !doctorsFreeTime.includes(pickedDate.substring(0, 10) + time);
+    }
     return true;
   };
 
@@ -69,7 +67,7 @@ const RadioBtns = ({
   return (
     <Styled.Wrapper>
       {time.map((singleInput) => {
-        const dis = getDisabled(singleInput)
+        const dis = getDisabled(singleInput);
         return (
           <div key={uuid4()}>
             <Styled.Input

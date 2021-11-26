@@ -9,10 +9,15 @@ import emailSvg from "media/email.svg";
 import lockSvg from "media/lock.svg";
 import { useDispatch } from "react-redux";
 import { getUserFetch } from "Redux/userSlice";
+import { useSelector } from "react-redux";
+import { loaderSelector } from "Redux/selectors";
+import ButtonTextWithArrow from "components/ButtonTextWithArrow";
+import LoaderForButtons from "components/LoaderForButtons";
 
 const SignInForm = () => {
   const [passwordToggle, setPasswordToggle] = useState(false);
-  const dispatch = useDispatch()
+  const loaderFromUserState = useSelector((state) => loaderSelector(state));
+  const dispatch = useDispatch();
 
   return (
     <Formik
@@ -21,9 +26,9 @@ const SignInForm = () => {
         password: "",
       }}
       validationSchema={SignInSchema}
-      onSubmit={({email, password}, {resetForm}) => {
-        const reqData = {"userName": email, "password": password};
-        dispatch(getUserFetch(reqData))
+      onSubmit={({ email, password }, { resetForm }) => {
+        const reqData = { userName: email, password: password };
+        dispatch(getUserFetch(reqData));
         resetForm();
       }}
     >
@@ -54,7 +59,11 @@ const SignInForm = () => {
             ></Styled.PasswordEyeSpan>
           </Styled.FormInputWrapper>
           <Styled.Button type="submit">
-            Sign In <Styled.ButtonVector />
+            {loaderFromUserState ? (
+              <LoaderForButtons />
+            ) : (
+              <ButtonTextWithArrow text="Sign in" />
+            )}
           </Styled.Button>
         </Styled.AsideForm>
       )}

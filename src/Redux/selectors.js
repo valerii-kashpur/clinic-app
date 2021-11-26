@@ -9,4 +9,4 @@ export const patientAppointments = (state) =>
   state.patientAppointments.appointments;
 export const doctorAppointments = (state) =>
   state.doctorAppointments.appointments;
-
+export const isLoadingSelector = (state) => state.loader;

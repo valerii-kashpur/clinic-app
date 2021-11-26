@@ -8,6 +8,10 @@ import RadioBtns from "../RadioBtns/RadioBtns";
 import VisitReasons from "../VisitReasons/VisitReasons";
 import { createAppointment } from "network/fetchOperations";
 import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { isLoadingSelector } from "Redux/selectors";
+import LoaderForButtons from "components/LoaderForButtons";
 
 const Form = () => {
   const [visitReasonsReady, setVisitReasonsReady] = useState(false);
@@ -16,9 +20,11 @@ const Form = () => {
   const [timeIsSelected, setTimeIsSelected] = useState(false);
   const [doctorId, setDoctorId] = useState("");
   const [toggleButton, setToggleButton] = useState(true);
+  const isLoading = useSelector((state) => isLoadingSelector(state));
   const history = useHistory();
+  const dispatch = useDispatch();
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     const { reason, note } = selectsValue;
     e.preventDefault();
     const reqData = {
@@ -27,9 +33,10 @@ const Form = () => {
       note: note,
       doctorID: doctorId,
     };
-    createAppointment(reqData).then(
-      history.push({ pathname: "/patient-view" })
-    );
+    await dispatch(createAppointment(reqData));
+    history.push({
+      pathname: "/patient-view",
+    });
   };
 
   useEffect(() => {
@@ -91,7 +98,7 @@ const Form = () => {
         height={"56px"}
         margin={"39px 80px 0px auto"}
       >
-        Submit
+        {isLoading ? <LoaderForButtons /> : "Submit"}
       </Button>
     </form>
   );

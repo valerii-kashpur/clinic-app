@@ -1,10 +1,10 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import { setDoctorAppointments } from "Redux/doctorAppointmentsSlice";
+import { setIsLoadingOff, setIsLoadingOn } from "Redux/loaderSlice";
 import { setPatientAppointments } from "Redux/patientAppointmentsSlice";
 import { setToken, setUser } from "Redux/userSlice";
 import { errorReq, succesReq } from "styles/notificationsStyles";
-
 
 toast.configure();
 const notify = (status, message) => {
@@ -58,58 +58,112 @@ export const getProfile = (persistToken) => (dispatch) => {
     .catch((error) => notify(error.response.status, error.response.data));
 };
 
-export const getPatientAppointment = (dateStatus) => (dispatch) => {
-  axios
-    .get(`appointments/patient/me?offset=0&limit=20&dateStatus=${dateStatus}`)
-    .then((response) => dispatch(setPatientAppointments(response.data)))
-    .catch((error) => notify(error.response.status, error.response.data));
+export const getPatientAppointment = (dateStatus) => async (dispatch) => {
+  dispatch(setIsLoadingOn());
+  try {
+    await axios
+      .get(`appointments/patient/me?offset=0&limit=20&dateStatus=${dateStatus}`)
+      .then((response) => dispatch(setPatientAppointments(response.data)));
+    dispatch(setIsLoadingOff());
+  } catch (error) {
+    dispatch(setIsLoadingOff());
+    notify(error.response.status, error.response.data);
+  }
 };
 
-export const getDoctorAppointment = (sortBy) => (dispatch) => {
-  axios
-    .get(`appointments/doctor/me?offset=0&limit=20&sortBy=${sortBy}`)
-    .then((response) => dispatch(setDoctorAppointments(response.data)))
-    .catch((error) => notify(error.response.status, error.response.data));
+export const getDoctorAppointment = (sortBy) => async (dispatch) => {
+  dispatch(setIsLoadingOn());
+  try {
+    await axios
+      .get(`appointments/doctor/me?offset=0&limit=20&sortBy=${sortBy}`)
+      .then((response) =>
+        dispatch(setDoctorAppointments(response.data)).then()
+      );
+    dispatch(setIsLoadingOff());
+  } catch (error) {
+    dispatch(setIsLoadingOff());
+    notify(error.response.status, error.response.data);
+  }
 };
 
-export const getOccupations = () => {
-  return axios
-    .get("specializations")
-    .then((data) => data)
-    .catch((error) => notify(error.response.status, error.response.data));
+export const getOccupations = () => async (dispatch) => {
+  dispatch(setIsLoadingOn());
+  try {
+    const result = await axios.get("specializations").then((data) => data);
+    dispatch(setIsLoadingOff());
+    return result;
+  } catch (error) {
+    dispatch(setIsLoadingOff());
+    notify(error.response.status, error.response.data);
+  }
 };
 
-export const getDoctorsByOccupationId = (id) => {
-  return axios
-    .get(`doctors/specialization/${id}`)
-    .then(({ data, status }) => data)
-    .catch((error) => notify(error.response.status, error.response.data));
+export const getDoctorsByOccupationId = (id) => async (dispatch) => {
+  dispatch(setIsLoadingOn());
+  try {
+    const result = await axios
+      .get(`doctors/specialization/${id}`)
+      .then(({ data, status }) => data);
+    dispatch(setIsLoadingOff());
+    return result;
+  } catch (error) {
+    dispatch(setIsLoadingOff());
+    notify(error.response.status, error.response.data);
+  }
 };
 
-export const getDoctorsFreeTimeByDateAndId = (date, id) => {
-  return axios
-    .get(`appointments/time/free?date=${date}&doctorID=${id}`)
-    .then(({ data }) => data)
-    .catch((error) => notify(error.response.status, error.response.data));
+export const getDoctorsFreeTimeByDateAndId = (date, id) => async (dispatch) => {
+  dispatch(setIsLoadingOn());
+  try {
+    const result = await axios
+      .get(`appointments/time/free?date=${date}&doctorID=${id}`)
+      .then(({ data }) => data);
+    dispatch(setIsLoadingOff());
+    return result;
+  } catch (error) {
+    dispatch(setIsLoadingOff());
+    notify(error.response.status, error.response.data);
+  }
 };
 
-export const createAppointment = (credentials) => {
-  return axios
-    .post(`appointments`, credentials)
-    .then(({ status }) => notify(status))
-    .catch((error) => notify(error.response.status, error.response.data));
+export const createAppointment = (credentials) => async (dispatch) => {
+  dispatch(setIsLoadingOn());
+  try {
+    const result = await axios
+      .post(`appointments`, credentials)
+      .then(({ status }) => notify(status));
+    dispatch(setIsLoadingOff());
+    return result;
+  } catch (error) {
+    dispatch(setIsLoadingOff());
+    notify(error.response.status, error.response.data);
+  }
 };
 
-export const updateAppointmentStatus = (credentials, id) => {
-  return axios
-    .patch(`appointments/${id}`, credentials)
-    .then(({ status }) => notify(status))
-    .catch((error) => notify(error.response.status, error.response.data));
-};
+export const updateAppointmentStatus =
+  (credentials, id) => async (dispatch) => {
+    dispatch(setIsLoadingOn());
+    try {
+      const result = await axios
+        .patch(`appointments/${id}`, credentials)
+        .then(({ status }) => notify(status));
+      dispatch(setIsLoadingOff());
+      return result;
+    } catch (error) {
+      dispatch(setIsLoadingOff());
+      notify(error.response.status, error.response.data);
+    }
+  };
 
-export const deleteAppointment = (id) => {
-  return axios
-    .delete(`appointments/${id}`)
-    .then(({ status }) => notify(status))
-    .catch((error) => notify(error.response.status, error.response.data));
+export const deleteAppointment = (id) => async (dispatch) => {
+  dispatch(setIsLoadingOn());
+  try {
+    await axios
+      .delete(`appointments/${id}`)
+      .then(({ status }) => notify(status));
+    dispatch(setIsLoadingOff());
+  } catch (error) {
+    dispatch(setIsLoadingOff());
+    notify(error.response.status, error.response.data);
+  }
 };

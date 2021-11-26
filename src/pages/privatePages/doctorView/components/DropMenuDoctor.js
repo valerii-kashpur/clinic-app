@@ -24,7 +24,7 @@ const DropMenuDoctor = ({
   };
 
   const handleDelete = async () => {
-    await deleteAppointment(id);
+    await dispatch(deleteAppointment(id));
     dispatch(getDoctorAppointment());
   };
 

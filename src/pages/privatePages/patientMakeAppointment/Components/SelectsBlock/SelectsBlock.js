@@ -4,6 +4,7 @@ import {
   getDoctorsByOccupationId,
   getOccupations,
 } from "network/fetchOperations";
+import { useDispatch } from "react-redux";
 
 const SelectsBlock = ({
   disabled,
@@ -15,10 +16,11 @@ const SelectsBlock = ({
 }) => {
   const [occupationOptions, setOccupationOptions] = useState("");
   const [doctorOptions, setDoctorOptions] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!occupationOptions) {
-      getOccupations().then((response) => {
+      dispatch(getOccupations()).then((response) => {
         const array = response.data.map((object) => ({
           value: object.id,
           label: object.specialization_name,
@@ -26,10 +28,10 @@ const SelectsBlock = ({
         setOccupationOptions(array);
       });
     }
-  }, [occupationOptions]);
+  }, [occupationOptions, dispatch]);
 
   const getDoctors = ({ value: id }) => {
-    getDoctorsByOccupationId(id).then((response) => {
+    dispatch(getDoctorsByOccupationId(id)).then((response) => {
       setDoctorOptions([]);
       setSelectedValues(false);
       onResetPickedDate("");

@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { Formik } from "formik";
 import { SignUpSchema } from "utils/YupValidationSchemas";
+import { useSelector } from "react-redux";
+import { loaderSelector } from "Redux/selectors";
 import AuthPageInputs from "../AuthPageInputs/AuthPageInputs";
+import ButtonTextWithArrow from "components/ButtonTextWithArrow";
+import LoaderForButtons from "components/LoaderForButtons";
 import * as Styled from "../../signUp/SignUpStyles";
 
 // media
@@ -14,6 +18,8 @@ import { register } from "network/fetchOperations";
 const SignUpForm = () => {
   const [passwordToggle, setPasswordToggle] = useState(false);
   const [passwordConfirmToggle, setPasswordConfirmToggle] = useState(false);
+  const loaderFromUserState = useSelector((state) => loaderSelector(state));
+
   return (
     <Formik
       initialValues={{
@@ -96,7 +102,11 @@ const SignUpForm = () => {
             ></Styled.PasswordEyeSpan>
           </Styled.FormInputWrapper>
           <Styled.Button type="submit">
-            Sign up <Styled.ButtonVector />
+          {loaderFromUserState ? (
+              <LoaderForButtons />
+            ) : (
+              <ButtonTextWithArrow text="Sign up" />
+            )}
           </Styled.Button>
         </Styled.AsideForm>
       )}
