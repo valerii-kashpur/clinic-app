@@ -13,7 +13,7 @@ const PrivateRoutes = ({ component: Component, ...routeProps }) => {
         return isLogIn ? (
           <Component {...props} />
         ) : (
-          <Redirect to={{ pathname: "/sign-in", state: props.location }} />
+          null
         );
       }}
     />

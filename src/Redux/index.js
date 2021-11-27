@@ -26,15 +26,16 @@ const saga = createSagaMiddleware();
 const authPersistConfig = {
   key: "user",
   storage,
-  whitelist: [`token`],
+  whitelist: ["token", "role_name"],
 };
 
-const middleware  = [
+const middleware = [
   ...getDefaultMiddleware({
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
-  }), saga
+  }),
+  saga,
 ];
 
 const rootReducer = combineReducers({
@@ -46,7 +47,7 @@ const rootReducer = combineReducers({
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware ,
+  middleware,
 });
 saga.run(userSagaWatcher);
 

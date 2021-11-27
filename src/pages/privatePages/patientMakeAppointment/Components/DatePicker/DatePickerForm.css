@@ -45,6 +45,7 @@
 }
 
 .react-datepicker__header {
+  background-color: white;
   padding: 0;
   border-bottom: none;
 }
