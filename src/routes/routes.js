@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import { v4 as uuidv4 } from "uuid";
+import  PATHS  from "./paths";
 import PrivateRoutes from "./PrivateRoutes";
 import PublicRoutes from "./PublicRoutes";
 
@@ -21,42 +22,43 @@ const PatientMakeAppointment = lazy(() =>
   import("pages/privatePages/patientMakeAppointment/PatientMakeAppointment")
 );
 
+
 const ROUTES = [
   {
-    path: "/doctor-view",
+    path: PATHS.doctorView,
     component: DoctorView,
     private: true,
     onlyForRole: "Doctor",
   },
   {
-    path: "/patient-view/make-appointment",
+    path: PATHS.makeAppointment,
     component: PatientMakeAppointment,
     private: true,
     onlyForRole: "Patient",
   },
   {
-    path: "/patient-view",
+    path: PATHS.patientView,
     component: PatientView,
     private: true,
     onlyForRole: "Patient",
   },
   {
-    path: "/sign-in",
+    path: PATHS.signIn,
     component: SignIn,
     private: false,
   },
   {
-    path: "/sign-up",
+    path: PATHS.signUp,
     component: SignUp,
     private: false,
   },
   {
-    path: "/restore-password-confirmed",
+    path: PATHS.restorePasswordConfirmed,
     component: RestorePasswordConfirmed,
     private: false,
   },
   {
-    path: "/restore-password",
+    path: PATHS.RestorePassword,
     component: RestorePassword,
     private: false,
   },

@@ -1,4 +1,5 @@
 import React from "react";
+import PATHS  from "routes/paths";
 import { styles } from "./RestorePassAsideStyles";
 
 const {
@@ -16,7 +17,7 @@ const RestorePassAside = ({ title, children }) => {
       <Aside>
         <AsideWrapper>
           <AsideTitleWrapper>
-            <StyledLink to="/sign-in"></StyledLink>
+            <StyledLink to={PATHS.signIn}></StyledLink>
             <AsideTitle>{title}</AsideTitle>
           </AsideTitleWrapper>
           {children}

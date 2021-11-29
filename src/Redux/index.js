@@ -26,7 +26,7 @@ const saga = createSagaMiddleware();
 const authPersistConfig = {
   key: "user",
   storage,
-  whitelist: ["token", "role_name"],
+  whitelist: ["token", "roleName"],
 };
 
 const middleware = [

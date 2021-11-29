@@ -15,7 +15,7 @@ const ViewPagesWrapper = ({ children }) => {
         <Styled.HeaderLogoWrapper>
           <Styled.HeaderUserNAmeWrapper>
             <p>
-              {currentUser.first_name} {currentUser.last_name}
+              {currentUser.firstName} {currentUser.lastName}
             </p>
             <p>{currentUser.role_name}</p>
           </Styled.HeaderUserNAmeWrapper>

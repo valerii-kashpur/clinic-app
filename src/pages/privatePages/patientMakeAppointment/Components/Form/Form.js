@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { isLoadingSelector } from "Redux/selectors";
 import LoaderForButtons from "components/LoaderForButtons";
+import  PATHS  from "routes/paths";
 
 const Form = () => {
   const [visitReasonsReady, setVisitReasonsReady] = useState(false);
@@ -35,7 +36,7 @@ const Form = () => {
     };
     await dispatch(createAppointment(reqData));
     history.push({
-      pathname: "/patient-view",
+      pathname: PATHS.doctorView,
     });
   };
 

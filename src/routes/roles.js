@@ -1,4 +1,6 @@
+import  PATHS  from "./paths";
+
 export const roles = {
-  Patient: "/patient-view",
-  Doctor: "/doctor-view",
+  Patient: PATHS.patientView,
+  Doctor: PATHS.doctorView,
 };

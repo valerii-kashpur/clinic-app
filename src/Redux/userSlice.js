@@ -4,10 +4,10 @@ const userSlice = createSlice({
   name: "userSlice",
   initialState: {
     id: "",
-    first_name: "",
-    last_name: "",
+    firstName: "",
+    lastName: "",
     photo: "",
-    role_name: "",
+    roleName: "",
     isAuthorized: false,
     token: "",
     loading: false,

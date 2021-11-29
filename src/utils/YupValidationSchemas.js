@@ -33,5 +33,5 @@ export const RestorePasswordSchema = Yup.object().shape({
 });
 
 export const appointmentSchema = Yup.object().shape({
-  reason: Yup.string().min(8, "Too Short!").required("Required"),
+  reason: Yup.string().min(4, "Too Short!").required("Required"),
 });

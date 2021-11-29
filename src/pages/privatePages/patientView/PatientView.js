@@ -13,6 +13,7 @@ import * as Styled from "./PatientViewStyles";
 
 // IMAGES
 import slider from "media/sliders-v-alt.svg";
+import  PATHS  from "routes/paths";
 
 const PatientView = () => {
   const [dateStatus, setDateStatus] = useState("Upcoming");
@@ -24,7 +25,7 @@ const PatientView = () => {
 
   useEffect(() => {
     if (!userRole && !isAuth) {
-      history.replace("/sign-in");
+      history.replace(PATHS.signIn);
     }
   }, [userRole, history, isAuth]);
 
@@ -52,7 +53,7 @@ const PatientView = () => {
             <option value="Upcoming">Upcoming</option>
             <option value="Outdate">Outdate</option>
           </Styled.NavigationSelectDesktop>
-          <Styled.UppointmentCreateButton to="/patient-view/make-appointment">
+          <Styled.UppointmentCreateButton to={PATHS.makeAppointment}>
             + create an uppointment
           </Styled.UppointmentCreateButton>
         </Styled.NavgationItemsWrapper>

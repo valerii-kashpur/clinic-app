@@ -20,17 +20,30 @@ export const getProfile = (persistToken) => (dispatch) => {
   if (!persistToken) {
     return;
   }
+
   axiosInstance
     .get("auth/profile")
-    .then((response) => dispatch(setUser(response.data)))
+    .then((response) => {
+      const { first_name, id, last_name, photo, role_name } = response.data;
+      const newData = {
+        firstName: first_name,
+        lastName: last_name,
+        id,
+        photo,
+        roleName: role_name,
+      };
+      return newData;
+    })
+    .then((newData) => dispatch(setUser(newData)))
     .catch((error) => notify(error.response.status, error.response.data));
 };
 
 export const getPatientAppointment = (dateStatus) => async (dispatch) => {
+  // &dateStatus=${dateStatus}
   dispatch(setIsLoadingOn());
   try {
     await axiosInstance
-      .get(`appointments/patient/me?offset=0&limit=20&dateStatus=${dateStatus}`)
+      .get(`appointments/patient/me?offset=0&limit=40`)
       .then((response) => dispatch(setPatientAppointments(response.data)));
     dispatch(setIsLoadingOff());
   } catch (error) {
@@ -40,10 +53,11 @@ export const getPatientAppointment = (dateStatus) => async (dispatch) => {
 };
 
 export const getDoctorAppointment = (sortBy) => async (dispatch) => {
+  // &sortBy=${sortBy}
   dispatch(setIsLoadingOn());
   try {
     await axiosInstance
-      .get(`appointments/doctor/me?offset=0&limit=20&sortBy=${sortBy}`)
+      .get(`appointments/doctor/me?offset=0&limit=40`)
       .then((response) =>
         dispatch(setDoctorAppointments(response.data)).then()
       );
@@ -105,6 +119,7 @@ export const createAppointment = (credentials) => async (dispatch) => {
     dispatch(setIsLoadingOff());
     return result;
   } catch (error) {
+    console.log(error);
     dispatch(setIsLoadingOff());
     notify(error.response.status, error.response.data);
   }

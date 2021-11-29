@@ -11,8 +11,8 @@ axiosInstance.interceptors.request.use((config) => {
   if (token) {
     config.headers = {
       Authorization: `Bearer ${token}`,
-      Accept: "application/json",
-      "Content-Type": "application/x-www-form-urlencoded",
+      accept: "application/json",
+      "Content-Type": "application/json"
     };
   }
   return config;
