@@ -1,4 +1,4 @@
-export const succesReq = {
+export const successReq = {
     position: "bottom-left",
     autoClose: 5000, //false to disable
     hideProgressBar: true,

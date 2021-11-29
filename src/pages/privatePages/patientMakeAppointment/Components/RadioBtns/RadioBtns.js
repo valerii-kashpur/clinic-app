@@ -41,7 +41,7 @@ const RadioBtns = ({ pickedDate, onSelected, doctorsId }) => {
         (response) => setDoctorsFreeTime(response)
       );
     }
-  }, [pickedDate, doctorsId]);
+  }, [pickedDate, doctorsId, dispatch]);
 
   useEffect(() => {
     if (selectedRadio) {

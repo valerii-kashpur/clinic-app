@@ -1,3 +1,7 @@
+.react-datepicker {
+  border: none;
+}
+
 .react-datepicker__day--outside-month {
   color: #dce0ec !important;
   pointer-events: none;

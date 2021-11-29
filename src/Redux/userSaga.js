@@ -1,26 +1,17 @@
 import {call, takeEvery, put} from "redux-saga/effects";
 import { getUserFailure, getUserSuccess } from "./userSlice";
 import { toast } from "react-toastify";
-import axios from "axios";
-import { errorReq, succesReq } from "styles/notificationsStyles";
-
-  const token = {
-    set(token) {
-      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-    },
-    unset(token) {
-      axios.defaults.headers.common.Authorization = ``;
-    },
-  };
+import { errorReq, successReq } from "styles/notificationsStyles";
+import axiosInstance from "network/Api";
 
 
 toast.configure();
 const notify = (status, message) => {
   switch (status) {
     case 200:
-      return toast.success("success", succesReq);
+      return toast.success("success", successReq);
     case 201:
-      return toast.success("success", succesReq);
+      return toast.success("success", successReq);
     default:
       return toast.error(message, errorReq);
   }
@@ -28,9 +19,9 @@ const notify = (status, message) => {
 
 function* workerUserSagaFetch({payload}) {
     try {
-        const {data} = yield call(() => axios.post("auth/login", payload));
-        token.set(data.access_token);
-        yield put(getUserSuccess(data.access_token));
+        const response = yield call(() => axiosInstance.post("auth/login", payload));
+        yield put(getUserSuccess(response.data.access_token));
+        notify(response.status)
     } catch (error) {
         notify(error.response.status, error.response.data)
         yield put(getUserFailure());

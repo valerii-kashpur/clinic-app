@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ViewPagesWrapper from "../components/ViewPagesWrapper/ViewPagesWrapper.js";
 import PatientsList from "./components/PatientsList";
 import { useSelector } from "react-redux";
-import { userRoleName, doctorAppointments } from "Redux/selectors";
+import { userRoleName, doctorAppointments, isAuthentificated } from "Redux/selectors";
 import { useHistory } from "react-router-dom";
 import * as Styled from "./DoctorViewStyles";
 
@@ -19,16 +19,19 @@ const DoctorView = () => {
   const dispatch = useDispatch();
   const userRole = useSelector((state) => userRoleName(state));
   const appointments = useSelector((state) => doctorAppointments(state));
+  const isAuth = useSelector((state) => isAuthentificated(state))
 
   useEffect(() => {
-    if (!userRole) {
+    if (!userRole && !isAuth) {
       history.replace("./sign-in");
     }
-  }, [userRole, history]);
+  }, [userRole, history, isAuth]);
 
   useEffect(() => {
-    dispatch(getDoctorAppointment(sortBy));
-  }, [dispatch, sortBy]);
+    if(userRole && isAuth){
+      dispatch(getDoctorAppointment(sortBy));
+    }
+  }, [dispatch, sortBy, userRole, isAuth]);
 
   return (
     <ViewPagesWrapper name="Miranda Nelson" role="doctor" avatar={avatar}>
