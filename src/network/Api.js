@@ -12,10 +12,15 @@ axiosInstance.interceptors.request.use((config) => {
     config.headers = {
       Authorization: `Bearer ${token}`,
       accept: "application/json",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     };
   }
   return config;
+});
+
+axiosInstance.interceptors.response.use((response) => {
+  const data = response.data;
+  return data;
 });
 
 export default axiosInstance;

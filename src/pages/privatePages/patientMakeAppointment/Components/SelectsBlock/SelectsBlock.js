@@ -21,7 +21,7 @@ const SelectsBlock = ({
   useEffect(() => {
     if (!occupationOptions) {
       dispatch(getOccupations()).then((response) => {
-        const array = response.data.map((object) => ({
+        const array = response.map((object) => ({
           value: object.id,
           label: object.specialization_name,
         }));

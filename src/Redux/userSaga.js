@@ -6,7 +6,7 @@ import { logIn } from "network/fetchOperations";
 function* workerUserSagaFetch({ payload }) {
   try {
     const response = yield call(logIn(payload));
-    yield put(getUserSuccess(response.data.access_token));
+    yield put(getUserSuccess(response.access_token));
     notify(response.status);
   } catch (error) {
     notify(error.response.status, error.response.data);
