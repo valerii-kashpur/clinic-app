@@ -16,7 +16,7 @@ import LoaderForButtons from "components/LoaderForButtons";
 
 const SignInForm = () => {
   const [passwordToggle, setPasswordToggle] = useState(false);
-  const loaderFromUserState = useSelector((state) => loaderSelector(state));
+  const isLoading = useSelector((state) => loaderSelector(state));
   const dispatch = useDispatch();
 
   return (
@@ -26,10 +26,9 @@ const SignInForm = () => {
         password: "",
       }}
       validationSchema={SignInSchema}
-      onSubmit={({ email, password }, { resetForm }) => {
+      onSubmit={({ email, password }) => {
         const reqData = { userName: email, password: password };
         dispatch(getUserFetch(reqData));
-        resetForm();
       }}
     >
       {({ errors, touched }) => (
@@ -59,7 +58,7 @@ const SignInForm = () => {
             ></Styled.PasswordEyeSpan>
           </Styled.FormInputWrapper>
           <Styled.Button type="submit">
-            {loaderFromUserState ? (
+            {isLoading ? (
               <LoaderForButtons />
             ) : (
               <ButtonTextWithArrow text="Sign in" />

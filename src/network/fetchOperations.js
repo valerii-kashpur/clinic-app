@@ -1,30 +1,20 @@
-import { toast } from "react-toastify";
 import { setDoctorAppointments } from "Redux/doctorAppointmentsSlice";
 import { setIsLoadingOff, setIsLoadingOn } from "Redux/loaderSlice";
 import { setPatientAppointments } from "Redux/patientAppointmentsSlice";
 import { setUser } from "Redux/userSlice";
-import { errorReq, successReq } from "styles/notificationsStyles";
 import axiosInstance from "./Api";
-
-toast.configure();
-const notify = (status, message) => {
-  switch (status) {
-    case 200:
-      return toast.success("success", successReq);
-    case 201:
-      return toast.success("success", successReq);
-    default:
-      return toast.error(message, errorReq);
-  }
-};
+import { notify } from "notifications";
 
 export const register = (credentials) =>
-axiosInstance
+  axiosInstance
     .post("auth/registration", credentials)
     .then((response) => {
       notify(response.status);
     })
     .catch((error) => notify(error.response.status, error.response.data));
+
+export const logIn = (credentials) => (dispatch) =>
+  axiosInstance.post("auth/login", credentials);
 
 export const getProfile = (persistToken) => (dispatch) => {
   if (!persistToken) {
@@ -67,7 +57,9 @@ export const getDoctorAppointment = (sortBy) => async (dispatch) => {
 export const getOccupations = () => async (dispatch) => {
   dispatch(setIsLoadingOn());
   try {
-    const result = await axiosInstance.get("specializations").then((data) => data);
+    const result = await axiosInstance
+      .get("specializations")
+      .then((data) => data);
     dispatch(setIsLoadingOff());
     return result;
   } catch (error) {
