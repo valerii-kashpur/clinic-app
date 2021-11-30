@@ -8,12 +8,12 @@ import {
   isAuthentificated,
 } from "redux/selectors";
 import { useHistory } from "react-router-dom";
-import { getPatientAppointment } from "network/fetchOperations.js";
 import * as Styled from "./PatientViewStyles";
 
 // IMAGES
 import slider from "media/sliders-v-alt.svg";
 import  PATHS  from "routes/paths";
+import { fetchPatientAppointments } from "redux/patientAppointmentsSlice.js";
 
 const PatientView = () => {
   const [dateStatus, setDateStatus] = useState("Upcoming");
@@ -31,7 +31,7 @@ const PatientView = () => {
 
   useEffect(() => {
     if (userRole && isAuth) {
-      dispatch(getPatientAppointment(dateStatus));
+      dispatch(fetchPatientAppointments(dateStatus))
     }
   }, [dispatch, dateStatus, userRole, isAuth]);
 

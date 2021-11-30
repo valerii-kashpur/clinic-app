@@ -30,8 +30,10 @@ const userSlice = createSlice({
     fetchUserSuccess(state, { payload }) {
       return {...state, ...payload, loading: false, isAuthorized:true}
     },
-    fetchFailure(state, { payload }) {
+    fetchFailure(state) {
       state.loading = false;
+      state.token = "";
+      state.roleName = "";
     },
   },
 });

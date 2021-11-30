@@ -1,26 +1,23 @@
 import { call, takeEvery, put } from "redux-saga/effects";
 import { notify } from "notifications";
 import { getPatientAppointment } from "network/fetchOperations";
-import {
-  fetchPatientAppointmentsFailure,
-  fetchPatientAppointmentsSuccess,
-} from "redux/patientAppointmentsSlice";
+import { fetchDoctorAppointmentsFailure, fetchDoctorAppointmentsSuccess } from "redux/doctorAppointmentsSlice";
 
 function* workerAppointmentsSagaFetch({ payload }) {
   try {
     const response = yield call(getPatientAppointment(payload));
-    yield put(fetchPatientAppointmentsSuccess(response));
+    yield put(fetchDoctorAppointmentsSuccess(response));
   } catch (error) {
     notify(error);
-    yield put(fetchPatientAppointmentsFailure());
+    yield put(fetchDoctorAppointmentsFailure());
   }
 }
 
-function* PatientsAppointmentsSagaWatcher() {
+function* DoctorsAppointmentsSagaWatcher() {
   yield takeEvery(
-    "patientAppointments/fetchPatientAppointments",
+    "doctorAppointments/fetchDoctorAppointments",
     workerAppointmentsSagaFetch
   );
 }
 
-export default PatientsAppointmentsSagaWatcher;
+export default DoctorsAppointmentsSagaWatcher;

@@ -1,6 +1,5 @@
-import { setDoctorAppointments } from "redux/doctorAppointmentsSlice";
+import { fetchDoctorAppointments } from "redux/doctorAppointmentsSlice";
 import { setIsLoadingOff, setIsLoadingOn } from "redux/loaderSlice";
-import { fetchPatientAppointments } from "redux/patientAppointmentsSlice";
 import axiosInstance from "./Api";
 import { notify } from "notifications";
 
@@ -15,7 +14,7 @@ export const register = (credentials) =>
 export const logIn = (credentials) => (dispatch) =>
   axiosInstance.post("auth/login", credentials);
 
-export const getProfile = (persistToken, history) => (dispatch) => {
+export const getProfile = (persistToken) => (dispatch) => {
   if (!persistToken) {
     return;
   }
@@ -32,18 +31,9 @@ export const getProfile = (persistToken, history) => (dispatch) => {
   });
 };
 
-export const getPatientAppointment = (dateStatus) => async (dispatch) => {
-  // &dateStatus=${dateStatus}
-  dispatch(setIsLoadingOn());
-  try {
-    await axiosInstance
-      .get(`appointments/patient/me?offset=0&limit=40`)
-      .then((response) => dispatch(fetchPatientAppointments(response)));
-    dispatch(setIsLoadingOff());
-  } catch (error) {
-    dispatch(setIsLoadingOff());
-    notify(error.response.status, error.response.data);
-  }
+export const getPatientAppointment = (dateStatus) => (dispatch) => {
+  // &dateStatus=${dateStatus} - добавить когда заработает бек
+  return axiosInstance.get(`appointments/patient/me?offset=0&limit=40`);
 };
 
 export const getDoctorAppointment = (sortBy) => async (dispatch) => {
@@ -53,7 +43,7 @@ export const getDoctorAppointment = (sortBy) => async (dispatch) => {
     await axiosInstance
       .get(`appointments/doctor/me?offset=0&limit=40`)
       .then((response) =>
-        dispatch(setDoctorAppointments(response.data)).then()
+        dispatch(fetchDoctorAppointments(response.data)).then()
       );
     dispatch(setIsLoadingOff());
   } catch (error) {
