@@ -5,6 +5,8 @@ import {
   getOccupations,
 } from "network/fetchOperations";
 import { useDispatch } from "react-redux";
+import { useQuery } from "react-query";
+import { notify } from "notifications";
 
 const SelectsBlock = ({
   disabled,
@@ -17,18 +19,21 @@ const SelectsBlock = ({
   const [occupationOptions, setOccupationOptions] = useState("");
   const [doctorOptions, setDoctorOptions] = useState([]);
   const dispatch = useDispatch();
+  const { data, error } = useQuery("occupations", getOccupations);
 
   useEffect(() => {
-    if (!occupationOptions) {
-      dispatch(getOccupations()).then((response) => {
-        const array = response.map((object) => ({
-          value: object.id,
-          label: object.specialization_name,
-        }));
-        setOccupationOptions(array);
-      });
+    if (!occupationOptions && data) {
+      const array = data.map((object) => ({
+        value: object.id,
+        label: object.specialization_name,
+      }));
+      setOccupationOptions(array);
     }
-  }, [occupationOptions, dispatch]);
+  }, [occupationOptions, data]);
+
+  useEffect(() => {
+    error && notify(error);
+  }, [error]);
 
   const getDoctors = ({ value: id }) => {
     dispatch(getDoctorsByOccupationId(id)).then((response) => {

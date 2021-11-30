@@ -35,21 +35,13 @@ export const getPatientAppointment = (dateStatus) => (dispatch) => {
   return axiosInstance.get(`appointments/patient/me?offset=0&limit=40`);
 };
 
-export const getDoctorAppointment = (sortBy) => async (dispatch) => {
+export const getDoctorAppointment = (sortBy) => (dispatch) => {
   // &sortBy=${sortBy}
   return axiosInstance.get(`appointments/doctor/me?offset=0&limit=40`);
 };
 
-export const getOccupations = () => async (dispatch) => {
-  dispatch(setIsLoadingOn());
-  try {
-    const result = await axiosInstance.get("specializations");
-    dispatch(setIsLoadingOff());
-    return result;
-  } catch (error) {
-    dispatch(setIsLoadingOff());
-    notify(error.response.status, error.response.data);
-  }
+export const getOccupations = () => {
+  return axiosInstance.get("specializations");
 };
 
 export const getDoctorsByOccupationId = (id) => async (dispatch) => {

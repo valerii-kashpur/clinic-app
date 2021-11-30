@@ -8,6 +8,9 @@ import { Provider } from "react-redux";
 import { store, persistor } from "redux/index";
 // import "normalize.css";
 import { theme } from "styles/theme";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 ReactDOM.render(
   <BrowserRouter>
@@ -15,7 +18,9 @@ ReactDOM.render(
       <ThemeProvider theme={theme}>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            <App />
+            <QueryClientProvider client={queryClient}>
+              <App />
+            </QueryClientProvider>
           </PersistGate>
         </Provider>
       </ThemeProvider>
