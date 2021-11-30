@@ -18,7 +18,6 @@ import doctorAppointmentsSlice from "./doctorAppointmentsSlice";
 import patientAppointmentsSlice from "./patientAppointmentsSlice";
 import userSlice from "./userSlice";
 import createSagaMiddleware from "@redux-saga/core";
-import userSagaWatcher from "./saga/loginSaga";
 import loaderSlice from "./loaderSlice";
 import { rootSaga } from "./saga/rootSaga";
 

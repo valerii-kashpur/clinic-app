@@ -5,13 +5,20 @@ const patientAppointmentsSlice = createSlice({
   initialState: {
     appointments: [],
     total: 0,
+    isFetching: false,
   },
   reducers: {
-    setPatientAppointments(state, { payload }) {
-      return payload;
+    fetchPatientAppointments(state) {
+      return { ...state, isFetching: true };
+    },
+    fetchPatientAppointmentsSuccess(state, { payload }) {
+      return { ...payload, isFetching: false };
+    },
+    fetchPatientAppointmentsFailure(state) {
+      return { ...state, isFetching: false };
     },
   },
 });
 
 export default patientAppointmentsSlice.reducer;
-export const { setPatientAppointments } = patientAppointmentsSlice.actions;
+export const { fetchPatientAppointments, fetchPatientAppointmentsSuccess, fetchPatientAppointmentsFailure } = patientAppointmentsSlice.actions;

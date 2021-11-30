@@ -17,7 +17,7 @@ const ViewPagesWrapper = ({ children }) => {
             <p>
               {currentUser.firstName} {currentUser.lastName}
             </p>
-            <p>{currentUser.role_name}</p>
+            <p>{currentUser.roleName}</p>
           </Styled.HeaderUserNAmeWrapper>
           <Styled.HeaderUserAvatarWrapper>
             <img src={currentUser.photo} alt="user avatar" />

@@ -1,21 +1,23 @@
 import { call, takeEvery, put } from "redux-saga/effects";
-import { getUserFailure, getUserSuccess } from "../userSlice";
+import { fetchFailure, fetchUserSuccess } from "../userSlice";
 import { notify } from "notifications";
-import { logIn } from "network/fetchOperations";
+import { getProfile } from "network/fetchOperations";
+import { historyReplace } from "utils/history";
 
-function* workerUserSagaFetch({ payload }) {
+
+function* workerUserSagaFetch({payload}) {
   try {
-    const response = yield call(logIn(payload));
-    yield put(getUserSuccess(response.access_token));
-    notify(200);
+    const response = yield call(getProfile(payload));
+    yield put(fetchUserSuccess(response));
   } catch (error) {
     notify(error.response.status, error.response.data);
-    yield put(getUserFailure());
+    yield put(fetchFailure());
+    yield put(historyReplace());
   }
 }
 
 function* UserSagaWatcher() {
-  yield takeEvery("userSlice/getUserFetch", workerUserSagaFetch);
+  yield takeEvery("userSlice/fetchUser", workerUserSagaFetch);
 }
 
 export default UserSagaWatcher;

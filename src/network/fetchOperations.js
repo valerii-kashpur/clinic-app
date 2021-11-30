@@ -1,10 +1,8 @@
 import { setDoctorAppointments } from "redux/doctorAppointmentsSlice";
 import { setIsLoadingOff, setIsLoadingOn } from "redux/loaderSlice";
-import { setPatientAppointments } from "redux/patientAppointmentsSlice";
-import { setAuthorizedStatus, setUser } from "redux/userSlice";
+import { fetchPatientAppointments } from "redux/patientAppointmentsSlice";
 import axiosInstance from "./Api";
 import { notify } from "notifications";
-import PATHS from "routes/paths";
 
 export const register = (credentials) =>
   axiosInstance
@@ -21,25 +19,17 @@ export const getProfile = (persistToken, history) => (dispatch) => {
   if (!persistToken) {
     return;
   }
-
-  axiosInstance
-    .get("auth/profile")
-    .then((response) => {
-      const { first_name, id, last_name, photo, role_name } = response;
-      const newData = {
-        firstName: first_name,
-        lastName: last_name,
-        id,
-        photo,
-        roleName: role_name,
-      };
-      return newData;
-    })
-    .then((newData) => dispatch(setUser(newData)))
-    .then(() => dispatch(setAuthorizedStatus(true)))
-    .catch((error) => {
-      history.replace(PATHS.signIn)
-      notify(error.response.status, error.response.data)});
+  return axiosInstance.get("auth/profile").then((response) => {
+    const { first_name, last_name, role_name, id, photo } = response;
+    const newData = {
+      id,
+      photo,
+      firstName: first_name,
+      lastName: last_name,
+      roleName: role_name,
+    };
+    return newData;
+  });
 };
 
 export const getPatientAppointment = (dateStatus) => async (dispatch) => {
@@ -48,7 +38,7 @@ export const getPatientAppointment = (dateStatus) => async (dispatch) => {
   try {
     await axiosInstance
       .get(`appointments/patient/me?offset=0&limit=40`)
-      .then((response) => dispatch(setPatientAppointments(response)));
+      .then((response) => dispatch(fetchPatientAppointments(response)));
     dispatch(setIsLoadingOff());
   } catch (error) {
     dispatch(setIsLoadingOff());
@@ -75,8 +65,7 @@ export const getDoctorAppointment = (sortBy) => async (dispatch) => {
 export const getOccupations = () => async (dispatch) => {
   dispatch(setIsLoadingOn());
   try {
-    const result = await axiosInstance
-      .get("specializations")
+    const result = await axiosInstance.get("specializations");
     dispatch(setIsLoadingOff());
     return result;
   } catch (error) {
@@ -88,8 +77,7 @@ export const getOccupations = () => async (dispatch) => {
 export const getDoctorsByOccupationId = (id) => async (dispatch) => {
   dispatch(setIsLoadingOn());
   try {
-    const result = await axiosInstance
-      .get(`doctors/specialization/${id}`)
+    const result = await axiosInstance.get(`doctors/specialization/${id}`);
     dispatch(setIsLoadingOff());
     return result;
   } catch (error) {
@@ -101,8 +89,9 @@ export const getDoctorsByOccupationId = (id) => async (dispatch) => {
 export const getDoctorsFreeTimeByDateAndId = (date, id) => async (dispatch) => {
   dispatch(setIsLoadingOn());
   try {
-    const result = await axiosInstance
-      .get(`appointments/time/free?date=${date}&doctorID=${id}`)
+    const result = await axiosInstance.get(
+      `appointments/time/free?date=${date}&doctorID=${id}`
+    );
     dispatch(setIsLoadingOff());
     return result;
   } catch (error) {

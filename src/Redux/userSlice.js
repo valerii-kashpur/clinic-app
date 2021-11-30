@@ -11,26 +11,26 @@ const userSlice = createSlice({
     isAuthorized: false,
     token: "",
     loading: false,
-    sagaExample: ""
+    sagaExample: "",
   },
   reducers: {
     setUser(state, { payload }) {
       return { ...state, ...payload };
     },
-    setAuthorizedStatus(state, { payload }) {
-      return { ...state, isAuthorized: payload };
-    },
-    setToken(state, { payload }) {
-      return { ...state, token: payload };
-    },
-    getUserFetch(state, { payload }) {
+    fetchToken(state) {
       state.loading = true;
     },
-    getUserSuccess(state, { payload }) {
+    fetchTokenSuccess(state, { payload }) {
       state.loading = false;
       state.token = payload;
     },
-    getUserFailure(state, { payload }) {
+    fetchUser(state) {
+      state.loading = true;
+    },
+    fetchUserSuccess(state, { payload }) {
+      return {...state, ...payload, loading: false, isAuthorized:true}
+    },
+    fetchFailure(state, { payload }) {
       state.loading = false;
     },
   },
@@ -41,7 +41,9 @@ export const {
   setUser,
   setAuthorizedStatus,
   setToken,
-  getUserFetch,
-  getUserSuccess,
-  getUserFailure,
+  fetchToken,
+  fetchTokenSuccess,
+  fetchFailure,
+  fetchUser,
+  fetchUserSuccess,
 } = userSlice.actions;
