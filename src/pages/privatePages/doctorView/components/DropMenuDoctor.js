@@ -2,11 +2,9 @@ import React from "react";
 import { Menu, MenuItem } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
-import {
-  deleteAppointment,
-  getDoctorAppointment,
-} from "network/fetchOperations";
+import { deleteAppointment } from "network/fetchOperations";
 import { useDispatch } from "react-redux";
+import { fetchDoctorAppointments } from "redux/doctorAppointmentsSlice";
 
 const DropMenuDoctor = ({
   menuBtn,
@@ -25,7 +23,7 @@ const DropMenuDoctor = ({
 
   const handleDelete = async () => {
     await dispatch(deleteAppointment(id));
-    dispatch(getDoctorAppointment());
+    dispatch(fetchDoctorAppointments("dateSort"));
   };
 
   return (

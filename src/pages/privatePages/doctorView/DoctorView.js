@@ -11,7 +11,7 @@ import avatar from "media/avatar.png";
 import search from "media/search.svg";
 import slider from "media/sliders-v-alt.svg";
 import { useDispatch } from "react-redux";
-import { getDoctorAppointment } from "network/fetchOperations.js";
+import { fetchDoctorAppointments } from "redux/doctorAppointmentsSlice.js";
 
 const DoctorView = () => {
   const [sortBy, setSortBy] = useState("dateSort")
@@ -29,7 +29,7 @@ const DoctorView = () => {
 
   useEffect(() => {
     if(userRole && isAuth){
-      dispatch(getDoctorAppointment(sortBy));
+      dispatch(fetchDoctorAppointments(sortBy));
     }
   }, [dispatch, sortBy, userRole, isAuth]);
 
