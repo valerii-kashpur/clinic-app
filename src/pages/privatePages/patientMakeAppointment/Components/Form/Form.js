@@ -10,7 +10,7 @@ import { createAppointment } from "network/fetchOperations";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { isLoadingSelector } from "Redux/selectors";
+import { isLoadingSelector } from "redux/selectors";
 import LoaderForButtons from "components/LoaderForButtons";
 import  PATHS  from "routes/paths";
 

@@ -4,7 +4,7 @@ import * as Styled from "./ViewPagesWrapperStyles";
 // media
 import logo from "media/logo.png";
 import { useSelector } from "react-redux";
-import { user } from "Redux/selectors";
+import { user } from "redux/selectors";
 
 const ViewPagesWrapper = ({ children }) => {
   const currentUser = useSelector((state) => user(state));

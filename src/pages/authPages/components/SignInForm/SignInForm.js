@@ -8,9 +8,9 @@ import AuthPageInputs from "../AuthPageInputs/AuthPageInputs";
 import emailSvg from "media/email.svg";
 import lockSvg from "media/lock.svg";
 import { useDispatch } from "react-redux";
-import { getUserFetch } from "Redux/userSlice";
+import { getUserFetch } from "redux/userSlice";
 import { useSelector } from "react-redux";
-import { loaderSelector } from "Redux/selectors";
+import { loaderSelector } from "redux/selectors";
 import ButtonTextWithArrow from "components/ButtonTextWithArrow";
 import LoaderForButtons from "components/LoaderForButtons";
 

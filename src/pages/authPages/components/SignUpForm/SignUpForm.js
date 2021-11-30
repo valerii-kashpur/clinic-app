@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Formik } from "formik";
 import { SignUpSchema } from "utils/YupValidationSchemas";
 import { useSelector } from "react-redux";
-import { loaderSelector } from "Redux/selectors";
+import { loaderSelector } from "redux/selectors";
 import AuthPageInputs from "../AuthPageInputs/AuthPageInputs";
 import ButtonTextWithArrow from "components/ButtonTextWithArrow";
 import LoaderForButtons from "components/LoaderForButtons";

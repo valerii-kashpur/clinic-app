@@ -1,9 +1,10 @@
-import { setDoctorAppointments } from "Redux/doctorAppointmentsSlice";
-import { setIsLoadingOff, setIsLoadingOn } from "Redux/loaderSlice";
-import { setPatientAppointments } from "Redux/patientAppointmentsSlice";
-import { setUser } from "Redux/userSlice";
+import { setDoctorAppointments } from "redux/doctorAppointmentsSlice";
+import { setIsLoadingOff, setIsLoadingOn } from "redux/loaderSlice";
+import { setPatientAppointments } from "redux/patientAppointmentsSlice";
+import { setAuthorizedStatus, setUser } from "redux/userSlice";
 import axiosInstance from "./Api";
 import { notify } from "notifications";
+import PATHS from "routes/paths";
 
 export const register = (credentials) =>
   axiosInstance
@@ -16,7 +17,7 @@ export const register = (credentials) =>
 export const logIn = (credentials) => (dispatch) =>
   axiosInstance.post("auth/login", credentials);
 
-export const getProfile = (persistToken) => (dispatch) => {
+export const getProfile = (persistToken, history) => (dispatch) => {
   if (!persistToken) {
     return;
   }
@@ -35,7 +36,10 @@ export const getProfile = (persistToken) => (dispatch) => {
       return newData;
     })
     .then((newData) => dispatch(setUser(newData)))
-    .catch((error) => notify(error.response.status, error.response.data));
+    .then(() => dispatch(setAuthorizedStatus(true)))
+    .catch((error) => {
+      history.replace(PATHS.signIn)
+      notify(error.response.status, error.response.data)});
 };
 
 export const getPatientAppointment = (dateStatus) => async (dispatch) => {

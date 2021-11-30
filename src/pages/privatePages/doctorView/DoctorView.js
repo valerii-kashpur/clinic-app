@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ViewPagesWrapper from "../components/ViewPagesWrapper/ViewPagesWrapper.js";
 import PatientsList from "./components/PatientsList";
 import { useSelector } from "react-redux";
-import { userRoleName, doctorAppointments, isAuthentificated } from "Redux/selectors";
+import { userRoleName, doctorAppointments, isAuthentificated } from "redux/selectors";
 import { useHistory } from "react-router-dom";
 import * as Styled from "./DoctorViewStyles";
 
@@ -22,10 +22,10 @@ const DoctorView = () => {
   const isAuth = useSelector((state) => isAuthentificated(state))
 
   useEffect(() => {
-    if (!userRole && !isAuth) {
+    if (!userRole) {
       history.replace("./sign-in");
     }
-  }, [userRole, history, isAuth]);
+  }, [userRole, history]);
 
   useEffect(() => {
     if(userRole && isAuth){

@@ -6,7 +6,7 @@ import {
   patientAppointments,
   userRoleName,
   isAuthentificated,
-} from "Redux/selectors";
+} from "redux/selectors";
 import { useHistory } from "react-router-dom";
 import { getPatientAppointment } from "network/fetchOperations.js";
 import * as Styled from "./PatientViewStyles";
@@ -24,10 +24,10 @@ const PatientView = () => {
   const isAuth = useSelector((state) => isAuthentificated(state));
 
   useEffect(() => {
-    if (!userRole && !isAuth) {
+    if (!userRole) {
       history.replace(PATHS.signIn);
     }
-  }, [userRole, history, isAuth]);
+  }, [userRole, history]);
 
   useEffect(() => {
     if (userRole && isAuth) {

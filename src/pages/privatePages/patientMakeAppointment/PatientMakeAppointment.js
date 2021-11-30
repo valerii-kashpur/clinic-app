@@ -5,19 +5,18 @@ import Title from "components/Title";
 import Form from "./Components/Form/Form";
 
 import { useSelector } from "react-redux";
-import { userRoleName, isAuthentificated } from "Redux/selectors";
+import { userRoleName } from "redux/selectors";
 import { useHistory } from "react-router-dom";
 
 const PatientMakeAppointment = () => {
   const history = useHistory();
   const userRole = useSelector((state) => userRoleName(state));
-  const isAuth = useSelector((state) => isAuthentificated(state));
 
   useEffect(() => {
-    if (!userRole && !isAuth) {
+    if (!userRole) {
       history.replace("./sign-in");
     }
-  }, [userRole, history, isAuth]);
+  }, [userRole, history]);
 
   return (
     <ViewPagesWrapper>
