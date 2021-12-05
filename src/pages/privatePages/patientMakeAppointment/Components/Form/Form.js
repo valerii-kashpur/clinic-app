@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import DatePickerForm from "../DatePicker/DatePickerForm";
 import Text from "components/Text";
 import * as Styled from "../../PatientMakeAppointmentStyles";
@@ -6,24 +6,29 @@ import Button from "components/Button";
 
 import RadioBtns from "../RadioBtns/RadioBtns";
 import VisitReasons from "../VisitReasons/VisitReasons";
-import { createAppointment } from "network/fetchOperations";
 import { useHistory } from "react-router";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { isLoadingSelector } from "redux/selectors";
 import LoaderForButtons from "components/LoaderForButtons";
-import  PATHS  from "routes/paths";
+import PATHS from "routes/paths";
+import { useAppointmentForm } from "hooks/useAppointmentForm";
 
 const Form = () => {
-  const [visitReasonsReady, setVisitReasonsReady] = useState(false);
-  const [selectsValue, setSelectsValue] = useState(false);
-  const [dateIsPicked, setDateIsPicked] = useState(false);
-  const [timeIsSelected, setTimeIsSelected] = useState(false);
-  const [doctorId, setDoctorId] = useState("");
-  const [toggleButton, setToggleButton] = useState(true);
-  const isLoading = useSelector((state) => isLoadingSelector(state));
+  const {
+    visitReasonsReady,
+    setVisitReasonsReady,
+    selectsValue,
+    setSelectsValue,
+    dateIsPicked,
+    setDateIsPicked,
+    timeIsSelected,
+    setTimeIsSelected,
+    doctorId,
+    setDoctorId,
+    toggleButton,
+    setToggleButton,
+    isLoading,
+    createAppointmentRequest,
+  } = useAppointmentForm();
   const history = useHistory();
-  const dispatch = useDispatch();
 
   const submitHandler = async (e) => {
     const { reason, note } = selectsValue;
@@ -34,7 +39,8 @@ const Form = () => {
       note: note,
       doctorID: doctorId,
     };
-    await dispatch(createAppointment(reqData));
+
+    await createAppointmentRequest(reqData);
     history.push({
       pathname: PATHS.doctorView,
     });
@@ -46,13 +52,13 @@ const Form = () => {
     } else if (!toggleButton) {
       setToggleButton(true);
     }
-  }, [visitReasonsReady, dateIsPicked, timeIsSelected, toggleButton]);
+  }, [visitReasonsReady, dateIsPicked, timeIsSelected, toggleButton, setToggleButton]);
 
   useEffect(() => {
     if (selectsValue) {
       setDoctorId(selectsValue.doctor.value);
     }
-  }, [selectsValue]);
+  }, [selectsValue, setDoctorId]);
 
   return (
     <form action="" onSubmit={submitHandler}>

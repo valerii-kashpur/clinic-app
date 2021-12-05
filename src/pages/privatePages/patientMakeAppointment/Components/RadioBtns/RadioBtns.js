@@ -65,7 +65,7 @@ const RadioBtns = ({ pickedDate, onSelected, doctorsId }) => {
   };
 
   return (
-    <Styled.Wrapper>
+    <Styled.Wrapper role="radiogroup">
       {time.map((singleInput) => {
         const dis = getDisabled(singleInput);
         return (
@@ -79,6 +79,7 @@ const RadioBtns = ({ pickedDate, onSelected, doctorsId }) => {
               onChange={handleRadioClick}
               key={uuid4()}
               disabled={!pickedDate || dis}
+              role="radio"
             />
             <Styled.Label
               htmlFor={getInputName(singleInput)}

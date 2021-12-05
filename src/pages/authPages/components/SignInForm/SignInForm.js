@@ -7,17 +7,16 @@ import AuthPageInputs from "../AuthPageInputs/AuthPageInputs";
 // media
 import emailSvg from "media/email.svg";
 import lockSvg from "media/lock.svg";
-import { useDispatch } from "react-redux";
-import { fetchToken } from "redux/userSlice";
 import { useSelector } from "react-redux";
 import { loaderSelector } from "redux/selectors";
 import ButtonTextWithArrow from "components/ButtonTextWithArrow";
 import LoaderForButtons from "components/LoaderForButtons";
+import { useAuth } from "hooks/useAuth";
 
 const SignInForm = () => {
   const [passwordToggle, setPasswordToggle] = useState(false);
   const isLoading = useSelector((state) => loaderSelector(state));
-  const dispatch = useDispatch();
+  const { loginRequest } = useAuth();
 
   return (
     <Formik
@@ -28,7 +27,7 @@ const SignInForm = () => {
       validationSchema={SignInSchema}
       onSubmit={({ email, password }) => {
         const reqData = { userName: email, password: password };
-        dispatch(fetchToken(reqData));
+        loginRequest(reqData);
       }}
     >
       {({ errors, touched }) => (

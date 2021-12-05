@@ -7,6 +7,7 @@ import {
 import { useDispatch } from "react-redux";
 import { useQuery } from "react-query";
 import { notify } from "notifications";
+import { useAppointmentForm } from "hooks/useAppointmentForm";
 
 const SelectsBlock = ({
   disabled,
@@ -20,6 +21,23 @@ const SelectsBlock = ({
   const [doctorOptions, setDoctorOptions] = useState([]);
   const dispatch = useDispatch();
   const { data, error } = useQuery("occupations", getOccupations);
+
+  const {
+    visitReasonsReady,
+    setVisitReasonsReady,
+    selectsValue,
+    setSelectsValue,
+    dateIsPicked,
+    setDateIsPicked,
+    timeIsSelected,
+    setTimeIsSelected,
+    doctorId,
+    setDoctorId,
+    toggleButton,
+    setToggleButton,
+    isLoading,
+    createAppointmentRequest,
+  } = useAppointmentForm();
 
   useEffect(() => {
     if (!occupationOptions && data) {

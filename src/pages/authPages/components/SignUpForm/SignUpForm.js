@@ -13,12 +13,13 @@ import userSvg from "media/user.svg";
 import emailSvg from "media/email.svg";
 import lockSvg from "media/lock.svg";
 import checkSvg from "media/check.svg";
-import { register } from "network/fetchOperations";
+import { useAuth } from "hooks/useAuth";
 
 const SignUpForm = () => {
   const [passwordToggle, setPasswordToggle] = useState(false);
   const [passwordConfirmToggle, setPasswordConfirmToggle] = useState(false);
   const loaderFromUserState = useSelector((state) => loaderSelector(state));
+  const { registrationRequest } = useAuth();
 
   return (
     <Formik
@@ -30,13 +31,9 @@ const SignUpForm = () => {
         confirmPassword: "",
       }}
       validationSchema={SignUpSchema}
-      onSubmit={(
-        { email: userName, password, firstName, lastName },
-        { resetForm }
-      ) => {
+      onSubmit={({ email: userName, password, firstName, lastName }) => {
         const reqData = { userName, password, firstName, lastName };
-        register(reqData);
-        resetForm();
+        registrationRequest(reqData);
       }}
     >
       {({ errors, touched }) => (
@@ -102,7 +99,7 @@ const SignUpForm = () => {
             ></Styled.PasswordEyeSpan>
           </Styled.FormInputWrapper>
           <Styled.Button type="submit">
-          {loaderFromUserState ? (
+            {loaderFromUserState ? (
               <LoaderForButtons />
             ) : (
               <ButtonTextWithArrow text="Sign up" />

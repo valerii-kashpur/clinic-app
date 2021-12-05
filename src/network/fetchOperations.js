@@ -5,9 +5,6 @@ import { notify } from "notifications";
 export const register = (credentials) =>
   axiosInstance
     .post("auth/registration", credentials)
-    .then((response) => {
-      notify(response);
-    })
     .catch((error) => notify(error.response.status, error.response.data));
 
 export const logIn = (credentials) => (dispatch) =>

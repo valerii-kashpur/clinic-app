@@ -11,6 +11,8 @@ const VisitReasons = ({ onReady, showDatePicker, resetPickedDate }) => {
   const [note, setNote] = useState("");
   const [isReasonValid, setIsReasonValid] = useState(false);
 
+  
+
   useEffect(() => {
     if (occupation && doctor) {
       showDatePicker({ occupation, doctor, reason, note });
@@ -27,6 +29,7 @@ const VisitReasons = ({ onReady, showDatePicker, resetPickedDate }) => {
     onReady,
     isReasonValid,
   ]);
+
 
   return (
     <Styled.Wrapper>
@@ -58,9 +61,9 @@ const VisitReasons = ({ onReady, showDatePicker, resetPickedDate }) => {
                   onChange={(e) => {
                     handleChange(e);
                     setReason(e.target.value);
-                    if (isReasonValid === !isValid) {
-                      setIsReasonValid(isValid);
-                    }
+                    e.target.value.length > 3
+                      ? setIsReasonValid(true)
+                      : setIsReasonValid(false);
                   }}
                   errored={errors.reason && touched.reason ? "true" : ""}
                 />

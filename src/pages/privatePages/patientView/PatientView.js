@@ -12,7 +12,7 @@ import * as Styled from "./PatientViewStyles";
 
 // IMAGES
 import slider from "media/sliders-v-alt.svg";
-import  PATHS  from "routes/paths";
+import PATHS from "routes/paths";
 import { fetchPatientAppointments } from "redux/patientAppointmentsSlice.js";
 
 const PatientView = () => {
@@ -31,7 +31,7 @@ const PatientView = () => {
 
   useEffect(() => {
     if (userRole && isAuth) {
-      dispatch(fetchPatientAppointments(dateStatus))
+      dispatch(fetchPatientAppointments(dateStatus));
     }
   }, [dispatch, dateStatus, userRole, isAuth]);
 
@@ -58,16 +58,7 @@ const PatientView = () => {
           </Styled.UppointmentCreateButton>
         </Styled.NavgationItemsWrapper>
       </Styled.NavigationWrapper>
-      {appointments.length > 0 ? (
-        <AppointmentsList appointments={appointments} />
-      ) : (
-        <Styled.EmptyListBlock>
-          <Styled.EmptyListText>
-            You have no patients yet. To create a patient profile, please
-            contact your administrator.
-          </Styled.EmptyListText>
-        </Styled.EmptyListBlock>
-      )}
+      <AppointmentsList appointments={appointments} />
     </ViewPagesWrapper>
   );
 };

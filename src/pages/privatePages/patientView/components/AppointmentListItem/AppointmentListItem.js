@@ -23,7 +23,7 @@ const AppointmentListItem = ({
   description,
 }) => {
   return (
-    <ListItem>
+    <ListItem data-testid="listItem">
       <ListItemInfoWrapper>
         <ListItemInfoAvatar src={avatar} alt="" />
         <div>

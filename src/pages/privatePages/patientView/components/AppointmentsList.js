@@ -2,10 +2,8 @@ import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 import styled from "styled-components";
-
-// MEDIA
+import * as Styled from "../PatientViewStyles";
 import AppointmentListItem from "./AppointmentListItem/AppointmentListItem";
-
 
 const List = styled.ul`
   margin-top: 16px;
@@ -43,7 +41,7 @@ const List = styled.ul`
 `;
 
 const AppointmentsList = ({ appointments }) => {
-  return (
+  return appointments.length ? (
     <List>
       {appointments.map(({ doctor, visit_date, reason }) => {
         const date = moment(visit_date).format("ddd MMM DD YYYY, h a");
@@ -59,6 +57,13 @@ const AppointmentsList = ({ appointments }) => {
         );
       })}
     </List>
+  ) : (
+    <Styled.EmptyListBlock>
+      <Styled.EmptyListText data-testid="emptyList">
+        You have no patients yet. To create a patient profile, please contact
+        your administrator.
+      </Styled.EmptyListText>
+    </Styled.EmptyListBlock>
   );
 };
 

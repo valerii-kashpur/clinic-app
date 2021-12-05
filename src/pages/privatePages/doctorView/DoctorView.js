@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import ViewPagesWrapper from "../components/ViewPagesWrapper/ViewPagesWrapper.js";
 import PatientsList from "./components/PatientsList";
 import { useSelector } from "react-redux";
-import { userRoleName, doctorAppointments, isAuthentificated } from "redux/selectors";
+import {
+  userRoleName,
+  doctorAppointments,
+  isAuthentificated,
+} from "redux/selectors";
 import { useHistory } from "react-router-dom";
 import * as Styled from "./DoctorViewStyles";
 
@@ -14,12 +18,12 @@ import { useDispatch } from "react-redux";
 import { fetchDoctorAppointments } from "redux/doctorAppointmentsSlice.js";
 
 const DoctorView = () => {
-  const [sortBy, setSortBy] = useState("dateSort")
+  const [sortBy, setSortBy] = useState("dateSort");
   const history = useHistory();
   const dispatch = useDispatch();
   const userRole = useSelector((state) => userRoleName(state));
   const appointments = useSelector((state) => doctorAppointments(state));
-  const isAuth = useSelector((state) => isAuthentificated(state))
+  const isAuth = useSelector((state) => isAuthentificated(state));
 
   useEffect(() => {
     if (!userRole) {
@@ -28,7 +32,7 @@ const DoctorView = () => {
   }, [userRole, history]);
 
   useEffect(() => {
-    if(userRole && isAuth){
+    if (userRole && isAuth) {
       dispatch(fetchDoctorAppointments(sortBy));
     }
   }, [dispatch, sortBy, userRole, isAuth]);
@@ -46,23 +50,18 @@ const DoctorView = () => {
           <Styled.NavigationSearchInput type="text" placeholder="Search" />
           <Styled.NavigationItemSelect src={slider} alt="" />
           <Styled.NavigationSelectSpan>Sort by:</Styled.NavigationSelectSpan>
-          <Styled.NavigationSelect name="Date" id="" onChange={e => setSortBy(e.target.value)}>
+          <Styled.NavigationSelect
+            name="Date"
+            id=""
+            onChange={(e) => setSortBy(e.target.value)}
+          >
             <option value="dateSort">Date</option>
             <option value="firstNameSort">Name</option>
             <option value="lastNameSort">Last Name</option>
           </Styled.NavigationSelect>
         </Styled.NavgationItemsWrapper>
       </Styled.NavigationWrapper>
-      {appointments.length > 0 ? (
-        <PatientsList appointments={appointments} />
-      ) : (
-        <Styled.EmptyListBlock>
-          <Styled.EmptyListText>
-            You have no patients yet. To create a patient profile, please
-            contact your administrator.
-          </Styled.EmptyListText>
-        </Styled.EmptyListBlock>
-      )}
+      <PatientsList appointments={appointments} />
     </ViewPagesWrapper>
   );
 };

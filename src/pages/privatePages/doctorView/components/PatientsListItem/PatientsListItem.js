@@ -19,7 +19,7 @@ const PatientsListItem = ({
 
   return (
     <>
-      <Styled.ListItem key={uuidv4()} >
+      <Styled.ListItem key={uuidv4()} data-testid="listItem">
         <Styled.ListItemInfoWrapper>
           <Styled.ListItemInfoAvatar src={avatar} alt="user avatar"/>
           <div>
