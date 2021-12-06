@@ -66,16 +66,17 @@ const RadioBtns = () => {
               checked={isSelectedRadio(getInputName(singleInput))}
               onChange={handleRadioClick}
               key={uuid4()}
-              disabled={!pickedDate || dis}
+              disabled={dis}
               role="radio"
             />
             <Styled.Label
               htmlFor={getInputName(singleInput)}
               key={uuid4()}
-              notReady={!pickedDate || dis}
+              notReady={dis}
               current={
                 selectedTime === getInputName(singleInput) ? true : false
               }
+              data-testid={dis ? "radioIsDisabled" : "radioIsNotDisabled"}
             >
               {moment(`2021-11-22${singleInput}`).format("hh:mm a")}
             </Styled.Label>

@@ -4,36 +4,36 @@ import selectEvent from "react-select-event";
 import "@testing-library/jest-dom";
 
 import { Provider } from "react-redux";
-import { store } from "redux/index";
 import { ThemeProvider } from "styled-components";
 import { theme } from "styles/theme";
 import Form from "./Form";
 import { QueryClient, QueryClientProvider } from "react-query";
+import configureStore from "redux-mock-store";
+import { SPECIALIZATIONS } from "__mock__/specializations";
+import { DOCTORS } from "__mock__/doctors";
+import { TIME } from "__mock__/time";
 const queryClient = new QueryClient();
 
-const specializations = [
-  {
-    id: "c43fca01-3ea9-48f5-b5d8-4d7a4705e30f",
-    specialization_name: "surgeon",
-  },
-  {
-    id: "902240b7-514a-48c3-a67f-6acfb1d35030",
-    specialization_name: "therapist",
-  },
-  {
-    id: "ff01ee4f-f005-48f2-830c-7dd456a1cc17",
-    specialization_name: "ophthalmologist",
-  },
-  {
-    id: "fbebec6f-5ec0-4dcd-8e87-2a27af771f5a",
-    specialization_name: "pediatrician",
-  },
-];
-
-jest.mock("network/fetchOperations", () => ({}));
+const middlewares = [];
+const mockStore = configureStore(middlewares);
 
 describe("SignIn form", () => {
-  it("should take correct params", async () => {
+  it("block with radio buttons not disabled when specialization and doctor are picked", async () => {
+    const initialState = {
+      createAppointment: {
+        specializations: SPECIALIZATIONS,
+        selectedSpecialization: "c43fca01-3ea9-48f5-b5d8-4d7a4705e30f",
+        doctors: DOCTORS,
+        selectedDoctor: "8d662b40-4a13-11ec-a856-e9af5fdc77bf",
+        reasons: "",
+        note: "",
+        selectedDate: "2021-12-30T19:13:05.000Z",
+        availableTime: TIME,
+        selectedTime: "",
+        isFetching: false,
+      },
+    };
+    const store = mockStore(initialState);
 
     await act(async () =>
       render(
@@ -46,5 +46,14 @@ describe("SignIn form", () => {
         </ThemeProvider>
       )
     );
+
+    await selectEvent.select(screen.getByText("select occupation"), [
+      "surgeon",
+    ]);
+    await selectEvent.select(screen.getByText("select doctor"), [
+      "Fedor Pomidor",
+    ]);
+
+    expect(await screen.findAllByTestId("radioIsNotDisabled")).toHaveLength(13);
   });
 });
