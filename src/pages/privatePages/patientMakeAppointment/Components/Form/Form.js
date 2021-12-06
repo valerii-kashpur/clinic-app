@@ -9,38 +9,16 @@ import VisitReasons from "../VisitReasons/VisitReasons";
 import { useHistory } from "react-router";
 import LoaderForButtons from "components/LoaderForButtons";
 import PATHS from "routes/paths";
-import { appointmentFormData } from "redux/selectors";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { fetchCreateAppointment } from "redux/createAppointmentSlice";
+import { useAppointmentForm } from "hooks/useAppointmentForm";
 
 const Form = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
-  const {
-    selectedSpecialization,
-    selectedDoctor,
-    reasons,
-    selectedTime,
-    isFetching,
-    note,
-  } = useSelector((state) => appointmentFormData(state));
-
-  const buttonCondition =
-    selectedSpecialization &&
-    selectedDoctor &&
-    reasons.length > 3 &&
-    selectedTime;
+  const { buttonCondition, isFetching, createAppointmentRequest } =
+    useAppointmentForm();
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const reqData = {
-      date: selectedTime,
-      reason: reasons,
-      note: note,
-      doctorID: selectedDoctor,
-    };
-    await dispatch(fetchCreateAppointment(reqData));
+    await createAppointmentRequest();
     history.push({
       pathname: PATHS.doctorView,
     });

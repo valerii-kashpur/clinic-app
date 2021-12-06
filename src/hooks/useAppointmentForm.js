@@ -1,37 +1,40 @@
-import { createAppointment } from "network/fetchOperations";
-import {  useState } from "react";
+import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { isLoadingSelector } from "redux/selectors";
+import { fetchCreateAppointment } from "redux/createAppointmentSlice";
+import { appointmentFormData } from "redux/selectors";
 
 export const useAppointmentForm = () => {
-  const [visitReasonsReady, setVisitReasonsReady] = useState(false);
-  const [selectsValue, setSelectsValue] = useState(false);
-  const [dateIsPicked, setDateIsPicked] = useState(false);
-  const [timeIsSelected, setTimeIsSelected] = useState(false);
-  const [doctorId, setDoctorId] = useState("");
-  const [toggleButton, setToggleButton] = useState(true);
-  const isLoading = useSelector((state) => isLoadingSelector(state));
   const dispatch = useDispatch();
+  const {
+    selectedSpecialization,
+    selectedDoctor,
+    reasons,
+    selectedTime,
+    isFetching,
+    note,
+  } = useSelector((state) => appointmentFormData(state));
 
-  const createAppointmentRequest = (reqData) => {
-    dispatch(createAppointment(reqData));
-  };
+  const buttonCondition =
+    selectedSpecialization &&
+    selectedDoctor &&
+    reasons.length > 3 &&
+    selectedTime;
+
+  const createAppointmentRequest = useCallback(() => {
+    const reqData = {
+      date: selectedTime,
+      reason: reasons,
+      note: note,
+      doctorID: selectedDoctor,
+    };
+
+    dispatch(fetchCreateAppointment(reqData));
+  }, [dispatch, note, reasons, selectedDoctor, selectedTime]);
 
   return {
-    visitReasonsReady,
-    setVisitReasonsReady,
-    selectsValue,
-    setSelectsValue,
-    dateIsPicked,
-    setDateIsPicked,
-    timeIsSelected,
-    setTimeIsSelected,
-    doctorId,
-    setDoctorId,
-    toggleButton,
-    setToggleButton,
-    isLoading,
+    buttonCondition,
+    isFetching,
     createAppointmentRequest,
   };
 };
