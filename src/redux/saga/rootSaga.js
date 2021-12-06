@@ -1,4 +1,5 @@
 import { all } from "redux-saga/effects";
+import CreateAppointmentsSagaWatcher from "./createAppointmentSaga";
 import DoctorsAppointmentsSagaWatcher from "./doctorAppointmentsSaga";
 import loginSagaWatcher from "./loginSaga";
 import PatientsAppointmentsSagaWatcher from "./patientAppointmentsSaga";
@@ -10,5 +11,6 @@ export function* rootSaga() {
     UserSagaWatcher(),
     PatientsAppointmentsSagaWatcher(),
     DoctorsAppointmentsSagaWatcher(),
+    CreateAppointmentsSagaWatcher(),
   ]);
 }

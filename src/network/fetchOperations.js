@@ -37,49 +37,22 @@ export const getDoctorAppointment = (sortBy) => (dispatch) => {
   return axiosInstance.get(`appointments/doctor/me?offset=0&limit=40`);
 };
 
-export const getOccupations = () => {
+export const getOccupations = () => (dispatch) => {
   return axiosInstance.get("specializations");
 };
 
-export const getDoctorsByOccupationId = (id) => async (dispatch) => {
-  dispatch(setIsLoadingOn());
-  try {
-    const result = await axiosInstance.get(`doctors/specialization/${id}`);
-    dispatch(setIsLoadingOff());
-    return result;
-  } catch (error) {
-    dispatch(setIsLoadingOff());
-    notify(error.response.status, error.response.data);
-  }
+export const getDoctorsByOccupationId = (id) => (dispatch) => {
+  return axiosInstance.get(`doctors/specialization/${id}`);
 };
 
 export const getDoctorsFreeTimeByDateAndId = (date, id) => async (dispatch) => {
-  dispatch(setIsLoadingOn());
-  try {
-    const result = await axiosInstance.get(
-      `appointments/time/free?date=${date}&doctorID=${id}`
-    );
-    dispatch(setIsLoadingOff());
-    return result;
-  } catch (error) {
-    dispatch(setIsLoadingOff());
-    notify(error.response.status, error.response.data);
-  }
+  return axiosInstance.get(
+    `appointments/time/free?date=${date}&doctorID=${id}`
+  );
 };
 
 export const createAppointment = (credentials) => async (dispatch) => {
-  dispatch(setIsLoadingOn());
-  try {
-    const result = await axiosInstance
-      .post(`appointments`, credentials)
-      .then(({ status }) => notify(status));
-    dispatch(setIsLoadingOff());
-    return result;
-  } catch (error) {
-    console.log(error);
-    dispatch(setIsLoadingOff());
-    notify(error.response.status, error.response.data);
-  }
+  return axiosInstance.post(`appointments`, credentials);
 };
 
 export const updateAppointmentStatus =

@@ -1,7 +1,12 @@
 import moment from "moment";
-import { getDoctorsFreeTimeByDateAndId } from "network/fetchOperations";
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedTime } from "redux/createAppointmentSlice";
+import {
+  availableTimeSelector,
+  selectedDateSelector,
+  selectedTimeSelector,
+} from "redux/selectors";
 import { v4 as uuid4 } from "uuid";
 import * as Styled from "./RadioBtnsStyles";
 
@@ -21,33 +26,16 @@ const time = [
   "T17:00:00.000Z",
 ];
 
-const RadioBtns = ({ pickedDate, onSelected, doctorsId }) => {
-  const [selectedRadio, setSelectedRadio] = useState("");
-  const [doctorsFreeTime, setDoctorsFreeTime] = useState([]);
-  const isSelectedRadio = (value) => selectedRadio === value;
+const RadioBtns = () => {
+  const selectedTime = useSelector((state) => selectedTimeSelector(state));
+  const availableTime = useSelector((state) => availableTimeSelector(state));
+  const pickedDate = useSelector((state) => selectedDateSelector(state));
+  const isSelectedRadio = (value) => selectedTime === value;
   const dispatch = useDispatch();
 
   const handleRadioClick = (e) => {
-    setSelectedRadio(e.currentTarget.value);
+    dispatch(setSelectedTime(e.currentTarget.value));
   };
-
-  useEffect(() => {
-    setSelectedRadio("");
-  }, [pickedDate]);
-
-  useEffect(() => {
-    if (pickedDate) {
-      dispatch(getDoctorsFreeTimeByDateAndId(pickedDate, doctorsId)).then(
-        (response) => setDoctorsFreeTime(response)
-      );
-    }
-  }, [pickedDate, doctorsId, dispatch]);
-
-  useEffect(() => {
-    if (selectedRadio) {
-      onSelected(selectedRadio);
-    }
-  }, [selectedRadio, onSelected]);
 
   const timeEditor = (date, modificator) => {
     return date.substr(0, 10) + modificator;
@@ -55,7 +43,7 @@ const RadioBtns = ({ pickedDate, onSelected, doctorsId }) => {
 
   const getDisabled = (time) => {
     if (pickedDate) {
-      return !doctorsFreeTime.includes(pickedDate.substring(0, 10) + time);
+      return !availableTime.includes(pickedDate.substring(0, 10) + time);
     }
     return true;
   };
@@ -86,7 +74,7 @@ const RadioBtns = ({ pickedDate, onSelected, doctorsId }) => {
               key={uuid4()}
               notReady={!pickedDate || dis}
               current={
-                selectedRadio === getInputName(singleInput) ? true : false
+                selectedTime === getInputName(singleInput) ? true : false
               }
             >
               {moment(`2021-11-22${singleInput}`).format("hh:mm a")}

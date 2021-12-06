@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import DatePickerForm from "../DatePicker/DatePickerForm";
 import Text from "components/Text";
 import * as Styled from "../../PatientMakeAppointmentStyles";
@@ -9,56 +9,42 @@ import VisitReasons from "../VisitReasons/VisitReasons";
 import { useHistory } from "react-router";
 import LoaderForButtons from "components/LoaderForButtons";
 import PATHS from "routes/paths";
-import { useAppointmentForm } from "hooks/useAppointmentForm";
+import { appointmentFormData } from "redux/selectors";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { fetchCreateAppointment } from "redux/createAppointmentSlice";
 
 const Form = () => {
-  const {
-    visitReasonsReady,
-    setVisitReasonsReady,
-    selectsValue,
-    setSelectsValue,
-    dateIsPicked,
-    setDateIsPicked,
-    timeIsSelected,
-    setTimeIsSelected,
-    doctorId,
-    setDoctorId,
-    toggleButton,
-    setToggleButton,
-    isLoading,
-    createAppointmentRequest,
-  } = useAppointmentForm();
   const history = useHistory();
+  const dispatch = useDispatch();
+  const {
+    selectedSpecialization,
+    selectedDoctor,
+    reasons,
+    selectedTime,
+    isFetching,
+    note,
+  } = useSelector((state) => appointmentFormData(state));
+
+  const buttonCondition =
+    selectedSpecialization &&
+    selectedDoctor &&
+    reasons.length > 3 &&
+    selectedTime;
 
   const submitHandler = async (e) => {
-    const { reason, note } = selectsValue;
     e.preventDefault();
     const reqData = {
-      date: timeIsSelected,
-      reason: reason,
+      date: selectedTime,
+      reason: reasons,
       note: note,
-      doctorID: doctorId,
+      doctorID: selectedDoctor,
     };
-
-    await createAppointmentRequest(reqData);
+    await dispatch(fetchCreateAppointment(reqData));
     history.push({
       pathname: PATHS.doctorView,
     });
   };
-
-  useEffect(() => {
-    if (visitReasonsReady && dateIsPicked && timeIsSelected) {
-      setToggleButton(false);
-    } else if (!toggleButton) {
-      setToggleButton(true);
-    }
-  }, [visitReasonsReady, dateIsPicked, timeIsSelected, toggleButton, setToggleButton]);
-
-  useEffect(() => {
-    if (selectsValue) {
-      setDoctorId(selectsValue.doctor.value);
-    }
-  }, [selectsValue, setDoctorId]);
 
   return (
     <form action="" onSubmit={submitHandler}>
@@ -68,44 +54,31 @@ const Form = () => {
             <Styled.Span>1</Styled.Span>
             <Text>Select a doctor and define the reason of your visit</Text>
           </Styled.TextWrapper>
-          <VisitReasons
-            onReady={setVisitReasonsReady}
-            showDatePicker={setSelectsValue}
-            resetPickedDate={setDateIsPicked}
-          />
+          <VisitReasons />
         </Styled.ListItem>
         <Styled.ListItem>
           <Styled.TextWrapper>
             <Styled.Span>2</Styled.Span>
             <Text>Choose a day for an appointment</Text>
           </Styled.TextWrapper>
-          <DatePickerForm
-            selectsValue={selectsValue}
-            onDateIsPiked={setDateIsPicked}
-          />
+          <DatePickerForm />
         </Styled.ListItem>
         <Styled.ListItem>
           <Styled.TextWrapper>
             <Styled.Span>3</Styled.Span>
             <Text>Select an available timeslot</Text>
           </Styled.TextWrapper>
-          <RadioBtns
-            pickedDate={dateIsPicked}
-            onSelected={setTimeIsSelected}
-            selectedValuesFromSelects={selectsValue}
-            disabled={selectsValue}
-            doctorsId={doctorId}
-          />
+          <RadioBtns />
         </Styled.ListItem>
       </Styled.List>
       <Button
         type="submit"
-        disabled={toggleButton}
+        disabled={!buttonCondition}
         width={"160px"}
         height={"56px"}
         margin={"39px 80px 0px auto"}
       >
-        {isLoading ? <LoaderForButtons /> : "Submit"}
+        {isFetching ? <LoaderForButtons /> : "Submit"}
       </Button>
     </form>
   );

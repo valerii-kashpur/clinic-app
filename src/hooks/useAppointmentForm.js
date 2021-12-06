@@ -14,13 +14,6 @@ export const useAppointmentForm = () => {
   const isLoading = useSelector((state) => isLoadingSelector(state));
   const dispatch = useDispatch();
 
-  //   const loginRequest = useCallback(
-  //     (data) => {
-  //       dispatch(fetchToken(data));
-  //     },
-  //     [dispatch]
-  //   );
-
   const createAppointmentRequest = (reqData) => {
     dispatch(createAppointment(reqData));
   };
