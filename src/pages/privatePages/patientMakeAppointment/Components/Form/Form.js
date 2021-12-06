@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DatePickerForm from "../DatePicker/DatePickerForm";
 import Text from "components/Text";
 import * as Styled from "../../PatientMakeAppointmentStyles";
@@ -13,6 +13,7 @@ import { useAppointmentForm } from "hooks/useAppointmentForm";
 
 const Form = () => {
   const history = useHistory();
+  const [toggleButton, setToggleButton] = useState(true);
   const { buttonCondition, isFetching, createAppointmentRequest } =
     useAppointmentForm();
 
@@ -23,6 +24,12 @@ const Form = () => {
       pathname: PATHS.doctorView,
     });
   };
+
+  useEffect(() => {
+    if (toggleButton !== buttonCondition) {
+      setToggleButton(buttonCondition);
+    }
+  }, [buttonCondition, toggleButton]);
 
   return (
     <form action="" onSubmit={submitHandler}>
@@ -51,7 +58,7 @@ const Form = () => {
       </Styled.List>
       <Button
         type="submit"
-        disabled={!buttonCondition}
+        disabled={toggleButton}
         width={"160px"}
         height={"56px"}
         margin={"39px 80px 0px auto"}

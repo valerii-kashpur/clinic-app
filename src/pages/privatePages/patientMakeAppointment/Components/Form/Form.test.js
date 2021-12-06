@@ -1,9 +1,10 @@
-import { render, screen, act } from "@testing-library/react";
+import { render, screen, act, cleanup, waitFor } from "@testing-library/react";
 import React from "react";
 import selectEvent from "react-select-event";
 import "@testing-library/jest-dom";
 
 import { Provider } from "react-redux";
+import { MemoryRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { theme } from "styles/theme";
 import Form from "./Form";
@@ -14,10 +15,21 @@ import {
   initialStateForRadioButtonsTest,
 } from "__mock__/statesForAppointment";
 import * as useAppointmentForm from "hooks/useAppointmentForm";
+import userEvent from "@testing-library/user-event";
 const queryClient = new QueryClient();
 
 const middlewares = [];
 const mockStore = configureStore(middlewares);
+
+afterEach(cleanup);
+const mockHistoryPush = jest.fn();
+
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useHistory: () => ({
+    push: mockHistoryPush,
+  }),
+}));
 
 describe("SignIn form", () => {
   it("block with radio buttons not disabled when specialization and doctor are picked", async () => {
@@ -61,7 +73,7 @@ describe("SignIn form", () => {
 
     expect(await screen.findByText(/submit/i)).toBeDisabled();
   });
-  it("should take correct params", async () => {
+  it("fetch create appointments was called", async () => {
     const store = mockStore(initialStateForFetch);
 
     const createAppointmentMock = jest.fn(() => {});
@@ -69,25 +81,28 @@ describe("SignIn form", () => {
       .spyOn(useAppointmentForm, "useAppointmentForm")
       .mockImplementation(() => {
         return {
-          createAppointmentRequest: (values) => createAppointmentMock(values),
+          createAppointmentRequest: () => createAppointmentMock(),
         };
       });
 
     await act(async () =>
       render(
-        <ThemeProvider theme={theme}>
-          <Provider store={store}>
-            <QueryClientProvider client={queryClient}>
-              <Form />
-            </QueryClientProvider>
-          </Provider>
-        </ThemeProvider>
+        <MemoryRouter>
+          <ThemeProvider theme={theme}>
+            <Provider store={store}>
+              <QueryClientProvider client={queryClient}>
+                <Form />
+              </QueryClientProvider>
+            </Provider>
+          </ThemeProvider>
+        </MemoryRouter>
       )
     );
 
-    // Received element is disabled:
-      // <button class="sc-gsDKAQ sc-furwcr hNkeGd" disabled="" height="56px" width="160px" />
-
-    expect(await screen.findByText(/submit/i)).not.toBeDisabled();
+    expect(screen.getByText(/submit/i)).toHaveProperty("disabled", false);
+    userEvent.click(screen.getByText(/submit/i));
+    await waitFor(() => {
+      expect(createAppointmentMock).toHaveBeenCalledTimes(1);
+    });
   });
 });

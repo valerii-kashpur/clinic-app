@@ -15,7 +15,7 @@ export const useAppointmentForm = () => {
     note,
   } = useSelector((state) => appointmentFormData(state));
 
-  const buttonCondition = Boolean(
+  const buttonCondition = !Boolean(
     selectedSpecialization &&
       selectedDoctor &&
       reasons.length > 3 &&
