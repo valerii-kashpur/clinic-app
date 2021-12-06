@@ -15,11 +15,12 @@ export const useAppointmentForm = () => {
     note,
   } = useSelector((state) => appointmentFormData(state));
 
-  const buttonCondition =
+  const buttonCondition = Boolean(
     selectedSpecialization &&
-    selectedDoctor &&
-    reasons.length > 3 &&
-    selectedTime;
+      selectedDoctor &&
+      reasons.length > 3 &&
+      selectedTime
+  );
 
   const createAppointmentRequest = useCallback(() => {
     const reqData = {

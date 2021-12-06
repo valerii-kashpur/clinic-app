@@ -9,9 +9,11 @@ import { theme } from "styles/theme";
 import Form from "./Form";
 import { QueryClient, QueryClientProvider } from "react-query";
 import configureStore from "redux-mock-store";
-import { SPECIALIZATIONS } from "__mock__/specializations";
-import { DOCTORS } from "__mock__/doctors";
-import { TIME } from "__mock__/time";
+import {
+  initialStateForFetch,
+  initialStateForRadioButtonsTest,
+} from "__mock__/statesForAppointment";
+import * as useAppointmentForm from "hooks/useAppointmentForm";
 const queryClient = new QueryClient();
 
 const middlewares = [];
@@ -19,21 +21,7 @@ const mockStore = configureStore(middlewares);
 
 describe("SignIn form", () => {
   it("block with radio buttons not disabled when specialization and doctor are picked", async () => {
-    const initialState = {
-      createAppointment: {
-        specializations: SPECIALIZATIONS,
-        selectedSpecialization: "c43fca01-3ea9-48f5-b5d8-4d7a4705e30f",
-        doctors: DOCTORS,
-        selectedDoctor: "8d662b40-4a13-11ec-a856-e9af5fdc77bf",
-        reasons: "",
-        note: "",
-        selectedDate: "2021-12-30T19:13:05.000Z",
-        availableTime: TIME,
-        selectedTime: "",
-        isFetching: false,
-      },
-    };
-    const store = mockStore(initialState);
+    const store = mockStore(initialStateForRadioButtonsTest);
 
     await act(async () =>
       render(
@@ -55,5 +43,51 @@ describe("SignIn form", () => {
     ]);
 
     expect(await screen.findAllByTestId("radioIsNotDisabled")).toHaveLength(13);
+  });
+  it("button is disabled after render", async () => {
+    const store = mockStore(initialStateForRadioButtonsTest);
+
+    await act(async () =>
+      render(
+        <ThemeProvider theme={theme}>
+          <Provider store={store}>
+            <QueryClientProvider client={queryClient}>
+              <Form />
+            </QueryClientProvider>
+          </Provider>
+        </ThemeProvider>
+      )
+    );
+
+    expect(await screen.findByText(/submit/i)).toBeDisabled();
+  });
+  it("should take correct params", async () => {
+    const store = mockStore(initialStateForFetch);
+
+    const createAppointmentMock = jest.fn(() => {});
+    jest
+      .spyOn(useAppointmentForm, "useAppointmentForm")
+      .mockImplementation(() => {
+        return {
+          createAppointmentRequest: (values) => createAppointmentMock(values),
+        };
+      });
+
+    await act(async () =>
+      render(
+        <ThemeProvider theme={theme}>
+          <Provider store={store}>
+            <QueryClientProvider client={queryClient}>
+              <Form />
+            </QueryClientProvider>
+          </Provider>
+        </ThemeProvider>
+      )
+    );
+
+    // Received element is disabled:
+      // <button class="sc-gsDKAQ sc-furwcr hNkeGd" disabled="" height="56px" width="160px" />
+
+    expect(await screen.findByText(/submit/i)).not.toBeDisabled();
   });
 });
