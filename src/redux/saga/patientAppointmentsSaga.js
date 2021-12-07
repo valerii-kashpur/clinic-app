@@ -1,5 +1,5 @@
 import { call, takeEvery, put } from "redux-saga/effects";
-import { notify } from "notifications";
+import { errorNotification } from "notifications";
 import { getPatientAppointment } from "network/fetchOperations";
 import {
   fetchPatientAppointmentsFailure,
@@ -11,7 +11,7 @@ function* workerAppointmentsSagaFetch({ payload }) {
     const response = yield call(getPatientAppointment(payload));
     yield put(fetchPatientAppointmentsSuccess(response));
   } catch (error) {
-    notify(error);
+    errorNotification();
     yield put(fetchPatientAppointmentsFailure());
   }
 }

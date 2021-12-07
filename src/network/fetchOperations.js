@@ -1,11 +1,11 @@
 import { setIsLoadingOff, setIsLoadingOn } from "redux/loaderSlice";
 import axiosInstance from "./Api";
-import { notify } from "notifications";
+import { errorNotification, successNotification } from "notifications";
 
 export const register = (credentials) =>
   axiosInstance
     .post("auth/registration", credentials)
-    .catch((error) => notify(error.response.status, error.response.data));
+    .catch((error) => errorNotification());
 
 export const logIn = (credentials) => (dispatch) =>
   axiosInstance.post("auth/login", credentials);
@@ -61,12 +61,12 @@ export const updateAppointmentStatus =
     try {
       const result = await axiosInstance
         .patch(`appointments/${id}`, credentials)
-        .then(({ status }) => notify(status));
+        .then(() => successNotification("Status have been updated!"));
       dispatch(setIsLoadingOff());
       return result;
     } catch (error) {
       dispatch(setIsLoadingOff());
-      notify(error.response.status, error.response.data);
+      errorNotification();
     }
   };
 
@@ -75,10 +75,10 @@ export const deleteAppointment = (id) => async (dispatch) => {
   try {
     await axiosInstance
       .delete(`appointments/${id}`)
-      .then(({ status }) => notify(status));
+      .then(() => successNotification("Appointment have been deleted!"));
     dispatch(setIsLoadingOff());
   } catch (error) {
     dispatch(setIsLoadingOff());
-    notify(error.response.status, error.response.data);
+    errorNotification();
   }
 };

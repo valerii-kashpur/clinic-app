@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { notify } from "notifications";
+import { errorNotification, successNotification } from "notifications";
 import {
   createAppointment,
   getDoctorsByOccupationId,
@@ -24,7 +24,7 @@ function* workerSpecializationSagaFetch() {
     const response = yield call(getOccupations());
     yield put(setSpecializations(response));
   } catch (error) {
-    notify(error);
+    errorNotification();
   }
 }
 
@@ -33,7 +33,7 @@ function* workerDoctorsSagaFetch({ payload }) {
     const response = yield call(getDoctorsByOccupationId(payload));
     yield put(setDoctors(response));
   } catch (error) {
-    notify(error);
+    errorNotification();
   }
 }
 
@@ -43,7 +43,7 @@ function* workerFreeTimeSagaFetch({ payload }) {
     const response = yield call(getDoctorsFreeTimeByDateAndId(date, selectedDoctor));
     yield put(setAvailableTime(response));
   } catch (error) {
-    notify(error);
+    errorNotification();
   }
 }
 
@@ -51,9 +51,9 @@ function* workerCreateAppointmentsSagaFetch({ payload }) {
   try {
     const response = yield call(createAppointment(payload));
     yield put(createAppointmentSuccess(response));
-    notify(201)
+    successNotification("Appointment have been created!");
   } catch (error) {
-    notify(error);
+    errorNotification();
     yield put(createAppointmentFailure());
   }
 }
