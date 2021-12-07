@@ -13,11 +13,11 @@ export const TextWrapper = styled.div`
 `;
 
 export const Text = styled.p`
-  font-size: ${(props) => props.theme.fonts.mobileFontSize};
+  font-size: ${({theme}) => theme.fonts.mobileFontSize};
   line-height: 130%;
-  font-weight: ${(props) => props.theme.fonts.fontStyle};
+  font-weight: ${({theme}) => theme.fonts.fontStyle};
 
-  color: ${(props) => props.theme.colors.secondaryTextColor};
+  color: ${({theme}) => theme.colors.secondaryTextColor};
 `;
 
 export const Span = styled.span`

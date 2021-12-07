@@ -12,7 +12,7 @@ const DatePickerForm = () => {
   const [selected, setSelected] = useState(new Date());
   const dispatch = useDispatch();
   const today = new Date();
-  const selectedDoctor = useSelector((state) => selectedDoctorSelector(state));
+  const selectedDoctor = useSelector(selectedDoctorSelector);
 
   const dateCutter = (date) => {
     return moment(date).toISOString();
@@ -33,7 +33,7 @@ const DatePickerForm = () => {
   return (
     <DatePicker
       selected={selected}
-      onChange={(date) => setSelected(date)}
+      onChange={setSelected}
       formatWeekDay={(nameOfDay) => nameOfDay.substr(0, 1)}
       inline
       minDate={today}

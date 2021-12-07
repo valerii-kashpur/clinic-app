@@ -4,8 +4,8 @@ import AppointmentsList from "./components/AppointmentsList";
 import { useSelector, useDispatch } from "react-redux";
 import {
   patientAppointments,
-  userRoleName,
-  isAuthentificated,
+  userRoleNameSelector,
+  isAuthorizedSelector,
 } from "redux/selectors";
 import { useHistory } from "react-router-dom";
 import * as Styled from "./PatientViewStyles";
@@ -19,9 +19,9 @@ const PatientView = () => {
   const [dateStatus, setDateStatus] = useState("Upcoming");
   const history = useHistory();
   const dispatch = useDispatch();
-  const appointments = useSelector((state) => patientAppointments(state));
-  const userRole = useSelector((state) => userRoleName(state));
-  const isAuth = useSelector((state) => isAuthentificated(state));
+  const appointments = useSelector(patientAppointments);
+  const userRole = useSelector(userRoleNameSelector);
+  const isAuth = useSelector(isAuthorizedSelector);
 
   useEffect(() => {
     if (!userRole) {

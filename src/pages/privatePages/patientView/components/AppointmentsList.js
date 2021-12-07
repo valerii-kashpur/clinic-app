@@ -12,7 +12,7 @@ const List = styled.ul`
   gap: 24px 20px;
   overflow: auto;
 
-  @media ${(props) => props.theme.media.tablet} {
+  @media ${({theme}) => theme.media.tablet} {
     margin-top: 42px;
     padding-bottom: 24px;
     min-height: 400px;
@@ -26,16 +26,15 @@ const List = styled.ul`
       width: 12px;
     }
     &::-webkit-scrollbar-track {
-      background: ${(props) =>
-        props.theme.colors.viewPagesContainerBackgroundColor};
+      background: ${({theme}) => theme.colors.viewPagesContainerBackgroundColor};
       opacity: 0.32;
-      border-radius: ${(props) => props.theme.borderRadius.borderRadius};
+      border-radius: ${({theme}) => theme.borderRadius.borderRadius};
     }
     &::-webkit-scrollbar-thumb {
       width: 12px;
-      background: ${(props) => props.theme.colors.asideInputBorderColor};
+      background: ${({theme}) => theme.colors.asideInputBorderColor};
       opacity: 0.56;
-      border-radius: ${(props) => props.theme.borderRadius.borderRadius};
+      border-radius: ${({theme}) => theme.borderRadius.borderRadius};
     }
   } ;
 `;

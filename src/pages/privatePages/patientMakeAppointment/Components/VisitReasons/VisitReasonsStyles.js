@@ -41,11 +41,11 @@ export const FormikInput = styled(Field)`
   height: 54px;
   padding: 0 24px;
 
-  border: ${(props) =>
-    props.errored
-      ? props.theme.inputsBorders.asideInputErrorBorder
-      : props.theme.inputsBorders.asideInputBorder};
-  border-radius: ${(props) => props.theme.borderRadius.borderRadius};
+  border: ${({errored, theme}) =>
+    errored
+      ? theme.inputsBorders.asideInputErrorBorder
+      : theme.inputsBorders.asideInputBorder};
+  border-radius: ${({theme}) => theme.borderRadius.borderRadius};
   
   box-sizing: border-box;
 
@@ -69,5 +69,5 @@ export const ErrorMessage = styled.p`
   line-height: 16px;
   letter-spacing: -0.24px;
 
-  color: ${(props) => props.theme.colors.errorTextColor};
+  color: ${({theme}) => theme.colors.errorTextColor};
 `;

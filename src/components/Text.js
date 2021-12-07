@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 const DefaultText = styled.p`
-  font-size: ${(props) => props.theme.fonts.mobileFontSize};
+  font-size: ${({theme}) => theme.fonts.mobileFontSize};
   line-height: 130%;
-  font-weight: ${(props) => props.theme.fonts.fontStyle};
+  font-weight: ${({theme}) => theme.fonts.fontStyle};
 
-  color: ${(props) => props.theme.colors.secondaryTextColor};
+  color: ${({theme}) => theme.colors.secondaryTextColor};
 `;
 
 const Text = ({ children, margin, padding }) => {

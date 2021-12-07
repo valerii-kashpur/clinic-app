@@ -15,8 +15,13 @@ import { useAuth } from "hooks/useAuth";
 
 const SignInForm = () => {
   const [passwordToggle, setPasswordToggle] = useState(false);
-  const isLoading = useSelector((state) => loaderSelector(state));
+  const isLoading = useSelector(loaderSelector);
   const { loginRequest } = useAuth();
+
+  const submitHandler = ({ email, password }) => {
+    const requestData = { userName: email, password: password };
+    loginRequest(requestData);
+  }
 
   return (
     <Formik
@@ -25,10 +30,7 @@ const SignInForm = () => {
         password: "",
       }}
       validationSchema={SignInSchema}
-      onSubmit={({ email, password }) => {
-        const reqData = { userName: email, password: password };
-        loginRequest(reqData);
-      }}
+      onSubmit={submitHandler}
     >
       {({ errors, touched }) => (
         <Styled.AsideForm action="">

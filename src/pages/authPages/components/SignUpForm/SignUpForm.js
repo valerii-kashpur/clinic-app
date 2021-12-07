@@ -18,8 +18,13 @@ import { useAuth } from "hooks/useAuth";
 const SignUpForm = () => {
   const [passwordToggle, setPasswordToggle] = useState(false);
   const [passwordConfirmToggle, setPasswordConfirmToggle] = useState(false);
-  const loaderFromUserState = useSelector((state) => loaderSelector(state));
+  const loaderFromUserState = useSelector(loaderSelector);
   const { registrationRequest } = useAuth();
+
+  const submitHandler = ({ email: userName, password, firstName, lastName }) => {
+    const requestData = { userName, password, firstName, lastName };
+    registrationRequest(requestData);
+  }
 
   return (
     <Formik
@@ -31,10 +36,7 @@ const SignUpForm = () => {
         confirmPassword: "",
       }}
       validationSchema={SignUpSchema}
-      onSubmit={({ email: userName, password, firstName, lastName }) => {
-        const reqData = { userName, password, firstName, lastName };
-        registrationRequest(reqData);
-      }}
+      onSubmit={submitHandler}
     >
       {({ errors, touched }) => (
         <Styled.AsideForm action="">

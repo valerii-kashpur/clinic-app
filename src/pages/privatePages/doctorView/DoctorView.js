@@ -3,9 +3,9 @@ import ViewPagesWrapper from "../components/ViewPagesWrapper/ViewPagesWrapper.js
 import PatientsList from "./components/PatientsList";
 import { useSelector } from "react-redux";
 import {
-  userRoleName,
+  userRoleNameSelector,
   doctorAppointments,
-  isAuthentificated,
+  isAuthorizedSelector,
 } from "redux/selectors";
 import { useHistory } from "react-router-dom";
 import * as Styled from "./DoctorViewStyles";
@@ -21,9 +21,9 @@ const DoctorView = () => {
   const [sortBy, setSortBy] = useState("dateSort");
   const history = useHistory();
   const dispatch = useDispatch();
-  const userRole = useSelector((state) => userRoleName(state));
-  const appointments = useSelector((state) => doctorAppointments(state));
-  const isAuth = useSelector((state) => isAuthentificated(state));
+  const userRole = useSelector(userRoleNameSelector);
+  const appointments = useSelector(doctorAppointments);
+  const isAuth = useSelector(isAuthorizedSelector);
 
   useEffect(() => {
     if (!userRole) {

@@ -12,7 +12,7 @@ import { setSelectedDoctor, setSelectedSpecialization } from "redux/createAppoin
 const SelectsBlock = () => {
   const [toggleSelectDisable, setToggleSelectDisable] = useState(true);
   const dispatch = useDispatch();
-  const state = useSelector((state) => appointmentFormData(state));
+  const state = useSelector(appointmentFormData);
 
   useEffect(() => {
     dispatch(fetchSpecializations());

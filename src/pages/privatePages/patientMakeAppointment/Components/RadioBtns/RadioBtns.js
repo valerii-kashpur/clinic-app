@@ -27,9 +27,9 @@ const time = [
 ];
 
 const RadioBtns = () => {
-  const selectedTime = useSelector((state) => selectedTimeSelector(state));
-  const availableTime = useSelector((state) => availableTimeSelector(state));
-  const pickedDate = useSelector((state) => selectedDateSelector(state));
+  const selectedTime = useSelector(selectedTimeSelector);
+  const availableTime = useSelector(availableTimeSelector);
+  const pickedDate = useSelector(selectedDateSelector);
   const isSelectedRadio = (value) => selectedTime === value;
   const dispatch = useDispatch();
 

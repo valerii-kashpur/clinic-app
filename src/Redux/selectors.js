@@ -1,10 +1,11 @@
-// import { createSelector } from "reselect";
+import { createSelector } from "reselect";
 
-export const tokenSelector = (state) => state.user.token;
+export const getUserTokenSelector = (state) => state.user.token;
 export const loaderSelector = (state) => state.user.loading;
-export const user = (state) => state.user;
-export const userRoleName = (state) => state.user.roleName;
-export const isAuthentificated = (state) => state.user.isAuthorized;
+export const getCurrentUserSelector = (state) => state.user;
+export const userRoleNameSelector = (state) => state.user.roleName;
+export const isAuthorizedSelector = (state) => state.user.isAuthorized;
+// 
 export const isPatientAppointmentFetching = (state) =>
   state.patientAppointments.isFetching;
 export const patientAppointments = (state) =>
@@ -14,14 +15,27 @@ export const doctorAppointments = (state) =>
 export const isLoadingSelector = (state) => state.loader;
 //
 export const appointmentFormData = (state) => state.createAppointment;
-export const selectedDoctorSelector = (state) =>
-  state.createAppointment.selectedDoctor;
-export const reasonsSelector = (state) => state.createAppointment.reasons;
-export const selectedTimeSelector = (state) =>
-  state.createAppointment.selectedTime;
-export const availableTimeSelector = (state) =>
-  state.createAppointment.availableTime;
-export const selectedDateSelector = (state) =>
-  state.createAppointment.selectedDate;
-export const selectedSpecializationSelector = (state) =>
-  state.createAppointment.selectedSpecialization;
+export const selectedDoctorSelector = createSelector(
+  appointmentFormData,
+  (state) => state.selectedDoctor
+);
+export const reasonsSelector = createSelector(
+  appointmentFormData,
+  (state) => state.reasons
+);
+export const selectedTimeSelector = createSelector(
+  appointmentFormData,
+  (state) => state.selectedTime
+);
+export const availableTimeSelector = createSelector(
+  appointmentFormData,
+  (state) => state.availableTime
+);
+export const selectedDateSelector = createSelector(
+  appointmentFormData,
+  (state) => state.selectedDate
+);
+export const selectedSpecializationSelector = createSelector(
+  appointmentFormData,
+  (state) => state.selectedSpecialization
+);

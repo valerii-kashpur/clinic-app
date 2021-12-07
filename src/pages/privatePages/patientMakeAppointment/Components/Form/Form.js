@@ -62,6 +62,7 @@ const Form = () => {
         width={"160px"}
         height={"56px"}
         margin={"39px 80px 0px auto"}
+        data-testid="submitButton"
       >
         {isFetching ? <LoaderForButtons /> : "Submit"}
       </Button>

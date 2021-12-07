@@ -13,7 +13,7 @@ export const useAppointmentForm = () => {
     selectedTime,
     isFetching,
     note,
-  } = useSelector((state) => appointmentFormData(state));
+  } = useSelector(appointmentFormData);
 
   const buttonCondition = !Boolean(
     selectedSpecialization &&

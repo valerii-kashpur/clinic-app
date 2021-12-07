@@ -6,21 +6,21 @@ const baseButtonStyles = styled.button`
   align-items: center;
   justify-content: center;
 
-  margin: ${(props) => props.margin};
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
+  margin: ${({margin}) => margin};
+  width: ${({width}) => width};
+  height: ${({height}) => height};
 
-  border-radius: ${(props) => props.theme.borderRadius.borderRadius};
+  border-radius: ${({theme}) => theme.borderRadius.borderRadius};
   border: none;
 
-  background-color: ${(props) => props.theme.colors.accentColor};
-  color: ${(props) => props.theme.colors.inputBackgroundColor};
+  background-color: ${({theme}) => theme.colors.accentColor};
+  color: ${({theme}) => theme.colors.inputBackgroundColor};
 
-  font-weight: ${(props) => props.theme.fonts.boldFontWeight};
-  font-size: ${(props) => props.theme.fonts.mobileFontSize};
+  font-weight: ${({theme}) => theme.fonts.boldFontWeight};
+  font-size: ${({theme}) => theme.fonts.mobileFontSize};
   line-height: 19px;
 
-  @media ${(props) => props.theme.media.tablet} {
+  @media ${({theme}) => theme.media.tablet} {
     font-size: 17px;
     line-height: 24px;
   }

@@ -6,7 +6,7 @@ const ButtonVector = styled.span`
   display: inline-block;
   width: 24px;
   height: 24px;
-  margin-left: ${(props) => props.theme.borderRadius.borderRadius};
+  margin-left: ${({theme}) => theme.borderRadius.borderRadius};
 
   background: url(${angleRight});
   background-repeat: no-repeat;

@@ -5,12 +5,13 @@ import Title from "components/Title";
 import Form from "./Components/Form/Form";
 
 import { useSelector } from "react-redux";
-import { userRoleName } from "redux/selectors";
+import { userRoleNameSelector } from "redux/selectors";
 import { useHistory } from "react-router-dom";
 
 const PatientMakeAppointment = () => {
   const history = useHistory();
-  const userRole = useSelector((state) => userRoleName(state));
+  const userRole = useSelector(userRoleNameSelector);
+
 
   useEffect(() => {
     if (!userRole) {

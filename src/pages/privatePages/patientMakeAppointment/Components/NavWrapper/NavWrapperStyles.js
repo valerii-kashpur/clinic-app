@@ -8,14 +8,14 @@ export const NavWrapper = styled.div`
   align-items: center;
 `;
 export const NavLink = styled(Link)`
-  font-weight: ${(props) => props.theme.fonts.boldFontWeight};
-  font-size: ${(props) => props.theme.fonts.mobileFontSize};
+  font-weight: ${({theme}) => theme.fonts.boldFontWeight};
+  font-size: ${({theme}) => theme.fonts.mobileFontSize};
   line-height: 130%;
   text-decoration: none;
 
-  color: ${(props) => props.theme.colors.accentColor};
+  color: ${({theme}) => theme.colors.accentColor};
 
-  @media ${(props) => props.theme.media.tablet} {
+  @media ${({theme}) => theme.media.tablet} {
     line-height: 19px;
   } ;
 `;
@@ -30,9 +30,9 @@ export const VectorSpan = styled.svg`
 `;
 
 export const BreadCrumbsCurrent = styled.p`
-  font-size: ${(props) => props.theme.fonts.mobileFontSize};
+  font-size: ${({theme}) => theme.fonts.mobileFontSize};
   line-height: 130%;
-  font-weight: ${(props) => props.theme.fonts.fontStyle};
+  font-weight: ${({theme}) => theme.fonts.fontStyle};
 
-  color: ${(props) => props.theme.colors.secondaryTextColor};
+  color: ${({theme}) => theme.colors.secondaryTextColor};
 `;
