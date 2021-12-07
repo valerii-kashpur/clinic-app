@@ -1,11 +1,15 @@
 import { setIsLoadingOff, setIsLoadingOn } from "redux/loaderSlice";
 import axiosInstance from "./Api";
 import { errorNotification, successNotification } from "notifications";
+import PATHS from "routes/paths";
 
-export const register = (credentials) =>
-  axiosInstance
-    .post("auth/registration", credentials)
-    .catch((error) => errorNotification());
+export const register = (credentials, history) => {
+    axiosInstance
+      .post("auth/registration", credentials)
+      .then(data => successNotification("Your account have been successfully created!"))
+      .then(() => history.push(PATHS.signIn))
+      .catch((error) => errorNotification());
+};
 
 export const logIn = (credentials) => (dispatch) =>
   axiosInstance.post("auth/login", credentials);
