@@ -7,18 +7,20 @@ const SelectComponent = ({
   onChangeFn,
   Disabled,
   optionsArray,
-  valueProp,
+  placeholder
 }) => {
   return (
     <div>
-      <Styled.SelectTitle>{text}</Styled.SelectTitle>
+      <Styled.SelectTitle htmlFor={text}>{text}</Styled.SelectTitle>
       <Select
         defaultValue={null}
         onChange={onChangeFn}
         options={optionsArray}
         styles={Styled.customStyles}
         isDisabled={Disabled}
-        value={valueProp}
+        inputId={text}
+        data-testid={text}
+        placeholder={placeholder}
       />
     </div>
   );

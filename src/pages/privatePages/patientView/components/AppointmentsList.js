@@ -2,10 +2,8 @@ import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 import styled from "styled-components";
-
-// MEDIA
+import * as Styled from "../PatientViewStyles";
 import AppointmentListItem from "./AppointmentListItem/AppointmentListItem";
-
 
 const List = styled.ul`
   margin-top: 16px;
@@ -14,7 +12,7 @@ const List = styled.ul`
   gap: 24px 20px;
   overflow: auto;
 
-  @media ${(props) => props.theme.media.tablet} {
+  @media ${({theme}) => theme.media.tablet} {
     margin-top: 42px;
     padding-bottom: 24px;
     min-height: 400px;
@@ -28,22 +26,21 @@ const List = styled.ul`
       width: 12px;
     }
     &::-webkit-scrollbar-track {
-      background: ${(props) =>
-        props.theme.colors.viewPagesContainerBackgroundColor};
+      background: ${({theme}) => theme.colors.viewPagesContainerBackgroundColor};
       opacity: 0.32;
-      border-radius: ${(props) => props.theme.borderRadius.borderRadius};
+      border-radius: ${({theme}) => theme.borderRadius.borderRadius};
     }
     &::-webkit-scrollbar-thumb {
       width: 12px;
-      background: ${(props) => props.theme.colors.asideInputBorderColor};
+      background: ${({theme}) => theme.colors.asideInputBorderColor};
       opacity: 0.56;
-      border-radius: ${(props) => props.theme.borderRadius.borderRadius};
+      border-radius: ${({theme}) => theme.borderRadius.borderRadius};
     }
   } ;
 `;
 
 const AppointmentsList = ({ appointments }) => {
-  return (
+  return appointments.length ? (
     <List>
       {appointments.map(({ doctor, visit_date, reason }) => {
         const date = moment(visit_date).format("ddd MMM DD YYYY, h a");
@@ -59,6 +56,13 @@ const AppointmentsList = ({ appointments }) => {
         );
       })}
     </List>
+  ) : (
+    <Styled.EmptyListBlock>
+      <Styled.EmptyListText data-testid="emptyList">
+        You have no patients yet. To create a patient profile, please contact
+        your administrator.
+      </Styled.EmptyListText>
+    </Styled.EmptyListBlock>
   );
 };
 

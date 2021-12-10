@@ -1,75 +1,61 @@
 import React, { useEffect, useState } from "react";
 import SelectComponent from "../SelectComponent/SelectComponent";
-import {
-  getDoctorsByOccupationId,
-  getOccupations,
-} from "network/fetchOperations";
 import { useDispatch } from "react-redux";
-import { useQuery } from "react-query";
-import { notify } from "notifications";
+import { useSelector } from "react-redux";
+import { appointmentFormData } from "redux/selectors";
+import {
+  fetchDoctors,
+  fetchSpecializations,
+} from "redux/createAppointmentsActions";
+import { setSelectedDoctor, setSelectedSpecialization } from "redux/createAppointmentSlice";
 
-const SelectsBlock = ({
-  disabled,
-  onChangeFnOccupation,
-  onChangeFnDoctor,
-  doctorValue,
-  setSelectedValues,
-  onResetPickedDate,
-}) => {
-  const [occupationOptions, setOccupationOptions] = useState("");
-  const [doctorOptions, setDoctorOptions] = useState([]);
+const SelectsBlock = () => {
+  const [toggleSelectDisable, setToggleSelectDisable] = useState(true);
   const dispatch = useDispatch();
-  const { data, error } = useQuery("occupations", getOccupations);
+  const state = useSelector(appointmentFormData);
 
   useEffect(() => {
-    if (!occupationOptions && data) {
-      const array = data.map((object) => ({
-        value: object.id,
-        label: object.specialization_name,
-      }));
-      setOccupationOptions(array);
+    dispatch(fetchSpecializations());
+  }, [dispatch]);
+
+  const specializationsArray = state.specializations.map((object) => ({
+    value: object.id,
+    label: object.specialization_name,
+  }));
+
+  const doctorsArray = state.doctors.map((object) => ({
+    value: object.id,
+    label: `${object.first_name} ${object.last_name}`,
+  }));
+
+  const specializationOnChangeHandler = ({ value }) => {
+    dispatch(fetchDoctors(value));
+    dispatch(setSelectedSpecialization(value))
+    if (toggleSelectDisable) {
+      setToggleSelectDisable(false);
     }
-  }, [occupationOptions, data]);
+  };
 
-  useEffect(() => {
-    error && notify(error);
-  }, [error]);
-
-  const getDoctors = ({ value: id }) => {
-    dispatch(getDoctorsByOccupationId(id)).then((response) => {
-      setDoctorOptions([]);
-      setSelectedValues(false);
-      onResetPickedDate("");
-      onChangeFnDoctor("");
-      const array = response.map((object) => ({
-        value: object.id,
-        label: `${object.first_name} ${object.last_name}`,
-      }));
-      setDoctorOptions(array);
-    });
+  const doctorsOnChangeHandler = ({ value }) => {
+    dispatch(setSelectedDoctor(value));
   };
 
   return (
     <>
       <SelectComponent
         text="Occupation"
+        placeholder="select occupation"
         defaultValue={""}
-        optionsArray={occupationOptions}
-        onChangeFn={(value) => {
-          onChangeFnOccupation(value);
-          getDoctors(value);
-        }}
+        optionsArray={specializationsArray}
+        onChangeFn={specializationOnChangeHandler}
       />
       <SelectComponent
         text="Doctor's Name"
+        placeholder="select doctor"
         defaultValue={""}
-        optionsArray={doctorOptions}
-        onChangeFn={(value) => {
-          onChangeFnDoctor(value);
-          onResetPickedDate("");
-        }}
-        Disabled={disabled}
-        valueProp={doctorValue}
+        optionsArray={doctorsArray}
+        onChangeFn={doctorsOnChangeHandler}
+        Disabled={toggleSelectDisable}
       />
     </>
   );

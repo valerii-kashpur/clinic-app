@@ -5,24 +5,24 @@ const NotificationText = styled.p`
   margin: 0;
   margin-bottom: 24px;
 
-  font-size: ${(props) => props.theme.fonts.mobileFontSize};
+  font-size: ${({theme}) => theme.fonts.mobileFontSize};
   line-height: 130%;
-  font-weight: ${(props) => props.theme.fonts.fontStyle};
+  font-weight: ${({theme}) => theme.fonts.fontStyle};
 
-  color: ${(props) => props.theme.colors.secondaryTextColor};
+  color: ${({theme}) => theme.colors.secondaryTextColor};
 
-  @media ${(props) => props.theme.media.tablet} {
+  @media ${({theme}) => theme.media.tablet} {
     width: 368px;
   } ;
 `;
 
 const EmailLInk = styled.a`
-  font-weight: ${(props) => props.theme.fonts.boldFontWeight};
-  font-size: ${(props) => props.theme.fonts.mobileFontSize};
+  font-weight: ${({theme}) => theme.fonts.boldFontWeight};
+  font-size: ${({theme}) => theme.fonts.mobileFontSize};
   line-height: 130%;
   text-decoration: underline;
 
-  color: ${(props) => props.theme.colors.accentColor};
+  color: ${({theme}) => theme.colors.accentColor};
 `;
 
 export const styles = {

@@ -22,7 +22,7 @@ export const FormInputWrapper = styled.div`
   &::before {
     position: absolute;
     z-index: 10;
-    top: ${(props) => props.theme.borderRadius.borderRadius};
+    top: ${({theme}) => theme.borderRadius.borderRadius};
     left: 16px;
 
     content: "";
@@ -31,10 +31,10 @@ export const FormInputWrapper = styled.div`
 
     background-repeat: no-repeat;
     background-size: cover;
-    background: url(${(props) => props.svg});
+    background: url(${({svg}) => svg});
   }
 
-  @media ${(props) => props.theme.media.tablet} {
+  @media ${({theme}) => theme.media.tablet} {
     margin-bottom: 40px;
 
     &:last-of-type {
@@ -49,7 +49,7 @@ export const FormInputWrapper = styled.div`
 
 export const PasswordEyeSpan = styled.span`
   position: absolute;
-  top: ${(props) => props.theme.borderRadius.borderRadius};
+  top: ${({theme}) => theme.borderRadius.borderRadius};
   right: 18px;
   z-index: 10;
 
@@ -60,7 +60,7 @@ export const PasswordEyeSpan = styled.span`
   background-size: cover;
   background: url(${eyeOff});
 
-  @media ${(props) => props.theme.media.tablet} {
+  @media ${({theme}) => theme.media.tablet} {
     top: 16px;
     left: 320px;
   } ;
@@ -74,7 +74,7 @@ export const ErrorMessage = styled.p`
   line-height: 16px;
   letter-spacing: -0.24px;
 
-  color: ${(props) => props.theme.colors.errorTextColor};
+  color: ${({theme}) => theme.colors.errorTextColor};
 `;
 
 export const Button = styled.button`
@@ -85,17 +85,17 @@ export const Button = styled.button`
   align-items: center;
   justify-content: center;
 
-  border-radius: ${(props) => props.theme.borderRadius.borderRadius};
+  border-radius: ${({theme}) => theme.borderRadius.borderRadius};
   border: none;
 
-  background-color: ${(props) => props.theme.colors.accentColor};
-  color: ${(props) => props.theme.colors.inputBackgroundColor};
+  background-color: ${({theme}) => theme.colors.accentColor};
+  color: ${({theme}) => theme.colors.inputBackgroundColor};
 
-  font-weight: ${(props) => props.theme.fonts.boldFontWeight};
-  font-size: ${(props) => props.theme.fonts.mobileFontSize};
+  font-weight: ${({theme}) => theme.fonts.boldFontWeight};
+  font-size: ${({theme}) => theme.fonts.mobileFontSize};
   line-height: 19px;
 
-  @media ${(props) => props.theme.media.tablet} {
+  @media ${({theme}) => theme.media.tablet} {
     margin-top: 64px;
     height: 56px;
     width: 138px;
@@ -109,7 +109,7 @@ export const ButtonVector = styled.span`
   display: inline-block;
   width: 24px;
   height: 24px;
-  margin-left: ${(props) => props.theme.borderRadius.borderRadius};
+  margin-left: ${({theme}) => theme.borderRadius.borderRadius};
 
   background: url(${angleRight});
   background-repeat: no-repeat;
@@ -120,15 +120,15 @@ export const AsideLinkText = styled.p`
   margin-right: 12px;
   margin-top: 32px;
 
-  margin-top: ${(props) => (props.forgotPass ? "32px" : "0px")};
+  margin-top: ${({forgotPass}) => (forgotPass ? "32px" : "0px")};
 
-  font-size: ${(props) => props.theme.fonts.mobileFontSize};
+  font-size: ${({theme}) => theme.fonts.mobileFontSize};
   line-height: 21px;
 
-  color: ${(props) => props.theme.colors.secondaryTextColor};
+  color: ${({theme}) => theme.colors.secondaryTextColor};
 
-  @media ${(props) => props.theme.media.tablet} {
-    font-size: ${(props) => props.theme.fonts.mobileFontSize};
+  @media ${({theme}) => theme.media.tablet} {
+    font-size: ${({theme}) => theme.fonts.mobileFontSize};
     line-height: 21px;
   } ;
 `;
@@ -138,7 +138,7 @@ export const AsideLinkWrapper = styled.div`
   padding-bottom: 44px;
   margin-top: auto;
 
-  @media ${(props) => props.theme.media.tablet} {
+  @media ${({theme}) => theme.media.tablet} {
     padding-top: 40px;
   }
 
@@ -148,14 +148,14 @@ export const AsideLinkWrapper = styled.div`
 `;
 
 export const AsideLink = styled(Link)`
-  font-weight: ${(props) => props.theme.fonts.boldFontWeight};
-  font-size: ${(props) => props.theme.fonts.mobileFontSize};
+  font-weight: ${({theme}) => theme.fonts.boldFontWeight};
+  font-size: ${({theme}) => theme.fonts.mobileFontSize};
   line-height: 130%;
   text-decoration: underline;
 
-  color: ${(props) => props.theme.colors.accentColor};
+  color: ${({theme}) => theme.colors.accentColor};
 
-  @media ${(props) => props.theme.media.tablet} {
+  @media ${({theme}) => theme.media.tablet} {
     margin-top: 0px;
     line-height: 19px;
   } ;

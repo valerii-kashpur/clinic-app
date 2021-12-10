@@ -6,53 +6,30 @@ import Button from "components/Button";
 
 import RadioBtns from "../RadioBtns/RadioBtns";
 import VisitReasons from "../VisitReasons/VisitReasons";
-import { createAppointment } from "network/fetchOperations";
 import { useHistory } from "react-router";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { isLoadingSelector } from "redux/selectors";
 import LoaderForButtons from "components/LoaderForButtons";
-import  PATHS  from "routes/paths";
+import PATHS from "routes/paths";
+import { useAppointmentForm } from "hooks/useAppointmentForm";
 
 const Form = () => {
-  const [visitReasonsReady, setVisitReasonsReady] = useState(false);
-  const [selectsValue, setSelectsValue] = useState(false);
-  const [dateIsPicked, setDateIsPicked] = useState(false);
-  const [timeIsSelected, setTimeIsSelected] = useState(false);
-  const [doctorId, setDoctorId] = useState("");
-  const [toggleButton, setToggleButton] = useState(true);
-  const isLoading = useSelector((state) => isLoadingSelector(state));
   const history = useHistory();
-  const dispatch = useDispatch();
+  const [toggleButton, setToggleButton] = useState(true);
+  const { buttonCondition, isFetching, createAppointmentRequest } =
+    useAppointmentForm();
 
   const submitHandler = async (e) => {
-    const { reason, note } = selectsValue;
     e.preventDefault();
-    const reqData = {
-      date: timeIsSelected,
-      reason: reason,
-      note: note,
-      doctorID: doctorId,
-    };
-    await dispatch(createAppointment(reqData));
+    await createAppointmentRequest();
     history.push({
       pathname: PATHS.doctorView,
     });
   };
 
   useEffect(() => {
-    if (visitReasonsReady && dateIsPicked && timeIsSelected) {
-      setToggleButton(false);
-    } else if (!toggleButton) {
-      setToggleButton(true);
+    if (toggleButton !== buttonCondition) {
+      setToggleButton(buttonCondition);
     }
-  }, [visitReasonsReady, dateIsPicked, timeIsSelected, toggleButton]);
-
-  useEffect(() => {
-    if (selectsValue) {
-      setDoctorId(selectsValue.doctor.value);
-    }
-  }, [selectsValue]);
+  }, [buttonCondition, toggleButton]);
 
   return (
     <form action="" onSubmit={submitHandler}>
@@ -62,34 +39,21 @@ const Form = () => {
             <Styled.Span>1</Styled.Span>
             <Text>Select a doctor and define the reason of your visit</Text>
           </Styled.TextWrapper>
-          <VisitReasons
-            onReady={setVisitReasonsReady}
-            showDatePicker={setSelectsValue}
-            resetPickedDate={setDateIsPicked}
-          />
+          <VisitReasons />
         </Styled.ListItem>
         <Styled.ListItem>
           <Styled.TextWrapper>
             <Styled.Span>2</Styled.Span>
             <Text>Choose a day for an appointment</Text>
           </Styled.TextWrapper>
-          <DatePickerForm
-            selectsValue={selectsValue}
-            onDateIsPiked={setDateIsPicked}
-          />
+          <DatePickerForm />
         </Styled.ListItem>
         <Styled.ListItem>
           <Styled.TextWrapper>
             <Styled.Span>3</Styled.Span>
             <Text>Select an available timeslot</Text>
           </Styled.TextWrapper>
-          <RadioBtns
-            pickedDate={dateIsPicked}
-            onSelected={setTimeIsSelected}
-            selectedValuesFromSelects={selectsValue}
-            disabled={selectsValue}
-            doctorsId={doctorId}
-          />
+          <RadioBtns />
         </Styled.ListItem>
       </Styled.List>
       <Button
@@ -98,8 +62,9 @@ const Form = () => {
         width={"160px"}
         height={"56px"}
         margin={"39px 80px 0px auto"}
+        data-testid="submitButton"
       >
-        {isLoading ? <LoaderForButtons /> : "Submit"}
+        {isFetching ? <LoaderForButtons /> : "Submit"}
       </Button>
     </form>
   );

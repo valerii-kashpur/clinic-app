@@ -13,12 +13,18 @@ import userSvg from "media/user.svg";
 import emailSvg from "media/email.svg";
 import lockSvg from "media/lock.svg";
 import checkSvg from "media/check.svg";
-import { register } from "network/fetchOperations";
+import { useAuth } from "hooks/useAuth";
 
 const SignUpForm = () => {
   const [passwordToggle, setPasswordToggle] = useState(false);
   const [passwordConfirmToggle, setPasswordConfirmToggle] = useState(false);
-  const loaderFromUserState = useSelector((state) => loaderSelector(state));
+  const loaderFromUserState = useSelector(loaderSelector);
+  const { registrationRequest } = useAuth();
+
+  const submitHandler = ({ email: userName, password, firstName, lastName }) => {
+    const requestData = { userName, password, firstName, lastName };
+    registrationRequest(requestData);
+  }
 
   return (
     <Formik
@@ -30,14 +36,7 @@ const SignUpForm = () => {
         confirmPassword: "",
       }}
       validationSchema={SignUpSchema}
-      onSubmit={(
-        { email: userName, password, firstName, lastName },
-        { resetForm }
-      ) => {
-        const reqData = { userName, password, firstName, lastName };
-        register(reqData);
-        resetForm();
-      }}
+      onSubmit={submitHandler}
     >
       {({ errors, touched }) => (
         <Styled.AsideForm action="">
@@ -102,7 +101,7 @@ const SignUpForm = () => {
             ></Styled.PasswordEyeSpan>
           </Styled.FormInputWrapper>
           <Styled.Button type="submit">
-          {loaderFromUserState ? (
+            {loaderFromUserState ? (
               <LoaderForButtons />
             ) : (
               <ButtonTextWithArrow text="Sign up" />

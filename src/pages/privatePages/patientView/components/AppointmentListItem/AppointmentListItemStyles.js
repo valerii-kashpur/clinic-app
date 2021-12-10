@@ -11,11 +11,11 @@ const ListItem = styled.li`
   padding-bottom: 24px;
   height: 100%;
 
-  background-color: ${(props) => props.theme.colors.inputBackgroundColor};
+  background-color: ${({theme}) => theme.colors.inputBackgroundColor};
   box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.24);
   border-radius: 12px;
 
-  @media ${(props) => props.theme.media.tablet} {
+  @media ${({theme}) => theme.media.tablet} {
     padding: 24px 32px;
     padding-bottom: 40px;
     min-width: 524px;
@@ -41,7 +41,7 @@ const ListItemInfoWrapper = styled.div`
     width: 100%;
     height: 1px;
 
-    background: ${(props) => props.theme.colors.asideInputBorderColor};
+    background: ${({theme}) => theme.colors.asideInputBorderColor};
     opacity: 0.5;
   }
 `;
@@ -51,7 +51,7 @@ const ListItemInfoAvatar = styled.img`
   margin-right: 16px;
 `;
 const ListItemInfoName = styled.p`
-  font-weight: ${(props) => props.theme.fonts.boldFontWeight};
+  font-weight: ${({theme}) => theme.fonts.boldFontWeight};
   font-size: 17px;
   line-height: 130%;
 `;
@@ -62,7 +62,7 @@ const ListItemStatusWrapper = styled.div`
 const ListItemStatusProffesion = styled.p`
   font-size: 13px;
   line-height: 130%;
-  color: ${(props) => props.theme.colors.secondaryTextColor};
+  color: ${({theme}) => theme.colors.secondaryTextColor};
 `;
 const ListItemMore = styled.img`
   width: 24px;
@@ -71,7 +71,7 @@ const ListItemMore = styled.img`
 `;
 const ListItemInfoText = styled.p`
   position: relative;
-  margin-top: ${(props) => (props.description ? "23px" : "16px")};
+  margin-top: ${({description}) => (description ? "23px" : "16px")};
   padding-left: 36px;
   &::before {
     position: absolute;
@@ -84,11 +84,11 @@ const ListItemInfoText = styled.p`
     height: 24px;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url(${(props) =>
-      props.description ? reasonSvg : timeSvg});
+    background-image: url(${({description}) =>
+      description ? reasonSvg : timeSvg});
   }
-  @media ${(props) => props.theme.media.tablet} {
-    margin-top: ${(props) => (props.description ? "24px" : "23px")};
+  @media ${({theme}) => theme.media.tablet} {
+    margin-top: ${({description}) => (description ? "24px" : "23px")};
   } ;
 `;
 

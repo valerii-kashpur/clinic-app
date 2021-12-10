@@ -1,46 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import * as Styled from "./VisitReasonsStyles";
 import { Formik } from "formik";
 import { appointmentSchema } from "utils/YupValidationSchemas";
 import SelectsBlock from "../SelectsBlock/SelectsBlock";
+import { setNote, setReason } from "redux/createAppointmentSlice";
+import { useDispatch } from "react-redux";
 
-const VisitReasons = ({ onReady, showDatePicker, resetPickedDate }) => {
-  const [occupation, setOccupation] = useState("");
-  const [doctor, setDoctor] = useState("");
-  const [reason, setReason] = useState("");
-  const [note, setNote] = useState("");
-  const [isReasonValid, setIsReasonValid] = useState(false);
-
-  useEffect(() => {
-    if (occupation && doctor) {
-      showDatePicker({ occupation, doctor, reason, note });
-    }
-    if (occupation && doctor && reason) {
-      onReady(isReasonValid);
-    }
-  }, [
-    occupation,
-    doctor,
-    reason,
-    note,
-    showDatePicker,
-    onReady,
-    isReasonValid,
-  ]);
+const VisitReasons = () => {
+  const dispatch = useDispatch();
 
   return (
     <Styled.Wrapper>
-      <SelectsBlock
-        disabled={!occupation}
-        onChangeFnOccupation={setOccupation}
-        onChangeFnDoctor={setDoctor}
-        doctorValue={doctor}
-        setSelectedValues={showDatePicker}
-        onResetPickedDate={resetPickedDate}
-      />
+      <SelectsBlock />
       <Formik
         initialValues={{
           reason: "",
+          note: "",
         }}
         validateOnMount={true}
         validationSchema={appointmentSchema}
@@ -57,10 +32,7 @@ const VisitReasons = ({ onReady, showDatePicker, resetPickedDate }) => {
                   placeholder="describe reasons for the visit"
                   onChange={(e) => {
                     handleChange(e);
-                    setReason(e.target.value);
-                    if (isReasonValid === !isValid) {
-                      setIsReasonValid(isValid);
-                    }
+                    dispatch(setReason(e.target.value));
                   }}
                   errored={errors.reason && touched.reason ? "true" : ""}
                 />
@@ -78,8 +50,7 @@ const VisitReasons = ({ onReady, showDatePicker, resetPickedDate }) => {
           name="note"
           type="text"
           placeholder="Leave a note if needed"
-          value={note}
-          onChange={(e) => setNote(e.target.value)}
+          onChange={(e) => dispatch(setNote(e.target.value))}
         />
       </Styled.InputWrapper>
     </Styled.Wrapper>

@@ -20,6 +20,7 @@ import userSlice from "./userSlice";
 import createSagaMiddleware from "@redux-saga/core";
 import loaderSlice from "./loaderSlice";
 import { rootSaga } from "./saga/rootSaga";
+import createAppointmentSlice from "./createAppointmentSlice";
 
 const saga = createSagaMiddleware();
 
@@ -43,6 +44,7 @@ const rootReducer = combineReducers({
   patientAppointments: patientAppointmentsSlice,
   doctorAppointments: doctorAppointmentsSlice,
   loader: loaderSlice,
+  createAppointment: createAppointmentSlice,
 });
 
 export const store = configureStore({

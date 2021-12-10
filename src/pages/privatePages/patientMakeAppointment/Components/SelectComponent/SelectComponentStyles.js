@@ -67,7 +67,7 @@ export const Select = styled.select`
   }
 `;
 
-export const SelectTitle = styled.p`
+export const SelectTitle = styled.label`
   margin-bottom: 16px;
 
   font-weight: 500;

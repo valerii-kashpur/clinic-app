@@ -1,15 +1,15 @@
 import { call, takeEvery, put } from "redux-saga/effects";
 import { fetchFailure, fetchTokenSuccess } from "../userSlice";
-import { notify } from "notifications";
+import { errorNotification, successNotification } from "notifications";
 import { logIn } from "network/fetchOperations";
 
 function* workerLoginSagaFetch({ payload }) {
   try {
     const response = yield call(logIn(payload));
     yield put(fetchTokenSuccess(response.access_token));
-    notify(200);
+    successNotification("You have been successfully login!");
   } catch (error) {
-    notify(error.response.status, error.response.data);
+    errorNotification();
     yield put(fetchFailure());
   }
 }

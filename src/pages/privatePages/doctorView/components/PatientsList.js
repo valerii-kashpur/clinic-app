@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 import styled from "styled-components";
+import * as Styled from "../DoctorViewStyles";
 
 import PatientsListItem from "./PatientsListItem/PatientsListItem";
 import EditAppointmentModal from "./EditAppointmentModal";
@@ -15,7 +16,7 @@ const List = styled.ul`
   gap: 24px 20px;
   overflow: auto;
 
-  @media ${(props) => props.theme.media.tablet} {
+  @media ${({theme}) => theme.media.tablet} {
     margin-top: 42px;
     padding-bottom: 24px;
     min-height: 400px;
@@ -29,16 +30,15 @@ const List = styled.ul`
       width: 12px;
     }
     &::-webkit-scrollbar-track {
-      background: ${(props) =>
-        props.theme.colors.viewPagesContainerBackgroundColor};
+      background: ${({theme}) => theme.colors.viewPagesContainerBackgroundColor};
       opacity: 0.32;
-      border-radius: ${(props) => props.theme.borderRadius.borderRadius};
+      border-radius: ${({theme}) => theme.borderRadius.borderRadius};
     }
     &::-webkit-scrollbar-thumb {
       width: 12px;
-      background: ${(props) => props.theme.colors.asideInputBorderColor};
+      background: ${({theme}) => theme.colors.asideInputBorderColor};
       opacity: 0.56;
-      border-radius: ${(props) => props.theme.borderRadius.borderRadius};
+      border-radius: ${({theme}) => theme.borderRadius.borderRadius};
     }
   } ;
 `;
@@ -55,25 +55,35 @@ const PatientsList = ({ appointments }) => {
 
   return (
     <>
-      <List>
-        {appointments.map(({ patient, reason, status, visit_date, id }) => {
-          const date = moment(visit_date).format("ddd MMM DD YYYY, h a");
-          return (
-            <PatientsListItem
-              key={uuidv4()}
-              avatar={patient.photo}
-              name={patient.first_name + " " + patient.last_name}
-              appointment={status}
-              time={date}
-              description={reason}
-              id={id}
-              visitDate={visit_date}
-              getModalProps={setModalPropItems}
-              openModal={toggleModal}
-            />
-          );
-        })}
-      </List>
+      {appointments.length ? (
+        <List>
+          {appointments.map(({ patient, reason, status, visit_date, id }) => {
+            const date = moment(visit_date).format("ddd MMM DD YYYY, h a");
+            return (
+              <PatientsListItem
+                key={uuidv4()}
+                avatar={patient.photo}
+                name={patient.first_name + " " + patient.last_name}
+                appointment={status}
+                time={date}
+                description={reason}
+                id={id}
+                visitDate={visit_date}
+                getModalProps={setModalPropItems}
+                openModal={toggleModal}
+              />
+            );
+          })}
+        </List>
+      ) : (
+        <Styled.EmptyListBlock>
+          <Styled.EmptyListText data-testid="emptyList">
+            You have no patients yet. To create a patient profile, please
+            contact your administrator.
+          </Styled.EmptyListText>
+        </Styled.EmptyListBlock>
+      )}
+
       <EditAppointmentModal
         isOpen={isOpen}
         toggleModal={toggleModal}

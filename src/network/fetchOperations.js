@@ -1,14 +1,15 @@
 import { setIsLoadingOff, setIsLoadingOn } from "redux/loaderSlice";
 import axiosInstance from "./Api";
-import { notify } from "notifications";
+import { errorNotification, successNotification } from "notifications";
+import PATHS from "routes/paths";
 
-export const register = (credentials) =>
-  axiosInstance
-    .post("auth/registration", credentials)
-    .then((response) => {
-      notify(response);
-    })
-    .catch((error) => notify(error.response.status, error.response.data));
+export const register = (credentials, history) => {
+    axiosInstance
+      .post("auth/registration", credentials)
+      .then(data => successNotification("Your account have been successfully created!"))
+      .then(() => history.push(PATHS.signIn))
+      .catch((error) => errorNotification());
+};
 
 export const logIn = (credentials) => (dispatch) =>
   axiosInstance.post("auth/login", credentials);
@@ -40,49 +41,22 @@ export const getDoctorAppointment = (sortBy) => (dispatch) => {
   return axiosInstance.get(`appointments/doctor/me?offset=0&limit=40`);
 };
 
-export const getOccupations = () => {
+export const getOccupations = () => (dispatch) => {
   return axiosInstance.get("specializations");
 };
 
-export const getDoctorsByOccupationId = (id) => async (dispatch) => {
-  dispatch(setIsLoadingOn());
-  try {
-    const result = await axiosInstance.get(`doctors/specialization/${id}`);
-    dispatch(setIsLoadingOff());
-    return result;
-  } catch (error) {
-    dispatch(setIsLoadingOff());
-    notify(error.response.status, error.response.data);
-  }
+export const getDoctorsByOccupationId = (id) => (dispatch) => {
+  return axiosInstance.get(`doctors/specialization/${id}`);
 };
 
 export const getDoctorsFreeTimeByDateAndId = (date, id) => async (dispatch) => {
-  dispatch(setIsLoadingOn());
-  try {
-    const result = await axiosInstance.get(
-      `appointments/time/free?date=${date}&doctorID=${id}`
-    );
-    dispatch(setIsLoadingOff());
-    return result;
-  } catch (error) {
-    dispatch(setIsLoadingOff());
-    notify(error.response.status, error.response.data);
-  }
+  return axiosInstance.get(
+    `appointments/time/free?date=${date}&doctorID=${id}`
+  );
 };
 
 export const createAppointment = (credentials) => async (dispatch) => {
-  dispatch(setIsLoadingOn());
-  try {
-    const result = await axiosInstance
-      .post(`appointments`, credentials)
-      .then(({ status }) => notify(status));
-    dispatch(setIsLoadingOff());
-    return result;
-  } catch (error) {
-    console.log(error);
-    dispatch(setIsLoadingOff());
-    notify(error.response.status, error.response.data);
-  }
+  return axiosInstance.post(`appointments`, credentials);
 };
 
 export const updateAppointmentStatus =
@@ -91,12 +65,12 @@ export const updateAppointmentStatus =
     try {
       const result = await axiosInstance
         .patch(`appointments/${id}`, credentials)
-        .then(({ status }) => notify(status));
+        .then(() => successNotification("Status have been updated!"));
       dispatch(setIsLoadingOff());
       return result;
     } catch (error) {
       dispatch(setIsLoadingOff());
-      notify(error.response.status, error.response.data);
+      errorNotification();
     }
   };
 
@@ -105,10 +79,10 @@ export const deleteAppointment = (id) => async (dispatch) => {
   try {
     await axiosInstance
       .delete(`appointments/${id}`)
-      .then(({ status }) => notify(status));
+      .then(() => successNotification("Appointment have been deleted!"));
     dispatch(setIsLoadingOff());
   } catch (error) {
     dispatch(setIsLoadingOff());
-    notify(error.response.status, error.response.data);
+    errorNotification();
   }
 };

@@ -1,10 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  background-color: ${(props) =>
-    props.theme.colors.viewPagesContainerBackgroundColor};
+  background-color: ${({theme}) => theme.colors.viewPagesContainerBackgroundColor};
 
-  @media ${(props) => props.theme.media.tablet} {
+  @media ${({theme}) => theme.media.tablet} {
     padding: 0 64px;
     padding-bottom: 48px;
     height: 100vh;
@@ -19,7 +18,7 @@ export const Header = styled.header`
   align-items: center;
   justify-content: space-between;
 
-  @media ${(props) => props.theme.media.tablet} {
+  @media ${({theme}) => theme.media.tablet} {
     height: 80px;
   } ;
 `;
@@ -37,7 +36,7 @@ export const HeaderUserNAmeWrapper = styled.div`
   display: none;
   text-align: end;
 
-  @media ${(props) => props.theme.media.tablet} {
+  @media ${({theme}) => theme.media.tablet} {
     display: block;
     margin-right: 16px;
   } ;
@@ -49,7 +48,7 @@ export const HeaderUserAvatarWrapper = styled.div`
   width: 40px;
   height: 40px;
 
-  @media ${(props) => props.theme.media.tablet} {
+  @media ${({theme}) => theme.media.tablet} {
     display: flex;
     text-align: end;
   } ;
@@ -67,9 +66,9 @@ export const HeaderUserStatus = styled.span`
 
   background-image: radial-gradient(
     ellipse at center,
-    ${(props) => props.theme.colors.pointerColor} 40%,
-    ${(props) => props.theme.colors.viewPagesContainerBackgroundColor} 40%,
-    ${(props) => props.theme.colors.viewPagesContainerBackgroundColor} 100%
+    ${({theme}) => theme.colors.pointerColor} 40%,
+    ${({theme}) => theme.colors.viewPagesContainerBackgroundColor} 40%,
+    ${({theme}) => theme.colors.viewPagesContainerBackgroundColor} 100%
   );
 `;
 
@@ -78,11 +77,11 @@ export const AppCardsSection = styled.section`
   padding-left: 24px;
   padding-right: 24px;
 
-  background: ${(props) => props.theme.colors.asideBackgroundColor};
+  background: ${({theme}) => theme.colors.asideBackgroundColor};
   box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.32);
   border-radius: 16px 16px 0px 0px;
 
-  @media ${(props) => props.theme.media.tablet} {
+  @media ${({theme}) => theme.media.tablet} {
     padding-left: 48px;
     padding-right: 48px;
 

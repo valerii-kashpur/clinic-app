@@ -1,12 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
-import { isAuthentificated, userRoleName } from "redux/selectors";
+import { isAuthorizedSelector, userRoleNameSelector } from "redux/selectors";
 import { roles } from "./roles";
 
 const PublicRoutes = ({ component: Component, ...routeProps }) => {
-  const isLogIn = useSelector((state) => isAuthentificated(state));
-  const roleName = useSelector((state) => userRoleName(state));
+  const isLogIn = useSelector(isAuthorizedSelector);
+  const roleName = useSelector(userRoleNameSelector);
   return (
     <Route
       {...routeProps}

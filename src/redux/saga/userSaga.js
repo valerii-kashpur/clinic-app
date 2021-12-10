@@ -1,6 +1,6 @@
 import { call, takeEvery, put } from "redux-saga/effects";
 import { fetchFailure, fetchUserSuccess } from "../userSlice";
-import { notify } from "notifications";
+import { errorNotification } from "notifications";
 import { getProfile } from "network/fetchOperations";
 import { historyReplace } from "utils/history";
 
@@ -10,7 +10,7 @@ function* workerUserSagaFetch({payload}) {
     const response = yield call(getProfile(payload));
     yield put(fetchUserSuccess(response));
   } catch (error) {
-    notify(error.response.status, error.response.data);
+    errorNotification();
     yield put(fetchFailure());
     yield put(historyReplace());
   }

@@ -10,13 +10,13 @@ export const NotificationText = styled.p`
   margin: 0;
   margin-bottom: 24px;
 
-  font-size: ${(props) => props.theme.fonts.mobileFontSize};
+  font-size: ${({theme}) => theme.fonts.mobileFontSize};
   line-height: 130%;
-  font-weight: ${(props) => props.theme.fonts.fontStyle};
+  font-weight: ${({theme}) => theme.fonts.fontStyle};
 
-  color: ${(props) => props.theme.colors.secondaryTextColor};
+  color: ${({theme}) => theme.colors.secondaryTextColor};
 
-  @media ${(props) => props.theme.media.tablet} {
+  @media ${({theme}) => theme.media.tablet} {
     width: 368px;
   } ;
 `;
@@ -37,7 +37,7 @@ export const FormInputWrapper = styled.div`
   &::before {
     position: absolute;
     z-index: 10;
-    top: ${(props) => props.theme.borderRadius.borderRadius};
+    top: ${({theme}) => theme.borderRadius.borderRadius};
     left: 16px;
 
     content: "";
@@ -46,10 +46,10 @@ export const FormInputWrapper = styled.div`
 
     background-repeat: no-repeat;
     background-size: cover;
-    background: url(${(props) => props.svg});
+    background: url(${({svg}) => svg});
   }
 
-  @media ${(props) => props.theme.media.tablet} {
+  @media ${({theme}) => theme.media.tablet} {
     margin-bottom: 40px;
 
     &:last-of-type {
@@ -69,7 +69,7 @@ export const ErrorMessage = styled.p`
   line-height: 16px;
   letter-spacing: -0.24px;
 
-  color: ${(props) => props.theme.colors.errorTextColor};
+  color: ${({theme}) => theme.colors.errorTextColor};
 `;
 
 export const StyledButton = styled(baseButtonStyles)`
@@ -77,7 +77,7 @@ export const StyledButton = styled(baseButtonStyles)`
   margin-top: 32px;
   height: 48px;
 
-  @media ${(props) => props.theme.media.tablet} {
+  @media ${({theme}) => theme.media.tablet} {
     margin-top: 64px;
     height: 56px;
     width: 214px;
@@ -88,7 +88,7 @@ export const ButtonVector = styled.span`
   display: inline-block;
   width: 24px;
   height: 24px;
-  margin-left: ${(props) => props.theme.borderRadius.borderRadius};
+  margin-left: ${({theme}) => theme.borderRadius.borderRadius};
 
   background: url(${angleRight});
   background-repeat: no-repeat;

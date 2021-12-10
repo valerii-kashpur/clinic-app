@@ -17,18 +17,18 @@ export const NavButton = styled.button`
     display: none;
   }
 
-  border-radius: ${(props) => props.theme.borderRadius.borderRadius};
+  border-radius: ${({theme}) => theme.borderRadius.borderRadius};
   border: none;
-  background: ${(props) =>
-    props.current
-      ? props.theme.colors.accentColor
-      : props.theme.colors.buttonTextColor};
-  color: ${(props) =>
-    props.current
-      ? props.theme.colors.buttonTextColor
-      : props.theme.colors.accentColor};
+  background: ${({current, theme}) =>
+    current
+      ? theme.colors.accentColor
+      : theme.colors.buttonTextColor};
+  color: ${({current, theme}) =>
+    current
+      ? theme.colors.buttonTextColor
+      : theme.colors.accentColor};
 
-  @media ${(props) => props.theme.media.tablet} {
+  @media ${({theme}) => theme.media.tablet} {
     width: 160px;
 
     &:last-of-type {
@@ -40,9 +40,9 @@ export const NavigationWrapper = styled.div`
   margin-top: 40px;
   display: flex;
 
-  @media ${(props) => props.theme.media.tablet} {
+  @media ${({theme}) => theme.media.tablet} {
     margin-top: 56px;
-    padding-right: ${(props) => props.theme.borderRadius.borderRadius};
+    padding-right: ${({theme}) => theme.borderRadius.borderRadius};
   } ;
 `;
 export const NavSectionTitle = styled.h3`
@@ -59,25 +59,25 @@ export const NavigationItemSelect = styled.img`
   width: 24px;
   height: 24px;
 
-  @media ${(props) => props.theme.media.desktop} {
+  @media ${({theme}) => theme.media.desktop} {
     display: none;
   } ;
 `;
 export const NavigationSelectSpan = styled.span`
   display: none;
-  @media ${(props) => props.theme.media.desktop} {
+  @media ${({theme}) => theme.media.desktop} {
     display: block;
     margin-right: 16px;
 
-    color: ${(props) => props.theme.colors.secondaryTextColor};
+    color: ${({theme}) => theme.colors.secondaryTextColor};
   } ;
 `;
 export const NavigationSelectDesktop = styled.select`
   display: none;
-  @media ${(props) => props.theme.media.desktop} {
+  @media ${({theme}) => theme.media.desktop} {
     display: block;
 
-    color: ${(props) => props.theme.colors.accentColor};
+    color: ${({theme}) => theme.colors.accentColor};
     border: none;
   } ;
 `;
@@ -97,14 +97,14 @@ export const EmptyListBlock = styled.div`
 export const EmptyListText = styled.p`
   max-width: 461px;
 
-  font-weight: ${(props) => props.theme.fonts.boldFontWeight};
+  font-weight: ${({theme}) => theme.fonts.boldFontWeight};
   line-height: 21px;
 
-  color: ${(props) => props.theme.colors.secondaryTextColor};
+  color: ${({theme}) => theme.colors.secondaryTextColor};
 `;
 export const UppointmentCreateButton = styled(Link)`
   display: none;
-  @media ${(props) => props.theme.media.desktop} {
+  @media ${({theme}) => theme.media.desktop} {
     width: 224px;
     height: 48px;
     margin-left: 64px;
@@ -114,8 +114,8 @@ export const UppointmentCreateButton = styled(Link)`
     text-decoration: none;
 
     border: none;
-    border-radius: ${(props) => props.theme.borderRadius.borderRadius};
-    background: ${(props) => props.theme.colors.accentColor};
+    border-radius: ${({theme}) => theme.borderRadius.borderRadius};
+    background: ${({theme}) => theme.colors.accentColor};
     color: white;
   } ;
 `;

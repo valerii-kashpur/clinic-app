@@ -8,15 +8,15 @@ const Input = styled(Field)`
 
   padding: 0;
   padding-left: 48px;
-  padding-right: ${(props) => (props.password ? "48px" : "16px")};
+  padding-right: ${({password}) => (password ? "48px" : "16px")};
 
-  border: ${(props) =>
-    props.errored
-      ? props.theme.inputsBorders.asideInputErrorBorder
-      : props.theme.inputsBorders.asideInputBorder};
-  border-radius: ${(props) => props.theme.borderRadius.borderRadius};
+  border: ${({errored, theme}) =>
+    errored
+      ? theme.inputsBorders.asideInputErrorBorder
+      : theme.inputsBorders.asideInputBorder};
+  border-radius: ${({theme}) => theme.borderRadius.borderRadius};
 
-  background-color: ${(props) => props.theme.colors.asideBackgroundColor};
+  background-color: ${({theme}) => theme.colors.asideBackgroundColor};
   box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.16);
   filter: ${(props) =>
     props.errored
@@ -24,16 +24,16 @@ const Input = styled(Field)`
       : "none"};
 
   &::placeholder {
-    color: ${(props) => props.theme.colors.secondaryTextColor};
-    font-size: ${(props) => props.theme.fonts.mobileFontSize};
+    color: ${({theme}) => theme.colors.secondaryTextColor};
+    font-size: ${({theme}) => theme.fonts.mobileFontSize};
     line-height: 24px;
   }
 
-  @media ${(props) => props.theme.media.tablet} {
+  @media ${({theme}) => theme.media.tablet} {
     width: 368px;
     height: 56px;
     padding-left: 64px;
-    padding-right: ${(props) => (props.password ? "64px" : "24px")};
+    padding-right: ${({password}) => (password ? "64px" : "24px")};
 
     font-size: 17px;
     line-height: 24px;
@@ -53,7 +53,7 @@ const ErrorMessage = styled.p`
   line-height: 16px;
   letter-spacing: -0.24px;
 
-  color: ${(props) => props.theme.colors.errorTextColor};
+  color: ${({theme}) => theme.colors.errorTextColor};
 `;
 
 const AuthPageInputs = ({

@@ -1,32 +1,43 @@
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
-import moment from 'moment';
+import moment from "moment";
 import "react-datepicker/dist/react-datepicker.css";
 import "./DatePickerForm.css";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchDoctorsFreeTime } from "redux/createAppointmentsActions";
+import { selectedDoctorSelector } from "redux/selectors";
+import { setSelectedDate } from "redux/createAppointmentSlice";
 
-const DatePickerForm = ({ selectsValue, onDateIsPiked }) => {
-  const [startDate, setStartDate] = useState(new Date());
+const DatePickerForm = () => {
+  const [selected, setSelected] = useState(new Date());
+  const dispatch = useDispatch();
   const today = new Date();
+  const selectedDoctor = useSelector(selectedDoctorSelector);
 
   const dateCutter = (date) => {
-    return moment(date).toISOString()
-
-  }
+    return moment(date).toISOString();
+  };
 
   useEffect(() => {
-    if (selectsValue) {
-      onDateIsPiked(dateCutter(startDate));
+    if (selectedDoctor) {
+      const date = dateCutter(selected);
+      dispatch(fetchDoctorsFreeTime({date, selectedDoctor}));
     }
-  }, [startDate, selectsValue, onDateIsPiked]);
+  }, [selected, selectedDoctor, dispatch]);
+
+  useEffect(() => {
+    const date = dateCutter(selected);
+    dispatch(setSelectedDate(date));
+  }, [selected, dispatch]);
 
   return (
     <DatePicker
-      selected={startDate}
-      onChange={(date) => setStartDate(date)}
+      selected={selected}
+      onChange={setSelected}
       formatWeekDay={(nameOfDay) => nameOfDay.substr(0, 1)}
       inline
       minDate={today}
-      maxDate={!selectsValue ? today : null}
+      maxDate={selectedDoctor ? null : today}
     />
   );
 };
