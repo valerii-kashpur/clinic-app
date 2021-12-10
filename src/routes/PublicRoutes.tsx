@@ -4,9 +4,13 @@ import { Route, Redirect } from "react-router-dom";
 import { isAuthorizedSelector, userRoleNameSelector } from "redux/selectors";
 import { roles } from "./roles";
 
-const PublicRoutes = ({ component: Component, ...routeProps }) => {
+type PublicRoutesParams = {
+  component: typeof React.Component,
+};
+
+const PublicRoutes = ({ component: Component, ...routeProps }: PublicRoutesParams) => {
   const isLogIn = useSelector(isAuthorizedSelector);
-  const roleName = useSelector(userRoleNameSelector);
+  const roleName: string = useSelector(userRoleNameSelector);
   return (
     <Route
       {...routeProps}

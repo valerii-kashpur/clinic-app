@@ -7,7 +7,11 @@ export const NavButtonsWrapper = styled.div`
   display: flex;
 `;
 
-export const NavButton = styled.button`
+type NavButtonProps = {
+  current?:boolean | undefined
+}
+
+export const NavButton = styled.button<NavButtonProps>`
   width: 120px;
   height: 40px;
   margin-right: 24px;

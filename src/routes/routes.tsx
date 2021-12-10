@@ -64,7 +64,7 @@ const ROUTES = [
   },
 ];
 
-const mapedRoutes = (userRoleName) =>
+const mapedRoutes = (userRoleName:string) =>
   ROUTES.map((route) => {
     return route.private && userRoleName === route.onlyForRole ? (
       <PrivateRoutes

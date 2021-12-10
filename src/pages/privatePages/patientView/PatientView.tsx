@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ViewPagesWrapper from "../components/ViewPagesWrapper/ViewPagesWrapper.js";
+import ViewPagesWrapper from "../components/ViewPagesWrapper/ViewPagesWrapper";
 import AppointmentsList from "./components/AppointmentsList";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -13,7 +13,7 @@ import * as Styled from "./PatientViewStyles";
 // IMAGES
 import slider from "media/sliders-v-alt.svg";
 import PATHS from "routes/paths";
-import { fetchPatientAppointments } from "redux/patientAppointmentsSlice.js";
+import { fetchPatientAppointments } from "redux/patientAppointmentsSlice";
 
 const PatientView = () => {
   const [dateStatus, setDateStatus] = useState("Upcoming");

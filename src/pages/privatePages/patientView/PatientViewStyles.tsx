@@ -7,7 +7,12 @@ import emptyImg from "media/medical-history.png";
 export const NavButtonsWrapper = styled.div`
   display: flex;
 `;
-export const NavButton = styled.button`
+
+type NavButtonProps = {
+  current?: boolean | undefined
+}
+
+export const NavButton = styled.button<NavButtonProps>`
   width: 120px;
   height: 40px;
   margin-right: 24px;
@@ -17,18 +22,18 @@ export const NavButton = styled.button`
     display: none;
   }
 
-  border-radius: ${({theme}) => theme.borderRadius.borderRadius};
+  border-radius: ${({ theme }) => theme.borderRadius.borderRadius};
   border: none;
-  background: ${({current, theme}) =>
+  background: ${({ current, theme }) =>
     current
       ? theme.colors.accentColor
       : theme.colors.buttonTextColor};
-  color: ${({current, theme}) =>
+  color: ${({ current, theme }) =>
     current
       ? theme.colors.buttonTextColor
       : theme.colors.accentColor};
 
-  @media ${({theme}) => theme.media.tablet} {
+  @media ${({ theme }) => theme.media.tablet} {
     width: 160px;
 
     &:last-of-type {
@@ -40,9 +45,9 @@ export const NavigationWrapper = styled.div`
   margin-top: 40px;
   display: flex;
 
-  @media ${({theme}) => theme.media.tablet} {
+  @media ${({ theme }) => theme.media.tablet} {
     margin-top: 56px;
-    padding-right: ${({theme}) => theme.borderRadius.borderRadius};
+    padding-right: ${({ theme }) => theme.borderRadius.borderRadius};
   } ;
 `;
 export const NavSectionTitle = styled.h3`
@@ -59,25 +64,25 @@ export const NavigationItemSelect = styled.img`
   width: 24px;
   height: 24px;
 
-  @media ${({theme}) => theme.media.desktop} {
+  @media ${({ theme }) => theme.media.desktop} {
     display: none;
   } ;
 `;
 export const NavigationSelectSpan = styled.span`
   display: none;
-  @media ${({theme}) => theme.media.desktop} {
+  @media ${({ theme }) => theme.media.desktop} {
     display: block;
     margin-right: 16px;
 
-    color: ${({theme}) => theme.colors.secondaryTextColor};
+    color: ${({ theme }) => theme.colors.secondaryTextColor};
   } ;
 `;
 export const NavigationSelectDesktop = styled.select`
   display: none;
-  @media ${({theme}) => theme.media.desktop} {
+  @media ${({ theme }) => theme.media.desktop} {
     display: block;
 
-    color: ${({theme}) => theme.colors.accentColor};
+    color: ${({ theme }) => theme.colors.accentColor};
     border: none;
   } ;
 `;
@@ -97,14 +102,14 @@ export const EmptyListBlock = styled.div`
 export const EmptyListText = styled.p`
   max-width: 461px;
 
-  font-weight: ${({theme}) => theme.fonts.boldFontWeight};
+  font-weight: ${({ theme }) => theme.fonts.boldFontWeight};
   line-height: 21px;
 
-  color: ${({theme}) => theme.colors.secondaryTextColor};
+  color: ${({ theme }) => theme.colors.secondaryTextColor};
 `;
 export const UppointmentCreateButton = styled(Link)`
   display: none;
-  @media ${({theme}) => theme.media.desktop} {
+  @media ${({ theme }) => theme.media.desktop} {
     width: 224px;
     height: 48px;
     margin-left: 64px;
@@ -114,8 +119,8 @@ export const UppointmentCreateButton = styled(Link)`
     text-decoration: none;
 
     border: none;
-    border-radius: ${({theme}) => theme.borderRadius.borderRadius};
-    background: ${({theme}) => theme.colors.accentColor};
+    border-radius: ${({ theme }) => theme.borderRadius.borderRadius};
+    background: ${({ theme }) => theme.colors.accentColor};
     color: white;
   } ;
 `;

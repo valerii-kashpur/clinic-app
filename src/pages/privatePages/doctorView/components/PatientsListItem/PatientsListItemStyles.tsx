@@ -80,7 +80,11 @@ export const ListItemStatusAppointment = styled.p`
   color: ${({theme}) => theme.colors.secondaryTextColor};
 `;
 
-export const ListItemInfoText = styled.p`
+type ListItemInfoTextProps = {
+  description?:boolean
+}
+
+export const ListItemInfoText = styled.p<ListItemInfoTextProps>`
   position: relative;
   margin-top: ${({description}) => (description ? "23px" : "16px")};
   padding-left: 36px;

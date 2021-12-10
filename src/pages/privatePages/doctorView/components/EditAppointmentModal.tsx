@@ -10,12 +10,26 @@ const StyledModal = Modal.styled`
   position: o o;
 `;
 
+type ModalPropItems = {
+  id?: string,
+  name?: string,
+  visitDate?: string,
+}
+
+type EditAppointmentModalProps = {
+  isOpen: boolean,
+  toggleModal: any,
+  setDropMenuValue: any,
+  modalPropItems?: ModalPropItems ,
+}
+
 const EditAppointmentModal = ({
   isOpen,
   toggleModal,
   setDropMenuValue,
   modalPropItems,
-}) => {
+}: EditAppointmentModalProps) => {
+
   return (
     <StyledModal
       isOpen={isOpen}

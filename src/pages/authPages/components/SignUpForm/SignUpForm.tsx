@@ -49,7 +49,7 @@ const SignUpForm = () => {
               name="firstName"
               type="text"
               placeholder="First name"
-              errored={errors.firstName && touched.firstName ? true : undefined}
+              errored={errors.firstName && touched.firstName ? "true" : undefined}
               errors={errors.firstName}
               touched={touched.firstName}
             />
@@ -59,7 +59,7 @@ const SignUpForm = () => {
               name="lastName"
               placeholder="Last name"
               type="text"
-              errored={errors.lastName && touched.lastName ? true : undefined}
+              errored={errors.lastName && touched.lastName ? "true" : undefined}
               errors={errors.lastName}
               touched={touched.lastName}
             />
@@ -69,7 +69,7 @@ const SignUpForm = () => {
               name="email"
               type="email"
               placeholder="Email"
-              errored={errors.email && touched.email ? true : undefined}
+              errored={errors.email && touched.email ? "true" : undefined}
               errors={errors.email}
               touched={touched.email}
             />
@@ -79,7 +79,7 @@ const SignUpForm = () => {
               name="password"
               type={passwordToggle ? "text" : "password"}
               placeholder="Password"
-              errored={errors.password && touched.password ? true : undefined}
+              errored={errors.password && touched.password ? "true" : undefined}
               password="true"
               errors={errors.password}
               touched={touched.password}
@@ -95,7 +95,7 @@ const SignUpForm = () => {
               placeholder="Confirm Password"
               password="true"
               errored={
-                errors.confirmPassword && touched.confirmPassword ? true : undefined
+                errors.confirmPassword && touched.confirmPassword ? "true" : undefined
               }
               errors={errors.confirmPassword}
               touched={touched.confirmPassword}

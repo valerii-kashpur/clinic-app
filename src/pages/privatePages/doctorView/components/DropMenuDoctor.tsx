@@ -6,6 +6,15 @@ import { deleteAppointment } from "network/fetchOperations";
 import { useDispatch } from "react-redux";
 import { fetchDoctorAppointments } from "redux/doctorAppointmentsSlice";
 
+type DropMenuDoctorProps = {
+  menuBtn: any,
+  id:string,
+  visitDate:string,
+  name:string,
+  getModalProps:any,
+  openModal:any,
+}
+
 const DropMenuDoctor = ({
   menuBtn,
   id,
@@ -13,7 +22,7 @@ const DropMenuDoctor = ({
   name,
   getModalProps,
   openModal,
-}) => {
+}: DropMenuDoctorProps) => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -23,7 +32,7 @@ const DropMenuDoctor = ({
 
   const handleDelete = async () => {
     await dispatch(deleteAppointment(id));
-    dispatch(fetchDoctorAppointments("dateSort"));
+    dispatch(fetchDoctorAppointments());
   };
 
   return (

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ViewPagesWrapper from "../components/ViewPagesWrapper/ViewPagesWrapper.js";
+import ViewPagesWrapper from "../components/ViewPagesWrapper/ViewPagesWrapper";
 import PatientsList from "./components/PatientsList";
 import { useSelector } from "react-redux";
 import {
@@ -11,11 +11,10 @@ import { useHistory } from "react-router-dom";
 import * as Styled from "./DoctorViewStyles";
 
 // IMAGES
-import avatar from "media/avatar.png";
 import search from "media/search.svg";
 import slider from "media/sliders-v-alt.svg";
 import { useDispatch } from "react-redux";
-import { fetchDoctorAppointments } from "redux/doctorAppointmentsSlice.js";
+import { fetchDoctorAppointments } from "redux/doctorAppointmentsSlice";
 
 const DoctorView = () => {
   const [sortBy, setSortBy] = useState("dateSort");
@@ -38,7 +37,7 @@ const DoctorView = () => {
   }, [dispatch, sortBy, userRole, isAuth]);
 
   return (
-    <ViewPagesWrapper name="Miranda Nelson" role="doctor" avatar={avatar}>
+    <ViewPagesWrapper>
       <Styled.NavButtonsWrapper>
         <Styled.NavButton current>Patients</Styled.NavButton>
         <Styled.NavButton>Resolutions</Styled.NavButton>

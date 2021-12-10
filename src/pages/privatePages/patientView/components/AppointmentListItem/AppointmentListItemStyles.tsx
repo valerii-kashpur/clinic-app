@@ -4,7 +4,7 @@ import styled from "styled-components";
 import timeSvg from "media/clock-three.svg";
 import reasonSvg from "media/reason.svg";
 
-const ListItem = styled.li`
+export const ListItem = styled.li`
   padding-left: 24px;
   padding-right: 16px;
   padding-top: 16px;
@@ -26,7 +26,7 @@ const ListItem = styled.li`
     width: 406px;
   }
 `;
-const ListItemInfoWrapper = styled.div`
+export const ListItemInfoWrapper = styled.div`
   position: relative;
   padding-bottom: 16px;
 
@@ -45,31 +45,36 @@ const ListItemInfoWrapper = styled.div`
     opacity: 0.5;
   }
 `;
-const ListItemInfoAvatar = styled.img`
+export const ListItemInfoAvatar = styled.img`
   width: 48px;
   height: 48px;
   margin-right: 16px;
 `;
-const ListItemInfoName = styled.p`
+export const ListItemInfoName = styled.p`
   font-weight: ${({theme}) => theme.fonts.boldFontWeight};
   font-size: 17px;
   line-height: 130%;
 `;
-const ListItemStatusWrapper = styled.div`
+export const ListItemStatusWrapper = styled.div`
   display: flex;
   align-items: center;
 `;
-const ListItemStatusProffesion = styled.p`
+export const ListItemStatusProfession = styled.p`
   font-size: 13px;
   line-height: 130%;
   color: ${({theme}) => theme.colors.secondaryTextColor};
 `;
-const ListItemMore = styled.img`
+export const ListItemMore = styled.img`
   width: 24px;
   height: 24px;
   margin-left: auto;
 `;
-const ListItemInfoText = styled.p`
+
+type ListItemInfoTextProps = {
+  description?: boolean | undefined
+}
+
+export const ListItemInfoText = styled.p<ListItemInfoTextProps>`
   position: relative;
   margin-top: ${({description}) => (description ? "23px" : "16px")};
   padding-left: 36px;
@@ -91,14 +96,3 @@ const ListItemInfoText = styled.p`
     margin-top: ${({description}) => (description ? "24px" : "23px")};
   } ;
 `;
-
-export const styles = {
-  ListItem,
-  ListItemInfoWrapper,
-  ListItemInfoAvatar,
-  ListItemInfoName,
-  ListItemStatusWrapper,
-  ListItemStatusProffesion,
-  ListItemMore,
-  ListItemInfoText,
-};

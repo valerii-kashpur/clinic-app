@@ -4,6 +4,18 @@ import * as Styled from "./PatientsListItemStyles";
 import moreVertical from "media/more-vertical.svg";
 import DropMenuDoctor from "../DropMenuDoctor";
 
+type PatientsListItemProps = {
+  avatar: string,
+  name: string,
+  appointment: string,
+  time: string,
+  description: string,
+  id: string,
+  visitDate: string,
+  setModalProps:any,
+  openModalToggle: any,
+}
+
 const PatientsListItem = ({
   avatar,
   name,
@@ -12,9 +24,9 @@ const PatientsListItem = ({
   description,
   id,
   visitDate,
-  getModalProps,
-  openModal
-}) => {
+  setModalProps,
+  openModalToggle
+} : PatientsListItemProps) => {
 
 
   return (
@@ -36,8 +48,8 @@ const PatientsListItem = ({
             id={id}
             visitDate={visitDate}
             name={name}
-            getModalProps={getModalProps}
-            openModal={openModal}
+            getModalProps={setModalProps}
+            openModal={openModalToggle}
           />
         </Styled.ListItemInfoWrapper>
         <Styled.ListItemInfoText>{time}</Styled.ListItemInfoText>

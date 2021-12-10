@@ -1,18 +1,32 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 
-const EditResolution = ({ onToggleModal, modalProps }) => {
-  const dispatch = useDispatch();
+type ModalProps = {
+  id: string
+  name: string
+  visitDate: string
+}
+
+type EditResolutionProps = {
+  onToggleModal: any, modalProps: ModalProps
+}
+
+const EditResolution = ({ onToggleModal, modalProps }: EditResolutionProps) => {
   const [textAreaValue, setTextAreaValue] = useState("");
-  const submitHandler = (e) => {
+
+  const submitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
     console.log(modalProps.id);
     console.log(modalProps.visitDate);
     console.log(textAreaValue);
   };
+
+  const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setTextAreaValue(e.target.value)
+  }
+
   return (
     <div>
-      <form action="" onSubmit={(e) => submitHandler(e)}>
+      <form action="" onSubmit={submitHandler}>
         <h3>Edit a Resolution</h3>
         <div>
           <img src="" alt="" />
@@ -22,10 +36,10 @@ const EditResolution = ({ onToggleModal, modalProps }) => {
         <textarea
           name=""
           id=""
-          cols="30"
-          rows="10"
+          cols={30}
+          rows={10}
           value={textAreaValue}
-          onChange={(e) => setTextAreaValue(e.target.value)}
+          onChange={onChangeHandler}
         ></textarea>
         <div>
           <button onClick={onToggleModal}>

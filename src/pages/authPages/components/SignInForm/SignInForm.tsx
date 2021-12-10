@@ -42,7 +42,7 @@ const SignInForm = () => {
               name="email"
               type="email"
               placeholder="Email"
-              errored={errors.email && touched.email ? true : undefined}
+              errored={errors.email && touched.email ? "true" : undefined}
               errors={errors.email}
               touched={touched.email}
             />
@@ -52,7 +52,7 @@ const SignInForm = () => {
               name="password"
               type={passwordToggle ? "text" : "password"}
               placeholder="Password"
-              errored={errors.password && touched.password ? true : undefined}
+              errored={errors.password && touched.password ? "true" : undefined}
               password="true"
               errors={errors.password}
               touched={touched.password}

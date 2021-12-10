@@ -7,8 +7,6 @@ import * as Styled from "../DoctorViewStyles";
 import PatientsListItem from "./PatientsListItem/PatientsListItem";
 import EditAppointmentModal from "./EditAppointmentModal";
 
-//  Styles ---------------------------------------------------------------------------------------------
-
 const List = styled.ul`
   margin-top: 16px;
   display: flex;
@@ -16,7 +14,7 @@ const List = styled.ul`
   gap: 24px 20px;
   overflow: auto;
 
-  @media ${({theme}) => theme.media.tablet} {
+  @media ${({ theme }) => theme.media.tablet} {
     margin-top: 42px;
     padding-bottom: 24px;
     min-height: 400px;
@@ -30,26 +28,47 @@ const List = styled.ul`
       width: 12px;
     }
     &::-webkit-scrollbar-track {
-      background: ${({theme}) => theme.colors.viewPagesContainerBackgroundColor};
+      background: ${({ theme }) =>
+    theme.colors.viewPagesContainerBackgroundColor};
       opacity: 0.32;
-      border-radius: ${({theme}) => theme.borderRadius.borderRadius};
+      border-radius: ${({ theme }) => theme.borderRadius.borderRadius};
     }
     &::-webkit-scrollbar-thumb {
       width: 12px;
-      background: ${({theme}) => theme.colors.asideInputBorderColor};
+      background: ${({ theme }) => theme.colors.asideInputBorderColor};
       opacity: 0.56;
-      border-radius: ${({theme}) => theme.borderRadius.borderRadius};
+      border-radius: ${({ theme }) => theme.borderRadius.borderRadius};
     }
   } ;
 `;
 
-//  ---------------------------------------------------------------------------------------------
+type AppointmentPatient = {
+  first_name: String,
+  id: string,
+  last_name: string,
+  photo: string,
+};
 
-const PatientsList = ({ appointments }) => {
-  const [modalPropItems, setModalPropItems] = useState("");
+type Appointment = {
+  id: string,
+  note: string,
+  patient: AppointmentPatient,
+  reason: string,
+  status: string,
+  visit_date: string,
+};
+
+type PatientsListProps = {
+  appointments: Appointment[],
+};
+
+
+
+const PatientsList = ({ appointments }: PatientsListProps) => {
+  const [modalPropItems, setModalPropItems] = useState({});
   const [isOpen, setIsOpen] = useState(false);
 
-  function toggleModal(e) {
+  function toggleModal() {
     setIsOpen(!isOpen);
   }
 
@@ -69,8 +88,8 @@ const PatientsList = ({ appointments }) => {
                 description={reason}
                 id={id}
                 visitDate={visit_date}
-                getModalProps={setModalPropItems}
-                openModal={toggleModal}
+                setModalProps={setModalPropItems}
+                openModalToggle={toggleModal}
               />
             );
           })}
@@ -88,6 +107,7 @@ const PatientsList = ({ appointments }) => {
         isOpen={isOpen}
         toggleModal={toggleModal}
         modalPropItems={modalPropItems}
+        setDropMenuValue={setModalPropItems}
       />
     </>
   );

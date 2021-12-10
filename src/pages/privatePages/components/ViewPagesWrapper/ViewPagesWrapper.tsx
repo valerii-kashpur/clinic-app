@@ -6,7 +6,11 @@ import logo from "media/logo.png";
 import { useSelector } from "react-redux";
 import { getCurrentUserSelector } from "redux/selectors";
 
-const ViewPagesWrapper = ({ children }) => {
+type ViewPagesWrapperProps = {
+  children: React.ReactNode,
+}
+
+const ViewPagesWrapper = ({ children }: ViewPagesWrapperProps) => {
   const currentUser = useSelector(getCurrentUserSelector);
   return (
     <Styled.Container>

@@ -60,7 +60,7 @@ type AuthPageInputsProps = {
   name:string,
   type:string,
   placeholder:string,
-  errored?: boolean,
+  errored?: string,
   password?:string,
   errors?:string,
   touched?: boolean

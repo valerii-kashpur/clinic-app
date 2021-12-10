@@ -26,7 +26,7 @@ const RestorePasswordForm = () => {
               name="email"
               type="email"
               placeholder="Email"
-              errored={errors.email && touched.email ? true : undefined}
+              errored={errors.email && touched.email ? "true" : undefined}
             />
             {errors.email && touched.email ? (
               <styled.ErrorMessage>{errors.email}</styled.ErrorMessage>
