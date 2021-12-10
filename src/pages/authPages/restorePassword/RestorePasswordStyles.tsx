@@ -26,7 +26,11 @@ export const AsideForm = styled(Form)`
   flex-direction: column;
 `;
 
-export const FormInputWrapper = styled.div`
+type FormInputWrapperType = {
+  svg: string
+}
+
+export const FormInputWrapper = styled.div<FormInputWrapperType>`
   margin-bottom: 24px;
   position: relative;
 

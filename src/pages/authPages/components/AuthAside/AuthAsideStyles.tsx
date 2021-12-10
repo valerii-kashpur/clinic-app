@@ -1,9 +1,5 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-// MEDIA
 import bgImage from "media/bg.jpg";
-import angle from "media/angle-left-b.svg";
 
 const Container = styled.div`
   padding-top: 72px;
@@ -19,7 +15,11 @@ const Container = styled.div`
   }
 `;
 
-const Aside = styled.aside`
+type AsideType = {
+  padding: string
+}
+
+const Aside = styled.aside<AsideType>`
   padding-top: 32px;
   padding-left: 32px;
   padding-right: 32px;
@@ -36,7 +36,7 @@ const Aside = styled.aside`
     width: 560px;
     height: 100vh;
 
-    padding-top: 26vh;
+    padding-top: ${({padding}) => padding};
   }
 
   @media ${({theme}) => theme.media.desktop} {
@@ -58,33 +58,16 @@ const AsideWrapper = styled.div`
   }
 `;
 
-const AsideTitleWrapper = styled.div`
-  display: flex;
-  margin-bottom: 24px;
-
-  @media ${({theme}) => theme.media.tablet} {
-    margin-bottom: 32px;
-  } ;
-`;
-
-const StyledLink = styled(Link)`
-  width: 24px;
-  height: 24px;
-  margin-right: 16px;
-
-  background: url(${angle});
-  background-repeat: no-repeat;
-  background-size: cover;
-`;
-
 const AsideTitle = styled.h2`
   margin: 0;
+  margin-bottom: 24px;
 
   font-weight: ${({theme}) => theme.fonts.boldFontWeight};
   font-size: 20px;
   line-height: 24px;
 
   @media ${({theme}) => theme.media.tablet} {
+    margin-bottom: 40px;
     font-size: 24px;
     line-height: 26px;
   } ;
@@ -94,7 +77,5 @@ export const styles = {
   Container,
   Aside,
   AsideWrapper,
-  AsideTitleWrapper,
-  StyledLink,
   AsideTitle,
 };

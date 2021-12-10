@@ -1,5 +1,5 @@
 import axios from "axios";
-import { store } from "redux/index";
+import { store } from "redux/store";
 
 const axiosInstance = axios.create({
   baseURL: "https://reactlabapi.herokuapp.com/api/",

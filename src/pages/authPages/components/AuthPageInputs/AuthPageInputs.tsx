@@ -18,8 +18,8 @@ const Input = styled(Field)`
 
   background-color: ${({theme}) => theme.colors.asideBackgroundColor};
   box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.16);
-  filter: ${(props) =>
-    props.errored
+  filter: ${(errored) =>
+    errored
       ? "drop-shadow(0px 4px 32px rgba(218, 228, 255, 0.16))"
       : "none"};
 
@@ -56,6 +56,16 @@ const ErrorMessage = styled.p`
   color: ${({theme}) => theme.colors.errorTextColor};
 `;
 
+type AuthPageInputsProps = {
+  name:string,
+  type:string,
+  placeholder:string,
+  errored?: boolean,
+  password?:string,
+  errors?:string,
+  touched?: boolean
+};
+
 const AuthPageInputs = ({
   name,
   type,
@@ -64,7 +74,7 @@ const AuthPageInputs = ({
   password,
   errors,
   touched
-}) => {
+}: AuthPageInputsProps) => {
   return (
     <>
       <Input

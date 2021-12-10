@@ -4,7 +4,11 @@ import { styles } from "./AuthAsideStyles";
 
 const { Container, Aside, AsideWrapper, AsideTitle } = styles;
 
-const AuthAside = ({ asidePadding, title, children }) => {
+type AuthAsideProps = {
+  asidePadding: string, title: string, children: React.ReactNode
+}
+
+const AuthAside = ({ asidePadding, title, children }: AuthAsideProps) => {
   return (
     <Container>
       <Aside padding={asidePadding}>

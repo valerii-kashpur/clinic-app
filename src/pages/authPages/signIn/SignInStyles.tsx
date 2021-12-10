@@ -3,60 +3,19 @@ import { Form } from "formik";
 import styled from "styled-components";
 
 // media
-import eyeOff from "../../../media/eye-off.svg";
-import angleRight from "../../../media/angle-right-b.svg";
-
-export const AsideLinkWrapper = styled.div`
-  display: flex;
-  padding-bottom: 44px;
-  margin-top: auto;
-
-  @media ${({theme}) => theme.media.tablet} {
-    padding-top: 40px;
-  }
-
-  @media screen and (max-width: 330px) {
-    flex-direction: column;
-  }
-`;
-
-export const AsideLinkText = styled.p`
-  margin: 0;
-  margin-right: 12px;
-
-  font-size: ${({theme}) => theme.fonts.mobileFontSize};
-  line-height: 21px;
-
-  color: ${({theme}) => theme.colors.secondaryTextColor};
-
-  @media ${({theme}) => theme.media.tablet} {
-    margin-top: 0px;
-
-    font-size: ${({theme}) => theme.fonts.mobileFontSize};
-    line-height: 21px;
-  } ;
-`;
-
-export const AsideLink = styled(Link)`
-  font-weight: ${({theme}) => theme.fonts.boldFontWeight};
-  font-size: ${({theme}) => theme.fonts.mobileFontSize};
-  line-height: 130%;
-  text-decoration: underline;
-
-  color: ${({theme}) => theme.colors.accentColor};
-
-  @media ${({theme}) => theme.media.tablet} {
-    margin-top: 0px;
-    line-height: 19px;
-  } ;
-`;
+import eyeOff from "media/eye-off.svg";
+import angleRight from "media/angle-right-b.svg";
 
 export const AsideForm = styled(Form)`
   display: flex;
   flex-direction: column;
 `;
 
-export const FormInputWrapper = styled.div`
+type FormInputWrapperProps = {
+  svg: string
+}
+
+export const FormInputWrapper = styled.div<FormInputWrapperProps>`
   margin-bottom: 24px;
   position: relative;
 
@@ -92,17 +51,6 @@ export const FormInputWrapper = styled.div`
   } ;
 `;
 
-export const ErrorMessage = styled.p`
-  position: absolute;
-  margin-top: 14px;
-
-  font-size: 13px;
-  line-height: 16px;
-  letter-spacing: -0.24px;
-
-  color: ${({theme}) => theme.colors.errorTextColor};
-`;
-
 export const PasswordEyeSpan = styled.span`
   position: absolute;
   top: ${({theme}) => theme.borderRadius.borderRadius};
@@ -122,8 +70,19 @@ export const PasswordEyeSpan = styled.span`
   } ;
 `;
 
+export const ErrorMessage = styled.p`
+  margin-top: 14px;
+  position: absolute;
+
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: -0.24px;
+
+  color: ${({theme}) => theme.colors.errorTextColor};
+`;
+
 export const Button = styled.button`
-  width: 122px;
+  width: 118px;
   margin-top: 32px;
   height: 48px;
   display: flex;
@@ -143,7 +102,7 @@ export const Button = styled.button`
   @media ${({theme}) => theme.media.tablet} {
     margin-top: 64px;
     height: 56px;
-    width: 146px;
+    width: 138px;
 
     font-size: 17px;
     line-height: 24px;
@@ -158,4 +117,56 @@ export const ButtonVector = styled.span`
 
   background: url(${angleRight});
   background-repeat: no-repeat;
+`;
+
+type AsideLinkTextProps = {
+  forgotPass?: boolean
+}
+
+
+
+export const AsideLinkText = styled.p<AsideLinkTextProps>`
+  margin: 0;
+  margin-right: 12px;
+  margin-top: 32px;
+
+  margin-top: ${({forgotPass}) => (forgotPass ? "32px" : "0px")};
+
+  font-size: ${({theme}) => theme.fonts.mobileFontSize};
+  line-height: 21px;
+
+  color: ${({theme}) => theme.colors.secondaryTextColor};
+
+  @media ${({theme}) => theme.media.tablet} {
+    font-size: ${({theme}) => theme.fonts.mobileFontSize};
+    line-height: 21px;
+  } ;
+`;
+
+export const AsideLinkWrapper = styled.div`
+  display: flex;
+  padding-bottom: 44px;
+  margin-top: auto;
+
+  @media ${({theme}) => theme.media.tablet} {
+    padding-top: 40px;
+  }
+
+  @media screen and (max-width: 330px) {
+    flex-direction: column;
+  }
+`;
+
+export const AsideLink = styled(Link)`
+  font-weight: ${({theme}) => theme.fonts.boldFontWeight};
+  font-size: ${({theme}) => theme.fonts.mobileFontSize};
+  line-height: 130%;
+  text-decoration: underline;
+
+  color: ${({theme}) => theme.colors.accentColor};
+
+  @media ${({theme}) => theme.media.tablet} {
+    margin-top: 0px;
+    line-height: 19px;
+  } ;
 `;

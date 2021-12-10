@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const NotificationText = styled.p`
+export const NotificationText = styled.p`
   min-width: 256px;
   margin: 0;
   margin-bottom: 24px;
@@ -16,7 +16,7 @@ const NotificationText = styled.p`
   } ;
 `;
 
-const EmailLInk = styled.a`
+export const EmailLInk = styled.a`
   font-weight: ${({theme}) => theme.fonts.boldFontWeight};
   font-size: ${({theme}) => theme.fonts.mobileFontSize};
   line-height: 130%;
@@ -24,8 +24,3 @@ const EmailLInk = styled.a`
 
   color: ${({theme}) => theme.colors.accentColor};
 `;
-
-export const styles = {
-  NotificationText,
-  EmailLInk,
-};

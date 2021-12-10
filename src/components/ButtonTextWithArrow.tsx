@@ -13,7 +13,7 @@ const ButtonVector = styled.span`
 `;
 
 type ButtonTextWithArrowProps = {
-    text:string
+    text:string,
 }
 
 

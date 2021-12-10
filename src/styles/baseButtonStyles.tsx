@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 type baseButtonStylesTypes = {
-  margin: string, width:string, height:string
+  margin: string, width:string, height:string, key: string
 }
 
 const baseButtonStyles = styled.button<baseButtonStylesTypes>`

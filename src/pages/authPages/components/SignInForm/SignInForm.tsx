@@ -9,16 +9,19 @@ import emailSvg from "media/email.svg";
 import lockSvg from "media/lock.svg";
 import { useSelector } from "react-redux";
 import { loaderSelector } from "redux/selectors";
-import ButtonTextWithArrow from "components/ButtonTextWithArrow";
-import LoaderForButtons from "components/LoaderForButtons";
 import { useAuth } from "hooks/useAuth";
+import ButtonWithTextAndArrow from "components/ButtonWithTextAndArrow";
+
+type submitHandlerProps = {
+  email: string, password: string
+}
 
 const SignInForm = () => {
   const [passwordToggle, setPasswordToggle] = useState(false);
   const isLoading = useSelector(loaderSelector);
   const { loginRequest } = useAuth();
 
-  const submitHandler = ({ email, password }) => {
+  const submitHandler = ({ email, password }: submitHandlerProps) => {
     const requestData = { userName: email, password: password };
     loginRequest(requestData);
   }
@@ -39,7 +42,7 @@ const SignInForm = () => {
               name="email"
               type="email"
               placeholder="Email"
-              errored={errors.email && touched.email ? "true" : ""}
+              errored={errors.email && touched.email ? true : undefined}
               errors={errors.email}
               touched={touched.email}
             />
@@ -49,7 +52,7 @@ const SignInForm = () => {
               name="password"
               type={passwordToggle ? "text" : "password"}
               placeholder="Password"
-              errored={errors.password && touched.password ? "true" : ""}
+              errored={errors.password && touched.password ? true : undefined}
               password="true"
               errors={errors.password}
               touched={touched.password}
@@ -58,13 +61,7 @@ const SignInForm = () => {
               onClick={() => setPasswordToggle(!passwordToggle)}
             ></Styled.PasswordEyeSpan>
           </Styled.FormInputWrapper>
-          <Styled.Button type="submit">
-            {isLoading ? (
-              <LoaderForButtons />
-            ) : (
-              <ButtonTextWithArrow text="Sign in" />
-            )}
-          </Styled.Button>
+          <ButtonWithTextAndArrow type="submit" text="Sign in" width="138px" height="56px" margin="64px 0 0 0" isLoading={isLoading} />
         </Styled.AsideForm>
       )}
     </Formik>

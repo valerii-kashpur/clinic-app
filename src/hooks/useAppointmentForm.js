@@ -4,6 +4,13 @@ import { useDispatch } from "react-redux";
 import { fetchCreateAppointment } from "redux/createAppointmentSlice";
 import { appointmentFormData } from "redux/selectors";
 
+type RequestData = {
+  date: string,
+  reason: string,
+  note: string,
+  doctorID: string,
+};
+
 export const useAppointmentForm = () => {
   const dispatch = useDispatch();
   const {
@@ -17,20 +24,20 @@ export const useAppointmentForm = () => {
 
   const buttonCondition = !Boolean(
     selectedSpecialization &&
-      selectedDoctor &&
-      reasons.length > 3 &&
-      selectedTime
+    selectedDoctor &&
+    reasons.length > 3 &&
+    selectedTime
   );
 
   const createAppointmentRequest = useCallback(() => {
-    const reqData = {
+    const requestData: RequestData = {
       date: selectedTime,
       reason: reasons,
       note: note,
       doctorID: selectedDoctor,
     };
 
-    dispatch(fetchCreateAppointment(reqData));
+    dispatch(fetchCreateAppointment(requestData));
   }, [dispatch, note, reasons, selectedDoctor, selectedTime]);
 
   return {

@@ -1,18 +1,17 @@
 import React from "react";
 import RestorePassAside from "../components/RestorePassAside/RestorePassAside";
-import { styles } from "./RestorePasswordConfirmedStyles";
+import * as Styled from "./RestorePasswordConfirmedStyles";
 
-const { NotificationText, EmailLInk } = styles;
 
 const RestorePasswordConfirmed = () => {
   return (
     <RestorePassAside title="Restore Password">
       <div>
-        <NotificationText>
+        <Styled.NotificationText>
           An email has been sent to{" "}
-          <EmailLInk href="/">example@exam.com.</EmailLInk> Check your inbox,
+          <Styled.EmailLInk href="/">example@exam.com.</Styled.EmailLInk> Check your inbox,
           and click the reset link provided.
-        </NotificationText>
+        </Styled.NotificationText>
       </div>
     </RestorePassAside>
   );
