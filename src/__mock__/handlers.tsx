@@ -1,5 +1,12 @@
 import { rest } from "msw";
 
+type RegistrationRequestBody = {
+  userName: string, password: string, firstName: string, lastName: string
+}
+type LoginRequestBody = {
+  userName: string, password: string
+}
+
 const tokens = {
   access_token:
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiJiYTVhNmY4MC00MzAxLTExZWMtODEwMi0xNzc0OTAyMGY5NjYiLCJpYXQiOjE2Mzg4OTg2MTMsImV4cCI6MTYzODkwMjIxM30.2Xb6bo_6utKtASsVxygi8GgbV5RTZJnkUvl8KMFTJGY",
@@ -20,7 +27,7 @@ const handlers = [
   rest.post(
     `https://reactlabapi.herokuapp.com/api/auth/login`,
     (req, res, ctx) => {
-      const { userName, password } = req.body;
+      const { userName, password }: any = req.body;
       if (userName === "mango@a.com" && password === "asdasdasd") {
         return res(ctx.status(200), ctx.json(tokens));
       } else {
@@ -31,7 +38,7 @@ const handlers = [
   rest.post(
     `https://reactlabapi.herokuapp.com/api/auth/registration`,
     (req, res, ctx) => {
-      const { userName, password, firstName, lastName } = req.body;
+      const { userName, password, firstName, lastName }: any = req.body;
       if (
         firstName === "mango121212" &&
         lastName === "mango121212" &&

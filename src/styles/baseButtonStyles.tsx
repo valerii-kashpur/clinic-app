@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-const baseButtonStyles = styled.button`
+type baseButtonStylesTypes = {
+  margin: string, width:string, height:string
+}
+
+const baseButtonStyles = styled.button<baseButtonStylesTypes>`
   width: auto;
   display: flex;
   align-items: center;

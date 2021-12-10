@@ -12,8 +12,12 @@ const ButtonVector = styled.span`
   background-repeat: no-repeat;
 `;
 
+type ButtonTextWithArrowProps = {
+    text:string
+}
 
-const ButtonTextWithArrow = ({text}) => {
+
+const ButtonTextWithArrow = ({text}: ButtonTextWithArrowProps) => {
     return (
         <>
             {text} <ButtonVector/>

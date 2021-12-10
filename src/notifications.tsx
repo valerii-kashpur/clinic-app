@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import { errorReq, successReq } from "styles/notificationsStyles";
 
-export const successNotification = (message) => {
+export const successNotification = (message:string) => {
   toast.success(message, successReq);
 };
 
