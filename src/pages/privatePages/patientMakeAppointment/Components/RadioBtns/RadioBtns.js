@@ -1,28 +1,47 @@
+import moment from "moment";
+import { getDoctorsFreeTimeByDateAndId } from "network/fetchOperations";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { v4 as uuid4 } from "uuid";
 import * as Styled from "./RadioBtnsStyles";
 
 const time = [
-  "12:00 am",
-  "1:00 pm",
-  "2:00 pm",
-  "3:00 pm",
-  "4:00 pm",
-  "5:00 pm",
-  "6:00 pm",
-  "7:00 pm",
-  "8:00 pm",
-  "9:00 pm",
+  "T05:00:00.000Z",
+  "T06:00:00.000Z",
+  "T07:00:00.000Z",
+  "T08:00:00.000Z",
+  "T09:00:00.000Z",
+  "T10:00:00.000Z",
+  "T11:00:00.000Z",
+  "T12:00:00.000Z",
+  "T13:00:00.000Z",
+  "T14:00:00.000Z",
+  "T15:00:00.000Z",
+  "T16:00:00.000Z",
+  "T17:00:00.000Z",
 ];
 
-const RadioBtns = ({ disabled, onSelected }) => {
+const RadioBtns = ({ pickedDate, onSelected, doctorsId }) => {
   const [selectedRadio, setSelectedRadio] = useState("");
-
+  const [doctorsFreeTime, setDoctorsFreeTime] = useState([]);
   const isSelectedRadio = (value) => selectedRadio === value;
+  const dispatch = useDispatch();
 
   const handleRadioClick = (e) => {
     setSelectedRadio(e.currentTarget.value);
   };
+
+  useEffect(() => {
+    setSelectedRadio("");
+  }, [pickedDate]);
+
+  useEffect(() => {
+    if (pickedDate) {
+      dispatch(getDoctorsFreeTimeByDateAndId(pickedDate, doctorsId)).then(
+        (response) => setDoctorsFreeTime(response)
+      );
+    }
+  }, [pickedDate, doctorsId, dispatch]);
 
   useEffect(() => {
     if (selectedRadio) {
@@ -30,30 +49,50 @@ const RadioBtns = ({ disabled, onSelected }) => {
     }
   }, [selectedRadio, onSelected]);
 
+  const timeEditor = (date, modificator) => {
+    return date.substr(0, 10) + modificator;
+  };
+
+  const getDisabled = (time) => {
+    if (pickedDate) {
+      return !doctorsFreeTime.includes(pickedDate.substring(0, 10) + time);
+    }
+    return true;
+  };
+
+  const getInputName = (inputTime) => {
+    return pickedDate ? timeEditor(pickedDate, inputTime) : inputTime;
+  };
+
   return (
     <Styled.Wrapper>
-      {time.map((singleInput, idx) => (
-        <div key={uuid4()}>
-          <Styled.Input
-            type="radio"
-            name={singleInput}
-            id={singleInput}
-            value={singleInput}
-            checked={isSelectedRadio({ singleInput })}
-            onChange={handleRadioClick}
-            key={uuid4()}
-            disabled={disabled}
-          />
-          <Styled.Label
-            htmlFor={singleInput}
-            key={uuid4()}
-            notReady={disabled}
-            current={selectedRadio === singleInput ? true : false}
-          >
-            {singleInput}
-          </Styled.Label>
-        </div>
-      ))}
+      {time.map((singleInput) => {
+        const dis = getDisabled(singleInput);
+        return (
+          <div key={uuid4()}>
+            <Styled.Input
+              type="radio"
+              name={getInputName(singleInput)}
+              id={getInputName(singleInput)}
+              value={getInputName(singleInput)}
+              checked={isSelectedRadio(getInputName(singleInput))}
+              onChange={handleRadioClick}
+              key={uuid4()}
+              disabled={!pickedDate || dis}
+            />
+            <Styled.Label
+              htmlFor={getInputName(singleInput)}
+              key={uuid4()}
+              notReady={!pickedDate || dis}
+              current={
+                selectedRadio === getInputName(singleInput) ? true : false
+              }
+            >
+              {moment(`2021-11-22${singleInput}`).format("hh:mm a")}
+            </Styled.Label>
+          </div>
+        );
+      })}
     </Styled.Wrapper>
   );
 };

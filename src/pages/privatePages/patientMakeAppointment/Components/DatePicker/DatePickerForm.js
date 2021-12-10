@@ -4,19 +4,20 @@ import moment from 'moment';
 import "react-datepicker/dist/react-datepicker.css";
 import "./DatePickerForm.css";
 
-const DatePickerForm = ({ disabled, onDateIsPiked }) => {
+const DatePickerForm = ({ selectsValue, onDateIsPiked }) => {
   const [startDate, setStartDate] = useState(new Date());
   const today = new Date();
 
   const dateCutter = (date) => {
-    return moment(date, "DD/MM/YYYY").format("DD.MM.YYYY")
+    return moment(date).toISOString()
+
   }
 
   useEffect(() => {
-    if (!disabled) {
+    if (selectsValue) {
       onDateIsPiked(dateCutter(startDate));
     }
-  }, [startDate, disabled, onDateIsPiked]);
+  }, [startDate, selectsValue, onDateIsPiked]);
 
   return (
     <DatePicker
@@ -25,7 +26,7 @@ const DatePickerForm = ({ disabled, onDateIsPiked }) => {
       formatWeekDay={(nameOfDay) => nameOfDay.substr(0, 1)}
       inline
       minDate={today}
-      maxDate={disabled ? today : null}
+      maxDate={!selectsValue ? today : null}
     />
   );
 };

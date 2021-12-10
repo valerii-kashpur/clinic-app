@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from "react";
-import SelectComponent from "../SelectComponent/SelectComponent";
 import * as Styled from "./VisitReasonsStyles";
 import { Formik } from "formik";
-import { appointmentShema } from "utils/YupValidationSchemas";
+import { appointmentSchema } from "utils/YupValidationSchemas";
+import SelectsBlock from "../SelectsBlock/SelectsBlock";
 
-// Then inside the component body
-
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-
-const VisitReasons = ({ onReady, showDatePicker }) => {
+const VisitReasons = ({ onReady, showDatePicker, resetPickedDate }) => {
   const [occupation, setOccupation] = useState("");
   const [doctor, setDoctor] = useState("");
   const [reason, setReason] = useState("");
@@ -26,34 +18,32 @@ const VisitReasons = ({ onReady, showDatePicker }) => {
     if (occupation && doctor && reason) {
       onReady(isReasonValid);
     }
-  }, [occupation, doctor, reason, note, showDatePicker, onReady, isReasonValid]);
+  }, [
+    occupation,
+    doctor,
+    reason,
+    note,
+    showDatePicker,
+    onReady,
+    isReasonValid,
+  ]);
 
   return (
     <Styled.Wrapper>
-      <SelectComponent
-        text="Occupation"
-        defaultValue={occupation}
-        optionsArray={options}
-        onChangeFn={setOccupation}
+      <SelectsBlock
+        disabled={!occupation}
+        onChangeFnOccupation={setOccupation}
+        onChangeFnDoctor={setDoctor}
+        doctorValue={doctor}
+        setSelectedValues={showDatePicker}
+        onResetPickedDate={resetPickedDate}
       />
-      <SelectComponent
-        text="Doctor's Name"
-        defaultValue={doctor}
-        optionsArray={options}
-        onChangeFn={setDoctor}
-        Disabled={!occupation}
-      />
-
       <Formik
         initialValues={{
           reason: "",
         }}
         validateOnMount={true}
-        validationSchema={appointmentShema}
-        onSubmit={(values) => {
-          // same shape as initial values
-          console.log(values);
-        }}
+        validationSchema={appointmentSchema}
       >
         {({ errors, touched, isValid, handleChange }) => {
           return (
@@ -74,7 +64,7 @@ const VisitReasons = ({ onReady, showDatePicker }) => {
                   }}
                   errored={errors.reason && touched.reason ? "true" : ""}
                 />
-                {(errors.reason && touched.reason) || !isValid? (
+                {(errors.reason && touched.reason) || !isValid ? (
                   <Styled.ErrorMessage>{errors.reason}</Styled.ErrorMessage>
                 ) : null}
               </Styled.InputWrapper>

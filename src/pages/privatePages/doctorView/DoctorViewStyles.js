@@ -3,11 +3,11 @@ import styled from "styled-components";
 // IMAGES
 import emptyImg from "media/medical-history.png";
 
-const NavButtonsWrapper = styled.div`
+export const NavButtonsWrapper = styled.div`
   display: flex;
 `;
 
-const NavButton = styled.button`
+export const NavButton = styled.button`
   width: 120px;
   height: 40px;
   margin-right: 24px;
@@ -28,7 +28,7 @@ const NavButton = styled.button`
   } ;
 `;
 
-const NavigationWrapper = styled.div`
+export const NavigationWrapper = styled.div`
   margin-top: 40px;
   display: flex;
 
@@ -38,19 +38,19 @@ const NavigationWrapper = styled.div`
   } ;
 `;
 
-const NavSectionTitle = styled.h3`
+export const NavSectionTitle = styled.h3`
   font-size: 24px;
   line-height: 110%;
 `;
 
-const NavgationItemsWrapper = styled.div`
+export const NavgationItemsWrapper = styled.div`
   display: flex;
   margin-left: auto;
   align-items: center;
   padding-right: 40px;
 `;
 
-const NavigationItemSearch = styled.img`
+export const NavigationItemSearch = styled.img`
   margin-right: 24px;
 
   width: 24px;
@@ -65,7 +65,7 @@ const NavigationItemSearch = styled.img`
   }
 `;
 
-const NavigationSearchInput = styled.input`
+export const NavigationSearchInput = styled.input`
   display: none;
 
   @media ${(props) => props.theme.media.desktop} {
@@ -80,7 +80,7 @@ const NavigationSearchInput = styled.input`
   } ;
 `;
 
-const NavigationItemSelect = styled.img`
+export const NavigationItemSelect = styled.img`
   width: 24px;
   height: 24px;
 
@@ -89,7 +89,7 @@ const NavigationItemSelect = styled.img`
   } ;
 `;
 
-const NavigationSelectSpan = styled.span`
+export const NavigationSelectSpan = styled.span`
   display: none;
 
   @media ${(props) => props.theme.media.desktop} {
@@ -99,7 +99,7 @@ const NavigationSelectSpan = styled.span`
   } ;
 `;
 
-const NavigationSelect = styled.select`
+export const NavigationSelect = styled.select`
   display: none;
 
   @media ${(props) => props.theme.media.desktop} {
@@ -109,7 +109,7 @@ const NavigationSelect = styled.select`
   } ;
 `;
 
-const EmptyListBlock = styled.div`
+export const EmptyListBlock = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -123,7 +123,7 @@ const EmptyListBlock = styled.div`
   background-size: 120px 120px;
 `;
 
-const EmptyListText = styled.p`
+export const EmptyListText = styled.p`
   max-width: 461px;
 
   font-weight: ${(props) => props.theme.fonts.boldFontWeight};
@@ -132,17 +132,3 @@ const EmptyListText = styled.p`
   color: ${(props) => props.theme.colors.secondaryTextColor};
 `;
 
-export const styles = {
-  NavButtonsWrapper,
-  NavButton,
-  NavigationWrapper,
-  NavSectionTitle,
-  NavgationItemsWrapper,
-  NavigationItemSearch,
-  NavigationSearchInput,
-  NavigationItemSelect,
-  NavigationSelectSpan,
-  NavigationSelect,
-  EmptyListBlock,
-  EmptyListText,
-};

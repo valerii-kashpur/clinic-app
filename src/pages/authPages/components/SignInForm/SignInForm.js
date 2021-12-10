@@ -7,9 +7,17 @@ import AuthPageInputs from "../AuthPageInputs/AuthPageInputs";
 // media
 import emailSvg from "media/email.svg";
 import lockSvg from "media/lock.svg";
+import { useDispatch } from "react-redux";
+import { fetchToken } from "redux/userSlice";
+import { useSelector } from "react-redux";
+import { loaderSelector } from "redux/selectors";
+import ButtonTextWithArrow from "components/ButtonTextWithArrow";
+import LoaderForButtons from "components/LoaderForButtons";
 
 const SignInForm = () => {
   const [passwordToggle, setPasswordToggle] = useState(false);
+  const isLoading = useSelector((state) => loaderSelector(state));
+  const dispatch = useDispatch();
 
   return (
     <Formik
@@ -18,9 +26,9 @@ const SignInForm = () => {
         password: "",
       }}
       validationSchema={SignInSchema}
-      onSubmit={(values) => {
-        // same shape as initial values
-        console.log(values);
+      onSubmit={({ email, password }) => {
+        const reqData = { userName: email, password: password };
+        dispatch(fetchToken(reqData));
       }}
     >
       {({ errors, touched }) => (
@@ -31,10 +39,9 @@ const SignInForm = () => {
               type="email"
               placeholder="Email"
               errored={errors.email && touched.email ? "true" : ""}
+              errors={errors.email}
+              touched={touched.email}
             />
-            {errors.email && touched.email ? (
-              <Styled.ErrorMessage>{errors.email}</Styled.ErrorMessage>
-            ) : null}
           </Styled.FormInputWrapper>
           <Styled.FormInputWrapper svg={lockSvg}>
             <AuthPageInputs
@@ -43,16 +50,19 @@ const SignInForm = () => {
               placeholder="Password"
               errored={errors.password && touched.password ? "true" : ""}
               password="true"
+              errors={errors.password}
+              touched={touched.password}
             />
             <Styled.PasswordEyeSpan
               onClick={() => setPasswordToggle(!passwordToggle)}
             ></Styled.PasswordEyeSpan>
-            {errors.password && touched.password ? (
-              <Styled.ErrorMessage>{errors.password}</Styled.ErrorMessage>
-            ) : null}
           </Styled.FormInputWrapper>
           <Styled.Button type="submit">
-            Sign In <Styled.ButtonVector />
+            {isLoading ? (
+              <LoaderForButtons />
+            ) : (
+              <ButtonTextWithArrow text="Sign in" />
+            )}
           </Styled.Button>
         </Styled.AsideForm>
       )}

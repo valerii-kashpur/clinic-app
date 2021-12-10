@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Container = styled.div`
+export const Container = styled.div`
   background-color: ${(props) =>
     props.theme.colors.viewPagesContainerBackgroundColor};
 
@@ -11,7 +11,7 @@ const Container = styled.div`
   } ;
 `;
 
-const Header = styled.header`
+export const Header = styled.header`
   display: flex;
   height: 72px;
   padding-left: 24px;
@@ -24,16 +24,16 @@ const Header = styled.header`
   } ;
 `;
 
-const Logo = styled.img`
+export const Logo = styled.img`
   width: 132px;
   height: 32px;
 `;
 
-const HeaderLogoWrapper = styled.div`
+export const HeaderLogoWrapper = styled.div`
   display: flex;
 `;
 
-const HeaderUserNAmeWrapper = styled.div`
+export const HeaderUserNAmeWrapper = styled.div`
   display: none;
   text-align: end;
 
@@ -43,8 +43,11 @@ const HeaderUserNAmeWrapper = styled.div`
   } ;
 `;
 
-const HeaderUserAvatarWrapper = styled.div`
+export const HeaderUserAvatarWrapper = styled.div`
   position: relative;
+  display: block;
+  width: 40px;
+  height: 40px;
 
   @media ${(props) => props.theme.media.tablet} {
     display: flex;
@@ -52,7 +55,7 @@ const HeaderUserAvatarWrapper = styled.div`
   } ;
 `;
 
-const HeaderUserStatus = styled.span`
+export const HeaderUserStatus = styled.span`
   position: absolute;
   z-index: 10;
   top: 0;
@@ -70,7 +73,7 @@ const HeaderUserStatus = styled.span`
   );
 `;
 
-const AppCardsSection = styled.section`
+export const AppCardsSection = styled.section`
   padding-top: 40px;
   padding-left: 24px;
   padding-right: 24px;
@@ -87,14 +90,3 @@ const AppCardsSection = styled.section`
     height: 92%;
   }
 `;
-
-export const styles = {
-  Container,
-  Header,
-  Logo,
-  HeaderLogoWrapper,
-  HeaderUserNAmeWrapper,
-  HeaderUserAvatarWrapper,
-  HeaderUserStatus,
-  AppCardsSection,
-};

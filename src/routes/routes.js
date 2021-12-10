@@ -1,6 +1,8 @@
 import { lazy } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { Route } from "react-router-dom";
+import  PATHS  from "./paths";
+import PrivateRoutes from "./PrivateRoutes";
+import PublicRoutes from "./PublicRoutes";
 
 const SignIn = lazy(() => import("pages/authPages/signIn/SignIn"));
 const SignUp = lazy(() => import("pages/authPages/signUp/SignUp"));
@@ -20,39 +22,64 @@ const PatientMakeAppointment = lazy(() =>
   import("pages/privatePages/patientMakeAppointment/PatientMakeAppointment")
 );
 
+
 const ROUTES = [
   {
-    path: "/sign-in",
-    component: SignIn,
-  },
-  {
-    path: "/sign-up",
-    component: SignUp,
-  },
-  {
-    path: "/restore-password-confirmed",
-    component: RestorePasswordConfirmed,
-  },
-  {
-    path: "/restore-password",
-    component: RestorePassword,
-  },
-  {
-    path: "/doctor-view",
+    path: PATHS.doctorView,
     component: DoctorView,
+    private: true,
+    onlyForRole: "Doctor",
   },
   {
-    path: "/patient-view/make-appointment",
+    path: PATHS.makeAppointment,
     component: PatientMakeAppointment,
+    private: true,
+    onlyForRole: "Patient",
   },
   {
-    path: "/patient-view",
+    path: PATHS.patientView,
     component: PatientView,
+    private: true,
+    onlyForRole: "Patient",
+  },
+  {
+    path: PATHS.signIn,
+    component: SignIn,
+    private: false,
+  },
+  {
+    path: PATHS.signUp,
+    component: SignUp,
+    private: false,
+  },
+  {
+    path: PATHS.restorePasswordConfirmed,
+    component: RestorePasswordConfirmed,
+    private: false,
+  },
+  {
+    path: PATHS.RestorePassword,
+    component: RestorePassword,
+    private: false,
   },
 ];
 
-const mapedRoutes = ROUTES.map(({ path, component }) => (
-  <Route path={path} component={component} key={uuidv4()} />
-));
+const mapedRoutes = (userRoleName) =>
+  ROUTES.map((route) => {
+    return route.private && userRoleName === route.onlyForRole ? (
+      <PrivateRoutes
+        path={route.path}
+        component={route.component}
+        forRole={route.onlyForRole}
+        key={uuidv4()}
+      />
+    ) : (
+      <PublicRoutes
+        path={route.path}
+        component={route.component}
+        key={uuidv4()}
+      />
+    );
+  });
 
 export default mapedRoutes;

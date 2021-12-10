@@ -1,62 +1,67 @@
 import React, { useEffect, useState } from "react";
 import ViewPagesWrapper from "../components/ViewPagesWrapper/ViewPagesWrapper.js";
 import PatientsList from "./components/PatientsList";
-import {styles} from "./DoctorViewStyles";
+import { useSelector } from "react-redux";
+import { userRoleName, doctorAppointments, isAuthentificated } from "redux/selectors";
+import { useHistory } from "react-router-dom";
+import * as Styled from "./DoctorViewStyles";
 
-import { usersData } from "utils/usersData.js";
 // IMAGES
 import avatar from "media/avatar.png";
 import search from "media/search.svg";
 import slider from "media/sliders-v-alt.svg";
-
-const {
-  NavButtonsWrapper,
-  NavButton,
-  NavigationWrapper,
-  NavSectionTitle,
-  NavgationItemsWrapper,
-  NavigationItemSearch,
-  NavigationSearchInput,
-  NavigationItemSelect,
-  NavigationSelectSpan,
-  NavigationSelect,
-  EmptyListBlock,
-  EmptyListText
-} = styles;
-
+import { useDispatch } from "react-redux";
+import { fetchDoctorAppointments } from "redux/doctorAppointmentsSlice.js";
 
 const DoctorView = () => {
-  const [users, setUsers] = useState([]);
+  const [sortBy, setSortBy] = useState("dateSort")
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const userRole = useSelector((state) => userRoleName(state));
+  const appointments = useSelector((state) => doctorAppointments(state));
+  const isAuth = useSelector((state) => isAuthentificated(state))
+
   useEffect(() => {
-    setUsers(usersData);
-  }, []);
+    if (!userRole) {
+      history.replace("./sign-in");
+    }
+  }, [userRole, history]);
+
+  useEffect(() => {
+    if(userRole && isAuth){
+      dispatch(fetchDoctorAppointments(sortBy));
+    }
+  }, [dispatch, sortBy, userRole, isAuth]);
+
   return (
     <ViewPagesWrapper name="Miranda Nelson" role="doctor" avatar={avatar}>
-      <NavButtonsWrapper>
-        <NavButton current>Patients</NavButton>
-        <NavButton>Resolutions</NavButton>
-      </NavButtonsWrapper>
-      <NavigationWrapper>
-        <NavSectionTitle>My Patients</NavSectionTitle>
-        <NavgationItemsWrapper>
-          <NavigationItemSearch src={search} alt="" />
-          <NavigationSearchInput type="text" placeholder="Search" />
-          <NavigationItemSelect src={slider} alt="" />
-          <NavigationSelectSpan>Sort by:</NavigationSelectSpan>
-          <NavigationSelect name="Date" id="">
-            <option>Date</option>
-          </NavigationSelect>
-        </NavgationItemsWrapper>
-      </NavigationWrapper>
-      {users.length > 0 ? (
-        <PatientsList users={users} />
+      <Styled.NavButtonsWrapper>
+        <Styled.NavButton current>Patients</Styled.NavButton>
+        <Styled.NavButton>Resolutions</Styled.NavButton>
+      </Styled.NavButtonsWrapper>
+      <Styled.NavigationWrapper>
+        <Styled.NavSectionTitle>My Patients</Styled.NavSectionTitle>
+        <Styled.NavgationItemsWrapper>
+          <Styled.NavigationItemSearch src={search} alt="" />
+          <Styled.NavigationSearchInput type="text" placeholder="Search" />
+          <Styled.NavigationItemSelect src={slider} alt="" />
+          <Styled.NavigationSelectSpan>Sort by:</Styled.NavigationSelectSpan>
+          <Styled.NavigationSelect name="Date" id="" onChange={e => setSortBy(e.target.value)}>
+            <option value="dateSort">Date</option>
+            <option value="firstNameSort">Name</option>
+            <option value="lastNameSort">Last Name</option>
+          </Styled.NavigationSelect>
+        </Styled.NavgationItemsWrapper>
+      </Styled.NavigationWrapper>
+      {appointments.length > 0 ? (
+        <PatientsList appointments={appointments} />
       ) : (
-        <EmptyListBlock>
-          <EmptyListText>
+        <Styled.EmptyListBlock>
+          <Styled.EmptyListText>
             You have no patients yet. To create a patient profile, please
             contact your administrator.
-          </EmptyListText>
-        </EmptyListBlock>
+          </Styled.EmptyListText>
+        </Styled.EmptyListBlock>
       )}
     </ViewPagesWrapper>
   );

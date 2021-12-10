@@ -5,32 +5,54 @@ import * as Styled from "../../PatientMakeAppointmentStyles";
 import Button from "components/Button";
 
 import RadioBtns from "../RadioBtns/RadioBtns";
-import VisitReasons from "..//VisitReasons/VisitReasons";
+import VisitReasons from "../VisitReasons/VisitReasons";
+import { createAppointment } from "network/fetchOperations";
+import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { isLoadingSelector } from "redux/selectors";
+import LoaderForButtons from "components/LoaderForButtons";
+import  PATHS  from "routes/paths";
 
 const Form = () => {
   const [visitReasonsReady, setVisitReasonsReady] = useState(false);
-  const [unlockDatePicker, setUnlockDatepicker] = useState(false);
+  const [selectsValue, setSelectsValue] = useState(false);
   const [dateIsPicked, setDateIsPicked] = useState(false);
   const [timeIsSelected, setTimeIsSelected] = useState(false);
-  const [togleButton, setTogglebutton] = useState(true);
+  const [doctorId, setDoctorId] = useState("");
+  const [toggleButton, setToggleButton] = useState(true);
+  const isLoading = useSelector((state) => isLoadingSelector(state));
+  const history = useHistory();
+  const dispatch = useDispatch();
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
+    const { reason, note } = selectsValue;
     e.preventDefault();
-    console.log(visitReasonsReady);
-    console.log({
-      inputs: unlockDatePicker,
-      date: dateIsPicked,
-      time: timeIsSelected,
+    const reqData = {
+      date: timeIsSelected,
+      reason: reason,
+      note: note,
+      doctorID: doctorId,
+    };
+    await dispatch(createAppointment(reqData));
+    history.push({
+      pathname: PATHS.doctorView,
     });
   };
 
   useEffect(() => {
     if (visitReasonsReady && dateIsPicked && timeIsSelected) {
-      setTogglebutton(false);
-    } else if (!togleButton) {
-      setTogglebutton(true);
+      setToggleButton(false);
+    } else if (!toggleButton) {
+      setToggleButton(true);
     }
-  }, [visitReasonsReady, dateIsPicked, timeIsSelected, togleButton]);
+  }, [visitReasonsReady, dateIsPicked, timeIsSelected, toggleButton]);
+
+  useEffect(() => {
+    if (selectsValue) {
+      setDoctorId(selectsValue.doctor.value);
+    }
+  }, [selectsValue]);
 
   return (
     <form action="" onSubmit={submitHandler}>
@@ -38,13 +60,12 @@ const Form = () => {
         <Styled.ListItem>
           <Styled.TextWrapper>
             <Styled.Span>1</Styled.Span>
-            <Text>
-              Select a doctor and define the reason of your visit
-            </Text>
+            <Text>Select a doctor and define the reason of your visit</Text>
           </Styled.TextWrapper>
           <VisitReasons
             onReady={setVisitReasonsReady}
-            showDatePicker={setUnlockDatepicker}
+            showDatePicker={setSelectsValue}
+            resetPickedDate={setDateIsPicked}
           />
         </Styled.ListItem>
         <Styled.ListItem>
@@ -53,7 +74,7 @@ const Form = () => {
             <Text>Choose a day for an appointment</Text>
           </Styled.TextWrapper>
           <DatePickerForm
-            disabled={!unlockDatePicker}
+            selectsValue={selectsValue}
             onDateIsPiked={setDateIsPicked}
           />
         </Styled.ListItem>
@@ -63,19 +84,22 @@ const Form = () => {
             <Text>Select an available timeslot</Text>
           </Styled.TextWrapper>
           <RadioBtns
-            disabled={!unlockDatePicker}
+            pickedDate={dateIsPicked}
             onSelected={setTimeIsSelected}
+            selectedValuesFromSelects={selectsValue}
+            disabled={selectsValue}
+            doctorsId={doctorId}
           />
         </Styled.ListItem>
       </Styled.List>
       <Button
         type="submit"
-        disabled={togleButton}
+        disabled={toggleButton}
         width={"160px"}
         height={"56px"}
         margin={"39px 80px 0px auto"}
       >
-        Submit
+        {isLoading ? <LoaderForButtons /> : "Submit"}
       </Button>
     </form>
   );
