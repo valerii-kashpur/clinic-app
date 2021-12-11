@@ -4,6 +4,7 @@ import { errorNotification, successNotification } from "notifications";
 import PATHS from "routes/paths";
 import { AppDispatch } from "redux/store";
 import { IPatientAppointment } from "models/IPatientAppointments";
+import { IDoctorAppointment } from "models/IDoctorAppointments";
 
 export const register = (credentials: any, history: any) => {
   axiosInstance
@@ -13,7 +14,7 @@ export const register = (credentials: any, history: any) => {
     .catch((error) => errorNotification());
 };
 
-export const logIn = (credentials: {email: string, password: string}) => async (dispatch: AppDispatch) => {
+export const logIn = (credentials: { email: string, password: string }) => async (dispatch: AppDispatch) => {
   type Response = {
     access_token: string,
     refresh_token: string
@@ -55,28 +56,48 @@ export const getPatientAppointment = (dateStatus: string) => async (dispatch: Ap
 
 export const getDoctorAppointment = (sortBy: string) => async (dispatch: AppDispatch) => {
   // &sortBy=${sortBy}
-  const { data } = await axiosInstance.get(`appointments/doctor/me?offset=0&limit=40`);
+  type FetchPayload = {
+    appointments: IDoctorAppointment[] | []
+    total: number,
+  }
+  const { data } = await axiosInstance.get<FetchPayload>(`appointments/doctor/me?offset=0&limit=40`);
   return data
 };
 
 export const getOccupations = () => async (dispatch: AppDispatch) => {
-  const { data } = await axiosInstance.get("specializations");
+  type Specializations = {
+    specialization_name: string,
+    id: string
+  }
+  const { data } = await axiosInstance.get<Specializations>("specializations");
   return data
 };
 
 export const getDoctorsByOccupationId = (id: string) => async (dispatch: AppDispatch) => {
-  const { data } = await axiosInstance.get(`doctors/specialization/${id}`);
+  type Doctor = {
+    firstName: string,
+    lastName: string,
+    id: string
+  }
+  type Doctors = Doctor[] | [];
+  const { data } = await axiosInstance.get<Doctors>(`doctors/specialization/${id}`);
   return data
 };
 
 export const getDoctorsFreeTimeByDateAndId = (date: string, id: string) => async (dispatch: AppDispatch) => {
-  const { data } = await axiosInstance.get(
+  type FreeTime = [number] | [];
+  const { data } = await axiosInstance.get<FreeTime>(
     `appointments/time/free?date=${date}&doctorID=${id}`
   );
   return data;
 };
 
-export const createAppointment = (credentials: any) => async (dispatch: AppDispatch) => {
+export const createAppointment = (credentials: {
+  date: string,
+  reason: string,
+  note: string,
+  doctorID: string,
+}) => async (dispatch: AppDispatch) => {
   return axiosInstance.post(`appointments`, credentials);
 };
 

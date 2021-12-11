@@ -3,16 +3,24 @@ import { fetchFailure, fetchUserSuccess } from "../userSlice";
 import { errorNotification } from "notifications";
 import { getProfile } from "network/fetchOperations";
 import { historyReplace } from "utils/history";
+import { PayloadAction } from "@reduxjs/toolkit";
 
+type Response = {
+  firstName: string,
+  id: string,
+  lastName: string,
+  photo: string,
+  roleName: string,
+}
 
-function* workerUserSagaFetch({payload}) {
+function* workerUserSagaFetch({ payload }: PayloadAction<string>) {
   try {
-    const response = yield call(getProfile(payload));
+    const response: Response = yield call(getProfile(payload));
     yield put(fetchUserSuccess(response));
   } catch (error) {
     errorNotification();
     yield put(fetchFailure());
-    yield put(historyReplace());
+    historyReplace();
   }
 }
 
