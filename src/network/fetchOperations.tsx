@@ -3,6 +3,7 @@ import axiosInstance from "./Api";
 import { errorNotification, successNotification } from "notifications";
 import PATHS from "routes/paths";
 import { AppDispatch } from "redux/store";
+import { IPatientAppointment } from "models/IPatientAppointments";
 
 export const register = (credentials: any, history: any) => {
   axiosInstance
@@ -12,7 +13,7 @@ export const register = (credentials: any, history: any) => {
     .catch((error) => errorNotification());
 };
 
-export const logIn = (credentials: any) => async (dispatch: AppDispatch) => {
+export const logIn = (credentials: {email: string, password: string}) => async (dispatch: AppDispatch) => {
   type Response = {
     access_token: string,
     refresh_token: string
@@ -43,7 +44,12 @@ export const getProfile = (persistToken: string) => async (dispatch: AppDispatch
 
 export const getPatientAppointment = (dateStatus: string) => async (dispatch: AppDispatch) => {
   // &dateStatus=${dateStatus} - добавить когда заработает бек
-  const { data } = await axiosInstance.get(`appointments/patient/me?offset=0&limit=40`);
+  type FetchPayload = {
+    appointments: IPatientAppointment[] | []
+    total: number,
+  }
+
+  const { data } = await axiosInstance.get<FetchPayload>(`appointments/patient/me?offset=0&limit=40`);
   return data
 };
 

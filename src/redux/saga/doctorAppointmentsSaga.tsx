@@ -5,10 +5,17 @@ import {
   fetchDoctorAppointmentsFailure,
   fetchDoctorAppointmentsSuccess,
 } from "redux/doctorAppointmentsSlice";
+import { IDoctorAppointment } from "models/IDoctorAppointments";
+import { PayloadAction } from "@reduxjs/toolkit";
 
-function* workerAppointmentsSagaFetch({ payload }) {
+type FetchPayload = {
+  appointments: IDoctorAppointment[] | []
+  total: number,
+}
+
+function* workerAppointmentsSagaFetch({ payload }: PayloadAction<string>) {
   try {
-    const response = yield call(getDoctorAppointment(payload));
+    const response: FetchPayload = yield call(getDoctorAppointment(payload));
     yield put(fetchDoctorAppointmentsSuccess(response));
   } catch (error) {
     errorNotification();

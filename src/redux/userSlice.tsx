@@ -1,19 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
-// type InitialState = {
-//   id: string,
-//   firstName: string,
-//   lastName: string,
-//   photo: string,
-//   roleName: string,
-//   isAuthorized: boolean,
-//   token: string,
-//   loading: boolean,
-// }
+type InitialState = {
+  id: string,
+  firstName: string,
+  lastName: string,
+  photo: string,
+  roleName: string,
+  isAuthorized: boolean,
+  token: string,
+  loading: boolean,
+}
 
 
-const initialState = {
+const initialState: InitialState = {
   id: "",
   firstName: "",
   lastName: "",
@@ -55,8 +55,6 @@ const userSlice = createSlice({
 export default userSlice.reducer;
 export const {
   setUser,
-  setAuthorizedStatus,
-  setToken,
   fetchToken,
   fetchTokenSuccess,
   fetchFailure,

@@ -15,12 +15,14 @@ import search from "media/search.svg";
 import slider from "media/sliders-v-alt.svg";
 import { useDispatch } from "react-redux";
 import { fetchDoctorAppointments } from "redux/doctorAppointmentsSlice";
+import { useAppSelector } from "hooks/useAppSelector";
+import { useAppDispatch } from "hooks/useAppDispatch";
 
 const DoctorView = () => {
   const [sortBy, setSortBy] = useState("dateSort");
   const history = useHistory();
-  const dispatch = useDispatch();
-  const userRole = useSelector(userRoleNameSelector);
+  const dispatch = useAppDispatch();
+  const userRole = useAppSelector(userRoleNameSelector);
   const appointments = useSelector(doctorAppointments);
   const isAuth = useSelector(isAuthorizedSelector);
 
