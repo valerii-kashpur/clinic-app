@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 
 type InitialState = {
@@ -31,17 +31,17 @@ const userSlice = createSlice({
     setUser(state, { payload }) {
       return { ...state, ...payload };
     },
-    fetchToken(state) {
+    fetchToken(state, action:PayloadAction<string>) {
       state.loading = true;
     },
     fetchTokenSuccess(state, { payload }) {
       state.loading = false;
       state.token = payload;
     },
-    fetchUser(state) {
+    fetchUser(state, action) {      
       state.loading = true;
     },
-    fetchUserSuccess(state, { payload }) {
+    fetchUserSuccess(state, { payload }) {  
       return { ...state, ...payload, loading: false, isAuthorized: true };
     },
     fetchFailure(state) {

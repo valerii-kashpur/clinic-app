@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 type DefaultTextProps = {
-  margin: string, padding: string
+  margin?: string, padding?: string
 }
 
 const DefaultText = styled.p<DefaultTextProps>`
@@ -16,7 +16,7 @@ const DefaultText = styled.p<DefaultTextProps>`
 `;
 
 type TextProps = {
-  children: React.ReactNode, margin: string, padding: string
+  children: React.ReactNode, margin?: string, padding?: string
 }
 
 const Text = ({ children, margin, padding }: TextProps) => {

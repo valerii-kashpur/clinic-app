@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 import { fetchCreateAppointment } from "redux/createAppointmentSlice";
 import { appointmentFormData } from "redux/selectors";
+import { useAppDispatch } from "./useAppDispatch";
 
 type RequestData = {
   date: string,
@@ -12,7 +12,7 @@ type RequestData = {
 };
 
 export const useAppointmentForm = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const {
     selectedSpecialization,
     selectedDoctor,
@@ -20,7 +20,7 @@ export const useAppointmentForm = () => {
     selectedTime,
     isFetching,
     note,
-  } = useSelector(appointmentFormData);
+  } = useSelector(appointmentFormData);  
 
   const buttonCondition = !Boolean(
     selectedSpecialization &&

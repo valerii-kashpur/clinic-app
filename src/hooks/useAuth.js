@@ -1,12 +1,11 @@
 import { register } from "network/fetchOperations";
-
 import { useCallback } from "react";
-import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { fetchToken } from "redux/userSlice";
+import { useAppDispatch } from "./useAppDispatch";
 
 export const useAuth = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const history = useHistory();
 
   const loginRequest = useCallback(

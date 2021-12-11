@@ -13,9 +13,9 @@ type Response = {
   roleName: string,
 }
 
-function* workerUserSagaFetch({ payload }: PayloadAction<string>) {
+function* workerUserSagaFetch({ payload }: PayloadAction<string>) {  
   try {
-    const response: Response = yield call(getProfile(payload));
+    const response: Response = yield call(getProfile, payload);
     yield put(fetchUserSuccess(response));
   } catch (error) {
     errorNotification();

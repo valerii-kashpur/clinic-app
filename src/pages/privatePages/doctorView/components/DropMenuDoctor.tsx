@@ -3,8 +3,8 @@ import { Menu, MenuItem } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
 import { deleteAppointment } from "network/fetchOperations";
-import { useDispatch } from "react-redux";
 import { fetchDoctorAppointments } from "redux/doctorAppointmentsSlice";
+import { useAppDispatch } from "hooks/useAppDispatch";
 
 type DropMenuDoctorProps = {
   menuBtn: any,
@@ -23,7 +23,7 @@ const DropMenuDoctor = ({
   getModalProps,
   openModal,
 }: DropMenuDoctorProps) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleClick = () => {
     getModalProps({ name, id, visitDate });
@@ -31,8 +31,8 @@ const DropMenuDoctor = ({
   };
 
   const handleDelete = async () => {
-    await dispatch(deleteAppointment(id));
-    dispatch(fetchDoctorAppointments());
+    await deleteAppointment(id);
+    dispatch(fetchDoctorAppointments("dateSort"));
   };
 
   return (

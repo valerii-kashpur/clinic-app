@@ -11,7 +11,12 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const Label = styled.label`
+type LabelProps = {
+  notReady: boolean,
+  current: boolean
+}
+
+export const Label = styled.label<LabelProps>`
   display: flex;
   width: 104px;
   height: 40px;
@@ -23,17 +28,17 @@ export const Label = styled.label`
   font-weight: 600;
   font-size: 15px;
   line-height: 19px;
-  background-color: ${(props) => (props.notReady ? "#DCE0EC" : "#ffffff")};
+  background-color: ${({ notReady }) => (notReady ? "#DCE0EC" : "#ffffff")};
   box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.24);
   border-radius: 8px;
-  color: ${(props) => (props.notReady ? "#ffffff" : "#202225")};
+  color: ${({ notReady }) => (notReady ? "#ffffff" : "#202225")};
   border: 1px solid white;
 
   &:hover,
   &:focus {
     ${({ notReady }) =>
-      !notReady &&
-      `    border: 1px solid #7297ff;
+    !notReady &&
+    `    border: 1px solid #7297ff;
     color: #7297ff;`}
   }
   ${({ current, notReady }) =>

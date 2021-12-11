@@ -3,7 +3,7 @@ import angleDown from "media/angle-down.svg";
 import angleUp from "media/angle-up.svg";
 
 export const customStyles = {
-  control: (provided, state) => ({
+  control: (provided:any) => ({
     ...provided,
     height: "54px",
     border: "1px solid #dce0ec",
@@ -18,11 +18,11 @@ export const customStyles = {
     lineHeight: "24px",
     color: "#202225",
   }),
-  indicatorSeparator:(provided, state) => ({
+  indicatorSeparator:(provided:any) => ({
     ...provided,
     display:"none",
   }),
-  dropdownIndicator: (provided, state) => ({
+  dropdownIndicator: (provided:any, state:any) => ({
     ...provided,
     transform: state.selectProps.menuIsOpen && "rotate(180deg)"
   }),

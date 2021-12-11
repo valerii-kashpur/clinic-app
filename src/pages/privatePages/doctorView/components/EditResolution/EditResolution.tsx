@@ -7,7 +7,7 @@ type ModalProps = {
 }
 
 type EditResolutionProps = {
-  onToggleModal: any, modalProps: ModalProps
+  onToggleModal: any, modalProps: any
 }
 
 const EditResolution = ({ onToggleModal, modalProps }: EditResolutionProps) => {

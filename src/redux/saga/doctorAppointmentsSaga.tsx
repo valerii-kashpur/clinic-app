@@ -15,8 +15,8 @@ type FetchPayload = {
 
 function* workerAppointmentsSagaFetch({ payload }: PayloadAction<string>) {
   try {
-    const response: FetchPayload = yield call(getDoctorAppointment(payload));
-    yield put(fetchDoctorAppointmentsSuccess(response));
+    const response: FetchPayload = yield call(getDoctorAppointment,payload)
+    yield put(fetchDoctorAppointmentsSuccess(response))
   } catch (error) {
     errorNotification();
     yield put(fetchDoctorAppointmentsFailure());

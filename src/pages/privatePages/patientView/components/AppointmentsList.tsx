@@ -62,10 +62,10 @@ export type AppointmentsListTypes = {
   appointments: Appointment[],
 };
 
-const AppointmentsList = ({ appointments }: AppointmentsListTypes) => {
+const AppointmentsList = ({ appointments }: any) => {
   return appointments.length ? (
     <List>
-      {appointments.map(({ doctor, visit_date, reason }) => {
+      {appointments.map(({ doctor, visit_date, reason }:any) => {
         const date = moment(visit_date).format("ddd MMM DD YYYY, h a");
         return (
           <AppointmentListItem

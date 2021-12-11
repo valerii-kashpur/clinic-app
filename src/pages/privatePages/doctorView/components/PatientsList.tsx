@@ -42,29 +42,8 @@ const List = styled.ul`
   } ;
 `;
 
-type AppointmentPatient = {
-  first_name: String,
-  id: string,
-  last_name: string,
-  photo: string,
-};
 
-type Appointment = {
-  id: string,
-  note: string,
-  patient: AppointmentPatient,
-  reason: string,
-  status: string,
-  visit_date: string,
-};
-
-type PatientsListProps = {
-  appointments: Appointment[],
-};
-
-
-
-const PatientsList = ({ appointments }: PatientsListProps) => {
+const PatientsList = ({ appointmentsArray }: any) => {
   const [modalPropItems, setModalPropItems] = useState({});
   const [isOpen, setIsOpen] = useState(false);
 
@@ -74,9 +53,9 @@ const PatientsList = ({ appointments }: PatientsListProps) => {
 
   return (
     <>
-      {appointments.length ? (
+      {appointmentsArray.length ? (
         <List>
-          {appointments.map(({ patient, reason, status, visit_date, id }) => {
+          {appointmentsArray.map(({ patient, reason, status, visit_date, id }: any) => {
             const date = moment(visit_date).format("ddd MMM DD YYYY, h a");
             return (
               <PatientsListItem

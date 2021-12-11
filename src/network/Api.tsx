@@ -50,11 +50,4 @@ type FreeTime = [number] | [];
 type Response = Login | User | PatientAppointments | DoctorAppointments | Specializations | Doctors | FreeTime
 
 
-
-
-// axiosInstance.interceptors.response.use(({ data }): Response => {
-//   console.log(data);
-//   return data;
-// });
-
 export default axiosInstance;

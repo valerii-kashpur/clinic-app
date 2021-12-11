@@ -41,12 +41,12 @@ const BaseButtonStyles = styled.button<BaseButtonStylesType>`
 `;
 
 type ButtonProps = {
-  children: React.ReactNode, margin: string, width: string, height: string, disabled?: boolean
+  children: React.ReactNode, margin: string, width: string, height: string, disabled?: boolean, type?: "button" | "submit" | "reset" | undefined
 }
 
-const Button = ({ children, margin, width, height, disabled }: ButtonProps) => {
+const Button = ({ children, margin, width, height, disabled, type }: ButtonProps) => {
   return (
-    <BaseButtonStyles margin={margin} width={width} height={height} disabled={disabled}>
+    <BaseButtonStyles type={type} margin={margin} width={width} height={height} disabled={disabled}>
       {children}
     </BaseButtonStyles>
   );

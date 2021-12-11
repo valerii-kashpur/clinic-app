@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import SelectComponent from "../SelectComponent/SelectComponent";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import { appointmentFormData } from "redux/selectors";
 import {
-  fetchDoctors,
   fetchSpecializations,
 } from "redux/createAppointmentsActions";
-import { setSelectedDoctor, setSelectedSpecialization } from "redux/createAppointmentSlice";
+import { fetchDoctors, setSelectedDoctor, setSelectedSpecialization } from "redux/createAppointmentSlice";
+import { useAppDispatch } from "hooks/useAppDispatch";
+import { useAppSelector } from "hooks/useAppSelector";
 
 const SelectsBlock = () => {
   const [toggleSelectDisable, setToggleSelectDisable] = useState(true);
-  const dispatch = useDispatch();
-  const state = useSelector(appointmentFormData);
+  const dispatch = useAppDispatch();
+  const state = useAppSelector(appointmentFormData);
 
   useEffect(() => {
     dispatch(fetchSpecializations());
@@ -28,16 +27,16 @@ const SelectsBlock = () => {
     label: `${object.first_name} ${object.last_name}`,
   }));
 
-  const specializationOnChangeHandler = ({ value }) => {
-    dispatch(fetchDoctors(value));
-    dispatch(setSelectedSpecialization(value))
+  const specializationOnChangeHandler = (data: { label: string, value: string }) => {
+    dispatch(fetchDoctors(data.value));
+    dispatch(setSelectedSpecialization(data.value))
     if (toggleSelectDisable) {
       setToggleSelectDisable(false);
     }
   };
 
-  const doctorsOnChangeHandler = ({ value }) => {
-    dispatch(setSelectedDoctor(value));
+  const doctorsOnChangeHandler = (data: { label: string, value: string }) => {
+    dispatch(setSelectedDoctor(data.value));
   };
 
   return (
@@ -45,14 +44,12 @@ const SelectsBlock = () => {
       <SelectComponent
         text="Occupation"
         placeholder="select occupation"
-        defaultValue={""}
         optionsArray={specializationsArray}
         onChangeFn={specializationOnChangeHandler}
       />
       <SelectComponent
         text="Doctor's Name"
         placeholder="select doctor"
-        defaultValue={""}
         optionsArray={doctorsArray}
         onChangeFn={doctorsOnChangeHandler}
         Disabled={toggleSelectDisable}

@@ -23,7 +23,7 @@ const doctorAppointmentsSlice = createSlice({
   name: "doctorAppointments",
   initialState,
   reducers: {
-    fetchDoctorAppointments(state) {
+    fetchDoctorAppointments(state, action) {
       return { ...state, isFetching: true };
     },
     fetchDoctorAppointmentsSuccess(state, action:PayloadAction<FetchPayload>) {

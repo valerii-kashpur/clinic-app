@@ -14,7 +14,7 @@ export const register = (credentials: any, history: any) => {
     .catch((error) => errorNotification());
 };
 
-export const logIn = (credentials: { email: string, password: string }) => async (dispatch: AppDispatch) => {
+export const logIn = async (credentials: { email: string, password: string }) => {
   type Response = {
     access_token: string,
     refresh_token: string
@@ -23,7 +23,7 @@ export const logIn = (credentials: { email: string, password: string }) => async
   return data
 }
 
-export const getProfile = (persistToken: string) => async (dispatch: AppDispatch) => {
+export const getProfile = async (persistToken: string) => {
   if (!persistToken) {
     return;
   }
@@ -43,7 +43,7 @@ export const getProfile = (persistToken: string) => async (dispatch: AppDispatch
   return newData;
 };
 
-export const getPatientAppointment = (dateStatus: string) => async (dispatch: AppDispatch) => {
+export const getPatientAppointment = async (dateStatus: string) => {
   // &dateStatus=${dateStatus} - добавить когда заработает бек
   type FetchPayload = {
     appointments: IPatientAppointment[] | []
@@ -54,7 +54,7 @@ export const getPatientAppointment = (dateStatus: string) => async (dispatch: Ap
   return data
 };
 
-export const getDoctorAppointment = (sortBy: string) => async (dispatch: AppDispatch) => {
+export const getDoctorAppointment = async (sortBy: string) => {
   // &sortBy=${sortBy}
   type FetchPayload = {
     appointments: IDoctorAppointment[] | []
@@ -64,16 +64,16 @@ export const getDoctorAppointment = (sortBy: string) => async (dispatch: AppDisp
   return data
 };
 
-export const getOccupations = () => async (dispatch: AppDispatch) => {
+export const getOccupations = async () => {
   type Specializations = {
     specialization_name: string,
     id: string
   }
-  const { data } = await axiosInstance.get<Specializations>("specializations");
+  const { data } = await axiosInstance.get<Specializations[]>("specializations");
   return data
 };
 
-export const getDoctorsByOccupationId = (id: string) => async (dispatch: AppDispatch) => {
+export const getDoctorsByOccupationId = async (id: string) => {
   type Doctor = {
     firstName: string,
     lastName: string,
@@ -84,7 +84,7 @@ export const getDoctorsByOccupationId = (id: string) => async (dispatch: AppDisp
   return data
 };
 
-export const getDoctorsFreeTimeByDateAndId = (date: string, id: string) => async (dispatch: AppDispatch) => {
+export const getDoctorsFreeTimeByDateAndId = async (date: string, id: string) => {
   type FreeTime = [number] | [];
   const { data } = await axiosInstance.get<FreeTime>(
     `appointments/time/free?date=${date}&doctorID=${id}`
@@ -97,34 +97,27 @@ export const createAppointment = (credentials: {
   reason: string,
   note: string,
   doctorID: string,
-}) => async (dispatch: AppDispatch) => {
+}) => {
   return axiosInstance.post(`appointments`, credentials);
 };
 
-export const updateAppointmentStatus =
-  (credentials: any, id: string) => async (dispatch: AppDispatch) => {
-    dispatch(setIsLoadingOn());
-    try {
-      const result = await axiosInstance
-        .patch(`appointments/${id}`, credentials)
-        .then(() => successNotification("Status have been updated!"));
-      dispatch(setIsLoadingOff());
-      return result;
-    } catch (error) {
-      dispatch(setIsLoadingOff());
-      errorNotification();
-    }
-  };
+export const updateAppointmentStatus = async (credentials: any, id: string) => {
+  try {
+    const result = await axiosInstance
+      .patch(`appointments/${id}`, credentials)
+      .then(() => successNotification("Status have been updated!"));
+    return result;
+  } catch (error) {
+    errorNotification();
+  }
+};
 
-export const deleteAppointment = (id: string) => async (dispatch: AppDispatch) => {
-  dispatch(setIsLoadingOn());
+export const deleteAppointment = async (id: string) => {
   try {
     await axiosInstance
       .delete(`appointments/${id}`)
       .then(() => successNotification("Appointment have been deleted!"));
-    dispatch(setIsLoadingOff());
   } catch (error) {
-    dispatch(setIsLoadingOff());
     errorNotification();
   }
 };

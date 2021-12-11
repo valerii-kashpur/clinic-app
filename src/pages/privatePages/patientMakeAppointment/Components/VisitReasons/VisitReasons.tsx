@@ -4,10 +4,10 @@ import { Formik } from "formik";
 import { appointmentSchema } from "utils/YupValidationSchemas";
 import SelectsBlock from "../SelectsBlock/SelectsBlock";
 import { setNote, setReason } from "redux/createAppointmentSlice";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "hooks/useAppDispatch";
 
 const VisitReasons = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <Styled.Wrapper>
@@ -19,6 +19,7 @@ const VisitReasons = () => {
         }}
         validateOnMount={true}
         validationSchema={appointmentSchema}
+        onSubmit={()=>{}}
       >
         {({ errors, touched, isValid, handleChange }) => {
           return (
@@ -30,7 +31,7 @@ const VisitReasons = () => {
                 <Styled.FormikInput
                   name="reason"
                   placeholder="describe reasons for the visit"
-                  onChange={(e) => {
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     handleChange(e);
                     dispatch(setReason(e.target.value));
                   }}

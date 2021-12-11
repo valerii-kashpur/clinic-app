@@ -13,7 +13,6 @@ import * as Styled from "./DoctorViewStyles";
 // IMAGES
 import search from "media/search.svg";
 import slider from "media/sliders-v-alt.svg";
-import { useDispatch } from "react-redux";
 import { fetchDoctorAppointments } from "redux/doctorAppointmentsSlice";
 import { useAppSelector } from "hooks/useAppSelector";
 import { useAppDispatch } from "hooks/useAppDispatch";
@@ -62,7 +61,7 @@ const DoctorView = () => {
           </Styled.NavigationSelect>
         </Styled.NavgationItemsWrapper>
       </Styled.NavigationWrapper>
-      <PatientsList appointments={appointments} />
+      <PatientsList appointmentsArray={appointments} />
     </ViewPagesWrapper>
   );
 };

@@ -4,13 +4,14 @@ import { errorNotification, successNotification } from "notifications";
 import { logIn } from "network/fetchOperations";
 import { PayloadAction } from "@reduxjs/toolkit";
 
+type Response = {
+  access_token: string,
+  refresh_token: string
+}
+
 function* workerLoginSagaFetch({ payload }:PayloadAction<{email: string, password: string}>) {
   try {
-    type Response = {
-      access_token: string,
-      refresh_token: string
-    }
-    const response:Response = yield call(logIn(payload));
+    const response:Response = yield call(logIn,payload)
     yield put(fetchTokenSuccess(response.access_token));
     successNotification("You have been successfully login!");
   } catch (error) {

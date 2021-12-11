@@ -1,11 +1,11 @@
-type AppointmentPatient = {
+interface AppointmentPatient  {
     first_name: String,
     id: string,
     last_name: string,
     photo: string,
 };
 
-type Appointment = {
+export interface Appointment {
     id: string,
     note: string,
     patient: AppointmentPatient,
@@ -15,5 +15,5 @@ type Appointment = {
 };
 
 export interface IDoctorAppointment {
-    appointments: Appointment[]
+    appointments: Array<Appointment> | []
 }

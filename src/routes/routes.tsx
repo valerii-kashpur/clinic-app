@@ -58,7 +58,7 @@ const ROUTES = [
     private: false,
   },
   {
-    path: PATHS.RestorePassword,
+    path: PATHS.restorePassword,
     component: RestorePassword,
     private: false,
   },
@@ -68,6 +68,7 @@ const mapedRoutes = (userRoleName:string) =>
   ROUTES.map((route) => {
     return route.private && userRoleName === route.onlyForRole ? (
       <PrivateRoutes
+       // @ts-ignore: Unreachable code error
         path={route.path}
         component={route.component}
         forRole={route.onlyForRole}
@@ -76,6 +77,7 @@ const mapedRoutes = (userRoleName:string) =>
     ) : (
       <PublicRoutes
         path={route.path}
+         // @ts-ignore: Unreachable code error
         component={route.component}
         key={uuidv4()}
       />

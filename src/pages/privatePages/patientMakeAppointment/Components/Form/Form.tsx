@@ -17,7 +17,7 @@ const Form = () => {
   const { buttonCondition, isFetching, createAppointmentRequest } =
     useAppointmentForm();
 
-  const submitHandler = async (e) => {
+  const submitHandler = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     await createAppointmentRequest();
     history.push({

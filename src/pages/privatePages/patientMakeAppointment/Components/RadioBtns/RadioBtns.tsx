@@ -1,6 +1,7 @@
+import { useAppDispatch } from "hooks/useAppDispatch";
+import { useAppSelector } from "hooks/useAppSelector";
 import moment from "moment";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { setSelectedTime } from "redux/createAppointmentSlice";
 import {
   availableTimeSelector,
@@ -27,28 +28,29 @@ const time = [
 ];
 
 const RadioBtns = () => {
-  const selectedTime = useSelector(selectedTimeSelector);
-  const availableTime = useSelector(availableTimeSelector);
-  const pickedDate = useSelector(selectedDateSelector);
-  const isSelectedRadio = (value) => selectedTime === value;
-  const dispatch = useDispatch();
+  const selectedTime = useAppSelector(selectedTimeSelector);
+  const availableTime = useAppSelector(availableTimeSelector);
+  const pickedDate = useAppSelector(selectedDateSelector);
+  const isSelectedRadio = (value: string) => selectedTime === value;
+  const dispatch = useAppDispatch();
 
-  const handleRadioClick = (e) => {
+  const handleRadioClick = (e: React.FormEvent<HTMLInputElement>) => {
     dispatch(setSelectedTime(e.currentTarget.value));
   };
 
-  const timeEditor = (date, modificator) => {
+  const timeEditor = (date: string, modificator: string) => {
     return date.substr(0, 10) + modificator;
   };
 
-  const getDisabled = (time) => {
+  const getDisabled = (time: string) => {
     if (pickedDate) {
+      // @ts-ignore: Unreachable code error
       return !availableTime.includes(pickedDate.substring(0, 10) + time);
     }
     return true;
   };
 
-  const getInputName = (inputTime) => {
+  const getInputName = (inputTime: string) => {
     return pickedDate ? timeEditor(pickedDate, inputTime) : inputTime;
   };
 
