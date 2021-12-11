@@ -1,17 +1,19 @@
-const { createSlice } = require("@reduxjs/toolkit");
+import { createSlice } from "@reduxjs/toolkit";
 
-type InitialState = {
-  id: string,
-  firstName: string,
-  lastName: string,
-  photo: string,
-  roleName: string,
-  isAuthorized: boolean,
-  token: string,
-  loading: boolean,
-}
 
-const initialState: InitialState = {
+// type InitialState = {
+//   id: string,
+//   firstName: string,
+//   lastName: string,
+//   photo: string,
+//   roleName: string,
+//   isAuthorized: boolean,
+//   token: string,
+//   loading: boolean,
+// }
+
+
+const initialState = {
   id: "",
   firstName: "",
   lastName: "",
@@ -26,23 +28,23 @@ const userSlice = createSlice({
   name: "userSlice",
   initialState,
   reducers: {
-    setUser(state: InitialState, { payload }) {
+    setUser(state, { payload }) {
       return { ...state, ...payload };
     },
-    fetchToken(state: InitialState) {
+    fetchToken(state) {
       state.loading = true;
     },
-    fetchTokenSuccess(state: InitialState, { payload }) {
+    fetchTokenSuccess(state, { payload }) {
       state.loading = false;
       state.token = payload;
     },
-    fetchUser(state: InitialState) {
+    fetchUser(state) {
       state.loading = true;
     },
-    fetchUserSuccess(state: InitialState, { payload }) {
+    fetchUserSuccess(state, { payload }) {
       return { ...state, ...payload, loading: false, isAuthorized: true };
     },
-    fetchFailure(state: InitialState) {
+    fetchFailure(state) {
       state.loading = false;
       state.token = "";
       state.roleName = "";

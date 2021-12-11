@@ -1,12 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { AppointmentsListTypes } from "pages/privatePages/patientView/components/AppointmentsList";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IPatientAppointment } from "models/IPatientAppointments";
 
-
-
-type InitialState = {
-  appointments: AppointmentsListTypes | [],
+interface InitialState {
+  appointments: IPatientAppointment[] | []
   total: number,
   isFetching: boolean,
+}
+
+type FetchPayload = {
+  appointments: IPatientAppointment[] | []
+  total: number,
 }
 
 const initialState: InitialState = {
@@ -19,11 +22,11 @@ const patientAppointmentsSlice = createSlice({
   name: "patientAppointments",
   initialState,
   reducers: {
-    fetchPatientAppointments(state) {
+    fetchPatientAppointments(state, action) {
       return { ...state, isFetching: true };
     },
-    fetchPatientAppointmentsSuccess(state, { payload }) {
-      return { ...payload, isFetching: false };
+    fetchPatientAppointmentsSuccess(state, action:PayloadAction<FetchPayload>) {
+      return { ...action.payload, isFetching: false };
     },
     fetchPatientAppointmentsFailure(state) {
       return { ...state, isFetching: false };

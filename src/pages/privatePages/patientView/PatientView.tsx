@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from "react";
 import ViewPagesWrapper from "../components/ViewPagesWrapper/ViewPagesWrapper";
 import AppointmentsList from "./components/AppointmentsList";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   patientAppointments,
   userRoleNameSelector,
   isAuthorizedSelector,
 } from "redux/selectors";
 import { useHistory } from "react-router-dom";
+import { fetchPatientAppointments } from "redux/patientAppointmentsSlice";
+import { useAppSelector } from "hooks/useAppSelector";
+import { useAppDispatch } from "hooks/useAppDispatch";
 import * as Styled from "./PatientViewStyles";
 
 // IMAGES
 import slider from "media/sliders-v-alt.svg";
 import PATHS from "routes/paths";
-import { fetchPatientAppointments } from "redux/patientAppointmentsSlice";
 
 const PatientView = () => {
   const [dateStatus, setDateStatus] = useState("Upcoming");
   const history = useHistory();
-  const dispatch = useDispatch();
-  const appointments = useSelector(patientAppointments);
+  const dispatch = useAppDispatch();
+  const appointments = useAppSelector(patientAppointments);
   const userRole = useSelector(userRoleNameSelector);
   const isAuth = useSelector(isAuthorizedSelector);
 

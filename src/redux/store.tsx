@@ -39,21 +39,43 @@ const middleware = [
   saga,
 ];
 
+type InitialUserState = {
+  id: string,
+  firstName: string,
+  lastName: string,
+  photo: string,
+  roleName: string,
+  isAuthorized: boolean,
+  token: string,
+  loading: boolean,
+}
+
 const rootReducer = combineReducers({
-  user: persistReducer(authPersistConfig, userSlice),
+  user: persistReducer<InitialUserState>(authPersistConfig, userSlice),
   patientAppointments: patientAppointmentsSlice,
   doctorAppointments: doctorAppointmentsSlice,
   loader: loaderSlice,
   createAppointment: createAppointmentSlice,
 });
 
-export const store = configureStore({
-  reducer: rootReducer,
-  middleware,
-});
+export const setupStore = () => {
+  return configureStore({
+    reducer: rootReducer,
+    middleware,
+  });
+}
+
+export const store = setupStore();
 saga.run(rootSaga);
+
+// export const store = configureStore({
+//   reducer: rootReducer,
+//   middleware,
+// });
+// saga.run(rootSaga);
 
 export const persistor = persistStore(store);
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppStore = ReturnType<typeof setupStore>;
+export type AppDispatch = AppStore["dispatch"];
