@@ -13,7 +13,7 @@ import * as Styled from "./DoctorViewStyles";
 // IMAGES
 import search from "media/search.svg";
 import slider from "media/sliders-v-alt.svg";
-import { fetchDoctorAppointments } from "redux/doctorAppointmentsSlice";
+import { fetchDoctorAppointments } from "redux/slices/doctorAppointmentsSlice";
 import { useAppSelector } from "hooks/useAppSelector";
 import { useAppDispatch } from "hooks/useAppDispatch";
 

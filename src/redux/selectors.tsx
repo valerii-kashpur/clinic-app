@@ -25,7 +25,6 @@ export const patientAppointments = (state:RootState) =>
   state.patientAppointments.appointments;
 export const doctorAppointments = (state:RootState) =>
   state.doctorAppointments.appointments;
-export const isLoadingSelector = (state:RootState) => state.loader;
 //
 export const appointmentFormData = (state:RootState) => state.createAppointment;
 export const selectedDoctorSelector = createSelector(

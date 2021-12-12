@@ -16,21 +16,17 @@ import {
   fetchDoctors,
   setSpecializations,
   fetchSuccess,
-} from "redux/createAppointmentSlice";
+} from "redux/slices/createAppointmentSlice";
 import {
   fetchSpecializations,
 } from "redux/createAppointmentsActions";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { fetchFailure } from "redux/userSlice";
-
-type Specializations = {
-  specialization_name: string,
-  id: string
-}
+import { fetchFailure } from "redux/slices/userSlice";
+import { CreateAppointmentRequestBody, SpecializationsResponseBody } from "types/fetchTypes";
 
 function* workerSpecializationSagaFetch() {
   try {
-    const response: Specializations[] | [] = yield call(getOccupations);
+    const response: SpecializationsResponseBody[] | [] = yield call(getOccupations);
     yield put(fetchSuccess());
     yield put(setSpecializations(response));
   } catch (error) {
@@ -53,7 +49,7 @@ function* workerDoctorsSagaFetch({ payload }: PayloadAction<string>) {
 function* workerFreeTimeSagaFetch({ payload }: PayloadAction<{ date: string, selectedDoctor: string }>) {
   const { date, selectedDoctor } = payload;
   try {
-    const response: string[] | [] = yield call(getDoctorsFreeTimeByDateAndId,date, selectedDoctor);
+    const response: string[] | [] = yield call(getDoctorsFreeTimeByDateAndId, date, selectedDoctor);
     yield put(fetchSuccess());
     yield put(setAvailableTime(response));
   } catch (error) {
@@ -62,16 +58,9 @@ function* workerFreeTimeSagaFetch({ payload }: PayloadAction<{ date: string, sel
   }
 }
 
-type CreateAppointmentDataType = {
-  date: string,
-  reason: string,
-  note: string,
-  doctorID: string,
-}
-
-function* workerCreateAppointmentsSagaFetch({ payload }: PayloadAction<CreateAppointmentDataType>) {
+function* workerCreateAppointmentsSagaFetch({ payload }: PayloadAction<CreateAppointmentRequestBody>) {
   try {
-    yield call(createAppointment,payload);
+    yield call(createAppointment, payload);
     yield put(createAppointmentSuccess());
     successNotification("Appointment have been created!");
   } catch (error) {

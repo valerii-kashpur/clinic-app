@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { UserResponse } from "redux/saga/userSaga";
 
-
-type InitialState = {
+export type InitialUserState = {
   id: string,
   firstName: string,
   lastName: string,
@@ -9,11 +9,11 @@ type InitialState = {
   roleName: string,
   isAuthorized: boolean,
   token: string,
+  refreshToken: string,
   loading: boolean,
 }
 
-
-const initialState: InitialState = {
+const initialState: InitialUserState = {
   id: "",
   firstName: "",
   lastName: "",
@@ -21,6 +21,7 @@ const initialState: InitialState = {
   roleName: "",
   isAuthorized: false,
   token: "",
+  refreshToken: "",
   loading: false,
 };
 
@@ -28,21 +29,22 @@ const userSlice = createSlice({
   name: "userSlice",
   initialState,
   reducers: {
-    setUser(state, { payload }) {
-      return { ...state, ...payload };
-    },
-    fetchToken(state, action:PayloadAction<string>) {
+    fetchToken(state, action: PayloadAction<string>) {
       state.loading = true;
     },
-    fetchTokenSuccess(state, { payload }) {
+    fetchTokenSuccess(state, action: PayloadAction<{
+      access_token: string,
+      refresh_token: string,
+    }>) {
       state.loading = false;
-      state.token = payload;
+      state.token = action.payload.access_token;
+      state.refreshToken = action.payload.refresh_token;
     },
-    fetchUser(state, action) {      
+    fetchUser(state, action) {
       state.loading = true;
     },
-    fetchUserSuccess(state, { payload }) {  
-      return { ...state, ...payload, loading: false, isAuthorized: true };
+    fetchUserSuccess(state, action: PayloadAction<UserResponse>) {
+      return { ...state, ...action.payload, loading: false, isAuthorized: true };
     },
     fetchFailure(state) {
       state.loading = false;
@@ -54,7 +56,6 @@ const userSlice = createSlice({
 
 export default userSlice.reducer;
 export const {
-  setUser,
   fetchToken,
   fetchTokenSuccess,
   fetchFailure,

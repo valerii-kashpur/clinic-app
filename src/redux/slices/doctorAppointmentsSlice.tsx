@@ -3,7 +3,7 @@ import { IDoctorAppointment } from "models/IDoctorAppointments";
 
 
 interface InitialState {
-  appointments: IDoctorAppointment[] | [],
+  appointments: IDoctorAppointment,
   total: Number,
   isFetching: boolean,
 }
@@ -15,7 +15,7 @@ const initialState:InitialState = {
 }
 
 type FetchPayload = {
-  appointments: IDoctorAppointment[] | []
+  appointments: IDoctorAppointment,
   total: number,
 }
 

@@ -14,20 +14,19 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import doctorAppointmentsSlice from "./doctorAppointmentsSlice";
-import patientAppointmentsSlice from "./patientAppointmentsSlice";
-import userSlice from "./userSlice";
+import doctorAppointmentsSlice from "./slices/doctorAppointmentsSlice";
+import patientAppointmentsSlice from "./slices/patientAppointmentsSlice";
+import userSlice, { InitialUserState } from "./slices/userSlice";
 import createSagaMiddleware from "@redux-saga/core";
-import loaderSlice from "./loaderSlice";
 import { rootSaga } from "./saga/rootSaga";
-import createAppointmentSlice from "./createAppointmentSlice";
+import createAppointmentSlice from "./slices/createAppointmentSlice";
 
 const saga = createSagaMiddleware();
 
 const authPersistConfig = {
   key: "user",
   storage,
-  whitelist: ["token", "roleName"],
+  whitelist: ["token", "refreshToken", "roleName"],
 };
 
 const middleware = [
@@ -39,22 +38,11 @@ const middleware = [
   saga,
 ];
 
-type InitialUserState = {
-  id: string,
-  firstName: string,
-  lastName: string,
-  photo: string,
-  roleName: string,
-  isAuthorized: boolean,
-  token: string,
-  loading: boolean,
-}
 
 const rootReducer = combineReducers({
   user: persistReducer<InitialUserState>(authPersistConfig, userSlice),
   patientAppointments: patientAppointmentsSlice,
   doctorAppointments: doctorAppointmentsSlice,
-  loader: loaderSlice,
   createAppointment: createAppointmentSlice,
 });
 
@@ -67,12 +55,6 @@ export const setupStore = () => {
 
 export const store = setupStore();
 saga.run(rootSaga);
-
-// export const store = configureStore({
-//   reducer: rootReducer,
-//   middleware,
-// });
-// saga.run(rootSaga);
 
 export const persistor = persistStore(store);
 

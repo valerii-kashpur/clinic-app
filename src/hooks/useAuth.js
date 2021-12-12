@@ -1,7 +1,7 @@
 import { register } from "network/fetchOperations";
 import { useCallback } from "react";
 import { useHistory } from "react-router";
-import { fetchToken } from "redux/userSlice";
+import { fetchToken } from "redux/slices/userSlice";
 import { useAppDispatch } from "./useAppDispatch";
 
 export const useAuth = () => {

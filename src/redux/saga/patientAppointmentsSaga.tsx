@@ -4,18 +4,13 @@ import { getPatientAppointment } from "network/fetchOperations";
 import {
   fetchPatientAppointmentsFailure,
   fetchPatientAppointmentsSuccess,
-} from "redux/patientAppointmentsSlice";
+} from "redux/slices/patientAppointmentsSlice";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { IPatientAppointment } from "models/IPatientAppointments";
-
-type FetchPayload = {
-  appointments: IPatientAppointment[] | []
-  total: number,
-}
+import { PatientAppointmentsResponseBody } from "types/fetchTypes";
 
 function* workerAppointmentsSagaFetch({ payload }:PayloadAction<string>) {
   try {
-    const response:FetchPayload = yield call(getPatientAppointment,payload)
+    const response:PatientAppointmentsResponseBody = yield call(getPatientAppointment,payload)
     yield put(fetchPatientAppointmentsSuccess(response));
   } catch (error) {
     errorNotification();

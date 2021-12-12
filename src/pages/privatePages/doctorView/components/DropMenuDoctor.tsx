@@ -3,7 +3,7 @@ import { Menu, MenuItem } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
 import { deleteAppointment } from "network/fetchOperations";
-import { fetchDoctorAppointments } from "redux/doctorAppointmentsSlice";
+import { fetchDoctorAppointments } from "redux/slices/doctorAppointmentsSlice";
 import { useAppDispatch } from "hooks/useAppDispatch";
 
 type DropMenuDoctorProps = {

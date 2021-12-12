@@ -2,7 +2,7 @@ import { useAppDispatch } from "hooks/useAppDispatch";
 import { useAppSelector } from "hooks/useAppSelector";
 import moment from "moment";
 import React from "react";
-import { setSelectedTime } from "redux/createAppointmentSlice";
+import { setSelectedTime } from "redux/slices/createAppointmentSlice";
 import {
   availableTimeSelector,
   selectedDateSelector,

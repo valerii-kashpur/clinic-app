@@ -6,7 +6,7 @@ import mapedRoutes from "routes/routes";
 import GlobalStyle from "styles/globalStyles";
 import { getUserTokenSelector, userRoleNameSelector } from "redux/selectors";
 import LoaderComponent from "components/LoaderComponent";
-import { fetchUser } from "redux/userSlice";
+import { fetchUser } from "redux/slices/userSlice";
 import { SpecialModalBackground } from "styles/specialModalBackground";
 import "react-toastify/dist/ReactToastify.css";
 import { useAppDispatch } from "hooks/useAppDispatch";
@@ -21,7 +21,7 @@ function App() {
     if (token) {
       dispatch(fetchUser(token));
     }
-  }, [token]);
+  }, [token, dispatch]);
 
   return (
     <>

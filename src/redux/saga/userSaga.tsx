@@ -1,11 +1,11 @@
 import { call, takeEvery, put } from "redux-saga/effects";
-import { fetchFailure, fetchUserSuccess } from "../userSlice";
+import { fetchFailure, fetchUserSuccess } from "../slices/userSlice";
 import { errorNotification } from "notifications";
 import { getProfile } from "network/fetchOperations";
 import { historyReplace } from "utils/history";
 import { PayloadAction } from "@reduxjs/toolkit";
 
-type Response = {
+export type UserResponse = {
   firstName: string,
   id: string,
   lastName: string,
@@ -15,7 +15,7 @@ type Response = {
 
 function* workerUserSagaFetch({ payload }: PayloadAction<string>) {  
   try {
-    const response: Response = yield call(getProfile, payload);
+    const response: UserResponse = yield call(getProfile, payload);
     yield put(fetchUserSuccess(response));
   } catch (error) {
     errorNotification();

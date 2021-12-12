@@ -4,7 +4,7 @@ import { appointmentFormData } from "redux/selectors";
 import {
   fetchSpecializations,
 } from "redux/createAppointmentsActions";
-import { fetchDoctors, setSelectedDoctor, setSelectedSpecialization } from "redux/createAppointmentSlice";
+import { fetchDoctors, setSelectedDoctor, setSelectedSpecialization } from "redux/slices/createAppointmentSlice";
 import { useAppDispatch } from "hooks/useAppDispatch";
 import { useAppSelector } from "hooks/useAppSelector";
 

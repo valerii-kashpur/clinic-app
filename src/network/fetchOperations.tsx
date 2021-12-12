@@ -1,12 +1,11 @@
-import { setIsLoadingOff, setIsLoadingOn } from "redux/loaderSlice";
 import axiosInstance from "./Api";
 import { errorNotification, successNotification } from "notifications";
 import PATHS from "routes/paths";
-import { AppDispatch } from "redux/store";
 import { IPatientAppointment } from "models/IPatientAppointments";
 import { IDoctorAppointment } from "models/IDoctorAppointments";
+import { CreateAppointmentRequestBody, Doctors, LoginRequestBody, LoginResponseBody, RegistrationRequestBody, SpecializationsResponseBody } from "types/fetchTypes";
 
-export const register = (credentials: any, history: any) => {
+export const register = (credentials: RegistrationRequestBody, history: any) => {
   axiosInstance
     .post("auth/registration", credentials)
     .then(data => successNotification("Your account have been successfully created!"))
@@ -14,12 +13,8 @@ export const register = (credentials: any, history: any) => {
     .catch((error) => errorNotification());
 };
 
-export const logIn = async (credentials: { email: string, password: string }) => {
-  type Response = {
-    access_token: string,
-    refresh_token: string
-  }
-  const { data } = await axiosInstance.post<Response>("auth/login", credentials);
+export const logIn = async (credentials: LoginRequestBody) => {
+  const { data } = await axiosInstance.post<LoginResponseBody>("auth/login", credentials);
   return data
 }
 
@@ -65,21 +60,11 @@ export const getDoctorAppointment = async (sortBy: string) => {
 };
 
 export const getOccupations = async () => {
-  type Specializations = {
-    specialization_name: string,
-    id: string
-  }
-  const { data } = await axiosInstance.get<Specializations[]>("specializations");
+  const { data } = await axiosInstance.get<SpecializationsResponseBody[]>("specializations");
   return data
 };
 
 export const getDoctorsByOccupationId = async (id: string) => {
-  type Doctor = {
-    firstName: string,
-    lastName: string,
-    id: string
-  }
-  type Doctors = Doctor[] | [];
   const { data } = await axiosInstance.get<Doctors>(`doctors/specialization/${id}`);
   return data
 };
@@ -92,12 +77,7 @@ export const getDoctorsFreeTimeByDateAndId = async (date: string, id: string) =>
   return data;
 };
 
-export const createAppointment = (credentials: {
-  date: string,
-  reason: string,
-  note: string,
-  doctorID: string,
-}) => {
+export const createAppointment = (credentials:CreateAppointmentRequestBody) => {
   return axiosInstance.post(`appointments`, credentials);
 };
 

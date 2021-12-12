@@ -8,7 +8,7 @@ import {
   isAuthorizedSelector,
 } from "redux/selectors";
 import { useHistory } from "react-router-dom";
-import { fetchPatientAppointments } from "redux/patientAppointmentsSlice";
+import { fetchPatientAppointments } from "redux/slices/patientAppointmentsSlice";
 import { useAppSelector } from "hooks/useAppSelector";
 import { useAppDispatch } from "hooks/useAppDispatch";
 import * as Styled from "./PatientViewStyles";
@@ -60,7 +60,7 @@ const PatientView = () => {
           </Styled.UppointmentCreateButton>
         </Styled.NavgationItemsWrapper>
       </Styled.NavigationWrapper>
-      <AppointmentsList appointments={appointments} />
+      <AppointmentsList appointmentsArray={appointments} />
     </ViewPagesWrapper>
   );
 };

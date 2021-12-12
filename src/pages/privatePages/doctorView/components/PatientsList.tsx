@@ -6,6 +6,7 @@ import * as Styled from "../DoctorViewStyles";
 
 import PatientsListItem from "./PatientsListItem/PatientsListItem";
 import EditAppointmentModal from "./EditAppointmentModal";
+import { IDoctorAppointment } from "models/IDoctorAppointments";
 
 const List = styled.ul`
   margin-top: 16px;
@@ -42,8 +43,12 @@ const List = styled.ul`
   } ;
 `;
 
+type appointmentsArray = {
+  appointmentsArray: IDoctorAppointment
+}
 
-const PatientsList = ({ appointmentsArray }: any) => {
+
+const PatientsList = ({ appointmentsArray }: appointmentsArray) => {
   const [modalPropItems, setModalPropItems] = useState({});
   const [isOpen, setIsOpen] = useState(false);
 

@@ -1,7 +1,4 @@
 
-export interface IPatientAppointment {
-    appointments: Appointment[]
-}
 
 type AppointmentDoctor = {
     first_name: String,
@@ -11,7 +8,7 @@ type AppointmentDoctor = {
     specialization_name: string
 };
 
-type Appointment = {
+export type Appointment = {
     doctor: AppointmentDoctor,
     doctor_id: string,
     id: string,
@@ -22,6 +19,4 @@ type Appointment = {
     visit_date: string,
 };
 
-export type AppointmentsListTypes = {
-    appointments: Appointment[],
-};
+export type IPatientAppointment = Array<Appointment> | [];

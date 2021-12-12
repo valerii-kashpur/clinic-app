@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
-import { fetchCreateAppointment } from "redux/createAppointmentSlice";
+import { fetchCreateAppointment } from "redux/slices/createAppointmentSlice";
 import { appointmentFormData } from "redux/selectors";
 import { useAppDispatch } from "./useAppDispatch";
 

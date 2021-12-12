@@ -2,13 +2,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IPatientAppointment } from "models/IPatientAppointments";
 
 interface InitialState {
-  appointments: IPatientAppointment[] | []
+  appointments: IPatientAppointment
   total: number,
   isFetching: boolean,
 }
 
 type FetchPayload = {
-  appointments: IPatientAppointment[] | []
+  appointments: IPatientAppointment
   total: number,
 }
 

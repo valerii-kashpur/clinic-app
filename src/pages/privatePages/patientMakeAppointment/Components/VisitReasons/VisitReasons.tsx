@@ -3,7 +3,7 @@ import * as Styled from "./VisitReasonsStyles";
 import { Formik } from "formik";
 import { appointmentSchema } from "utils/YupValidationSchemas";
 import SelectsBlock from "../SelectsBlock/SelectsBlock";
-import { setNote, setReason } from "redux/createAppointmentSlice";
+import { setNote, setReason } from "redux/slices/createAppointmentSlice";
 import { useAppDispatch } from "hooks/useAppDispatch";
 
 const VisitReasons = () => {

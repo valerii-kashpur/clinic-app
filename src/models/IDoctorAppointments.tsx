@@ -14,6 +14,4 @@ export interface Appointment {
     visit_date: string,
 };
 
-export interface IDoctorAppointment {
-    appointments: Array<Appointment> | []
-}
+export type IDoctorAppointment = Array<Appointment> | []

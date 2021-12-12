@@ -5,6 +5,7 @@ import styled from "styled-components";
 import * as Styled from "../PatientViewStyles";
 import AppointmentListItem from "./AppointmentListItem/AppointmentListItem";
 
+
 const List = styled.ul`
   margin-top: 16px;
   display: flex;
@@ -44,11 +45,11 @@ type AppointmentDoctor = {
   id: string,
   last_name: string,
   photo: string,
-specialization_name: string
+  specialization_name: string
 };
 
-type Appointment = {
-    doctor: AppointmentDoctor,
+ type Appointment = {
+  doctor: AppointmentDoctor,
   doctor_id: string,
   id: string,
   note: string,
@@ -58,14 +59,16 @@ type Appointment = {
   visit_date: string,
 };
 
-export type AppointmentsListTypes = {
-  appointments: Appointment[],
-};
+ type IPatientAppointment = Array<Appointment> | [];
 
-const AppointmentsList = ({ appointments }: any) => {
-  return appointments.length ? (
+ type AppointmentsArray = {
+  appointmentsArray: IPatientAppointment
+ }
+
+const AppointmentsList = ({ appointmentsArray }: AppointmentsArray) => {
+  return appointmentsArray.length ? (
     <List>
-      {appointments.map(({ doctor, visit_date, reason }:any) => {
+      {appointmentsArray.map(({ doctor, visit_date, reason }) => {
         const date = moment(visit_date).format("ddd MMM DD YYYY, h a");
         return (
           <AppointmentListItem
