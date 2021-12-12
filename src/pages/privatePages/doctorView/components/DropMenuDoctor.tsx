@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Menu, MenuItem } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
@@ -7,12 +7,12 @@ import { fetchDoctorAppointments } from "redux/slices/doctorAppointmentsSlice";
 import { useAppDispatch } from "hooks/useAppDispatch";
 
 type DropMenuDoctorProps = {
-  menuBtn: any,
-  id:string,
-  visitDate:string,
-  name:string,
-  getModalProps:any,
-  openModal:any,
+  menuBtn: ReactElement<string, string>,
+  id: string,
+  visitDate: string,
+  name: string,
+  getModalProps: ({ name, id, visitDate }: { name: string, id: string, visitDate: string }) => void,
+  openModal: () => void,
 }
 
 const DropMenuDoctor = ({

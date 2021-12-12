@@ -4,7 +4,7 @@ import Select from "react-select";
 
 type SelectProps = {
   text: string,
-  onChangeFn: any,
+  onChangeFn: (data: any) => void,
   Disabled?: boolean,
   optionsArray: { value: string, label: string }[],
   placeholder: string

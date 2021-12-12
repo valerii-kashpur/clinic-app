@@ -3,19 +3,16 @@ import { useSelector } from "react-redux";
 import { Route } from "react-router-dom";
 import { isAuthorizedSelector } from "redux/selectors";
 
-type PrivateRouteParams = {
-  component: React.FC,
-}
+type Props = { component: typeof React.Component };
 
 
-const PrivateRoutes = ({ component: Component, ...routeProps }: PrivateRouteParams) => {
+const PrivateRoutes = ({ component: Component, ...routeProps }: Props) => {
   const isLogIn = useSelector(isAuthorizedSelector);
   return (
     <Route
       {...routeProps}
       exact
       render={(props) => {
-         // @ts-ignore: Unreachable code error
         return isLogIn ? <Component {...props} /> : null;
       }}
     />

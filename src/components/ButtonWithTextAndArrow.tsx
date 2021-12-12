@@ -54,7 +54,7 @@ const ButtonVector = styled.span`
   background-repeat: no-repeat;
 `;
 
-type ButtonProps = { text: string, disabled?: boolean, onClick?: any, width: string, height: string, margin?: string, padding?: string, isLoading?: boolean, type?: "button" | "submit" | "reset" | undefined }
+type ButtonProps = { text: string, disabled?: boolean, onClick?: () => void, width: string, height: string, margin?: string, padding?: string, isLoading?: boolean, type?: "button" | "submit" | "reset" | undefined }
 
 const ButtonWithTextAndArrow = ({ text, disabled, onClick, width, height, margin, padding, isLoading, type }: ButtonProps) => {
   return (

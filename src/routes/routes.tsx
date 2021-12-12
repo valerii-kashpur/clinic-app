@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import { v4 as uuidv4 } from "uuid";
-import  PATHS  from "./paths";
+import PATHS from "./paths";
 import PrivateRoutes from "./PrivateRoutes";
 import PublicRoutes from "./PublicRoutes";
 
@@ -64,12 +64,16 @@ const ROUTES = [
   },
 ];
 
-const mapedRoutes = (userRoleName:string) =>
+// Тип "LazyExoticComponent<() => Element>" не может быть назначен для типа "typeof Component".
+//   Тип "ExoticComponent<unknown> & { readonly _result: () => Element; }" не предоставляет соответствия для сигнатуры "new <P = {}, S = {}, SS = any>(props: P | Readonly<P>): Component<P, S, SS>".ts(2322)
+// PrivateRoutes.tsx(6, 16): Ожидаемый тип поступает из свойства "component", объявленного здесь в типе "IntrinsicAttributes & Props"
+
+const mapedRoutes = (userRoleName: string) =>
   ROUTES.map((route) => {
     return route.private && userRoleName === route.onlyForRole ? (
       <PrivateRoutes
-       // @ts-ignore: Unreachable code error
         path={route.path}
+        // @ts-ignore: Unreachable code error
         component={route.component}
         forRole={route.onlyForRole}
         key={uuidv4()}
@@ -77,7 +81,7 @@ const mapedRoutes = (userRoleName:string) =>
     ) : (
       <PublicRoutes
         path={route.path}
-         // @ts-ignore: Unreachable code error
+        // @ts-ignore: Unreachable code error
         component={route.component}
         key={uuidv4()}
       />

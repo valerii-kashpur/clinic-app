@@ -5,7 +5,7 @@ import "@testing-library/jest-dom";
 import SignInForm from "./SignInForm";
 import * as useAuth from "hooks/useAuth";
 import { Provider } from "react-redux";
-import { store } from "redux/index";
+import { store } from "redux/store";
 import { ThemeProvider } from "styled-components";
 import { theme } from "styles/theme";
 import { ToastContainer } from "react-toastify";

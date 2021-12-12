@@ -16,11 +16,9 @@ import {
 } from "__mock__/statesForAppointment";
 import * as useAppointmentForm from "hooks/useAppointmentForm";
 import userEvent from "@testing-library/user-event";
-import axios from "axios";
-import { createAppointment } from "network/fetchOperations";
 const queryClient = new QueryClient();
 
-const middlewares = [];
+const middlewares:any[] = [];
 const mockStore = configureStore(middlewares);
 
 afterEach(cleanup);

@@ -44,8 +44,8 @@ const RadioBtns = () => {
 
   const getDisabled = (time: string) => {
     if (pickedDate) {
-      // @ts-ignore: Unreachable code error
-      return !availableTime.includes(pickedDate.substring(0, 10) + time);
+      const dateString = pickedDate.substring(0, 10) + time;
+      return !(availableTime as string[]).includes(dateString);
     }
     return true;
   };

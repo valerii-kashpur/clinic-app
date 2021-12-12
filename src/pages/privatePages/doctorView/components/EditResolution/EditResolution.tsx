@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 
-type ModalProps = {
-  id: string
-  name: string
-  visitDate: string
-}
-
 type EditResolutionProps = {
-  onToggleModal: any, modalProps: any
+  onToggleModal: () => void, modalProps: any;
 }
 
 const EditResolution = ({ onToggleModal, modalProps }: EditResolutionProps) => {

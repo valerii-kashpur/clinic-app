@@ -12,8 +12,8 @@ type PatientsListItemProps = {
   description: string,
   id: string,
   visitDate: string,
-  setModalProps:any,
-  openModalToggle: any,
+  setModalProps: React.Dispatch<React.SetStateAction<{}>>,
+  openModalToggle: () => void,
 }
 
 const PatientsListItem = ({
@@ -26,14 +26,14 @@ const PatientsListItem = ({
   visitDate,
   setModalProps,
   openModalToggle
-} : PatientsListItemProps) => {
+}: PatientsListItemProps) => {
 
 
   return (
     <>
       <Styled.ListItem key={uuidv4()} data-testid="listItem">
         <Styled.ListItemInfoWrapper>
-          <Styled.ListItemInfoAvatar src={avatar} alt="user avatar"/>
+          <Styled.ListItemInfoAvatar src={avatar} alt="user avatar" />
           <div>
             <Styled.ListItemInfoName>{name}</Styled.ListItemInfoName>
             <Styled.ListItemStatusWrapper>
@@ -44,7 +44,7 @@ const PatientsListItem = ({
             </Styled.ListItemStatusWrapper>
           </div>
           <DropMenuDoctor
-            menuBtn={<Styled.ListItemMore src={moreVertical} alt="drop menu"/>}
+            menuBtn={<Styled.ListItemMore src={moreVertical} alt="drop menu" />}
             id={id}
             visitDate={visitDate}
             name={name}

@@ -27,7 +27,7 @@ const SelectsBlock = () => {
     label: `${object.first_name} ${object.last_name}`,
   }));
 
-  const specializationOnChangeHandler = (data: { label: string, value: string }) => {
+  const specializationOnChangeHandler = (data: { label: string; value: string }) => {
     dispatch(fetchDoctors(data.value));
     dispatch(setSelectedSpecialization(data.value))
     if (toggleSelectDisable) {

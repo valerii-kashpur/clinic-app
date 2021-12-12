@@ -60,7 +60,7 @@ const PatientsList = ({ appointmentsArray }: appointmentsArray) => {
     <>
       {appointmentsArray.length ? (
         <List>
-          {appointmentsArray.map(({ patient, reason, status, visit_date, id }: any) => {
+          {appointmentsArray.map(({ patient, reason, status, visit_date, id }) => {
             const date = moment(visit_date).format("ddd MMM DD YYYY, h a");
             return (
               <PatientsListItem

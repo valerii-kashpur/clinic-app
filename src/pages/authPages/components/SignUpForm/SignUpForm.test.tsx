@@ -4,7 +4,7 @@ import "@testing-library/jest-dom";
 
 import * as useAuth from "hooks/useAuth";
 import { Provider } from "react-redux";
-import { store } from "redux/index";
+import { store } from "redux/store";
 import { ThemeProvider } from "styled-components";
 import { theme } from "styles/theme";
 import SignUpForm from "./SignUpForm";
@@ -24,7 +24,7 @@ describe("SignIn form", () => {
     const mockedRequest = jest
       .spyOn(useAuth, "useAuth")
       .mockImplementation(() => {
-        return { registrationRequest: (values) => registrationMock(values) };
+        return { registrationRequest: (data) => registrationMock() };
       });
 
     render(

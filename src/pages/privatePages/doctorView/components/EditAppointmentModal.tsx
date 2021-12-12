@@ -10,7 +10,7 @@ const StyledModal = Modal.styled`
   position: o o;
 `;
 
-type ModalPropItems = {
+export type ModalPropItems = {
   id?: string,
   name?: string,
   visitDate?: string,
@@ -18,9 +18,9 @@ type ModalPropItems = {
 
 type EditAppointmentModalProps = {
   isOpen: boolean,
-  toggleModal: any,
-  setDropMenuValue: any,
-  modalPropItems?: ModalPropItems ,
+  toggleModal: () => void,
+  setDropMenuValue: React.Dispatch<React.SetStateAction<{}>>,
+  modalPropItems?: ModalPropItems,
 }
 
 const EditAppointmentModal = ({

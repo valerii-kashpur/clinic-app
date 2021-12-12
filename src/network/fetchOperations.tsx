@@ -4,8 +4,9 @@ import PATHS from "routes/paths";
 import { IPatientAppointment } from "models/IPatientAppointments";
 import { IDoctorAppointment } from "models/IDoctorAppointments";
 import { CreateAppointmentRequestBody, Doctors, LoginRequestBody, LoginResponseBody, RegistrationRequestBody, SpecializationsResponseBody } from "types/fetchTypes";
+import { History } from "history";
 
-export const register = (credentials: RegistrationRequestBody, history: any) => {
+export const register = (credentials: RegistrationRequestBody, history: History) => {
   axiosInstance
     .post("auth/registration", credentials)
     .then(data => successNotification("Your account have been successfully created!"))
