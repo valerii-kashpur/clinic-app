@@ -13,6 +13,7 @@ const PrivateRoutes = ({ component: Component, ...routeProps }: Props) => {
       {...routeProps}
       exact
       render={(props) => {
+ // У типа "{ history: History<unknown>; location: Location<unknown>; match: match<{ [x: string]: string | undefined; }>; staticContext?: StaticContext | undefined; }" нет общих свойств с типом "IntrinsicAttributes".
         return isLogIn ? <Component {...props} /> : null;
       }}
     />
