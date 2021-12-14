@@ -8,7 +8,11 @@ import {
   fetchDoctorResolutionsSuccess,
 } from "redux/slices/doctorsResolutionsSlice";
 
-function* workerResolutionsSagaFetch({ payload }: PayloadAction<string>) {
+function* workerResolutionsSagaFetch({
+  payload,
+}: PayloadAction<{ sortBy: string; currentPage: string }>) {
+  console.log(payload);
+
   try {
     const response: DoctorResolutionsResponseBody = yield call(
       getDoctorResolutions,

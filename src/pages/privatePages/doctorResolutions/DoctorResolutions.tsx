@@ -10,30 +10,39 @@ import { useAppDispatch } from "types/useAppDispatch";
 import { useAppSelector } from "types/useAppSelector";
 import {
   doctorsResolutionsSelector,
+  doctorsTotalResolutionsSelector,
   isAuthorizedSelector,
   userRoleNameSelector,
 } from "redux/selectors";
 import { fetchDoctorResolutions } from "redux/slices/doctorsResolutionsSlice";
+import Pagination from "components/Pagination/Pagination";
+import PATHS from "routes/paths";
 
 const DoctorResolutions = () => {
   const [sortBy, setSortBy] = useState("dateSort");
+  const [currentPage, setCurrentPage] = useState(1);
   const history = useHistory();
   const dispatch = useAppDispatch();
   const userRole = useAppSelector(userRoleNameSelector);
   const isAuth = useAppSelector(isAuthorizedSelector);
   const resolutions = useAppSelector(doctorsResolutionsSelector);
+  const paginationPages = useAppSelector(doctorsTotalResolutionsSelector);
+
+  const handlePaginationClick = (pageNummber: number) => {
+    setCurrentPage(pageNummber);
+  };
 
   useEffect(() => {
     if (!userRole) {
-      history.replace("./sign-in");
+      history.replace(PATHS.signIn);
     }
   }, [userRole, history]);
 
   useEffect(() => {
     if (userRole && isAuth) {
-      dispatch(fetchDoctorResolutions(sortBy));
+      dispatch(fetchDoctorResolutions({ sortBy, currentPage }));
     }
-  }, [dispatch, sortBy, userRole, isAuth]);
+  }, [dispatch, sortBy, userRole, isAuth, currentPage]);
 
   return (
     <ViewPagesWrapper>
@@ -60,7 +69,13 @@ const DoctorResolutions = () => {
           </Styled.NavigationSelect>
         </Styled.NavgationItemsWrapper>
       </Styled.NavigationWrapper>
-      <ResolutionsTable resolutions={resolutions}/>
+      <ResolutionsTable resolutions={resolutions} />
+      <Pagination
+        total={paginationPages}
+        perPage={8}
+        onClick={handlePaginationClick}
+        currentPage={currentPage}
+      />
     </ViewPagesWrapper>
   );
 };

@@ -7,6 +7,7 @@ import Form from "./Components/Form/Form";
 import { useSelector } from "react-redux";
 import { userRoleNameSelector } from "redux/selectors";
 import { useHistory } from "react-router-dom";
+import PATHS from "routes/paths";
 
 const PatientMakeAppointment = () => {
   const history = useHistory();
@@ -15,7 +16,7 @@ const PatientMakeAppointment = () => {
 
   useEffect(() => {
     if (!userRole) {
-      history.replace("./sign-in");
+      history.replace(PATHS.signIn);
     }
   }, [userRole, history]);
 

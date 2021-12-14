@@ -16,6 +16,7 @@ import slider from "media/sliders-v-alt.svg";
 import { fetchDoctorAppointments } from "redux/slices/doctorAppointmentsSlice";
 import { useAppSelector } from "types/useAppSelector";
 import { useAppDispatch } from "types/useAppDispatch";
+import PATHS from "routes/paths";
 
 const DoctorView = () => {
   const [sortBy, setSortBy] = useState("dateSort");
@@ -27,7 +28,7 @@ const DoctorView = () => {
 
   useEffect(() => {
     if (!userRole) {
-      history.replace("./sign-in");
+      history.replace(PATHS.signIn);
     }
   }, [userRole, history]);
 

@@ -3,7 +3,7 @@ import { IDoctorResolutions } from "models/IDoctorResolutions";
 
 interface InitialState {
   resolutions: IDoctorResolutions;
-  total: Number;
+  total: number;
   isFetching: boolean;
 }
 

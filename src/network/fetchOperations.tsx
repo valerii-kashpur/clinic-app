@@ -60,38 +60,59 @@ export const getProfile = async (persistToken: string) => {
 };
 
 export const getPatientAppointment = async (dateStatus: string) => {
-  // &dateStatus=${dateStatus} - добавить когда заработает бек
   type FetchPayload = {
     appointments: IPatientAppointment[] | [];
     total: number;
   };
 
   const { data } = await axiosInstance.get<FetchPayload>(
-    `appointments/patient/me?offset=0&limit=40`
+    `appointments/patient/me`,
+    {
+      params: {
+        offset: 0,
+        limit: 40,
+        dateStatus: dateStatus,
+      },
+    }
   );
   return data;
 };
 
 export const getDoctorAppointment = async (sortBy: string) => {
-  // &sortBy=${sortBy}
   type FetchPayload = {
     appointments: IDoctorAppointment[] | [];
     total: number;
   };
   const { data } = await axiosInstance.get<FetchPayload>(
-    `appointments/doctor/me?offset=0&limit=40`
+    `appointments/doctor/me`,
+    {
+      params: {
+        offset: 0,
+        limit: 40,
+        sortBy: sortBy,
+      },
+    }
   );
   return data;
 };
 
-export const getDoctorResolutions = async (sortBy: string) => {
-  // &sortBy=${sortBy}
+export const getDoctorResolutions = async (requestData: {
+  sortBy: string;
+  currentPage: string;
+}) => {
   type FetchPayload = {
     appointments: IDoctorResolutions[] | [];
     total: number;
   };
   const { data } = await axiosInstance.get<FetchPayload>(
-    `resolutions/doctor/me?offset=0&limit=8`
+    `resolutions/doctor/me`,
+    {
+      params: {
+        offset: requestData.currentPage,
+        limit: 8,
+        sortBy: requestData.sortBy,
+      },
+    }
   );
   return data;
 };
