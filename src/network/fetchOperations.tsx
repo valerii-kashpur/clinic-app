@@ -3,29 +3,50 @@ import { errorNotification, successNotification } from "notifications";
 import PATHS from "routes/paths";
 import { IPatientAppointment } from "models/IPatientAppointments";
 import { IDoctorAppointment } from "models/IDoctorAppointments";
-import { CreateAppointmentRequestBody, CreateResolutionRequestBody, Doctors, LoginRequestBody, LoginResponseBody, RegistrationRequestBody, SpecializationsResponseBody } from "types/fetchTypes";
+import {
+  CreateAppointmentRequestBody,
+  CreateResolutionRequestBody,
+  Doctors,
+  LoginRequestBody,
+  LoginResponseBody,
+  RegistrationRequestBody,
+  SpecializationsResponseBody,
+} from "types/fetchTypes";
 import { History } from "history";
+import { IDoctorResolutions } from "models/IDoctorResolutions";
 
-export const register = (credentials: RegistrationRequestBody, history: History) => {
+export const register = (
+  credentials: RegistrationRequestBody,
+  history: History
+) => {
   axiosInstance
     .post("auth/registration", credentials)
-    .then(data => successNotification("Your account have been successfully created!"))
+    .then((data) =>
+      successNotification("Your account have been successfully created!")
+    )
     .then(() => history.push(PATHS.signIn))
     .catch((error) => errorNotification());
 };
 
 export const logIn = async (credentials: LoginRequestBody) => {
-  const { data } = await axiosInstance.post<LoginResponseBody>("auth/login", credentials);
-  return data
-}
+  const { data } = await axiosInstance.post<LoginResponseBody>(
+    "auth/login",
+    credentials
+  );
+  return data;
+};
 
 export const getProfile = async (persistToken: string) => {
   if (!persistToken) {
     return;
   }
   type Response = {
-    first_name: string, last_name: string, role_name: string, id: string, photo: string
-  }
+    first_name: string;
+    last_name: string;
+    role_name: string;
+    id: string;
+    photo: string;
+  };
   const { data } = await axiosInstance.get<Response>("auth/profile");
   const { first_name, last_name, role_name, id, photo } = data;
   const newData = {
@@ -34,7 +55,6 @@ export const getProfile = async (persistToken: string) => {
     firstName: first_name,
     lastName: last_name,
     roleName: role_name,
-
   };
   return newData;
 };
@@ -42,35 +62,58 @@ export const getProfile = async (persistToken: string) => {
 export const getPatientAppointment = async (dateStatus: string) => {
   // &dateStatus=${dateStatus} - добавить когда заработает бек
   type FetchPayload = {
-    appointments: IPatientAppointment[] | []
-    total: number,
-  }
+    appointments: IPatientAppointment[] | [];
+    total: number;
+  };
 
-  const { data } = await axiosInstance.get<FetchPayload>(`appointments/patient/me?offset=0&limit=40`);
-  return data
+  const { data } = await axiosInstance.get<FetchPayload>(
+    `appointments/patient/me?offset=0&limit=40`
+  );
+  return data;
 };
 
 export const getDoctorAppointment = async (sortBy: string) => {
   // &sortBy=${sortBy}
   type FetchPayload = {
-    appointments: IDoctorAppointment[] | []
-    total: number,
-  }
-  const { data } = await axiosInstance.get<FetchPayload>(`appointments/doctor/me?offset=0&limit=40`);
-  return data
+    appointments: IDoctorAppointment[] | [];
+    total: number;
+  };
+  const { data } = await axiosInstance.get<FetchPayload>(
+    `appointments/doctor/me?offset=0&limit=40`
+  );
+  return data;
+};
+
+export const getDoctorResolutions = async (sortBy: string) => {
+  // &sortBy=${sortBy}
+  type FetchPayload = {
+    appointments: IDoctorResolutions[] | [];
+    total: number;
+  };
+  const { data } = await axiosInstance.get<FetchPayload>(
+    `resolutions/doctor/me?offset=0&limit=8`
+  );
+  return data;
 };
 
 export const getOccupations = async () => {
-  const { data } = await axiosInstance.get<SpecializationsResponseBody[]>("specializations");
-  return data
+  const { data } = await axiosInstance.get<SpecializationsResponseBody[]>(
+    "specializations"
+  );
+  return data;
 };
 
 export const getDoctorsByOccupationId = async (id: string) => {
-  const { data } = await axiosInstance.get<Doctors>(`doctors/specialization/${id}`);
-  return data
+  const { data } = await axiosInstance.get<Doctors>(
+    `doctors/specialization/${id}`
+  );
+  return data;
 };
 
-export const getDoctorsFreeTimeByDateAndId = async (date: string, id: string) => {
+export const getDoctorsFreeTimeByDateAndId = async (
+  date: string,
+  id: string
+) => {
   type FreeTime = [number] | [];
   const { data } = await axiosInstance.get<FreeTime>(
     `appointments/time/free?date=${date}&doctorID=${id}`
@@ -78,7 +121,9 @@ export const getDoctorsFreeTimeByDateAndId = async (date: string, id: string) =>
   return data;
 };
 
-export const createAppointment = (credentials:CreateAppointmentRequestBody) => {
+export const createAppointment = (
+  credentials: CreateAppointmentRequestBody
+) => {
   return axiosInstance.post(`appointments`, credentials);
 };
 
@@ -103,7 +148,9 @@ export const deleteAppointment = async (id: string) => {
   }
 };
 
-export const CreateResolution = async (credentials:CreateResolutionRequestBody) => {
+export const CreateResolution = async (
+  credentials: CreateResolutionRequestBody
+) => {
   try {
     await axiosInstance
       .post(`resolutions`, credentials)

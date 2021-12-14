@@ -4,6 +4,7 @@ const PATHS = {
   restorePassword: "/restore-password",
   restorePasswordConfirmed: "/restore-password-confirmed",
   doctorView: "/doctor-view",
+  doctorResolutions: "/doctor-view/resolutions",
   patientView: "/patient-view",
   makeAppointment: "/patient-view/make-appointment",
 };

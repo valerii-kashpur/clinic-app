@@ -1,6 +1,5 @@
 import { CreateResolution } from "network/fetchOperations";
-import { errorNotification } from "notifications";
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { useQuery } from "react-query";
 
 type CreateResolutionProps = {
@@ -31,15 +30,12 @@ const CreateResolutionForm = ({
     setTextAreaValue(e.target.value);
   };
 
-  const { isLoading, error, refetch } = useQuery("key", fetchCreateResolution, {
+  const { isLoading, refetch } = useQuery("key", fetchCreateResolution, {
     refetchOnWindowFocus: false,
     enabled: false,
   });
 
-  // console.log(`isLoadin: `, isLoading);
-  useEffect(() => {
-    errorNotification();
-  }, [error])
+  console.log(`isLoadin: `, isLoading);
 
   return (
     <div>
