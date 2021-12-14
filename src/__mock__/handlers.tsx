@@ -1,4 +1,4 @@
-import { rest } from "msw";
+import { DefaultRequestBody, rest } from "msw";
 
 type RegistrationRequestBody = {
   userName: string, password: string, firstName: string, lastName: string
@@ -24,10 +24,10 @@ const patientProfile = {
 };
 
 const handlers = [
-  rest.post(
+  rest.post<LoginRequestBody>(
     `https://reactlabapi.herokuapp.com/api/auth/login`,
     (req, res, ctx) => {
-      const { userName, password }: any = req.body;
+      const { userName, password }: LoginRequestBody = req.body;
       if (userName === "mango@a.com" && password === "asdasdasd") {
         return res(ctx.status(200), ctx.json(tokens));
       } else {
@@ -35,10 +35,10 @@ const handlers = [
       }
     }
   ),
-  rest.post(
+  rest.post<RegistrationRequestBody>(
     `https://reactlabapi.herokuapp.com/api/auth/registration`,
     (req, res, ctx) => {
-      const { userName, password, firstName, lastName }: any = req.body;
+      const { userName, password, firstName, lastName }: RegistrationRequestBody = req.body;
       if (
         firstName === "mango121212" &&
         lastName === "mango121212" &&

@@ -9,8 +9,8 @@ import {
 } from "redux/selectors";
 import { useHistory } from "react-router-dom";
 import { fetchPatientAppointments } from "redux/slices/patientAppointmentsSlice";
-import { useAppSelector } from "hooks/useAppSelector";
-import { useAppDispatch } from "hooks/useAppDispatch";
+import { useAppSelector } from "types/useAppSelector";
+import { useAppDispatch } from "types/useAppDispatch";
 import * as Styled from "./PatientViewStyles";
 
 // IMAGES

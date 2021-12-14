@@ -5,10 +5,13 @@ import { isAuthorizedSelector, userRoleNameSelector } from "redux/selectors";
 import { roles } from "./roles";
 
 type PublicRoutesParams = {
-  component:  typeof React.Component,
+  component: typeof React.Component;
 };
 
-const PublicRoutes = ({ component: Component, ...routeProps }: PublicRoutesParams) => {
+const PublicRoutes = ({
+  component: Component,
+  ...routeProps
+}: PublicRoutesParams) => {
   const isLogIn = useSelector(isAuthorizedSelector);
   const roleName: string = useSelector(userRoleNameSelector);
   return (

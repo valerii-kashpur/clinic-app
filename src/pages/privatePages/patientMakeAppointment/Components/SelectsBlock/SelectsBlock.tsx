@@ -5,8 +5,8 @@ import {
   fetchSpecializations,
 } from "redux/createAppointmentsActions";
 import { fetchDoctors, setSelectedDoctor, setSelectedSpecialization } from "redux/slices/createAppointmentSlice";
-import { useAppDispatch } from "hooks/useAppDispatch";
-import { useAppSelector } from "hooks/useAppSelector";
+import { useAppDispatch } from "types/useAppDispatch";
+import { useAppSelector } from "types/useAppSelector";
 
 const SelectsBlock = () => {
   const [toggleSelectDisable, setToggleSelectDisable] = useState(true);

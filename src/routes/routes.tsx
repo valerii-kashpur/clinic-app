@@ -6,22 +6,23 @@ import PublicRoutes from "./PublicRoutes";
 
 const SignIn = lazy(() => import("pages/authPages/signIn/SignIn"));
 const SignUp = lazy(() => import("pages/authPages/signUp/SignUp"));
-const RestorePassword = lazy(() =>
-  import("pages/authPages/restorePassword/RestorePassword")
+const RestorePassword = lazy(
+  () => import("pages/authPages/restorePassword/RestorePassword")
 );
-const RestorePasswordConfirmed = lazy(() =>
-  import("pages/authPages/restorePasswordConfirmed/RestorePasswordConfirmed")
+const RestorePasswordConfirmed = lazy(
+  () =>
+    import("pages/authPages/restorePasswordConfirmed/RestorePasswordConfirmed")
 );
-const DoctorView = lazy(() =>
-  import("pages/privatePages/doctorView/DoctorView")
+const DoctorView = lazy(
+  () => import("pages/privatePages/doctorView/DoctorView")
 );
-const PatientView = lazy(() =>
-  import("pages/privatePages/patientView/PatientView")
+const PatientView = lazy(
+  () => import("pages/privatePages/patientView/PatientView")
 );
-const PatientMakeAppointment = lazy(() =>
-  import("pages/privatePages/patientMakeAppointment/PatientMakeAppointment")
+const PatientMakeAppointment = lazy(
+  () =>
+    import("pages/privatePages/patientMakeAppointment/PatientMakeAppointment")
 );
-
 
 const ROUTES = [
   {

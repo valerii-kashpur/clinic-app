@@ -9,8 +9,8 @@ import LoaderComponent from "components/LoaderComponent";
 import { fetchUser } from "redux/slices/userSlice";
 import { SpecialModalBackground } from "styles/specialModalBackground";
 import "react-toastify/dist/ReactToastify.css";
-import { useAppDispatch } from "hooks/useAppDispatch";
-import { useAppSelector } from "hooks/useAppSelector";
+import { useAppDispatch } from "types/useAppDispatch";
+import { useAppSelector } from "types/useAppSelector";
 
 function App() {
   const token = useAppSelector(getUserTokenSelector);

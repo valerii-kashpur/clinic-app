@@ -4,7 +4,7 @@ import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
 import { deleteAppointment } from "network/fetchOperations";
 import { fetchDoctorAppointments } from "redux/slices/doctorAppointmentsSlice";
-import { useAppDispatch } from "hooks/useAppDispatch";
+import { useAppDispatch } from "types/useAppDispatch";
 
 type DropMenuDoctorProps = {
   menuBtn: ReactElement<string, string>,

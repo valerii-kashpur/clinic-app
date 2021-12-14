@@ -1,4 +1,4 @@
-import  PATHS  from "./paths";
+import PATHS from "./paths";
 
 export const roles: { [key: string]: string } = {
   Patient: PATHS.patientView,

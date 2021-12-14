@@ -4,7 +4,7 @@ import { Formik } from "formik";
 import { appointmentSchema } from "utils/YupValidationSchemas";
 import SelectsBlock from "../SelectsBlock/SelectsBlock";
 import { setNote, setReason } from "redux/slices/createAppointmentSlice";
-import { useAppDispatch } from "hooks/useAppDispatch";
+import { useAppDispatch } from "types/useAppDispatch";
 
 const VisitReasons = () => {
   const dispatch = useAppDispatch();

@@ -5,8 +5,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./DatePickerForm.css";
 import { selectedDoctorSelector } from "redux/selectors";
 import { fetchDoctorsFreeTime, setSelectedDate } from "redux/slices/createAppointmentSlice";
-import { useAppDispatch } from "hooks/useAppDispatch";
-import { useAppSelector } from "hooks/useAppSelector";
+import { useAppDispatch } from "types/useAppDispatch";
+import { useAppSelector } from "types/useAppSelector";
 
 const DatePickerForm = () => {
   const [selected, setSelected] = useState(new Date());

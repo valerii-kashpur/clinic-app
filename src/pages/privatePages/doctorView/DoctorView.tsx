@@ -14,8 +14,8 @@ import * as Styled from "./DoctorViewStyles";
 import search from "media/search.svg";
 import slider from "media/sliders-v-alt.svg";
 import { fetchDoctorAppointments } from "redux/slices/doctorAppointmentsSlice";
-import { useAppSelector } from "hooks/useAppSelector";
-import { useAppDispatch } from "hooks/useAppDispatch";
+import { useAppSelector } from "types/useAppSelector";
+import { useAppDispatch } from "types/useAppDispatch";
 
 const DoctorView = () => {
   const [sortBy, setSortBy] = useState("dateSort");
