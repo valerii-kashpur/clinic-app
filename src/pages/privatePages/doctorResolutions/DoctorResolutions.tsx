@@ -44,6 +44,9 @@ const DoctorResolutions = () => {
     }
   }, [dispatch, sortBy, userRole, isAuth, currentPage]);
 
+
+  
+
   return (
     <ViewPagesWrapper>
       <Styled.NavButtonsWrapper>

@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "styled-react-modal";
-import CreateResolutionForm from "./CreateResolution/CreateResolutionFrom";
+import CreateResolutionForm from "./CreateResolutionForm/CreateResolutionFrom";
 
 const StyledModal = Modal.styled`
   width: 272px;

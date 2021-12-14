@@ -53,3 +53,7 @@ export type CreateResolutionRequestBody = {
   resolution: string;
   appointmentID: string;
 };
+export type EditResolutionRequestBody = {
+  resolution: string;
+  resolutionID: string;
+};

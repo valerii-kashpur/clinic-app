@@ -7,6 +7,7 @@ import {
   CreateAppointmentRequestBody,
   CreateResolutionRequestBody,
   Doctors,
+  EditResolutionRequestBody,
   LoginRequestBody,
   LoginResponseBody,
   RegistrationRequestBody,
@@ -103,7 +104,7 @@ export const getDoctorResolutions = async (requestData: {
   type FetchPayload = {
     appointments: IDoctorResolutions[] | [];
     total: number;
-  };
+  };  
   const { data } = await axiosInstance.get<FetchPayload>(
     `resolutions/doctor/me`,
     {
@@ -174,8 +175,33 @@ export const CreateResolution = async (
 ) => {
   try {
     await axiosInstance
-      .post(`resolutions`, credentials)
+      .post(`resolutions/`, credentials)
       .then(() => successNotification("Resolution have been created!"));
+  } catch (error) {
+    errorNotification();
+  }
+};
+
+export const editResolution = async (
+  credentials: EditResolutionRequestBody
+) => {
+  console.log(credentials);
+  try {
+    await axiosInstance
+      .patch(`resolutions/${credentials.resolutionID}`, {
+        resolution: credentials.resolution,
+      })
+      .then(() => successNotification("Resolution have been created!"));
+  } catch (error) {
+    errorNotification();
+  }
+};
+
+export const deleteResolution = async (id: string) => {  
+  try {
+    await axiosInstance
+      .delete(`resolutions/${id}`)
+      .then(() => successNotification("Resolution have been deleted!"));
   } catch (error) {
     errorNotification();
   }

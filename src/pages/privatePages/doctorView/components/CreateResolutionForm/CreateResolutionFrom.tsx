@@ -1,5 +1,5 @@
 import { CreateResolution } from "network/fetchOperations";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 
 type CreateResolutionProps = {
@@ -18,7 +18,7 @@ const CreateResolutionForm = ({
       resolution: textAreaValue,
       appointmentID: modalProps.id,
     };
-    CreateResolution(requestBody);
+    CreateResolution(requestBody).then(() => onToggleModal);
   };
 
   const submitHandler = (e: React.SyntheticEvent) => {
@@ -30,7 +30,7 @@ const CreateResolutionForm = ({
     setTextAreaValue(e.target.value);
   };
 
-  const { isLoading, refetch } = useQuery("key", fetchCreateResolution, {
+  const { isLoading, refetch } = useQuery("createResolution", fetchCreateResolution, {
     refetchOnWindowFocus: false,
     enabled: false,
   });
