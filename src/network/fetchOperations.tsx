@@ -3,7 +3,7 @@ import { errorNotification, successNotification } from "notifications";
 import PATHS from "routes/paths";
 import { IPatientAppointment } from "models/IPatientAppointments";
 import { IDoctorAppointment } from "models/IDoctorAppointments";
-import { CreateAppointmentRequestBody, Doctors, LoginRequestBody, LoginResponseBody, RegistrationRequestBody, SpecializationsResponseBody } from "types/fetchTypes";
+import { CreateAppointmentRequestBody, CreateResolutionRequestBody, Doctors, LoginRequestBody, LoginResponseBody, RegistrationRequestBody, SpecializationsResponseBody } from "types/fetchTypes";
 import { History } from "history";
 
 export const register = (credentials: RegistrationRequestBody, history: History) => {
@@ -98,6 +98,16 @@ export const deleteAppointment = async (id: string) => {
     await axiosInstance
       .delete(`appointments/${id}`)
       .then(() => successNotification("Appointment have been deleted!"));
+  } catch (error) {
+    errorNotification();
+  }
+};
+
+export const CreateResolution = async (credentials:CreateResolutionRequestBody) => {
+  try {
+    await axiosInstance
+      .post(`resolutions`, credentials)
+      .then(() => successNotification("Resolution have been created!"));
   } catch (error) {
     errorNotification();
   }

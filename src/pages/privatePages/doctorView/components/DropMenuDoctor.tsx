@@ -7,13 +7,21 @@ import { fetchDoctorAppointments } from "redux/slices/doctorAppointmentsSlice";
 import { useAppDispatch } from "types/useAppDispatch";
 
 type DropMenuDoctorProps = {
-  menuBtn: ReactElement<string, string>,
-  id: string,
-  visitDate: string,
-  name: string,
-  getModalProps: ({ name, id, visitDate }: { name: string, id: string, visitDate: string }) => void,
-  openModal: () => void,
-}
+  menuBtn: ReactElement<string, string>;
+  id: string;
+  visitDate: string;
+  name: string;
+  getModalProps: ({
+    name,
+    id,
+    visitDate,
+  }: {
+    name: string;
+    id: string;
+    visitDate: string;
+  }) => void;
+  toggleCreateResolutionModal: () => void;
+};
 
 const DropMenuDoctor = ({
   menuBtn,
@@ -21,13 +29,13 @@ const DropMenuDoctor = ({
   visitDate,
   name,
   getModalProps,
-  openModal,
+  toggleCreateResolutionModal,
 }: DropMenuDoctorProps) => {
   const dispatch = useAppDispatch();
 
-  const handleClick = () => {
+  const handleCreate = () => {
     getModalProps({ name, id, visitDate });
-    openModal();
+    toggleCreateResolutionModal();
   };
 
   const handleDelete = async () => {
@@ -37,7 +45,7 @@ const DropMenuDoctor = ({
 
   return (
     <Menu menuButton={menuBtn} transition>
-      <MenuItem onClick={handleClick}>Edit a resolution</MenuItem>
+      <MenuItem onClick={handleCreate}>Create a resolution</MenuItem>
       <MenuItem onClick={handleDelete}>Delete</MenuItem>
     </Menu>
   );

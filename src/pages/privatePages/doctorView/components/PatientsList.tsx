@@ -5,7 +5,7 @@ import styled from "styled-components";
 import * as Styled from "../DoctorViewStyles";
 
 import PatientsListItem from "./PatientsListItem/PatientsListItem";
-import EditAppointmentModal from "./EditAppointmentModal";
+import CreateResolutionModal from "./CreateResolutionModal";
 import { IDoctorAppointment } from "models/IDoctorAppointments";
 
 const List = styled.ul`
@@ -30,7 +30,7 @@ const List = styled.ul`
     }
     &::-webkit-scrollbar-track {
       background: ${({ theme }) =>
-    theme.colors.viewPagesContainerBackgroundColor};
+        theme.colors.viewPagesContainerBackgroundColor};
       opacity: 0.32;
       border-radius: ${({ theme }) => theme.borderRadius.borderRadius};
     }
@@ -44,39 +44,45 @@ const List = styled.ul`
 `;
 
 type appointmentsArray = {
-  appointmentsArray: IDoctorAppointment
-}
-
+  appointmentsArray: IDoctorAppointment;
+};
 
 const PatientsList = ({ appointmentsArray }: appointmentsArray) => {
-  const [modalPropItems, setModalPropItems] = useState({});
-  const [isOpen, setIsOpen] = useState(false);
+  const [modalPropItems, setModalPropItems] = useState({
+    id: "",
+    name: "",
+    visitDate: "",
+  });
+  const [isCreateResolutionModalOpen, setIsCreateResolutionModalOpen] =
+    useState(false);
 
   function toggleModal() {
-    setIsOpen(!isOpen);
+    setIsCreateResolutionModalOpen(!isCreateResolutionModalOpen);
   }
 
   return (
     <>
       {appointmentsArray.length ? (
         <List>
-          {appointmentsArray.map(({ patient, reason, status, visit_date, id }) => {
-            const date = moment(visit_date).format("ddd MMM DD YYYY, h a");
-            return (
-              <PatientsListItem
-                key={uuidv4()}
-                avatar={patient.photo}
-                name={patient.first_name + " " + patient.last_name}
-                appointment={status}
-                time={date}
-                description={reason}
-                id={id}
-                visitDate={visit_date}
-                setModalProps={setModalPropItems}
-                openModalToggle={toggleModal}
-              />
-            );
-          })}
+          {appointmentsArray.map(
+            ({ patient, reason, status, visit_date, id }) => {
+              const date = moment(visit_date).format("ddd MMM DD YYYY, h a");
+              return (
+                <PatientsListItem
+                  key={uuidv4()}
+                  avatar={patient.photo}
+                  name={patient.first_name + " " + patient.last_name}
+                  appointment={status}
+                  time={date}
+                  description={reason}
+                  id={id}
+                  visitDate={visit_date}
+                  setModalProps={setModalPropItems}
+                  toggleCreateResolutionModal={toggleModal}
+                />
+              );
+            }
+          )}
         </List>
       ) : (
         <Styled.EmptyListBlock>
@@ -87,8 +93,8 @@ const PatientsList = ({ appointmentsArray }: appointmentsArray) => {
         </Styled.EmptyListBlock>
       )}
 
-      <EditAppointmentModal
-        isOpen={isOpen}
+      <CreateResolutionModal
+        isOpen={isCreateResolutionModalOpen}
         toggleModal={toggleModal}
         modalPropItems={modalPropItems}
         setDropMenuValue={setModalPropItems}

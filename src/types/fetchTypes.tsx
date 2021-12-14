@@ -44,3 +44,7 @@ export type CreateAppointmentRequestBody = {
   note: string;
   doctorID: string;
 };
+export type CreateResolutionRequestBody = {
+  resolution: string;
+  appointmentID: string;
+};
