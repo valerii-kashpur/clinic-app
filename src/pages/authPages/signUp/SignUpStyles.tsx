@@ -127,7 +127,7 @@ export const PasswordEyeSpan = styled.span`
   } ;
 `;
 
-export const buttonWrapper = styled.div`
+export const ButtonWrapper = styled.div`
   margin: 64px 0 0 0;
 `;
 

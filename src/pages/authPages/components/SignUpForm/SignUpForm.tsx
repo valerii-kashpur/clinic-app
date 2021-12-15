@@ -97,14 +97,14 @@ const SignUpForm = () => {
               onClick={() => setPasswordConfirmToggle(!passwordConfirmToggle)}
             ></Styled.PasswordEyeSpan>
           </Styled.FormInputWrapper>
-          <Styled.buttonWrapper>
+          <Styled.ButtonWrapper>
             <Styled.Button
               text="Sign up"
               width="122px"
               height="48px"
               isLoading={loaderFromUserState}
             />
-          </Styled.buttonWrapper>
+          </Styled.ButtonWrapper>
         </Styled.AsideForm>
       )}
     </Formik>

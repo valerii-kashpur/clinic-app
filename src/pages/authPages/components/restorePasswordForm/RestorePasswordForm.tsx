@@ -5,7 +5,6 @@ import AuthPageInputs from "../AuthPageInputs/AuthPageInputs";
 import * as styled from "../../restorePassword/RestorePasswordStyles";
 // media
 import emailSvg from "media/email.svg";
-import ButtonWithTextAndArrow from "components/ButtonWithTextAndArrow";
 
 const RestorePasswordForm = () => {
   return (

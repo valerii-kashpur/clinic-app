@@ -82,7 +82,7 @@ export const ErrorMessage = styled.p`
   color: ${({theme}) => theme.colors.errorTextColor};
 `;
 
-export const buttonWrapper = styled.div`
+export const ButtonWrapper = styled.div`
   margin: 64px 0 0 0;
 `;
 

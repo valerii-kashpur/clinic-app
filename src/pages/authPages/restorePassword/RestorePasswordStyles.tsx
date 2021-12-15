@@ -1,6 +1,5 @@
 import { Form } from "formik";
 import styled from "styled-components";
-import baseButtonStyles from "styles/baseButtonStyles";
 
 // media
 import angleRight from "media/angle-right-b.svg";
@@ -78,7 +77,7 @@ export const ErrorMessage = styled.p`
 `;
 
 export const ButtonWrapper = styled.div`
-  margin:32px 0 0 0;
+  margin: 32px 0 0 0;
 `;
 
 export const Button = styled(ButtonWithTextAndArrow)`

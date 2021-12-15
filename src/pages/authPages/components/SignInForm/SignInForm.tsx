@@ -10,7 +10,6 @@ import lockSvg from "media/lock.svg";
 import { useSelector } from "react-redux";
 import { loaderSelector } from "redux/selectors";
 import { useAuth } from "hooks/useAuth";
-import ButtonWithTextAndArrow from "components/ButtonWithTextAndArrow";
 
 type submitHandlerProps = {
   email: string;
@@ -57,7 +56,7 @@ const SignInForm = () => {
               onClick={() => setPasswordToggle(!passwordToggle)}
             ></Styled.PasswordEyeSpan>
           </Styled.FormInputWrapper>
-          <Styled.buttonWrapper>
+          <Styled.ButtonWrapper>
             <Styled.Button
               type="submit"
               text="Sign in"
@@ -65,7 +64,7 @@ const SignInForm = () => {
               height="56px"
               isLoading={isLoading}
             />
-          </Styled.buttonWrapper>
+          </Styled.ButtonWrapper>
         </Styled.AsideForm>
       )}
     </Formik>
