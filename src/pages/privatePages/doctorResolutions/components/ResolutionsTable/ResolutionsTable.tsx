@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import TableHead from "../TableHead/TableHead";
 import EditCreateModal from "components/Modal/EditCreateModal";
 import EditResolutionForm from "../EditResolutionForm/EditResolutionForm";
+import * as Styled from "./ResolutionsTableStyles";
 
 type ResolutionsTableProps = {
   resolutions: IDoctorResolutions;
@@ -27,8 +28,8 @@ const ResolutionsTable = ({ resolutions }: ResolutionsTableProps) => {
   };
 
   return (
-    <>
-      <table>
+    <Styled.Wrapper>
+      <Styled.Table>
         <TableHead />
         <tbody>
           {resolutions.map(
@@ -55,7 +56,7 @@ const ResolutionsTable = ({ resolutions }: ResolutionsTableProps) => {
             }
           )}
         </tbody>
-      </table>
+      </Styled.Table>
       <EditCreateModal
         isOpen={isModalOpen}
         toggleModal={setIsModalOpen}
@@ -68,7 +69,7 @@ const ResolutionsTable = ({ resolutions }: ResolutionsTableProps) => {
           />
         </div>
       </EditCreateModal>
-    </>
+    </Styled.Wrapper>
   );
 };
 

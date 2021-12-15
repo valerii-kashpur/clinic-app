@@ -1,6 +1,9 @@
 import React from "react";
+import * as Styled from "./TableItemStyles";
+
 import moreVertical from "media/more-vertical.svg";
 import DropMenuResolution from "../DropMenuResolution/DropMenuResolution";
+import moment from "moment";
 
 type TableItemProps = {
   firstName: string;
@@ -26,24 +29,31 @@ const TableItem = ({
   toggleModal,
 }: TableItemProps) => {
   const actions = () => {};
+
+  const formatDate = (date: string) => {
+    return moment(date).format("MM/DD/YY");
+  };
+
   return (
-    <tr>
-      <td>{firstName}</td>
-      <td>{lastName}</td>
-      <td>{resolution}</td>
-      <td>{visitDate}</td>
-      <td>{nextVisit}</td>
-      <td onClick={actions}>
-        <DropMenuResolution
-          menuButton={<img src={moreVertical} alt="more vertical svg" />}
-          resolutionId={resolutionId}
-          firstName={firstName}
-          lastName={lastName}
-          setModalProps={setModalProps}
-          toggleModal={toggleModal}
-        />
-      </td>
-    </tr>
+    <Styled.Tr>
+      <Styled.Td>{firstName}</Styled.Td>
+      <Styled.Td>{lastName}</Styled.Td>
+      <Styled.ResolutionTd>{resolution}</Styled.ResolutionTd>
+      <Styled.DateTd>{formatDate(visitDate)}</Styled.DateTd>
+      <Styled.DateTd>{formatDate(nextVisit)}</Styled.DateTd>
+      <Styled.MoreTd onClick={actions}>
+        <Styled.ImgWrapper>
+          <DropMenuResolution
+            menuButton={<img src={moreVertical} alt="more vertical svg" />}
+            resolutionId={resolutionId}
+            firstName={firstName}
+            lastName={lastName}
+            setModalProps={setModalProps}
+            toggleModal={toggleModal}
+          />
+        </Styled.ImgWrapper>
+      </Styled.MoreTd>
+    </Styled.Tr>
   );
 };
 
