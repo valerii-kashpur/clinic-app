@@ -28,12 +28,13 @@ const RestorePasswordForm = () => {
               component={AuthPageInputs}
             />
           </styled.FormInputWrapper>
-          <ButtonWithTextAndArrow
-            text="Send Resent Link"
-            width="198px"
-            height="48px"
-            margin="32px 0 0 0"
-          />
+          <styled.ButtonWrapper>
+            <styled.Button
+              text="Send Resent Link"
+              width="198px"
+              height="48px"
+            />
+          </styled.ButtonWrapper>
         </styled.AsideForm>
       )}
     </Formik>

@@ -126,10 +126,14 @@ export const PasswordEyeSpan = styled.span`
     left: 320px;
   } ;
 `;
+
+export const buttonWrapper = styled.div`
+  margin: 64px 0 0 0;
+`;
+
 export const Button = styled(ButtonWithTextAndArrow)`
   width: 122px;
   height: 48px;
-  margin-top: 32px;
 
   @media ${({ theme }) => theme.media.tablet} {
     height: 56px;

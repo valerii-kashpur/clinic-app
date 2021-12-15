@@ -57,14 +57,15 @@ const SignInForm = () => {
               onClick={() => setPasswordToggle(!passwordToggle)}
             ></Styled.PasswordEyeSpan>
           </Styled.FormInputWrapper>
-          <ButtonWithTextAndArrow
-            type="submit"
-            text="Sign in"
-            width="138px"
-            height="56px"
-            margin="64px 0 0 0"
-            isLoading={isLoading}
-          />
+          <Styled.buttonWrapper>
+            <Styled.Button
+              type="submit"
+              text="Sign in"
+              width="138px"
+              height="56px"
+              isLoading={isLoading}
+            />
+          </Styled.buttonWrapper>
         </Styled.AsideForm>
       )}
     </Formik>

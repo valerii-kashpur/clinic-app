@@ -5,6 +5,7 @@ import styled from "styled-components";
 // media
 import eyeOff from "media/eye-off.svg";
 import angleRight from "media/angle-right-b.svg";
+import ButtonWithTextAndArrow from "components/ButtonWithTextAndArrow";
 
 export const AsideForm = styled(Form)`
   display: flex;
@@ -81,32 +82,21 @@ export const ErrorMessage = styled.p`
   color: ${({theme}) => theme.colors.errorTextColor};
 `;
 
-export const Button = styled.button`
-  width: 118px;
-  margin-top: 32px;
+export const buttonWrapper = styled.div`
+  margin: 64px 0 0 0;
+`;
+
+export const Button = styled(ButtonWithTextAndArrow)`
+  width: 122px;
   height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
-  border-radius: ${({theme}) => theme.borderRadius.borderRadius};
-  border: none;
-
-  background-color: ${({theme}) => theme.colors.accentColor};
-  color: ${({theme}) => theme.colors.inputBackgroundColor};
-
-  font-weight: ${({theme}) => theme.fonts.boldFontWeight};
-  font-size: ${({theme}) => theme.fonts.mobileFontSize};
-  line-height: 19px;
-
-  @media ${({theme}) => theme.media.tablet} {
-    margin-top: 64px;
+  @media ${({ theme }) => theme.media.tablet} {
     height: 56px;
-    width: 138px;
+    width: 146px;
 
     font-size: 17px;
     line-height: 24px;
-  }
+  } ;
 `;
 
 export const ButtonVector = styled.span`
