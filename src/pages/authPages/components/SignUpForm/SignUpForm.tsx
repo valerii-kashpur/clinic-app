@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Formik } from "formik";
+import { Field, Formik } from "formik";
 import { SignUpSchema } from "utils/YupValidationSchemas";
 import { useSelector } from "react-redux";
 import { loaderSelector } from "redux/selectors";
@@ -22,13 +22,21 @@ const SignUpForm = () => {
   const { registrationRequest } = useAuth();
 
   type submitHandlerPtops = {
-    email: string, password: string, firstName: string, lastName: string
-  }
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+  };
 
-  const submitHandler = ({ email: userName, password, firstName, lastName }: submitHandlerPtops) => {
+  const submitHandler = ({
+    email: userName,
+    password,
+    firstName,
+    lastName,
+  }: submitHandlerPtops) => {
     const requestData = { userName, password, firstName, lastName };
     registrationRequest(requestData);
-  }
+  };
 
   return (
     <Formik
@@ -42,63 +50,50 @@ const SignUpForm = () => {
       validationSchema={SignUpSchema}
       onSubmit={submitHandler}
     >
-      {({ errors, touched }) => (
+      {() => (
         <Styled.AsideForm action="">
           <Styled.FormInputWrapper svg={userSvg}>
-            <AuthPageInputs
+            <Field
               name="firstName"
               type="text"
               placeholder="First name"
-              errored={errors.firstName && touched.firstName ? "true" : undefined}
-              errors={errors.firstName}
-              touched={touched.firstName}
+              component={AuthPageInputs}
             />
           </Styled.FormInputWrapper>
           <Styled.FormInputWrapper svg={userSvg}>
-            <AuthPageInputs
+            <Field
               name="lastName"
               placeholder="Last name"
               type="text"
-              errored={errors.lastName && touched.lastName ? "true" : undefined}
-              errors={errors.lastName}
-              touched={touched.lastName}
+              component={AuthPageInputs}
             />
           </Styled.FormInputWrapper>
           <Styled.FormInputWrapper svg={emailSvg}>
-            <AuthPageInputs
+            <Field
               name="email"
               type="email"
               placeholder="Email"
-              errored={errors.email && touched.email ? "true" : undefined}
-              errors={errors.email}
-              touched={touched.email}
+              component={AuthPageInputs}
             />
           </Styled.FormInputWrapper>
           <Styled.FormInputWrapper svg={lockSvg}>
-            <AuthPageInputs
+            <Field
               name="password"
               type={passwordToggle ? "text" : "password"}
               placeholder="Password"
-              errored={errors.password && touched.password ? "true" : undefined}
-              password="true"
-              errors={errors.password}
-              touched={touched.password}
+              component={AuthPageInputs}
             />
             <Styled.PasswordEyeSpan
               onClick={() => setPasswordToggle(!passwordToggle)}
             ></Styled.PasswordEyeSpan>
           </Styled.FormInputWrapper>
           <Styled.FormInputWrapper svg={checkSvg}>
-            <AuthPageInputs
+            <Field
               name="confirmPassword"
               type={passwordConfirmToggle ? "text" : "password"}
               placeholder="Confirm Password"
               password="true"
-              errored={
-                errors.confirmPassword && touched.confirmPassword ? "true" : undefined
-              }
-              errors={errors.confirmPassword}
-              touched={touched.confirmPassword}
+              component={AuthPageInputs}
             />
             <Styled.PasswordEyeSpan
               onClick={() => setPasswordConfirmToggle(!passwordConfirmToggle)}

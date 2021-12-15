@@ -1,13 +1,12 @@
 import axios from "axios";
-import { store } from "redux/store";
+import { getToken } from "./tokenService";
 
 const axiosInstance = axios.create({
   baseURL: "https://reactlabapi.herokuapp.com/api/",
 });
 
 axiosInstance.interceptors.request.use((config) => {
-  const state = store.getState();
-  const token = state.user.token;
+  const token = getToken();
   if (token) {
     config.headers = {
       Authorization: `Bearer ${token}`,

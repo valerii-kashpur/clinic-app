@@ -22,6 +22,7 @@ import { rootSaga } from "./saga/rootSaga";
 import createAppointmentSlice from "./slices/createAppointmentSlice";
 import doctorsResolutionsSlice from "./slices/doctorsResolutionsSlice";
 import patientsResolutionsSlice from "./slices/patientsResolutionsSlice";
+import { callback } from "network/tokenService";
 
 const saga = createSagaMiddleware();
 
@@ -59,8 +60,8 @@ export const setupStore = () => {
 export const store = setupStore();
 saga.run(rootSaga);
 
-export const persistor = persistStore(store);
-
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;
 export type AppDispatch = typeof store.dispatch;
+
+export const persistor = persistStore(store, {}, () => callback());
