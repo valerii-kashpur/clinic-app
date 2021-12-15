@@ -4,8 +4,6 @@ import { SignUpSchema } from "utils/YupValidationSchemas";
 import { useSelector } from "react-redux";
 import { loaderSelector } from "redux/selectors";
 import AuthPageInputs from "../AuthPageInputs/AuthPageInputs";
-import ButtonTextWithArrow from "components/ButtonTextWithArrow";
-import LoaderForButtons from "components/LoaderForButtons";
 import * as Styled from "../../signUp/SignUpStyles";
 
 // media
@@ -99,13 +97,12 @@ const SignUpForm = () => {
               onClick={() => setPasswordConfirmToggle(!passwordConfirmToggle)}
             ></Styled.PasswordEyeSpan>
           </Styled.FormInputWrapper>
-          <Styled.Button type="submit">
-            {loaderFromUserState ? (
-              <LoaderForButtons />
-            ) : (
-              <ButtonTextWithArrow text="Sign up" />
-            )}
-          </Styled.Button>
+          <Styled.Button
+            text="Sign up"
+            width="122px"
+            height="48px"
+            isLoading={loaderFromUserState}
+          />
         </Styled.AsideForm>
       )}
     </Formik>

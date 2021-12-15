@@ -61,8 +61,8 @@ type ButtonProps = {
   text: string;
   disabled?: boolean;
   onClick?: any;
-  width: string;
-  height: string;
+  width?: string;
+  height?: string;
   margin?: string;
   padding?: string;
   isLoading?: boolean;
