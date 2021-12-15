@@ -2,9 +2,8 @@ import React from "react";
 import Modal from "styled-react-modal";
 
 const StyledModal = Modal.styled`
-  width: 272px;
-  padding: 4px 24px;
   background-color: white;
+  overflow: hidden;
 
   position: o o;
 `;

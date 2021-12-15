@@ -5,8 +5,9 @@ import styled from "styled-components";
 import * as Styled from "../DoctorViewStyles";
 
 import PatientsListItem from "./PatientsListItem/PatientsListItem";
-import CreateResolutionModal from "./CreateResolutionModal";
 import { IDoctorAppointment } from "models/IDoctorAppointments";
+import EditCreateModal from "components/Modal/EditCreateModal";
+import CreateResolutionForm from "./CreateResolutionForm/CreateResolutionFrom";
 
 const List = styled.ul`
   margin-top: 16px;
@@ -56,9 +57,17 @@ const PatientsList = ({ appointmentsArray }: appointmentsArray) => {
   const [isCreateResolutionModalOpen, setIsCreateResolutionModalOpen] =
     useState(false);
 
-  function toggleModal() {
+  const toggleModal = () => {
     setIsCreateResolutionModalOpen(!isCreateResolutionModalOpen);
-  }
+  };
+
+  const clearModalProperties = () => {
+    setModalPropItems({
+      id: "",
+      name: "",
+      visitDate: "",
+    });
+  };
 
   return (
     <>
@@ -92,13 +101,16 @@ const PatientsList = ({ appointmentsArray }: appointmentsArray) => {
           </Styled.EmptyListText>
         </Styled.EmptyListBlock>
       )}
-
-      <CreateResolutionModal
+      <EditCreateModal
         isOpen={isCreateResolutionModalOpen}
-        toggleModal={toggleModal}
-        modalPropItems={modalPropItems}
-        setDropMenuValue={setModalPropItems}
-      />
+        toggleModal={setIsCreateResolutionModalOpen}
+        clearModalProperties={clearModalProperties}
+      >
+        <CreateResolutionForm
+          modalProps={modalPropItems}
+          toggleModal={setIsCreateResolutionModalOpen}
+        />
+      </EditCreateModal>
     </>
   );
 };

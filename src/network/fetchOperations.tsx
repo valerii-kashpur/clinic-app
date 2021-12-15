@@ -15,6 +15,7 @@ import {
 } from "types/fetchTypes";
 import { History } from "history";
 import { IDoctorResolutions } from "models/IDoctorResolutions";
+import { IPatientsResolutions } from "models/IPatientsResolutions";
 
 export const register = (
   credentials: RegistrationRequestBody,
@@ -104,9 +105,30 @@ export const getDoctorResolutions = async (requestData: {
   type FetchPayload = {
     appointments: IDoctorResolutions[] | [];
     total: number;
-  };  
+  };
   const { data } = await axiosInstance.get<FetchPayload>(
     `resolutions/doctor/me`,
+    {
+      params: {
+        offset: requestData.currentPage,
+        limit: 8,
+        sortBy: requestData.sortBy,
+      },
+    }
+  );
+  return data;
+};
+
+export const getPatientsResolutions = async (requestData: {
+  sortBy: string;
+  currentPage: string;
+}) => {
+  type FetchPayload = {
+    appointments: IPatientsResolutions[] | [];
+    total: number;
+  };
+  const { data } = await axiosInstance.get<FetchPayload>(
+    `resolutions/patient/me`,
     {
       params: {
         offset: requestData.currentPage,
@@ -197,7 +219,7 @@ export const editResolution = async (
   }
 };
 
-export const deleteResolution = async (id: string) => {  
+export const deleteResolution = async (id: string) => {
   try {
     await axiosInstance
       .delete(`resolutions/${id}`)

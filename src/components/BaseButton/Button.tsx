@@ -2,8 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 type BaseButtonStylesType = {
-  margin: string, width: string, height: string,
-}
+  margin?: string;
+  width?: string;
+  height?: string;
+  altStyle?: boolean;
+};
 
 const BaseButtonStyles = styled.button<BaseButtonStylesType>`
   width: auto;
@@ -33,20 +36,64 @@ const BaseButtonStyles = styled.button<BaseButtonStylesType>`
   &:hover,
   &:focus {
     background-color: #476cd3;
+    color: #dce0ec;
   }
 
   &:disabled {
     background-color: #dce0ec;
+    color: #ffffff;
   }
+
+  ${({ altStyle }) =>
+    altStyle &&
+    `
+    background: #FFFFFF;
+    color: #A1ABC9;
+
+    &:hover,&:focus,&:active{
+      background-color: #F9FAFF;
+      color: #A1ABC9;
+      cursor: pointer;
+    };
+
+    &:disabled{
+      background: #DCE0EC;
+      color: #FFFFFF;
+    }
+  `}
 `;
 
 type ButtonProps = {
-  children: React.ReactNode, margin: string, width: string, height: string, disabled?: boolean, type?: "button" | "submit" | "reset" | undefined
-}
+  children: React.ReactNode;
+  margin?: string;
+  width?: string;
+  height?: string;
+  disabled?: boolean;
+  onClick?: any;
+  altStyle?: boolean;
+  type?: "button" | "submit" | "reset" | undefined;
+};
 
-const Button = ({ children, margin, width, height, disabled, type }: ButtonProps) => {
+const Button = ({
+  children,
+  margin,
+  width,
+  height,
+  disabled,
+  altStyle,
+  onClick,
+  type,
+}: ButtonProps) => {
   return (
-    <BaseButtonStyles type={type} margin={margin} width={width} height={height} disabled={disabled}>
+    <BaseButtonStyles
+      type={type}
+      margin={margin}
+      width={width}
+      height={height}
+      disabled={disabled}
+      altStyle={altStyle}
+      onClick={onClick}
+    >
       {children}
     </BaseButtonStyles>
   );

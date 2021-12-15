@@ -4,6 +4,7 @@ import DoctorsAppointmentsSagaWatcher from "./doctorAppointmentsSaga";
 import DoctorsResolutionsSagaWatcher from "./doctorsResolutionsSaga";
 import loginSagaWatcher from "./loginSaga";
 import PatientsAppointmentsSagaWatcher from "./patientAppointmentsSaga";
+import PatientsResolutionsSagaWatcher from "./patientsResolutionsSaga";
 import UserSagaWatcher from "./userSaga";
 
 export function* rootSaga() {
@@ -14,5 +15,6 @@ export function* rootSaga() {
     DoctorsAppointmentsSagaWatcher(),
     DoctorsResolutionsSagaWatcher(),
     CreateAppointmentsSagaWatcher(),
+    PatientsResolutionsSagaWatcher(),
   ]);
 }

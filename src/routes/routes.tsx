@@ -26,6 +26,9 @@ const PatientMakeAppointment = lazy(
   () =>
     import("pages/privatePages/patientMakeAppointment/PatientMakeAppointment")
 );
+const PatientResolutions = lazy(
+  () => import("pages/privatePages/patientsResolutions/PatientsResolutions")
+);
 
 const ROUTES = [
   {
@@ -39,6 +42,12 @@ const ROUTES = [
     component: DoctorView,
     private: true,
     onlyForRole: "Doctor",
+  },
+  {
+    path: PATHS.patientsResolutions,
+    component: PatientResolutions,
+    private: true,
+    onlyForRole: "Patient",
   },
   {
     path: PATHS.makeAppointment,

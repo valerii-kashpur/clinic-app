@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ViewPagesWrapper from "../components/ViewPagesWrapper/ViewPagesWrapper";
 import AppointmentsList from "./components/AppointmentsList";
+import PATHS from "routes/paths";
+import NavTab from "components/NavTab";
 import { useSelector } from "react-redux";
 import {
   patientAppointments,
@@ -15,7 +17,6 @@ import * as Styled from "./PatientViewStyles";
 
 // IMAGES
 import slider from "media/sliders-v-alt.svg";
-import PATHS from "routes/paths";
 
 const PatientView = () => {
   const [dateStatus, setDateStatus] = useState("Upcoming");
@@ -40,9 +41,13 @@ const PatientView = () => {
   return (
     <ViewPagesWrapper>
       <Styled.NavButtonsWrapper>
-        <Styled.NavButton>Profile</Styled.NavButton>
-        <Styled.NavButton current>Appointments</Styled.NavButton>
-        <Styled.NavButton>resolutions</Styled.NavButton>
+        <NavTab to={"/profile"} disabled={true}>
+          Profile
+        </NavTab>
+        <NavTab to={PATHS.patientView} current="true">
+          Appointments
+        </NavTab>
+        <NavTab to={PATHS.patientsResolutions}>resolutions</NavTab>
       </Styled.NavButtonsWrapper>
       <Styled.NavigationWrapper>
         <Styled.NavSectionTitle>My Appointments</Styled.NavSectionTitle>

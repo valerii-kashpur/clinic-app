@@ -1,6 +1,11 @@
 import { editResolution } from "network/fetchOperations";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
+import Button from "components/BaseButton/Button";
+import * as Styled from "./EditResolutionFormStyles";
+import userSvg from "media/user.svg";
+import blankSvg from "media/clipboard-blank.svg";
+import multiplySvg from "media/multiply.svg";
 
 type modalProps = {
   toggleModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,6 +20,7 @@ const EditResolutionForm = ({ toggleModal, modalFormProps }: modalProps) => {
     e.preventDefault();
     refetch();
   };
+
   const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
   };
@@ -43,34 +49,45 @@ const EditResolutionForm = ({ toggleModal, modalFormProps }: modalProps) => {
   console.log(isLoading);
 
   return (
-    <div>
-      <form action="" onSubmit={submitHandler}>
-        <h4>Edit a Resolution</h4>
-        <div>
-          <img src="" alt="" />
-          <p>{`${firstName} ${lastName}`}</p>
-        </div>
-        <p>Resolution</p>
-        <textarea
-          name=""
-          id=""
-          cols={30}
-          rows={10}
-          value={value}
-          onChange={onChangeHandler}
-        ></textarea>
-        <div>
-          <button onClick={onClickHandler} type="button">
-            <img src="" alt="" />
-            Cancel
-          </button>
-          <button type="submit" disabled={value.length < 4}>
-            <img src="" alt="" />
-            Edit
-          </button>
-        </div>
-      </form>
-    </div>
+    <Styled.FormWrapper>
+      <Styled.Form action="" onSubmit={submitHandler}>
+        <Styled.FormTitle>Edit a Resolution</Styled.FormTitle>
+        <Styled.NameWrapper>
+          <Styled.Image src={userSvg} alt="user icon" />
+          <Styled.Name>{`${firstName} ${lastName}`}</Styled.Name>
+        </Styled.NameWrapper>
+        <Styled.TextAreaWrapper>
+          <Styled.Label htmlFor="resolution">Resolution</Styled.Label>
+          <Styled.TextArea
+            name="resolution"
+            id="resolution"
+            cols={30}
+            rows={10}
+            value={value}
+            onChange={onChangeHandler}
+          ></Styled.TextArea>
+        </Styled.TextAreaWrapper>
+        <Styled.ButtonWrapper>
+          <Button
+            onClick={onClickHandler}
+            type="button"
+            width="117px"
+            height="48px"
+            altStyle={true}
+          >
+            <Styled.Image src={multiplySvg} alt="blank svg" /> Cancel
+          </Button>
+          <Button
+            type="submit"
+            disabled={value.length < 4}
+            width="117px"
+            height="48px"
+          >
+            <Styled.Image src={blankSvg} alt="blank svg" /> Edit
+          </Button>
+        </Styled.ButtonWrapper>
+      </Styled.Form>
+    </Styled.FormWrapper>
   );
 };
 

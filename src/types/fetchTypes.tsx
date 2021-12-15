@@ -1,6 +1,7 @@
 import { IDoctorAppointment } from "models/IDoctorAppointments";
 import { IDoctorResolutions } from "models/IDoctorResolutions";
 import { IPatientAppointment } from "models/IPatientAppointments";
+import { IPatientsResolutions } from "models/IPatientsResolutions";
 
 export type RegistrationRequestBody = {
   userName: string;
@@ -30,6 +31,10 @@ export type DoctorAppointmentsResponseBody = {
 };
 export type DoctorResolutionsResponseBody = {
   resolutions: IDoctorResolutions;
+  total: number;
+};
+export type PatientsResolutionsResponseBody = {
+  resolutions: IPatientsResolutions;
   total: number;
 };
 export type SpecializationsResponseBody = {

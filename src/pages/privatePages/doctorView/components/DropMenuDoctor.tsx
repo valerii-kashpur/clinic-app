@@ -1,10 +1,18 @@
 import React, { ReactElement } from "react";
-import { Menu, MenuItem } from "@szhsin/react-menu";
+import { MenuItem, Menu as MenuInner } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
+import { menuSelector } from "@szhsin/react-menu/style-utils";
 import { deleteAppointment } from "network/fetchOperations";
 import { fetchDoctorAppointments } from "redux/slices/doctorAppointmentsSlice";
 import { useAppDispatch } from "types/useAppDispatch";
+import styled from "styled-components";
+
+const Menu = styled(MenuInner)`
+  ${menuSelector.name} {
+    left: -205px !important;
+  } ;
+`;
 
 type DropMenuDoctorProps = {
   menuBtn: ReactElement<string, string>;

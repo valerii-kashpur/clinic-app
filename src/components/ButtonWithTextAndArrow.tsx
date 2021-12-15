@@ -1,12 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 import angleRight from "media/angle-right-b.svg";
-import LoaderForButtons from './LoaderForButtons';
+import LoaderForButtons from "./LoaderForButtons";
 
 type ButtonStyleProps = {
-  margin?: string, width: string, height: string, padding?: string, isLoading?: boolean
-}
-
+  margin?: string;
+  width?: string;
+  height?: string;
+  padding?: string;
+  isLoading?: boolean;
+};
 
 const Button = styled.button<ButtonStyleProps>`
   width: auto;
@@ -39,9 +42,9 @@ const Button = styled.button<ButtonStyleProps>`
     background-color: #476cd3;
   }
 
-  &:disabled{
+  &:disabled {
     background-color: #dce0ec;
-  };
+  }
 `;
 
 const ButtonVector = styled.span`
@@ -54,12 +57,46 @@ const ButtonVector = styled.span`
   background-repeat: no-repeat;
 `;
 
-type ButtonProps = { text: string, disabled?: boolean, onClick?: () => void, width: string, height: string, margin?: string, padding?: string, isLoading?: boolean, type?: "button" | "submit" | "reset" }
+type ButtonProps = {
+  text: string;
+  disabled?: boolean;
+  onClick?: any;
+  width: string;
+  height: string;
+  margin?: string;
+  padding?: string;
+  isLoading?: boolean;
+  type?: "button" | "submit" | "reset";
+};
 
-const ButtonWithTextAndArrow = ({ text, disabled, onClick, width, height, margin, padding, isLoading, type }: ButtonProps) => {
+const ButtonWithTextAndArrow = ({
+  text,
+  disabled,
+  onClick,
+  width,
+  height,
+  margin,
+  padding,
+  isLoading,
+  type,
+}: ButtonProps) => {
   return (
-    <Button disabled={disabled} onClick={onClick} width={width} height={height} margin={margin} padding={padding} type={type}>
-      {isLoading ? <LoaderForButtons /> : <>{text} < ButtonVector /></>}
+    <Button
+      disabled={disabled}
+      onClick={onClick}
+      width={width}
+      height={height}
+      margin={margin}
+      padding={padding}
+      type={type}
+    >
+      {isLoading ? (
+        <LoaderForButtons />
+      ) : (
+        <>
+          {text} <ButtonVector />
+        </>
+      )}
     </Button>
   );
 };

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import DatePickerForm from "../DatePicker/DatePickerForm";
 import Text from "components/Text";
 import * as Styled from "../../PatientMakeAppointmentStyles";
-import Button from "components/BaseButton.js/Button";
+import Button from "components/BaseButton/Button";
 
 import RadioBtns from "../RadioBtns/RadioBtns";
 import VisitReasons from "../VisitReasons/VisitReasons";

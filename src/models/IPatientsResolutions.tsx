@@ -3,6 +3,7 @@ interface ResolutionPatient {
   id: string;
   last_name: string;
   photo: string;
+  specialization_name: string;
 }
 
 export interface Resolution {
@@ -11,7 +12,7 @@ export interface Resolution {
   appointment_id: string;
   next_appointment_date: string;
   visit_date: string;
-  patient: ResolutionPatient;
+  doctor: ResolutionPatient;
 }
 
-export type IDoctorResolutions = Array<Resolution> | [];
+export type IPatientsResolutions = Array<Resolution> | [];

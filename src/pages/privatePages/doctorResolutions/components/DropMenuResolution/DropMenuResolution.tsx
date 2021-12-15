@@ -1,10 +1,18 @@
 import React, { ReactElement } from "react";
-import { Menu, MenuItem } from "@szhsin/react-menu";
+import { MenuItem, Menu as MenuInner } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
+import { menuSelector } from "@szhsin/react-menu/style-utils";
 import { useAppDispatch } from "types/useAppDispatch";
 import { deleteResolution } from "network/fetchOperations";
 import { fetchDoctorResolutions } from "redux/slices/doctorsResolutionsSlice";
+import styled from "styled-components";
+
+const Menu = styled(MenuInner)`
+  ${menuSelector.name} {
+    left: -170px !important;
+  } ;
+`;
 
 type DropMenuResolutionProps = {
   menuButton: ReactElement;

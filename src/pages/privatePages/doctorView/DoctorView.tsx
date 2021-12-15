@@ -17,6 +17,7 @@ import { fetchDoctorAppointments } from "redux/slices/doctorAppointmentsSlice";
 import { useAppSelector } from "types/useAppSelector";
 import { useAppDispatch } from "types/useAppDispatch";
 import PATHS from "routes/paths";
+import NavTab from "components/NavTab";
 
 const DoctorView = () => {
   const [sortBy, setSortBy] = useState("dateSort");
@@ -41,8 +42,10 @@ const DoctorView = () => {
   return (
     <ViewPagesWrapper>
       <Styled.NavButtonsWrapper>
-        <Styled.NavButton current>Patients</Styled.NavButton>
-        <Styled.NavButton>Resolutions</Styled.NavButton>
+        <NavTab to={PATHS.doctorView} current="true">
+          Patients
+        </NavTab>
+        <NavTab to={PATHS.doctorResolutions}>Resolutions</NavTab>
       </Styled.NavButtonsWrapper>
       <Styled.NavigationWrapper>
         <Styled.NavSectionTitle>My Patients</Styled.NavSectionTitle>

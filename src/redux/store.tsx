@@ -21,6 +21,7 @@ import createSagaMiddleware from "@redux-saga/core";
 import { rootSaga } from "./saga/rootSaga";
 import createAppointmentSlice from "./slices/createAppointmentSlice";
 import doctorsResolutionsSlice from "./slices/doctorsResolutionsSlice";
+import patientsResolutionsSlice from "./slices/patientsResolutionsSlice";
 
 const saga = createSagaMiddleware();
 
@@ -44,6 +45,7 @@ const rootReducer = combineReducers({
   patientAppointments: patientAppointmentsSlice,
   doctorAppointments: doctorAppointmentsSlice,
   doctorsResolutions: doctorsResolutionsSlice,
+  patientsResolutions: patientsResolutionsSlice,
   createAppointment: createAppointmentSlice,
 });
 

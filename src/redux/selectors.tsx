@@ -41,6 +41,21 @@ export const doctorsResolutionsIsFetchingSelector = createSelector(
   (state) => state.isFetching
 );
 //
+export const patientsResolutions = (state: RootState) =>
+  state.patientsResolutions;
+export const patientsResolutionsSelector = createSelector(
+  patientsResolutions,
+  (state) => state.resolutions
+);
+export const patientsTotalResolutionsSelector = createSelector(
+  patientsResolutions,
+  (state) => state.total
+);
+export const patientsResolutionsIsFetchingSelector = createSelector(
+  patientsResolutions,
+  (state) => state.isFetching
+);
+//
 export const appointmentFormData = (state: RootState) =>
   state.createAppointment;
 export const selectedDoctorSelector = createSelector(

@@ -1,37 +1,33 @@
 import React, { useEffect, useState } from "react";
 import ViewPagesWrapper from "../components/ViewPagesWrapper/ViewPagesWrapper";
-import * as Styled from "./DoctorResolutionsStyles";
-
-import search from "media/search.svg";
-import slider from "media/sliders-v-alt.svg";
-import ResolutionsTable from "./components/ResolutionsTable/ResolutionsTable";
+import PATHS from "routes/paths";
+import NavTab from "components/NavTab";
+import * as Styled from "./PatientsResolutionsStyles";
 import { useHistory } from "react-router-dom";
 import { useAppDispatch } from "types/useAppDispatch";
 import { useAppSelector } from "types/useAppSelector";
 import {
-  doctorsResolutionsSelector,
-  doctorsTotalResolutionsSelector,
   isAuthorizedSelector,
+  patientsResolutionsSelector,
+  patientsTotalResolutionsSelector,
   userRoleNameSelector,
 } from "redux/selectors";
-import { fetchDoctorResolutions } from "redux/slices/doctorsResolutionsSlice";
-import Pagination from "components/Pagination/Pagination";
-import PATHS from "routes/paths";
-import NavTab from "components/NavTab";
 
-const DoctorResolutions = () => {
+import search from "media/search.svg";
+import slider from "media/sliders-v-alt.svg";
+import ResolutionsTable from "./components/ResolutionsTable/ResolutionsTable";
+import { fetchPatientsResolutions } from "redux/slices/patientsResolutionsSlice";
+import Pagination from "components/Pagination/Pagination";
+
+const PatientsResolutions = () => {
   const [sortBy, setSortBy] = useState("dateSort");
   const [currentPage, setCurrentPage] = useState(1);
   const history = useHistory();
   const dispatch = useAppDispatch();
   const userRole = useAppSelector(userRoleNameSelector);
   const isAuth = useAppSelector(isAuthorizedSelector);
-  const resolutions = useAppSelector(doctorsResolutionsSelector);
-  const paginationPages = useAppSelector(doctorsTotalResolutionsSelector);
-
-  const handlePaginationClick = (pageNummber: number) => {
-    setCurrentPage(pageNummber);
-  };
+  const resolutions = useAppSelector(patientsResolutionsSelector);
+  const paginationPages = useAppSelector(patientsTotalResolutionsSelector);
 
   useEffect(() => {
     if (!userRole) {
@@ -41,9 +37,19 @@ const DoctorResolutions = () => {
 
   useEffect(() => {
     if (userRole && isAuth) {
-      dispatch(fetchDoctorResolutions({ sortBy, currentPage }));
+      //   dispatch(fetchDoctorResolutions({ sortBy, currentPage }));
     }
   }, [dispatch, sortBy, userRole, isAuth, currentPage]);
+
+  useEffect(() => {
+    if (userRole && isAuth) {
+      dispatch(fetchPatientsResolutions({ sortBy, currentPage }));
+    }
+  }, [dispatch, sortBy, userRole, isAuth, currentPage]);
+
+  const handlePaginationClick = (pageNummber: number) => {
+    setCurrentPage(pageNummber);
+  };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortBy(e.target.value);
@@ -52,9 +58,12 @@ const DoctorResolutions = () => {
   return (
     <ViewPagesWrapper>
       <Styled.NavButtonsWrapper>
-        <NavTab to={PATHS.doctorView}>Patients</NavTab>
-        <NavTab to={PATHS.doctorResolutions} current="true">
-          Resolutions
+        <NavTab to={"/profile"} disabled={true}>
+          Profile
+        </NavTab>
+        <NavTab to={PATHS.patientView}>Appointments</NavTab>
+        <NavTab to={PATHS.patientsResolutions} current="true">
+          resolutions
         </NavTab>
       </Styled.NavButtonsWrapper>
       <Styled.NavigationWrapper>
@@ -83,4 +92,4 @@ const DoctorResolutions = () => {
   );
 };
 
-export default DoctorResolutions;
+export default PatientsResolutions;

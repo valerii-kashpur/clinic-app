@@ -6,6 +6,7 @@ const PATHS = {
   doctorView: "/doctor-view",
   doctorResolutions: "/doctor-view/resolutions",
   patientView: "/patient-view",
+  patientsResolutions: "/patient-view/resolutions",
   makeAppointment: "/patient-view/make-appointment",
 };
 
