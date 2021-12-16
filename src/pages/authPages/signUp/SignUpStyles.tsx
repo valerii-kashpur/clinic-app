@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { Form } from "formik";
 import styled from "styled-components";
 
@@ -21,35 +20,9 @@ export const AsideLinkWrapper = styled.div`
   }
 `;
 
-export const AsideLinkText = styled.p`
+export const AsideLinkText = styled.div`
   margin: 0;
   margin-right: 12px;
-
-  font-size: ${({ theme }) => theme.fonts.mobileFontSize};
-  line-height: 21px;
-
-  color: ${({ theme }) => theme.colors.secondaryTextColor};
-
-  @media ${({ theme }) => theme.media.tablet} {
-    margin-top: 0px;
-
-    font-size: ${({ theme }) => theme.fonts.mobileFontSize};
-    line-height: 21px;
-  } ;
-`;
-
-export const AsideLink = styled(Link)`
-  font-weight: ${({ theme }) => theme.fonts.boldFontWeight};
-  font-size: ${({ theme }) => theme.fonts.mobileFontSize};
-  line-height: 130%;
-  text-decoration: underline;
-
-  color: ${({ theme }) => theme.colors.accentColor};
-
-  @media ${({ theme }) => theme.media.tablet} {
-    margin-top: 0px;
-    line-height: 19px;
-  } ;
 `;
 
 export const AsideForm = styled(Form)`

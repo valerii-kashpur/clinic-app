@@ -5,16 +5,9 @@ import styled from "styled-components";
 import angleRight from "media/angle-right-b.svg";
 import ButtonWithTextAndArrow from "components/ButtonWithTextAndArrow";
 
-export const NotificationText = styled.p`
+export const NotificationText = styled.div`
   min-width: 256px;
-  margin: 0;
   margin-bottom: 24px;
-
-  font-size: ${({ theme }) => theme.fonts.mobileFontSize};
-  line-height: 130%;
-  font-weight: ${({ theme }) => theme.fonts.fontStyle};
-
-  color: ${({ theme }) => theme.colors.secondaryTextColor};
 
   @media ${({ theme }) => theme.media.tablet} {
     width: 368px;

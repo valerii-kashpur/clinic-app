@@ -5,13 +5,13 @@ import { useSelector } from "react-redux";
 import { loaderSelector } from "redux/selectors";
 import AuthPageInputs from "../AuthPageInputs/AuthPageInputs";
 import * as Styled from "../../signUp/SignUpStyles";
+import { useAuth } from "hooks/useAuth";
 
 // media
 import userSvg from "media/user.svg";
 import emailSvg from "media/email.svg";
 import lockSvg from "media/lock.svg";
 import checkSvg from "media/check.svg";
-import { useAuth } from "hooks/useAuth";
 
 const SignUpForm = () => {
   const [passwordToggle, setPasswordToggle] = useState(false);
