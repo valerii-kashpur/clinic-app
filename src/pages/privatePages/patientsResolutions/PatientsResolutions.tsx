@@ -18,6 +18,7 @@ import slider from "media/sliders-v-alt.svg";
 import ResolutionsTable from "./components/ResolutionsTable/ResolutionsTable";
 import { fetchPatientsResolutions } from "redux/slices/patientsResolutionsSlice";
 import Pagination from "components/Pagination/Pagination";
+import TitleH2 from "components/TitleH2";
 
 const PatientsResolutions = () => {
   const [sortBy, setSortBy] = useState("dateSort");
@@ -67,7 +68,7 @@ const PatientsResolutions = () => {
         </NavTab>
       </Styled.NavButtonsWrapper>
       <Styled.NavigationWrapper>
-        <Styled.NavSectionTitle>Resolutions</Styled.NavSectionTitle>
+        <TitleH2>Resolutions</TitleH2>
         <Styled.NavigationItemsWrapper>
           <Styled.NavigationItemSearch src={search} alt="" />
           <Styled.NavigationSearchInput type="text" placeholder="Search" />

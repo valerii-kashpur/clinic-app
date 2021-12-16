@@ -23,4 +23,6 @@ min-height: 400px;
   } ;
 `;
 
-export const Table = styled.table``;
+export const Table = styled.table`
+
+`;

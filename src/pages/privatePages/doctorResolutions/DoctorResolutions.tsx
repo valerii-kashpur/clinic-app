@@ -18,6 +18,7 @@ import { fetchDoctorResolutions } from "redux/slices/doctorsResolutionsSlice";
 import Pagination from "components/Pagination/Pagination";
 import PATHS from "routes/paths";
 import NavTab from "components/NavTab";
+import TitleH2 from "components/TitleH2";
 
 const DoctorResolutions = () => {
   const [sortBy, setSortBy] = useState("dateSort");
@@ -58,7 +59,7 @@ const DoctorResolutions = () => {
         </NavTab>
       </Styled.NavButtonsWrapper>
       <Styled.NavigationWrapper>
-        <Styled.NavSectionTitle>Resolutions</Styled.NavSectionTitle>
+        <TitleH2>Resolutions</TitleH2>
         <Styled.NavigationItemsWrapper>
           <Styled.NavigationItemSearch src={search} alt="" />
           <Styled.NavigationSearchInput type="text" placeholder="Search" />

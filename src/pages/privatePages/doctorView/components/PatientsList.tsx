@@ -8,6 +8,7 @@ import PatientsListItem from "./PatientsListItem/PatientsListItem";
 import { IDoctorAppointment } from "models/IDoctorAppointments";
 import EditCreateModal from "components/Modal/EditCreateModal";
 import CreateResolutionForm from "./CreateResolutionForm/CreateResolutionFrom";
+import TextSecondary from "components/TextSecondary";
 
 const List = styled.ul`
   margin-top: 16px;
@@ -96,8 +97,10 @@ const PatientsList = ({ appointmentsArray }: appointmentsArray) => {
       ) : (
         <Styled.EmptyListBlock>
           <Styled.EmptyListText data-testid="emptyList">
-            You have no patients yet. To create a patient profile, please
-            contact your administrator.
+            <TextSecondary>
+              You have no patients yet. To create a patient profile, please
+              contact your administrator.
+            </TextSecondary>
           </Styled.EmptyListText>
         </Styled.EmptyListBlock>
       )}

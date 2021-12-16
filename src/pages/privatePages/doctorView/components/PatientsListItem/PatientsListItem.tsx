@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from "uuid";
 import * as Styled from "./PatientsListItemStyles";
 import moreVertical from "media/more-vertical.svg";
 import DropMenuDoctor from "../DropMenuDoctor";
+import CardName from "components/CardName";
+import TextSecondary from "components/TextSecondary";
 
 type PatientsListItemProps = {
   avatar: string;
@@ -35,12 +37,10 @@ const PatientsListItem = ({
         <Styled.ListItemInfoWrapper>
           <Styled.ListItemInfoAvatar src={avatar} alt="user avatar" />
           <div>
-            <Styled.ListItemInfoName>{name}</Styled.ListItemInfoName>
+            <CardName>{name}</CardName>
             <Styled.ListItemStatusWrapper>
               <Styled.ListItemStatus />
-              <Styled.ListItemStatusAppointment>
-                {appointment}
-              </Styled.ListItemStatusAppointment>
+              <TextSecondary>{appointment}</TextSecondary>
             </Styled.ListItemStatusWrapper>
           </div>
           <DropMenuDoctor

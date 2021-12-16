@@ -124,11 +124,6 @@ export const EmptyListBlock = styled.div`
   background-size: 120px 120px;
 `;
 
-export const EmptyListText = styled.p`
+export const EmptyListText = styled.div`
   max-width: 461px;
-
-  font-weight: ${({ theme }) => theme.fonts.boldFontWeight};
-  line-height: 21px;
-
-  color: ${({ theme }) => theme.colors.secondaryTextColor};
 `;

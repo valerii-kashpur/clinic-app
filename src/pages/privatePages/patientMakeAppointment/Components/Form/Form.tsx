@@ -12,6 +12,11 @@ import { useAppointmentForm } from "hooks/useAppointmentForm";
 import TitleH4 from "components/TitleH4";
 import styled from "styled-components";
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+`;
+
 const Form = () => {
   const history = useHistory();
   const [toggleButton, setToggleButton] = useState(true);
@@ -31,11 +36,6 @@ const Form = () => {
       setToggleButton(buttonCondition);
     }
   }, [buttonCondition, toggleButton]);
-
-  const ButtonWrapper = styled.div`
-    display: flex;
-    flex-direction: row-reverse;
-  `;
 
   return (
     <form action="" onSubmit={submitHandler}>

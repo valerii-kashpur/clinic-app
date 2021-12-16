@@ -18,6 +18,7 @@ import { useAppSelector } from "types/useAppSelector";
 import { useAppDispatch } from "types/useAppDispatch";
 import PATHS from "routes/paths";
 import NavTab from "components/NavTab";
+import TitleH2 from "components/TitleH2";
 
 const DoctorView = () => {
   const [sortBy, setSortBy] = useState("dateSort");
@@ -39,6 +40,10 @@ const DoctorView = () => {
     }
   }, [dispatch, sortBy, userRole, isAuth]);
 
+  const onChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortBy(e.target.value);
+  };
+
   return (
     <ViewPagesWrapper>
       <Styled.NavButtonsWrapper>
@@ -48,17 +53,13 @@ const DoctorView = () => {
         <NavTab to={PATHS.doctorResolutions}>Resolutions</NavTab>
       </Styled.NavButtonsWrapper>
       <Styled.NavigationWrapper>
-        <Styled.NavSectionTitle>My Patients</Styled.NavSectionTitle>
+        <TitleH2>My Patients</TitleH2>
         <Styled.NavigationItemsWrapper>
           <Styled.NavigationItemSearch src={search} alt="" />
           <Styled.NavigationSearchInput type="text" placeholder="Search" />
           <Styled.NavigationItemSelect src={slider} alt="" />
           <Styled.NavigationSelectSpan>Sort by:</Styled.NavigationSelectSpan>
-          <Styled.NavigationSelect
-            name="Date"
-            id=""
-            onChange={(e) => setSortBy(e.target.value)}
-          >
+          <Styled.NavigationSelect name="Date" id="" onChange={onChangeHandler}>
             <option value="dateSort">Date</option>
             <option value="firstNameSort">Name</option>
             <option value="lastNameSort">Last Name</option>

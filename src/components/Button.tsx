@@ -1,7 +1,6 @@
 import LoaderForButtons from "components/LoaderForButtons";
 import React from "react";
 import styled from "styled-components";
-import { BooleanLocale } from "yup/lib/locale";
 
 type BaseButtonStylesType = {
   width?: string;
