@@ -1,23 +1,25 @@
+import TitleH2 from "components/TitleH2";
 import React from "react";
-import { styles } from "./AuthAsideStyles";
-
-
-const { Container, Aside, AsideWrapper, AsideTitle } = styles;
+import * as Styled from "./AuthAsideStyles";
 
 type AuthAsideProps = {
-  asidePadding: string, title: string, children: React.ReactNode
-}
+  asidePadding: string;
+  title: string;
+  children: React.ReactNode;
+};
 
 const AuthAside = ({ asidePadding, title, children }: AuthAsideProps) => {
   return (
-    <Container>
-      <Aside padding={asidePadding}>
-        <AsideWrapper>
-          <AsideTitle>{title}</AsideTitle>
+    <Styled.Container>
+      <Styled.Aside padding={asidePadding}>
+        <Styled.AsideWrapper>
+          <Styled.TitleWrapper>
+            <TitleH2>{title}</TitleH2>
+          </Styled.TitleWrapper>
           {children}
-        </AsideWrapper>
-      </Aside>
-    </Container>
+        </Styled.AsideWrapper>
+      </Styled.Aside>
+    </Styled.Container>
   );
 };
 

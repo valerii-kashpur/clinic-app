@@ -2,8 +2,7 @@ import React from "react";
 import * as Styled from "./SignInStyles";
 import SignInForm from "../components/SignInForm/SignInForm";
 import AuthAside from "../components/AuthAside/AuthAside";
-import  PATHS  from "routes/paths";
-
+import PATHS from "routes/paths";
 
 const SignIn = () => {
   return (

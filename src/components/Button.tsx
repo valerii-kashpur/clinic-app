@@ -1,8 +1,9 @@
+import LoaderForButtons from "components/LoaderForButtons";
 import React from "react";
 import styled from "styled-components";
+import { BooleanLocale } from "yup/lib/locale";
 
 type BaseButtonStylesType = {
-  margin?: string;
   width?: string;
   height?: string;
   altStyle?: boolean;
@@ -14,29 +15,29 @@ const BaseButtonStyles = styled.button<BaseButtonStylesType>`
   align-items: center;
   justify-content: center;
 
-  margin: ${({ margin }) => margin};
-  width: ${({ width }) => width};
-  height: ${({ height }) => height};
+  min-width: ${({ width }) => width};
+  min-height: ${({ height }) => height};
 
   border-radius: ${({ theme }) => theme.borderRadius.borderRadius};
   border: none;
 
-  background-color: ${({ theme }) => theme.colors.accentColor};
-  color: ${({ theme }) => theme.colors.inputBackgroundColor};
+  background-color: #7297ff;
+  color: #ffffff;
+  cursor: pointer;
 
   font-weight: ${({ theme }) => theme.fonts.boldFontWeight};
-  font-size: ${({ theme }) => theme.fonts.mobileFontSize};
-  line-height: 19px;
+  font-size: 15px;
+  line-height: 1.3;
 
   @media ${({ theme }) => theme.media.tablet} {
     font-size: 17px;
-    line-height: 24px;
+    line-height: 1.41;
   }
 
   &:hover,
   &:focus {
     background-color: #476cd3;
-    color: #dce0ec;
+    color: #ffffff;
   }
 
   &:disabled {
@@ -53,7 +54,6 @@ const BaseButtonStyles = styled.button<BaseButtonStylesType>`
     &:hover,&:focus,&:active{
       background-color: #F9FAFF;
       color: #A1ABC9;
-      cursor: pointer;
     };
 
     &:disabled{
@@ -65,36 +65,35 @@ const BaseButtonStyles = styled.button<BaseButtonStylesType>`
 
 type ButtonProps = {
   children: React.ReactNode;
-  margin?: string;
   width?: string;
   height?: string;
   disabled?: boolean;
   onClick?: any;
   altStyle?: boolean;
-  type?: "button" | "submit" | "reset" | undefined;
+  isLoading?: BooleanLocale;
+  type?: "button" | "submit" | "reset";
 };
 
 const Button = ({
   children,
-  margin,
   width,
   height,
   disabled,
   altStyle,
   onClick,
+  isLoading,
   type,
 }: ButtonProps) => {
   return (
     <BaseButtonStyles
       type={type}
-      margin={margin}
       width={width}
       height={height}
       disabled={disabled}
       altStyle={altStyle}
       onClick={onClick}
     >
-      {children}
+      {isLoading ? <LoaderForButtons /> : <>{children}</>}
     </BaseButtonStyles>
   );
 };

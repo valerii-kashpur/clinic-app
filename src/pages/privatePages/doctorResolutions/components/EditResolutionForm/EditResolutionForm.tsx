@@ -1,7 +1,7 @@
 import { editResolution } from "network/fetchOperations";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
-import Button from "components/BaseButton/Button";
+import Button from "components/Button";
 import * as Styled from "./EditResolutionFormStyles";
 import userSvg from "media/user.svg";
 import blankSvg from "media/clipboard-blank.svg";

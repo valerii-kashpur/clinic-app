@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import DatePickerForm from "../DatePicker/DatePickerForm";
 import Text from "components/Text";
 import * as Styled from "../../PatientMakeAppointmentStyles";
-import Button from "components/BaseButton/Button";
+import Button from "components/Button";
 
 import RadioBtns from "../RadioBtns/RadioBtns";
 import VisitReasons from "../VisitReasons/VisitReasons";
@@ -61,7 +61,6 @@ const Form = () => {
         disabled={toggleButton}
         width={"160px"}
         height={"56px"}
-        margin={"39px 80px 0px auto"}
         data-testid="submitButton"
       >
         {isFetching ? <LoaderForButtons /> : "Submit"}

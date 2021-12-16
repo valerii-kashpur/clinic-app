@@ -5,7 +5,7 @@ import * as Styled from "./CreateResolutionStyles";
 import userSvg from "media/user.svg";
 import blankSvg from "media/clipboard-blank.svg";
 import multiplySvg from "media/multiply.svg";
-import Button from "components/BaseButton/Button";
+import Button from "components/Button";
 
 type CreateResolutionProps = {
   toggleModal: React.Dispatch<React.SetStateAction<boolean>>;

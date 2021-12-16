@@ -8,8 +8,8 @@ type NavButtonProps = {
 };
 
 export const NavButton = styled(Link)<NavButtonProps>`
-  width: 120px;
-  height: 40px;
+  min-width: 120px;
+  min-height: 40px;
   margin-right: 24px;
 
   display: flex;
@@ -27,7 +27,7 @@ export const NavButton = styled(Link)<NavButtonProps>`
   &:disabled {
     background: #dce0ec;
     color: white;
-  };
+  }
 
   @media ${({ theme }) => theme.media.tablet} {
     width: 160px;
