@@ -6,6 +6,10 @@ export const List = styled.ul`
   gap: 0 104px;
 `;
 
+export const TitleWrapper = styled.div`
+  margin: 72px 0 40px 0;
+`;
+
 export const TextWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -13,11 +17,11 @@ export const TextWrapper = styled.div`
 `;
 
 export const Text = styled.p`
-  font-size: ${({theme}) => theme.fonts.mobileFontSize};
+  font-size: ${({ theme }) => theme.fonts.mobileFontSize};
   line-height: 130%;
-  font-weight: ${({theme}) => theme.fonts.fontStyle};
+  font-weight: ${({ theme }) => theme.fonts.fontStyle};
 
-  color: ${({theme}) => theme.colors.secondaryTextColor};
+  color: ${({ theme }) => theme.colors.secondaryTextColor};
 `;
 
 export const Span = styled.span`

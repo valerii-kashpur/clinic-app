@@ -59,7 +59,7 @@ const DoctorResolutions = () => {
       </Styled.NavButtonsWrapper>
       <Styled.NavigationWrapper>
         <Styled.NavSectionTitle>Resolutions</Styled.NavSectionTitle>
-        <Styled.NavgationItemsWrapper>
+        <Styled.NavigationItemsWrapper>
           <Styled.NavigationItemSearch src={search} alt="" />
           <Styled.NavigationSearchInput type="text" placeholder="Search" />
           <Styled.NavigationItemSelect src={slider} alt="" />
@@ -70,7 +70,7 @@ const DoctorResolutions = () => {
             <option value="lastNameSort">Last Name</option>
             <option value="NextDateSort">Next Date</option>
           </Styled.NavigationSelect>
-        </Styled.NavgationItemsWrapper>
+        </Styled.NavigationItemsWrapper>
       </Styled.NavigationWrapper>
       <ResolutionsTable resolutions={resolutions} />
       <Pagination

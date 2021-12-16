@@ -70,7 +70,7 @@ type ButtonProps = {
   disabled?: boolean;
   onClick?: any;
   altStyle?: boolean;
-  isLoading?: BooleanLocale;
+  isLoading?: boolean;
   type?: "button" | "submit" | "reset";
 };
 

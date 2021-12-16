@@ -17,6 +17,7 @@ import * as Styled from "./PatientViewStyles";
 
 // IMAGES
 import slider from "media/sliders-v-alt.svg";
+import TitleH2 from "components/TitleH2";
 
 const PatientView = () => {
   const [dateStatus, setDateStatus] = useState("Upcoming");
@@ -38,6 +39,10 @@ const PatientView = () => {
     }
   }, [dispatch, dateStatus, userRole, isAuth]);
 
+  const onChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setDateStatus(e.target.value);
+  };
+
   return (
     <ViewPagesWrapper>
       <Styled.NavButtonsWrapper>
@@ -50,20 +55,18 @@ const PatientView = () => {
         <NavTab to={PATHS.patientsResolutions}>resolutions</NavTab>
       </Styled.NavButtonsWrapper>
       <Styled.NavigationWrapper>
-        <Styled.NavSectionTitle>My Appointments</Styled.NavSectionTitle>
-        <Styled.NavgationItemsWrapper>
+        <TitleH2>My Appointments</TitleH2>
+        <Styled.NavigationItemsWrapper>
           <Styled.NavigationItemSelect src={slider} alt="" />
           <Styled.NavigationSelectSpan>Show:</Styled.NavigationSelectSpan>
-          <Styled.NavigationSelectDesktop
-            onChange={(e) => setDateStatus(e.target.value)}
-          >
+          <Styled.NavigationSelectDesktop onChange={onChangeHandler}>
             <option value="Upcoming">Upcoming</option>
             <option value="Outdate">Outdate</option>
           </Styled.NavigationSelectDesktop>
           <Styled.UppointmentCreateButton to={PATHS.makeAppointment}>
             + create an uppointment
           </Styled.UppointmentCreateButton>
-        </Styled.NavgationItemsWrapper>
+        </Styled.NavigationItemsWrapper>
       </Styled.NavigationWrapper>
       <AppointmentsList appointmentsArray={appointments} />
     </ViewPagesWrapper>

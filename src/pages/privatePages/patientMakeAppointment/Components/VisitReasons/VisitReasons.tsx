@@ -5,9 +5,14 @@ import { appointmentSchema } from "utils/YupValidationSchemas";
 import SelectsBlock from "../SelectsBlock/SelectsBlock";
 import { setNote, setReason } from "redux/slices/createAppointmentSlice";
 import { useAppDispatch } from "types/useAppDispatch";
+import InputLabel from "components/InputLabel";
 
 const VisitReasons = () => {
   const dispatch = useAppDispatch();
+
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setNote(e.target.value));
+  };
 
   return (
     <Styled.Wrapper>
@@ -19,14 +24,14 @@ const VisitReasons = () => {
         }}
         validateOnMount={true}
         validationSchema={appointmentSchema}
-        onSubmit={()=>{}}
+        onSubmit={() => {}}
       >
         {({ errors, touched, isValid, handleChange }) => {
           return (
             <>
               <Styled.InputWrapper>
-                <Styled.InputLabel htmlFor="reason">
-                  Reason for the visit
+                <Styled.InputLabel>
+                  <InputLabel htmlFor="reason">Reason for the visit</InputLabel>
                 </Styled.InputLabel>
                 <Styled.FormikInput
                   name="reason"
@@ -46,12 +51,14 @@ const VisitReasons = () => {
         }}
       </Formik>
       <Styled.InputWrapper>
-        <Styled.InputLabel htmlFor="note">Note</Styled.InputLabel>
+        <Styled.InputLabel>
+          <InputLabel htmlFor="note">Note</InputLabel>{" "}
+        </Styled.InputLabel>
         <Styled.Input
           name="note"
           type="text"
           placeholder="Leave a note if needed"
-          onChange={(e) => dispatch(setNote(e.target.value))}
+          onChange={onChangeHandler}
         />
       </Styled.InputWrapper>
     </Styled.Wrapper>

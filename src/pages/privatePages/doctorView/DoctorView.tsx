@@ -49,7 +49,7 @@ const DoctorView = () => {
       </Styled.NavButtonsWrapper>
       <Styled.NavigationWrapper>
         <Styled.NavSectionTitle>My Patients</Styled.NavSectionTitle>
-        <Styled.NavgationItemsWrapper>
+        <Styled.NavigationItemsWrapper>
           <Styled.NavigationItemSearch src={search} alt="" />
           <Styled.NavigationSearchInput type="text" placeholder="Search" />
           <Styled.NavigationItemSelect src={slider} alt="" />
@@ -63,7 +63,7 @@ const DoctorView = () => {
             <option value="firstNameSort">Name</option>
             <option value="lastNameSort">Last Name</option>
           </Styled.NavigationSelect>
-        </Styled.NavgationItemsWrapper>
+        </Styled.NavigationItemsWrapper>
       </Styled.NavigationWrapper>
       <PatientsList appointmentsArray={appointments} />
     </ViewPagesWrapper>

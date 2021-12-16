@@ -1,14 +1,15 @@
 import React from "react";
 import * as Styled from "./SelectComponentStyles";
 import Select from "react-select";
+import InputLabel from "components/InputLabel";
 
 type SelectProps = {
-  text: string,
-  onChangeFn: (data: any) => void,
-  Disabled?: boolean,
-  optionsArray: { value: string, label: string }[],
-  placeholder: string
-}
+  text: string;
+  onChangeFn: (data: any) => void;
+  Disabled?: boolean;
+  optionsArray: { value: string; label: string }[];
+  placeholder: string;
+};
 
 const SelectComponent = ({
   text,
@@ -19,7 +20,9 @@ const SelectComponent = ({
 }: SelectProps) => {
   return (
     <div>
-      <Styled.SelectTitle htmlFor={text}>{text}</Styled.SelectTitle>
+      <Styled.SelectTitle>
+        <InputLabel htmlFor={text}>{text}</InputLabel>
+      </Styled.SelectTitle>
       <Select
         defaultValue={null}
         onChange={onChangeFn}

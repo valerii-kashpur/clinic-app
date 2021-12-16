@@ -13,7 +13,7 @@ export const InputWrapper = styled.div`
   position: relative;
 `;
 
-export const InputLabel = styled.label`
+export const InputLabel = styled.div`
   margin-bottom: 16px;
 `;
 

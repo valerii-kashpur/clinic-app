@@ -48,8 +48,6 @@ const CreateResolutionForm = ({
     }
   );
 
-  console.log(`isLoadin: `, isLoading);
-
   return (
     <Styled.FormWrapper>
       <Styled.Form action="" onSubmit={submitHandler}>
@@ -81,9 +79,10 @@ const CreateResolutionForm = ({
           </Button>
           <Button
             type="submit"
-            disabled={textAreaValue.length < 4}
+            disabled={textAreaValue.length < 4 && isLoading}
             width="117px"
             height="48px"
+            isLoading={isLoading}
           >
             <Styled.Image src={blankSvg} alt="blank svg" /> Create
           </Button>

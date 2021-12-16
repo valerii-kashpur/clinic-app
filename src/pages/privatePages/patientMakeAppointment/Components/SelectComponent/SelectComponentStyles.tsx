@@ -67,11 +67,6 @@ export const Select = styled.select`
   }
 `;
 
-export const SelectTitle = styled.label`
+export const SelectTitle = styled.div`
   margin-bottom: 16px;
-
-  font-weight: 500;
-  font-size: 13px;
-  line-height: 130%;
-  color: #000000;
 `;

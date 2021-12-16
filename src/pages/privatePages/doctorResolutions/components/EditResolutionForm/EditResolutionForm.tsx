@@ -46,8 +46,6 @@ const EditResolutionForm = ({ toggleModal, modalFormProps }: modalProps) => {
     }
   );
 
-  console.log(isLoading);
-
   return (
     <Styled.FormWrapper>
       <Styled.Form action="" onSubmit={submitHandler}>
@@ -79,9 +77,10 @@ const EditResolutionForm = ({ toggleModal, modalFormProps }: modalProps) => {
           </Button>
           <Button
             type="submit"
-            disabled={value.length < 4}
+            disabled={value.length < 4 && isLoading}
             width="117px"
             height="48px"
+            isLoading={isLoading}
           >
             <Styled.Image src={blankSvg} alt="blank svg" /> Edit
           </Button>

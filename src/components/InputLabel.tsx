@@ -11,10 +11,11 @@ const Label = styled.label`
 
 type LabelProps = {
   children: React.ReactNode;
+  htmlFor: string;
 };
 
-const InputLabel = ({ children }: LabelProps) => {
-  return <Label>{children}</Label>;
+const InputLabel = ({ children, htmlFor }: LabelProps) => {
+  return <Label htmlFor={htmlFor}>{children}</Label>;
 };
 
 export default InputLabel;

@@ -7,7 +7,8 @@ import { useSelector } from "react-redux";
 import { userRoleNameSelector } from "redux/selectors";
 import { useHistory } from "react-router-dom";
 import PATHS from "routes/paths";
-import TitleH4 from "components/TitleH4";
+import TitleH2 from "components/TitleH2";
+import * as Styled from "./PatientMakeAppointmentStyles";
 
 const PatientMakeAppointment = () => {
   const history = useHistory();
@@ -23,7 +24,9 @@ const PatientMakeAppointment = () => {
     <ViewPagesWrapper>
       <NavWrapper />
       <section>
-        <TitleH4>Make an appointment</TitleH4>
+        <Styled.TitleWrapper>
+          <TitleH2>Make an appointment</TitleH2>
+        </Styled.TitleWrapper>
         <Form />
       </section>
     </ViewPagesWrapper>
