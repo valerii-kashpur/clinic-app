@@ -24,7 +24,7 @@ const BaseButtonStyles = styled.button<BaseButtonStylesType>`
   color: #ffffff;
   cursor: pointer;
 
-  font-weight: ${({ theme }) => theme.fonts.boldFontWeight};
+  font-weight: ${({ theme }) => theme.fonts.fontWeightBold};
   font-size: 15px;
   line-height: 1.3;
 

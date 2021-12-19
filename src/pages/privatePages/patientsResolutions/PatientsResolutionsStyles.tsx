@@ -127,7 +127,7 @@ export const EmptyListBlock = styled.div`
 export const EmptyListText = styled.p`
   max-width: 461px;
 
-  font-weight: ${({ theme }) => theme.fonts.boldFontWeight};
+  font-weight: ${({ theme }) => theme.fonts.fontWeightBold};
   line-height: 21px;
 
   color: ${({ theme }) => theme.colors.secondaryTextColor};

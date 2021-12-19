@@ -34,7 +34,7 @@ const List = styled.ul`
     }
     &::-webkit-scrollbar-thumb {
       width: 12px;
-      background: ${({ theme }) => theme.colors.asideInputBorderColor};
+      background: ${({ theme }) => theme.colors.inputBorderColor};
       opacity: 0.56;
       border-radius: ${({ theme }) => theme.borderRadius.borderRadius};
     }

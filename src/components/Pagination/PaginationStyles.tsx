@@ -15,20 +15,20 @@ export const BaseButton = styled.button`
   height: 32px;
 
   border: none;
-  color: #a1abc9;
+  border-radius: ${({ theme }) => theme.borderRadius.buttonsBorderRadius};
+
+  color: ${({ theme }) => theme.color.secondaryTextColor};
   background: none;
 
   &:hover,
   &:focus,
   &:active {
     background-color: #476cd3;
-    color: white;
-    border-radius: 8px;
+    color: ${({ theme }) => theme.color.buttonTextColor};
   }
 
   &:disabled {
-    background-color: #dce0ec;
-    border-radius: 8px;
+    background-color: ${({ theme }) => theme.color.alterButtonBackgroundColor};
   }
 `;
 

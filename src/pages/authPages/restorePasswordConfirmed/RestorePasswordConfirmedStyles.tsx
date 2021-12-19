@@ -11,7 +11,7 @@ export const NotificationText = styled.div`
 `;
 
 export const EmailLInk = styled.a`
-  font-weight: ${({ theme }) => theme.fonts.boldFontWeight};
+  font-weight: ${({ theme }) => theme.fonts.fontWeightBold};
   font-size: ${({ theme }) => theme.fonts.mobileFontSize};
   line-height: 130%;
   text-decoration: underline;

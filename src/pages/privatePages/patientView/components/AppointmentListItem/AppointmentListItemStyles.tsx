@@ -41,7 +41,7 @@ export const ListItemInfoWrapper = styled.div`
     width: 100%;
     height: 1px;
 
-    background: ${({ theme }) => theme.colors.asideInputBorderColor};
+    background: ${({ theme }) => theme.colors.inputBorderColor};
     opacity: 0.5;
   }
 `;
@@ -51,7 +51,7 @@ export const ListItemInfoAvatar = styled.img`
   margin-right: 16px;
 `;
 export const ListItemInfoName = styled.p`
-  font-weight: ${({ theme }) => theme.fonts.boldFontWeight};
+  font-weight: ${({ theme }) => theme.fonts.fontWeightBold};
   font-size: 17px;
   line-height: 130%;
 `;
