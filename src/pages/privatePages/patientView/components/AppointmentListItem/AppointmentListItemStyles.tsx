@@ -52,7 +52,7 @@ export const ListItemInfoAvatar = styled.img`
 `;
 export const ListItemInfoName = styled.p`
   font-weight: ${({ theme }) => theme.fonts.fontWeightBold};
-  font-size: 17px;
+  font-size: ${({ theme }) => theme.fonts.fontSize17};
   line-height: 130%;
 `;
 export const ListItemStatusWrapper = styled.div`
@@ -60,7 +60,7 @@ export const ListItemStatusWrapper = styled.div`
   align-items: center;
 `;
 export const ListItemStatusProfession = styled.p`
-  font-size: 13px;
+  font-size: ${({ theme }) => theme.fonts.fontSize13};
   line-height: 130%;
   color: ${({ theme }) => theme.colors.secondaryTextColor};
 `;

@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 const DefaultText = styled.p`
-  font-size: 15px;
-  line-height: 1.4;
-  font-weight: normal;
+  font-size: ${({ theme }) => theme.fonts.fontSize15};
+  line-height: ${({ theme }) => theme.fonts.lineHeight141};
+  font-weight: ${({ theme }) => theme.fonts.fontWeightNormal};
 
-  color: #202225;
+  color: ${({ theme }) => theme.colors.baseColor}; ;
 `;
 
 type TextProps = {

@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 const Title = styled.h4`
-  font-weight: 500;
-  font-size: 17px;
-  line-height: 1.41;
+  font-weight: ${({ theme }) => theme.fonts.fontWeightMedium};
+  font-size: ${({ theme }) => theme.fonts.fontSize17};
+  line-height: ${({ theme }) => theme.fonts.lineHeight141};
 
-  color: #a1abc9;
+  color: ${({ theme }) => theme.colors.secondaryTextColor};
 `;
 
 type TextProps = {

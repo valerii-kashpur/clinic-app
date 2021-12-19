@@ -63,9 +63,9 @@ const PatientView = () => {
             <option value="Upcoming">Upcoming</option>
             <option value="Outdate">Outdate</option>
           </Styled.NavigationSelectDesktop>
-          <Styled.UppointmentCreateButton to={PATHS.makeAppointment}>
+          <Styled.AppointmentCreateButton to={PATHS.makeAppointment}>
             + create an uppointment
-          </Styled.UppointmentCreateButton>
+          </Styled.AppointmentCreateButton>
         </Styled.NavigationItemsWrapper>
       </Styled.NavigationWrapper>
       <AppointmentsList appointmentsArray={appointments} />

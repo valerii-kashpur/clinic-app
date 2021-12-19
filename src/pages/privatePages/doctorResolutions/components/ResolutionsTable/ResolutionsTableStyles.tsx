@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-min-height: 400px;
+  min-height: 400px;
   max-height: calc(100% - 210px);
   overflow: auto;
 

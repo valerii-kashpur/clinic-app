@@ -17,18 +17,18 @@ export const BaseButton = styled.button`
   border: none;
   border-radius: ${({ theme }) => theme.borderRadius.buttonsBorderRadius};
 
-  color: ${({ theme }) => theme.color.secondaryTextColor};
+  color: ${({ theme }) => theme.colors.secondaryTextColor};
   background: none;
 
   &:hover,
   &:focus,
   &:active {
-    background-color: #476cd3;
-    color: ${({ theme }) => theme.color.buttonTextColor};
+    background-color: ${({ theme }) => theme.colors.buttonHoverColor};
+    color: ${({ theme }) => theme.colors.buttonTextColor};
   }
 
   &:disabled {
-    background-color: ${({ theme }) => theme.color.alterButtonBackgroundColor};
+    background-color: ${({ theme }) => theme.colors.alterButtonBackgroundColor};
   }
 `;
 

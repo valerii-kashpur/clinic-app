@@ -47,7 +47,7 @@ export const NavigationWrapper = styled.div`
   } ;
 `;
 export const NavSectionTitle = styled.h3`
-  font-size: 24px;
+  font-size: ${({ theme }) => theme.fonts.fontSize20};
   line-height: 110%;
 `;
 export const NavigationItemsWrapper = styled.div`
@@ -99,7 +99,7 @@ export const EmptyListBlock = styled.div`
 export const EmptyListText = styled.div`
   max-width: 461px;
 `;
-export const UppointmentCreateButton = styled(Link)`
+export const AppointmentCreateButton = styled(Link)`
   display: none;
   @media ${({ theme }) => theme.media.desktop} {
     width: 224px;
@@ -113,6 +113,6 @@ export const UppointmentCreateButton = styled(Link)`
     border: none;
     border-radius: ${({ theme }) => theme.borderRadius.borderRadius};
     background: ${({ theme }) => theme.colors.accentColor};
-    color: white;
+    color: ${({ theme }) => theme.colors.buttonTextColor};
   } ;
 `;

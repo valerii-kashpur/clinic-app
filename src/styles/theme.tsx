@@ -43,6 +43,7 @@ export const theme = {
     lineHeight130: "1.3",
     lineHeight141: "1.41",
     lineHeight110: "1.1",
+    lineHeight160: "1.6",
 
   },
   media: {

@@ -28,8 +28,8 @@ const Input = styled.input<Type>`
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.secondaryTextColor};
-    font-size: ${({ theme }) => theme.fonts.mobileFontSize};
-    line-height: 24px;
+    font-size: ${({ theme }) => theme.fonts.fontSize15};
+    line-height: ${({ theme }) => theme.fonts.lineHeight141};
   }
 
   @media ${({ theme }) => theme.media.tablet} {
@@ -38,12 +38,12 @@ const Input = styled.input<Type>`
     padding-left: 64px;
     padding-right: ${({ password }) => (password ? "64px" : "24px")};
 
-    font-size: 17px;
-    line-height: 24px;
+    font-size: ${({ theme }) => theme.fonts.fontSize17};
+    line-height: ${({ theme }) => theme.fonts.lineHeight141};
 
     &::placeholder {
-      font-size: 17px;
-      line-height: 24px;
+      font-size: ${({ theme }) => theme.fonts.fontSize17};
+      line-height: ${({ theme }) => theme.fonts.lineHeight141};
     }
   } ;
 `;
@@ -52,10 +52,8 @@ const ErrorMessage = styled.p`
   position: absolute;
   margin-top: 14px;
 
-  font-size: 13px;
-  line-height: 16px;
-  letter-spacing: -0.24px;
-
+  font-size: ${({ theme }) => theme.fonts.fontSize13};
+  line-height: ${({ theme }) => theme.fonts.lineHeight120};
   color: ${({ theme }) => theme.colors.errorTextColor};
 `;
 

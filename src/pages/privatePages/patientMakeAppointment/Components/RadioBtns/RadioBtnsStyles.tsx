@@ -5,40 +5,42 @@ export const Wrapper = styled.div`
   flex-wrap: wrap;
   width: 464px;
   gap: 16px;
-  &>div{
+  & > div {
     width: 104px;
     height: 40px;
   }
 `;
 
 type LabelProps = {
-  notReady: boolean,
-  current: boolean
-}
+  notReady: boolean;
+  current: boolean;
+};
 
 export const Label = styled.label<LabelProps>`
   display: flex;
   width: 104px;
   height: 40px;
   justify-content: center;
-  align-items:center;
+  align-items: center;
 
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 19px;
-  background-color: ${({ notReady }) => (notReady ? "#DCE0EC" : "#ffffff")};
+  font-family: ${({ theme }) => theme.fonts.fontFamily};
+  font-weight: ${({ theme }) => theme.fonts.fontStyleNormal};
+  font-weight: ${({ theme }) => theme.fonts.fontWeightBold};
+  font-size: ${({ theme }) => theme.fonts.fontSize15};
+  line-height: ${({ theme }) => theme.fonts.lineHeight130};
+  background-color: ${({ notReady, theme }) =>
+    notReady ? theme.colors.disabledButtonColor : theme.colors.buttonTextColor};
   box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.24);
-  border-radius: 8px;
-  color: ${({ notReady }) => (notReady ? "#ffffff" : "#202225")};
+  border-radius: ${({ theme }) => theme.borderRadius.borderRadius};
+  color: ${({ notReady, theme }) =>
+    notReady ? theme.colors.buttonTextColor : theme.colors.baseColor};
   border: 1px solid white;
 
   &:hover,
   &:focus {
     ${({ notReady }) =>
-    !notReady &&
-    `    border: 1px solid #7297ff;
+      !notReady &&
+      `    border: 1px solid #7297ff;
     color: #7297ff;`}
   }
   ${({ current, notReady }) =>

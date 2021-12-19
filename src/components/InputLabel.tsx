@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 const Label = styled.label`
-  font-weight: 500;
-  font-size: 13px;
-  line-height: 1.3;
+  font-weight: ${({ theme }) => theme.fonts.fontWeightMedium};
+  font-size: ${({ theme }) => theme.fonts.fontSize13};
+  line-height: ${({ theme }) => theme.fonts.lineHeight130};
 
-  color: #000000;
+  color: ${({ theme }) => theme.colors.baseColor};
 `;
 
 type LabelProps = {

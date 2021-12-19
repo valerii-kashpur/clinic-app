@@ -3,7 +3,7 @@ import angleDown from "media/angle-down.svg";
 import angleUp from "media/angle-up.svg";
 
 export const customStyles = {
-  control: (provided:any) => ({
+  control: (provided: any) => ({
     ...provided,
     height: "54px",
     border: "1px solid #dce0ec",
@@ -18,13 +18,13 @@ export const customStyles = {
     lineHeight: "24px",
     color: "#202225",
   }),
-  indicatorSeparator:(provided:any) => ({
+  indicatorSeparator: (provided: any) => ({
     ...provided,
-    display:"none",
+    display: "none",
   }),
-  dropdownIndicator: (provided:any, state:any) => ({
+  dropdownIndicator: (provided: any, state: any) => ({
     ...provided,
-    transform: state.selectProps.menuIsOpen && "rotate(180deg)"
+    transform: state.selectProps.menuIsOpen && "rotate(180deg)",
   }),
 };
 
@@ -45,16 +45,16 @@ export const Select = styled.select`
   background-position-y: 14px;
   background-size: 24px 24px;
 
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 17px;
-  line-height: 24px;
-  color: #202225;
+  font-family: ${({ theme }) => theme.fonts.fontFamily};
+  font-weight: ${({ theme }) => theme.fonts.fontStyleNormal};
+  font-weight: ${({ theme }) => theme.fonts.fontWeightNormal};
+  font-size: ${({ theme }) => theme.fonts.fontSize17};
+  line-height: ${({ theme }) => theme.fonts.lineHeight141};
+  color: ${({ theme }) => theme.colors.baseColor};
 
   &:focus,
   &:hover {
-    border: 1px solid #7297ff;
+    border: 1px solid ${({ theme }) => theme.colors.accentColor};
 
     box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.24);
     border-radius: 8px;

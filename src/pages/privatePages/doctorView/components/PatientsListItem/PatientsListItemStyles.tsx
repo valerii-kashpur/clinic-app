@@ -55,7 +55,7 @@ export const ListItemInfoAvatar = styled.img`
 
 export const ListItemInfoName = styled.p`
   font-weight: ${({ theme }) => theme.fonts.fontWeightBold};
-  font-size: 17px;
+  font-size: ${({ theme }) => theme.fonts.fontSize17};
   line-height: 130%;
 `;
 
@@ -75,8 +75,8 @@ export const ListItemStatus = styled.span`
 `;
 
 export const ListItemStatusAppointment = styled.p`
-  font-size: 13px;
-  line-height: 130%;
+  font-size: ${({ theme }) => theme.fonts.fontSize13};
+  line-height: ${({ theme }) => theme.fonts.lineHeight130};
   color: ${({ theme }) => theme.colors.secondaryTextColor};
 `;
 

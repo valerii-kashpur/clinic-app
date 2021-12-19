@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 const Text = styled.p`
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 1.3;
-  color: #202225;
+  font-weight: ${({ theme }) => theme.fonts.fontWeightBold};
+  font-size: ${({ theme }) => theme.fonts.fontSize15};
+  line-height: ${({ theme }) => theme.fonts.lineHeight130};
+  color: ${({ theme }) => theme.colors.baseColor}; ;
 `;
 
 type TextProps = {

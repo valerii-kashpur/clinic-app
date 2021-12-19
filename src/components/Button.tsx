@@ -20,28 +20,26 @@ const BaseButtonStyles = styled.button<BaseButtonStylesType>`
   border-radius: ${({ theme }) => theme.borderRadius.borderRadius};
   border: none;
 
-  background-color: #7297ff;
-  color: #ffffff;
+  background-color: ${({ theme }) => theme.colors.accentColor};
+  color: ${({ theme }) => theme.colors.buttonTextColor};
   cursor: pointer;
 
   font-weight: ${({ theme }) => theme.fonts.fontWeightBold};
-  font-size: 15px;
-  line-height: 1.3;
+  font-size: ${({ theme }) => theme.fonts.fontSize15};
+  line-height: ${({ theme }) => theme.fonts.lineHeight130};
 
   @media ${({ theme }) => theme.media.tablet} {
-    font-size: 17px;
-    line-height: 1.41;
+    font-size: ${({ theme }) => theme.fonts.fontSize17};
+    line-height: ${({ theme }) => theme.fonts.lineHeight141};
   }
 
   &:hover,
   &:focus {
-    background-color: #476cd3;
-    color: #ffffff;
+    background-color: ${({ theme }) => theme.colors.buttonHoverColor};
   }
 
   &:disabled {
-    background-color: #dce0ec;
-    color: #ffffff;
+    background-color: ${({ theme }) => theme.colors.disabledButtonColor};
   }
 
   ${({ altStyle }) =>

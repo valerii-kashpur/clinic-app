@@ -44,10 +44,10 @@ export const TextArea = styled.textarea`
   height: 160px;
   overflow: auto;
 
-  border: 1px solid #dce0ec;
+  border: ${({ theme }) => theme.inputsBorders.asideInputBorder};
   box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.16);
-  border-radius: 8px;
-  color: #202225;
+  border-radius: ${({ theme }) => theme.borderRadius.inputsBorderRadius};
+  color: ${({ theme }) => theme.colors.baseColor}; ;
 `;
 
 export const ButtonWrapper = styled.div`
@@ -66,7 +66,7 @@ export const ButtonWrapper = styled.div`
     height: 1px;
 
     display: block;
-    background: #dce0ec;
+    background: ${({ theme }) => theme.colors.disabledButtonColor};
     opacity: 0.5;
   }
 `;

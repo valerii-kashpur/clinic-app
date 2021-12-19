@@ -7,18 +7,18 @@ export const Td = styled.td`
   padding: 20px 40px;
   text-align: start;
 
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 17px;
-  line-height: 1.41;
+  font-family: ${({ theme }) => theme.fonts.fontFamily};
+  font-weight: ${({ theme }) => theme.fonts.fontStyleNormal};
+  font-weight: ${({ theme }) => theme.fonts.fontWeightNormal};
+  font-size: ${({ theme }) => theme.fonts.fontSize17};
+  line-height: ${({ theme }) => theme.fonts.lineHeight141};
 
-  color: #202225;
+  color: ${({ theme }) => theme.colors.baseColor};
 
   box-sizing: border-box;
   box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.24);
   border-radius: 4px;
-  border-top: 1px solid #dce0ec;
+  border-top: ${({ theme }) => theme.inputsBorders.asideInputBorder};
 `;
 export const ResolutionTd = styled(Td)`
   min-width: 590px;

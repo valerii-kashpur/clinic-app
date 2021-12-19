@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Text = styled(Link)`
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 1.3;
-  color: #7297ff;
+  font-weight: ${({ theme }) => theme.fonts.fontWeightBold};
+  font-size: ${({ theme }) => theme.fonts.fontSize15};
+  line-height: ${({ theme }) => theme.fonts.lineHeight130};
+  color: ${({ theme }) => theme.colors.accentColor};
 `;
 
 type TextProps = {

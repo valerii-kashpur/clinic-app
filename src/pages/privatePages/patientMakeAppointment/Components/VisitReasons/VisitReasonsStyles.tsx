@@ -22,18 +22,18 @@ export const Input = styled.input`
   height: 54px;
   padding: 0 24px;
 
-  border: 1px solid #dce0ec;
+  border: ${({ theme }) => theme.inputsBorders.asideInputBorder};
   box-sizing: border-box;
 
   box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.16);
-  border-radius: 8px;
+  border-radius: ${({ theme }) => theme.borderRadius.borderRadius};
 
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 17px;
-  line-height: 24px;
-  color: #202225;
+  font-family: ${({ theme }) => theme.fonts.fontFamily};
+  font-weight: ${({ theme }) => theme.fonts.fontStyleNormal};
+  font-weight: ${({ theme }) => theme.fonts.fontWeightNormal};
+  font-size: ${({ theme }) => theme.fonts.fontSize17};
+  line-height: ${({ theme }) => theme.fonts.lineHeight141};
+  color: ${({ theme }) => theme.colors.baseColor}; ;
 `;
 
 export const FormikInput = styled(Field)`
@@ -41,23 +41,22 @@ export const FormikInput = styled(Field)`
   height: 54px;
   padding: 0 24px;
 
-  border: ${({errored, theme}) =>
+  border: ${({ errored, theme }) =>
     errored
       ? theme.inputsBorders.asideInputErrorBorder
       : theme.inputsBorders.asideInputBorder};
-  border-radius: ${({theme}) => theme.borderRadius.borderRadius};
-  
+  border-radius: ${({ theme }) => theme.borderRadius.borderRadius};
+
   box-sizing: border-box;
 
   box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.16);
 
-
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 17px;
-  line-height: 24px;
-  color: #202225;
+  font-family: ${({ theme }) => theme.fonts.fontFamily};
+  font-weight: ${({ theme }) => theme.fonts.fontStyleNormal};
+  font-weight: ${({ theme }) => theme.fonts.fontWeightNormal};
+  font-size: ${({ theme }) => theme.fonts.fontSize17};
+  line-height: ${({ theme }) => theme.fonts.lineHeight141};
+  color: ${({ theme }) => theme.colors.baseColor}; ;
 `;
 
 export const ErrorMessage = styled.p`
@@ -65,9 +64,7 @@ export const ErrorMessage = styled.p`
   position: absolute;
   top: 84px;
 
-  font-size: 13px;
-  line-height: 16px;
-  letter-spacing: -0.24px;
-
-  color: ${({theme}) => theme.colors.errorTextColor};
+  font-size: ${({ theme }) => theme.fonts.fontSize13};
+  line-height: ${({ theme }) => theme.fonts.lineHeight120};
+  color: ${({ theme }) => theme.colors.errorTextColor};
 `;

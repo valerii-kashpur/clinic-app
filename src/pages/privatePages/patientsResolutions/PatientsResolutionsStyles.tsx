@@ -39,7 +39,7 @@ export const NavigationWrapper = styled.div`
 `;
 
 export const NavSectionTitle = styled.h3`
-  font-size: 24px;
+  font-size: ${({ theme }) => theme.fonts.fontSize20};
   line-height: 110%;
 `;
 
@@ -106,7 +106,7 @@ export const NavigationSelect = styled.select`
     display: block;
     color: ${({ theme }) => theme.colors.accentColor};
     border: none;
-    background: white;
+    background: ${({ theme }) => theme.colors.inputBackgroundColor};
   } ;
 `;
 

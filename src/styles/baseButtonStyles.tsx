@@ -28,17 +28,18 @@ const baseButtonStyles = styled.button<baseButtonStylesTypes>`
   line-height: 19px;
 
   @media ${({ theme }) => theme.media.tablet} {
-    font-size: 17px;
-    line-height: 24px;
+    font-size: ${({ theme }) => theme.fonts.fontSize17};
+    line-height: ${({ theme }) => theme.fonts.lineHeight141};
   }
 
   &:hover,
   &:focus {
-    background-color: #476cd3;
+    background-color: ${({ theme }) => theme.colors.buttonHoverColor};
   }
 
   &:disabled {
-    background-color: #dce0ec;
+    background-color: background-color: ${({ theme }) =>
+      theme.colors.disabledButtonColor}; 
   }
 `;
 

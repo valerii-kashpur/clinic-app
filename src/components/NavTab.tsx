@@ -25,8 +25,8 @@ export const NavButton = styled(Link)<NavButtonProps>`
     current ? theme.colors.buttonTextColor : theme.colors.accentColor};
 
   &:disabled {
-    background: #dce0ec;
-    color: white;
+    background: ${({ theme }) => theme.colors.disabledButtonColor};
+    color: ${({ theme }) => theme.colors.buttonTextColor};
   }
 
   @media ${({ theme }) => theme.media.tablet} {

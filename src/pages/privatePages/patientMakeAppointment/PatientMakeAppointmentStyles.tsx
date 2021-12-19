@@ -18,7 +18,7 @@ export const TextWrapper = styled.div`
 
 export const Text = styled.p`
   font-size: ${({ theme }) => theme.fonts.mobileFontSize};
-  line-height: 130%;
+  line-height: ${({ theme }) => theme.fonts.lineHeight130};
   font-weight: ${({ theme }) => theme.fonts.fontStyle};
 
   color: ${({ theme }) => theme.colors.secondaryTextColor};

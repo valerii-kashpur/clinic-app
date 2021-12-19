@@ -8,14 +8,14 @@ export const Th = styled.th`
   padding: 0 40px;
   text-align: start;
 
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
-  line-height: 1.6;
+  font-family: ${({ theme }) => theme.fonts.fontFamily};
+  font-weight: ${({ theme }) => theme.fonts.fontStyleNormal};
+  font-weight: ${({ theme }) => theme.fonts.fontWeightNormal};
+  font-size: ${({ theme }) => theme.fonts.fontSize15};
+  font-family: ${({ theme }) => theme.fonts.lineHeight160};
   align-items: center;
 
-  color: #a1abc9;
+  color: ${({ theme }) => theme.colors.secondaryTextColor};
 `;
 
 export const AngleSpan = styled.span`

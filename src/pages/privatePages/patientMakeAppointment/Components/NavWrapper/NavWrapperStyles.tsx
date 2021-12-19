@@ -10,13 +10,13 @@ export const NavWrapper = styled.div`
 export const NavLink = styled(Link)`
   font-weight: ${({ theme }) => theme.fonts.fontWeightBold};
   font-size: ${({ theme }) => theme.fonts.mobileFontSize};
-  line-height: 130%;
+  line-height: ${({ theme }) => theme.fonts.lineHeight130};
   text-decoration: none;
 
   color: ${({ theme }) => theme.colors.accentColor};
 
   @media ${({ theme }) => theme.media.tablet} {
-    line-height: 19px;
+    line-height: ${({ theme }) => theme.fonts.lineHeight141};
   } ;
 `;
 
@@ -31,7 +31,7 @@ export const VectorSpan = styled.svg`
 
 export const BreadCrumbsCurrent = styled.p`
   font-size: ${({ theme }) => theme.fonts.mobileFontSize};
-  line-height: 130%;
+  line-height: ${({ theme }) => theme.fonts.lineHeight130};
   font-weight: ${({ theme }) => theme.fonts.fontStyle};
 
   color: ${({ theme }) => theme.colors.secondaryTextColor};

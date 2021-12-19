@@ -6,16 +6,15 @@ type TitleH2Props = {
 };
 
 const Title = styled.h2`
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 1.2;
-  color: #202225;
+  font-weight: ${({ theme }) => theme.fonts.fontStyleNormal};
+  font-weight: ${({ theme }) => theme.fonts.fontWeightBold};
+  font-size: ${({ theme }) => theme.fonts.fontSize20};
+  line-height: ${({ theme }) => theme.fonts.lineHeight120};
+  color: ${({ theme }) => theme.colors.baseColor};
 
   @media ${({ theme }) => theme.media.tablet} {
-    font-size: 24px;
-    line-height: 1.1;
+    font-size: ${({ theme }) => theme.fonts.fontSize20};
+    line-height: ${({ theme }) => theme.fonts.lineHeight110};
   }
 `;
 

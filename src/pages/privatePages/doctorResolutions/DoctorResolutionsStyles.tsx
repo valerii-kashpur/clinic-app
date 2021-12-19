@@ -39,8 +39,8 @@ export const NavigationWrapper = styled.div`
 `;
 
 export const NavSectionTitle = styled.h3`
-  font-size: 24px;
-  line-height: 110%;
+  font-size: ${({ theme }) => theme.fonts.fontSize20};
+  line-height: ${({ theme }) => theme.fonts.lineHeight110};
 `;
 
 export const NavigationItemsWrapper = styled.div`
@@ -73,9 +73,9 @@ export const NavigationSearchInput = styled.input`
     border: none;
     width: 90px;
     margin-right: 10px;
-    color: $secondary-text-color;
+    color: ${({ theme }) => theme.colors.secondaryTextColor};
     &::placeholder {
-      color: $secondary-text-color;
+      color: ${({ theme }) => theme.colors.secondaryTextColor};
     }
   } ;
 `;
@@ -106,7 +106,7 @@ export const NavigationSelect = styled.select`
     display: block;
     color: ${({ theme }) => theme.colors.accentColor};
     border: none;
-    background: white;
+    background: ${({ theme }) => theme.colors.inputBackgroundColor};
   } ;
 `;
 

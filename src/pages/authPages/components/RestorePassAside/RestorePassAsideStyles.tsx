@@ -81,11 +81,11 @@ export const AsideTitle = styled.h2`
   margin: 0;
 
   font-weight: ${({ theme }) => theme.fonts.fontWeightBold};
-  font-size: 20px;
+  font-size: ${({ theme }) => theme.fonts.fontSize20};
   line-height: 24px;
 
   @media ${({ theme }) => theme.media.tablet} {
-    font-size: 24px;
+    font-size: ${({ theme }) => theme.fonts.fontSize20};
     line-height: 26px;
   } ;
 `;
