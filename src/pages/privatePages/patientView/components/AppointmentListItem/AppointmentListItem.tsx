@@ -3,14 +3,16 @@ import * as Styled from "./AppointmentListItemStyles";
 
 // media
 import moreVertical from "media/more-vertical.svg";
+import CardName from "components/CardName";
+import TextSecondary from "components/TextSecondary";
 
 type AppointmentListItemProps = {
-  avatar: string,
-  name: string,
-  profession: string,
-  time: string,
-  description: string,
-}
+  avatar: string;
+  name: string;
+  profession: string;
+  time: string;
+  description: string;
+};
 
 const AppointmentListItem = ({
   avatar,
@@ -24,15 +26,17 @@ const AppointmentListItem = ({
       <Styled.ListItemInfoWrapper>
         <Styled.ListItemInfoAvatar src={avatar} alt="" />
         <div>
-          <Styled.ListItemInfoName>{name}</Styled.ListItemInfoName>
+          <CardName>{name}</CardName>
           <Styled.ListItemStatusWrapper>
-            <Styled.ListItemStatusProfession>{profession}</Styled.ListItemStatusProfession>
+            <TextSecondary>{profession}</TextSecondary>
           </Styled.ListItemStatusWrapper>
         </div>
         <Styled.ListItemMore src={moreVertical} alt="" />
       </Styled.ListItemInfoWrapper>
       <Styled.ListItemInfoText>{time}</Styled.ListItemInfoText>
-      <Styled.ListItemInfoText description>{description}</Styled.ListItemInfoText>
+      <Styled.ListItemInfoText description>
+        {description}
+      </Styled.ListItemInfoText>
     </Styled.ListItem>
   );
 };

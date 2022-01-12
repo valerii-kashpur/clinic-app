@@ -5,8 +5,10 @@ import styled from "styled-components";
 import * as Styled from "../DoctorViewStyles";
 
 import PatientsListItem from "./PatientsListItem/PatientsListItem";
-import EditAppointmentModal from "./EditAppointmentModal";
 import { IDoctorAppointment } from "models/IDoctorAppointments";
+import EditCreateModal from "components/Modal/EditCreateModal";
+import CreateResolutionForm from "./CreateResolutionForm/CreateResolutionFrom";
+import TextSecondary from "components/TextSecondary";
 
 const List = styled.ul`
   margin-top: 16px;
@@ -30,13 +32,13 @@ const List = styled.ul`
     }
     &::-webkit-scrollbar-track {
       background: ${({ theme }) =>
-    theme.colors.viewPagesContainerBackgroundColor};
+        theme.colors.viewPagesContainerBackgroundColor};
       opacity: 0.32;
       border-radius: ${({ theme }) => theme.borderRadius.borderRadius};
     }
     &::-webkit-scrollbar-thumb {
       width: 12px;
-      background: ${({ theme }) => theme.colors.asideInputBorderColor};
+      background: ${({ theme }) => theme.colors.inputBorderColor};
       opacity: 0.56;
       border-radius: ${({ theme }) => theme.borderRadius.borderRadius};
     }
@@ -44,55 +46,74 @@ const List = styled.ul`
 `;
 
 type appointmentsArray = {
-  appointmentsArray: IDoctorAppointment
-}
-
+  appointmentsArray: IDoctorAppointment;
+};
 
 const PatientsList = ({ appointmentsArray }: appointmentsArray) => {
-  const [modalPropItems, setModalPropItems] = useState({});
-  const [isOpen, setIsOpen] = useState(false);
+  const [modalPropItems, setModalPropItems] = useState({
+    id: "",
+    name: "",
+    visitDate: "",
+  });
+  const [isCreateResolutionModalOpen, setIsCreateResolutionModalOpen] =
+    useState(false);
 
-  function toggleModal() {
-    setIsOpen(!isOpen);
-  }
+  const toggleModal = () => {
+    setIsCreateResolutionModalOpen(!isCreateResolutionModalOpen);
+  };
+
+  const clearModalProperties = () => {
+    setModalPropItems({
+      id: "",
+      name: "",
+      visitDate: "",
+    });
+  };
 
   return (
     <>
       {appointmentsArray.length ? (
         <List>
-          {appointmentsArray.map(({ patient, reason, status, visit_date, id }) => {
-            const date = moment(visit_date).format("ddd MMM DD YYYY, h a");
-            return (
-              <PatientsListItem
-                key={uuidv4()}
-                avatar={patient.photo}
-                name={patient.first_name + " " + patient.last_name}
-                appointment={status}
-                time={date}
-                description={reason}
-                id={id}
-                visitDate={visit_date}
-                setModalProps={setModalPropItems}
-                openModalToggle={toggleModal}
-              />
-            );
-          })}
+          {appointmentsArray.map(
+            ({ patient, reason, status, visit_date, id }) => {
+              const date = moment(visit_date).format("ddd MMM DD YYYY, h a");
+              return (
+                <PatientsListItem
+                  key={uuidv4()}
+                  avatar={patient.photo}
+                  name={patient.first_name + " " + patient.last_name}
+                  appointment={status}
+                  time={date}
+                  description={reason}
+                  id={id}
+                  visitDate={visit_date}
+                  setModalProps={setModalPropItems}
+                  toggleCreateResolutionModal={toggleModal}
+                />
+              );
+            }
+          )}
         </List>
       ) : (
         <Styled.EmptyListBlock>
           <Styled.EmptyListText data-testid="emptyList">
-            You have no patients yet. To create a patient profile, please
-            contact your administrator.
+            <TextSecondary>
+              You have no patients yet. To create a patient profile, please
+              contact your administrator.
+            </TextSecondary>
           </Styled.EmptyListText>
         </Styled.EmptyListBlock>
       )}
-
-      <EditAppointmentModal
-        isOpen={isOpen}
-        toggleModal={toggleModal}
-        modalPropItems={modalPropItems}
-        setDropMenuValue={setModalPropItems}
-      />
+      <EditCreateModal
+        isOpen={isCreateResolutionModalOpen}
+        toggleModal={setIsCreateResolutionModalOpen}
+        clearModalProperties={clearModalProperties}
+      >
+        <CreateResolutionForm
+          modalProps={modalPropItems}
+          toggleModal={setIsCreateResolutionModalOpen}
+        />
+      </EditCreateModal>
     </>
   );
 };

@@ -1,7 +1,7 @@
 
 
 type AppointmentDoctor = {
-    first_name: String,
+    first_name: string,
     id: string,
     last_name: string,
     photo: string,

@@ -1,21 +1,22 @@
 import React, { useEffect } from "react";
 import ViewPagesWrapper from "../components/ViewPagesWrapper/ViewPagesWrapper";
 import NavWrapper from "./Components/NavWrapper/NavWrapper";
-import Title from "components/Title";
 import Form from "./Components/Form/Form";
 
 import { useSelector } from "react-redux";
 import { userRoleNameSelector } from "redux/selectors";
 import { useHistory } from "react-router-dom";
+import PATHS from "routes/paths";
+import TitleH2 from "components/TitleH2";
+import * as Styled from "./PatientMakeAppointmentStyles";
 
 const PatientMakeAppointment = () => {
   const history = useHistory();
   const userRole = useSelector(userRoleNameSelector);
 
-
   useEffect(() => {
     if (!userRole) {
-      history.replace("./sign-in");
+      history.replace(PATHS.signIn);
     }
   }, [userRole, history]);
 
@@ -23,7 +24,9 @@ const PatientMakeAppointment = () => {
     <ViewPagesWrapper>
       <NavWrapper />
       <section>
-        <Title marginProp={"72px 0 40px 0"}>Make an appointment</Title>
+        <Styled.TitleWrapper>
+          <TitleH2>Make an appointment</TitleH2>
+        </Styled.TitleWrapper>
         <Form />
       </section>
     </ViewPagesWrapper>

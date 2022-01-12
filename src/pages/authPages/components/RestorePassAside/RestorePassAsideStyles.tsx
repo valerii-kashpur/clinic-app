@@ -12,7 +12,7 @@ export const Container = styled.div`
   overflow: hidden;
   background: url(${bgImage}) no-repeat;
 
-  @media ${({theme}) => theme.media.tablet} {
+  @media ${({ theme }) => theme.media.tablet} {
     padding-top: 0px;
     background: url(${bgImage}) no-repeat;
     background-size: cover;
@@ -27,9 +27,9 @@ export const Aside = styled.aside`
   border-radius: 24px 24px 0px 0px;
   height: calc(90vh - 2px);
 
-  background-color: ${({theme}) => theme.colors.asideBackgroundColor};
+  background-color: ${({ theme }) => theme.colors.asideBackgroundColor};
 
-  @media ${({theme}) => theme.media.tablet} {
+  @media ${({ theme }) => theme.media.tablet} {
     margin-left: auto;
     top: 0;
     border-radius: 0;
@@ -39,7 +39,7 @@ export const Aside = styled.aside`
     padding-top: 26vh;
   }
 
-  @media ${({theme}) => theme.media.desktop} {
+  @media ${({ theme }) => theme.media.desktop} {
     width: 560px;
   } ;
 `;
@@ -52,7 +52,7 @@ export const AsideWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media ${({theme}) => theme.media.tablet} {
+  @media ${({ theme }) => theme.media.tablet} {
     margin: 0 auto;
     width: 368px;
   }
@@ -62,7 +62,7 @@ export const AsideTitleWrapper = styled.div`
   display: flex;
   margin-bottom: 24px;
 
-  @media ${({theme}) => theme.media.tablet} {
+  @media ${({ theme }) => theme.media.tablet} {
     margin-bottom: 32px;
   } ;
 `;
@@ -80,12 +80,12 @@ export const StyledLink = styled(Link)`
 export const AsideTitle = styled.h2`
   margin: 0;
 
-  font-weight: ${({theme}) => theme.fonts.boldFontWeight};
-  font-size: 20px;
+  font-weight: ${({ theme }) => theme.fonts.fontWeightBold};
+  font-size: ${({ theme }) => theme.fonts.fontSize20};
   line-height: 24px;
 
-  @media ${({theme}) => theme.media.tablet} {
-    font-size: 24px;
+  @media ${({ theme }) => theme.media.tablet} {
+    font-size: ${({ theme }) => theme.fonts.fontSize20};
     line-height: 26px;
   } ;
 `;

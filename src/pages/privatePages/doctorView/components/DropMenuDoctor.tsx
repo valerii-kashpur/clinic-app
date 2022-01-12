@@ -1,19 +1,35 @@
 import React, { ReactElement } from "react";
-import { Menu, MenuItem } from "@szhsin/react-menu";
+import { MenuItem, Menu as MenuInner } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
+import { menuSelector } from "@szhsin/react-menu/style-utils";
 import { deleteAppointment } from "network/fetchOperations";
 import { fetchDoctorAppointments } from "redux/slices/doctorAppointmentsSlice";
 import { useAppDispatch } from "types/useAppDispatch";
+import styled from "styled-components";
+
+const Menu = styled(MenuInner)`
+  ${menuSelector.name} {
+    left: -205px !important;
+  } ;
+`;
 
 type DropMenuDoctorProps = {
-  menuBtn: ReactElement<string, string>,
-  id: string,
-  visitDate: string,
-  name: string,
-  getModalProps: ({ name, id, visitDate }: { name: string, id: string, visitDate: string }) => void,
-  openModal: () => void,
-}
+  menuBtn: ReactElement<string, string>;
+  id: string;
+  visitDate: string;
+  name: string;
+  getModalProps: ({
+    name,
+    id,
+    visitDate,
+  }: {
+    name: string;
+    id: string;
+    visitDate: string;
+  }) => void;
+  toggleCreateResolutionModal: () => void;
+};
 
 const DropMenuDoctor = ({
   menuBtn,
@@ -21,13 +37,13 @@ const DropMenuDoctor = ({
   visitDate,
   name,
   getModalProps,
-  openModal,
+  toggleCreateResolutionModal,
 }: DropMenuDoctorProps) => {
   const dispatch = useAppDispatch();
 
-  const handleClick = () => {
+  const handleCreate = () => {
     getModalProps({ name, id, visitDate });
-    openModal();
+    toggleCreateResolutionModal();
   };
 
   const handleDelete = async () => {
@@ -37,7 +53,7 @@ const DropMenuDoctor = ({
 
   return (
     <Menu menuButton={menuBtn} transition>
-      <MenuItem onClick={handleClick}>Edit a resolution</MenuItem>
+      <MenuItem onClick={handleCreate}>Create a resolution</MenuItem>
       <MenuItem onClick={handleDelete}>Delete</MenuItem>
     </Menu>
   );

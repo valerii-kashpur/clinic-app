@@ -11,11 +11,11 @@ export const ListItem = styled.li`
   padding-bottom: 24px;
   height: 100%;
 
-  background-color: ${({theme}) => theme.colors.inputBackgroundColor};
+  background-color: ${({ theme }) => theme.colors.inputBackgroundColor};
   box-shadow: 0px 4px 32px rgba(218, 228, 255, 0.24);
   border-radius: 12px;
 
-  @media ${({theme}) => theme.media.tablet} {
+  @media ${({ theme }) => theme.media.tablet} {
     padding: 24px 32px;
     padding-bottom: 40px;
     min-width: 524px;
@@ -41,7 +41,7 @@ export const ListItemInfoWrapper = styled.div`
     width: 100%;
     height: 1px;
 
-    background: ${({theme}) => theme.colors.asideInputBorderColor};
+    background: ${({ theme }) => theme.colors.inputBorderColor};
     opacity: 0.5;
   }
 `;
@@ -51,8 +51,8 @@ export const ListItemInfoAvatar = styled.img`
   margin-right: 16px;
 `;
 export const ListItemInfoName = styled.p`
-  font-weight: ${({theme}) => theme.fonts.boldFontWeight};
-  font-size: 17px;
+  font-weight: ${({ theme }) => theme.fonts.fontWeightBold};
+  font-size: ${({ theme }) => theme.fonts.fontSize17};
   line-height: 130%;
 `;
 export const ListItemStatusWrapper = styled.div`
@@ -60,9 +60,9 @@ export const ListItemStatusWrapper = styled.div`
   align-items: center;
 `;
 export const ListItemStatusProfession = styled.p`
-  font-size: 13px;
+  font-size: ${({ theme }) => theme.fonts.fontSize13};
   line-height: 130%;
-  color: ${({theme}) => theme.colors.secondaryTextColor};
+  color: ${({ theme }) => theme.colors.secondaryTextColor};
 `;
 export const ListItemMore = styled.img`
   width: 24px;
@@ -71,12 +71,12 @@ export const ListItemMore = styled.img`
 `;
 
 type ListItemInfoTextProps = {
-  description?: boolean | undefined
-}
+  description?: boolean | undefined;
+};
 
 export const ListItemInfoText = styled.p<ListItemInfoTextProps>`
   position: relative;
-  margin-top: ${({description}) => (description ? "23px" : "16px")};
+  margin-top: ${({ description }) => (description ? "23px" : "16px")};
   padding-left: 36px;
   &::before {
     position: absolute;
@@ -89,10 +89,10 @@ export const ListItemInfoText = styled.p<ListItemInfoTextProps>`
     height: 24px;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url(${({description}) =>
+    background-image: url(${({ description }) =>
       description ? reasonSvg : timeSvg});
   }
-  @media ${({theme}) => theme.media.tablet} {
-    margin-top: ${({description}) => (description ? "24px" : "23px")};
+  @media ${({ theme }) => theme.media.tablet} {
+    margin-top: ${({ description }) => (description ? "24px" : "23px")};
   } ;
 `;

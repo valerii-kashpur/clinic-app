@@ -5,10 +5,12 @@ import * as Styled from "./ViewPagesWrapperStyles";
 import logo from "media/logo.png";
 import { useSelector } from "react-redux";
 import { getCurrentUserSelector } from "redux/selectors";
+import PageUserName from "components/PageUserName";
+import PageUserRole from "components/PageUserRole";
 
 type ViewPagesWrapperProps = {
-  children: React.ReactNode,
-}
+  children: React.ReactNode;
+};
 
 const ViewPagesWrapper = ({ children }: ViewPagesWrapperProps) => {
   const currentUser = useSelector(getCurrentUserSelector);
@@ -18,10 +20,10 @@ const ViewPagesWrapper = ({ children }: ViewPagesWrapperProps) => {
         <Styled.Logo src={logo} alt="Palm Clinic logo" />
         <Styled.HeaderLogoWrapper>
           <Styled.HeaderUserNAmeWrapper>
-            <p>
+            <PageUserName>
               {currentUser.firstName} {currentUser.lastName}
-            </p>
-            <p>{currentUser.roleName}</p>
+            </PageUserName>
+            <PageUserRole>{currentUser.roleName}</PageUserRole>
           </Styled.HeaderUserNAmeWrapper>
           <Styled.HeaderUserAvatarWrapper>
             <img src={currentUser.photo} alt="user avatar" />

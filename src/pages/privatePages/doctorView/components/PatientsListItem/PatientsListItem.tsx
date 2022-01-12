@@ -3,18 +3,22 @@ import { v4 as uuidv4 } from "uuid";
 import * as Styled from "./PatientsListItemStyles";
 import moreVertical from "media/more-vertical.svg";
 import DropMenuDoctor from "../DropMenuDoctor";
+import CardName from "components/CardName";
+import TextSecondary from "components/TextSecondary";
 
 type PatientsListItemProps = {
-  avatar: string,
-  name: string,
-  appointment: string,
-  time: string,
-  description: string,
-  id: string,
-  visitDate: string,
-  setModalProps: React.Dispatch<React.SetStateAction<{}>>,
-  openModalToggle: () => void,
-}
+  avatar: string;
+  name: string;
+  appointment: string;
+  time: string;
+  description: string;
+  id: string;
+  visitDate: string;
+  setModalProps: React.Dispatch<
+    React.SetStateAction<{ id: string; name: string; visitDate: string }>
+  >;
+  toggleCreateResolutionModal: () => void;
+};
 
 const PatientsListItem = ({
   avatar,
@@ -25,22 +29,18 @@ const PatientsListItem = ({
   id,
   visitDate,
   setModalProps,
-  openModalToggle
+  toggleCreateResolutionModal,
 }: PatientsListItemProps) => {
-
-
   return (
     <>
       <Styled.ListItem key={uuidv4()} data-testid="listItem">
         <Styled.ListItemInfoWrapper>
           <Styled.ListItemInfoAvatar src={avatar} alt="user avatar" />
           <div>
-            <Styled.ListItemInfoName>{name}</Styled.ListItemInfoName>
+            <CardName>{name}</CardName>
             <Styled.ListItemStatusWrapper>
               <Styled.ListItemStatus />
-              <Styled.ListItemStatusAppointment>
-                {appointment}
-              </Styled.ListItemStatusAppointment>
+              <TextSecondary>{appointment}</TextSecondary>
             </Styled.ListItemStatusWrapper>
           </div>
           <DropMenuDoctor
@@ -49,7 +49,7 @@ const PatientsListItem = ({
             visitDate={visitDate}
             name={name}
             getModalProps={setModalProps}
-            openModal={openModalToggle}
+            toggleCreateResolutionModal={toggleCreateResolutionModal}
           />
         </Styled.ListItemInfoWrapper>
         <Styled.ListItemInfoText>{time}</Styled.ListItemInfoText>

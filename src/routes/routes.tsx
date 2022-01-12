@@ -16,6 +16,9 @@ const RestorePasswordConfirmed = lazy(
 const DoctorView = lazy(
   () => import("pages/privatePages/doctorView/DoctorView")
 );
+const DoctorResolutions = lazy(
+  () => import("pages/privatePages/doctorResolutions/DoctorResolutions")
+);
 const PatientView = lazy(
   () => import("pages/privatePages/patientView/PatientView")
 );
@@ -23,13 +26,28 @@ const PatientMakeAppointment = lazy(
   () =>
     import("pages/privatePages/patientMakeAppointment/PatientMakeAppointment")
 );
+const PatientResolutions = lazy(
+  () => import("pages/privatePages/patientsResolutions/PatientsResolutions")
+);
 
 const ROUTES = [
+  {
+    path: PATHS.doctorResolutions,
+    component: DoctorResolutions,
+    private: true,
+    onlyForRole: "Doctor",
+  },
   {
     path: PATHS.doctorView,
     component: DoctorView,
     private: true,
     onlyForRole: "Doctor",
+  },
+  {
+    path: PATHS.patientsResolutions,
+    component: PatientResolutions,
+    private: true,
+    onlyForRole: "Patient",
   },
   {
     path: PATHS.makeAppointment,

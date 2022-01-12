@@ -6,5 +6,5 @@ export const successNotification = (message:string) => {
 };
 
 export const errorNotification = () => {
-  toast.success("Something went wrong!", errorReq);
+  toast.error("Something went wrong!", errorReq);
 };

@@ -1,22 +1,15 @@
 import { Form } from "formik";
 import styled from "styled-components";
-import baseButtonStyles from "styles/baseButtonStyles";
 
 // media
 import angleRight from "media/angle-right-b.svg";
+import ButtonWithTextAndArrow from "components/ButtonWithTextAndArrow";
 
-export const NotificationText = styled.p`
+export const NotificationText = styled.div`
   min-width: 256px;
-  margin: 0;
   margin-bottom: 24px;
 
-  font-size: ${({theme}) => theme.fonts.mobileFontSize};
-  line-height: 130%;
-  font-weight: ${({theme}) => theme.fonts.fontStyle};
-
-  color: ${({theme}) => theme.colors.secondaryTextColor};
-
-  @media ${({theme}) => theme.media.tablet} {
+  @media ${({ theme }) => theme.media.tablet} {
     width: 368px;
   } ;
 `;
@@ -27,8 +20,8 @@ export const AsideForm = styled(Form)`
 `;
 
 type FormInputWrapperType = {
-  svg: string
-}
+  svg: string;
+};
 
 export const FormInputWrapper = styled.div<FormInputWrapperType>`
   margin-bottom: 24px;
@@ -41,7 +34,7 @@ export const FormInputWrapper = styled.div<FormInputWrapperType>`
   &::before {
     position: absolute;
     z-index: 10;
-    top: ${({theme}) => theme.borderRadius.borderRadius};
+    top: ${({ theme }) => theme.borderRadius.borderRadius};
     left: 16px;
 
     content: "";
@@ -50,10 +43,10 @@ export const FormInputWrapper = styled.div<FormInputWrapperType>`
 
     background-repeat: no-repeat;
     background-size: cover;
-    background: url(${({svg}) => svg});
+    background: url(${({ svg }) => svg});
   }
 
-  @media ${({theme}) => theme.media.tablet} {
+  @media ${({ theme }) => theme.media.tablet} {
     margin-bottom: 40px;
 
     &:last-of-type {
@@ -69,30 +62,34 @@ export const FormInputWrapper = styled.div<FormInputWrapperType>`
 export const ErrorMessage = styled.p`
   margin-top: 14px;
 
-  font-size: 13px;
-  line-height: 16px;
-  letter-spacing: -0.24px;
+  font-size: ${({ theme }) => theme.fonts.fontSize13};
+  line-height: ${({ theme }) => theme.fonts.lineHeight120};
 
-  color: ${({theme}) => theme.colors.errorTextColor};
+  color: ${({ theme }) => theme.colors.errorTextColor};
 `;
 
-export const StyledButton = styled(baseButtonStyles)`
-  width: 198px;
-  margin-top: 32px;
+export const ButtonWrapper = styled.div`
+  margin: 32px 0 0 0;
+`;
+
+export const Button = styled(ButtonWithTextAndArrow)`
+  width: 122px;
   height: 48px;
 
-  @media ${({theme}) => theme.media.tablet} {
-    margin-top: 64px;
+  @media ${({ theme }) => theme.media.tablet} {
     height: 56px;
-    width: 214px;
-  }
+    width: 146px;
+
+    font-size: ${({ theme }) => theme.fonts.fontSize17};
+    line-height: 24px;
+  } ;
 `;
 
 export const ButtonVector = styled.span`
   display: inline-block;
   width: 24px;
   height: 24px;
-  margin-left: ${({theme}) => theme.borderRadius.borderRadius};
+  margin-left: ${({ theme }) => theme.borderRadius.borderRadius};
 
   background: url(${angleRight});
   background-repeat: no-repeat;

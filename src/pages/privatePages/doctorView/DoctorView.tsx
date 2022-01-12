@@ -16,6 +16,9 @@ import slider from "media/sliders-v-alt.svg";
 import { fetchDoctorAppointments } from "redux/slices/doctorAppointmentsSlice";
 import { useAppSelector } from "types/useAppSelector";
 import { useAppDispatch } from "types/useAppDispatch";
+import PATHS from "routes/paths";
+import NavTab from "components/NavTab";
+import TitleH2 from "components/TitleH2";
 
 const DoctorView = () => {
   const [sortBy, setSortBy] = useState("dateSort");
@@ -27,7 +30,7 @@ const DoctorView = () => {
 
   useEffect(() => {
     if (!userRole) {
-      history.replace("./sign-in");
+      history.replace(PATHS.signIn);
     }
   }, [userRole, history]);
 
@@ -37,29 +40,31 @@ const DoctorView = () => {
     }
   }, [dispatch, sortBy, userRole, isAuth]);
 
+  const onChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortBy(e.target.value);
+  };
+
   return (
     <ViewPagesWrapper>
       <Styled.NavButtonsWrapper>
-        <Styled.NavButton current>Patients</Styled.NavButton>
-        <Styled.NavButton>Resolutions</Styled.NavButton>
+        <NavTab to={PATHS.doctorView} current="true">
+          Patients
+        </NavTab>
+        <NavTab to={PATHS.doctorResolutions}>Resolutions</NavTab>
       </Styled.NavButtonsWrapper>
       <Styled.NavigationWrapper>
-        <Styled.NavSectionTitle>My Patients</Styled.NavSectionTitle>
-        <Styled.NavgationItemsWrapper>
+        <TitleH2>My Patients</TitleH2>
+        <Styled.NavigationItemsWrapper>
           <Styled.NavigationItemSearch src={search} alt="" />
           <Styled.NavigationSearchInput type="text" placeholder="Search" />
           <Styled.NavigationItemSelect src={slider} alt="" />
           <Styled.NavigationSelectSpan>Sort by:</Styled.NavigationSelectSpan>
-          <Styled.NavigationSelect
-            name="Date"
-            id=""
-            onChange={(e) => setSortBy(e.target.value)}
-          >
+          <Styled.NavigationSelect name="Date" id="" onChange={onChangeHandler}>
             <option value="dateSort">Date</option>
             <option value="firstNameSort">Name</option>
             <option value="lastNameSort">Last Name</option>
           </Styled.NavigationSelect>
-        </Styled.NavgationItemsWrapper>
+        </Styled.NavigationItemsWrapper>
       </Styled.NavigationWrapper>
       <PatientsList appointmentsArray={appointments} />
     </ViewPagesWrapper>

@@ -1,5 +1,7 @@
 import { IDoctorAppointment } from "models/IDoctorAppointments";
+import { IDoctorResolutions } from "models/IDoctorResolutions";
 import { IPatientAppointment } from "models/IPatientAppointments";
+import { IPatientsResolutions } from "models/IPatientsResolutions";
 
 export type RegistrationRequestBody = {
   userName: string;
@@ -27,6 +29,14 @@ export type DoctorAppointmentsResponseBody = {
   appointments: IDoctorAppointment;
   total: number;
 };
+export type DoctorResolutionsResponseBody = {
+  resolutions: IDoctorResolutions;
+  total: number;
+};
+export type PatientsResolutionsResponseBody = {
+  resolutions: IPatientsResolutions;
+  total: number;
+};
 export type SpecializationsResponseBody = {
   specialization_name: string;
   id: string;
@@ -43,4 +53,12 @@ export type CreateAppointmentRequestBody = {
   reason: string;
   note: string;
   doctorID: string;
+};
+export type CreateResolutionRequestBody = {
+  resolution: string;
+  appointmentID: string;
+};
+export type EditResolutionRequestBody = {
+  resolution: string;
+  resolutionID: string;
 };

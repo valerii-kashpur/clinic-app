@@ -8,26 +8,22 @@ export const NavButtonsWrapper = styled.div`
 `;
 
 type NavButtonProps = {
-  current?:boolean | undefined
-}
+  current?: boolean | undefined;
+};
 
 export const NavButton = styled.button<NavButtonProps>`
   width: 120px;
   height: 40px;
   margin-right: 24px;
 
-  border-radius: ${({theme}) => theme.borderRadius.borderRadius};
+  border-radius: ${({ theme }) => theme.borderRadius.borderRadius};
   border: none;
-  background: ${({current, theme}) =>
-    current
-      ? theme.colors.accentColor
-      : theme.colors.buttonTextColor};
-  color: ${({current, theme}) =>
-    current
-      ? theme.colors.buttonTextColor
-      : theme.colors.accentColor};
+  background: ${({ current, theme }) =>
+    current ? theme.colors.accentColor : theme.colors.buttonTextColor};
+  color: ${({ current, theme }) =>
+    current ? theme.colors.buttonTextColor : theme.colors.accentColor};
 
-  @media ${({theme}) => theme.media.tablet} {
+  @media ${({ theme }) => theme.media.tablet} {
     width: 160px;
   } ;
 `;
@@ -36,18 +32,18 @@ export const NavigationWrapper = styled.div`
   margin-top: 40px;
   display: flex;
 
-  @media ${({theme}) => theme.media.tablet} {
+  @media ${({ theme }) => theme.media.tablet} {
     margin-top: 56px;
-    padding-right: ${({theme}) => theme.borderRadius.borderRadius};
+    padding-right: ${({ theme }) => theme.borderRadius.borderRadius};
   } ;
 `;
 
 export const NavSectionTitle = styled.h3`
-  font-size: 24px;
-  line-height: 110%;
+  font-size: ${({ theme }) => theme.fonts.fontSize20};
+  line-height: ${({ theme }) => theme.fonts.lineHeight110};
 `;
 
-export const NavgationItemsWrapper = styled.div`
+export const NavigationItemsWrapper = styled.div`
   display: flex;
   margin-left: auto;
   align-items: center;
@@ -60,11 +56,11 @@ export const NavigationItemSearch = styled.img`
   width: 24px;
   height: 24px;
 
-  @media ${({theme}) => theme.media.tablet} {
+  @media ${({ theme }) => theme.media.tablet} {
     margin-right: 32px;
   }
 
-  @media ${({theme}) => theme.media.desktop} {
+  @media ${({ theme }) => theme.media.desktop} {
     margin-right: 16px;
   }
 `;
@@ -72,14 +68,14 @@ export const NavigationItemSearch = styled.img`
 export const NavigationSearchInput = styled.input`
   display: none;
 
-  @media ${({theme}) => theme.media.desktop} {
+  @media ${({ theme }) => theme.media.desktop} {
     display: block;
     border: none;
     width: 90px;
     margin-right: 10px;
-    color: $secondary-text-color;
+    color: ${({ theme }) => theme.colors.secondaryTextColor};
     &::placeholder {
-      color: $secondary-text-color;
+      color: ${({ theme }) => theme.colors.secondaryTextColor};
     }
   } ;
 `;
@@ -88,7 +84,7 @@ export const NavigationItemSelect = styled.img`
   width: 24px;
   height: 24px;
 
-  @media ${({theme}) => theme.media.desktop} {
+  @media ${({ theme }) => theme.media.desktop} {
     display: none;
   } ;
 `;
@@ -96,20 +92,21 @@ export const NavigationItemSelect = styled.img`
 export const NavigationSelectSpan = styled.span`
   display: none;
 
-  @media ${({theme}) => theme.media.desktop} {
+  @media ${({ theme }) => theme.media.desktop} {
     display: block;
     margin-right: 16px;
-    color: ${({theme}) => theme.colors.secondaryTextColor};
+    color: ${({ theme }) => theme.colors.secondaryTextColor};
   } ;
 `;
 
 export const NavigationSelect = styled.select`
   display: none;
 
-  @media ${({theme}) => theme.media.desktop} {
+  @media ${({ theme }) => theme.media.desktop} {
     display: block;
-    color: ${({theme}) => theme.colors.accentColor};
+    color: ${({ theme }) => theme.colors.accentColor};
     border: none;
+    background: ${({ theme }) => theme.colors.inputBackgroundColor};
   } ;
 `;
 
@@ -127,12 +124,6 @@ export const EmptyListBlock = styled.div`
   background-size: 120px 120px;
 `;
 
-export const EmptyListText = styled.p`
+export const EmptyListText = styled.div`
   max-width: 461px;
-
-  font-weight: ${({theme}) => theme.fonts.boldFontWeight};
-  line-height: 21px;
-
-  color: ${({theme}) => theme.colors.secondaryTextColor};
 `;
-

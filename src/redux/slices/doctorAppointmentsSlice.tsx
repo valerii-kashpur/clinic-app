@@ -4,7 +4,7 @@ import { IDoctorAppointment } from "models/IDoctorAppointments";
 
 interface InitialState {
   appointments: IDoctorAppointment,
-  total: Number,
+  total: number,
   isFetching: boolean,
 }
 

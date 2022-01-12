@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
 import { Form } from "formik";
 import styled from "styled-components";
 
 // media
 import eyeOff from "media/eye-off.svg";
 import angleRight from "media/angle-right-b.svg";
+import ButtonWithTextAndArrow from "components/ButtonWithTextAndArrow";
 
 export const AsideForm = styled(Form)`
   display: flex;
@@ -12,8 +12,8 @@ export const AsideForm = styled(Form)`
 `;
 
 type FormInputWrapperProps = {
-  svg: string
-}
+  svg: string;
+};
 
 export const FormInputWrapper = styled.div<FormInputWrapperProps>`
   margin-bottom: 24px;
@@ -26,7 +26,7 @@ export const FormInputWrapper = styled.div<FormInputWrapperProps>`
   &::before {
     position: absolute;
     z-index: 10;
-    top: ${({theme}) => theme.borderRadius.borderRadius};
+    top: ${({ theme }) => theme.borderRadius.borderRadius};
     left: 16px;
 
     content: "";
@@ -35,10 +35,10 @@ export const FormInputWrapper = styled.div<FormInputWrapperProps>`
 
     background-repeat: no-repeat;
     background-size: cover;
-    background: url(${({svg}) => svg});
+    background: url(${({ svg }) => svg});
   }
 
-  @media ${({theme}) => theme.media.tablet} {
+  @media ${({ theme }) => theme.media.tablet} {
     margin-bottom: 40px;
 
     &:last-of-type {
@@ -53,7 +53,7 @@ export const FormInputWrapper = styled.div<FormInputWrapperProps>`
 
 export const PasswordEyeSpan = styled.span`
   position: absolute;
-  top: ${({theme}) => theme.borderRadius.borderRadius};
+  top: ${({ theme }) => theme.borderRadius.borderRadius};
   right: 18px;
   z-index: 10;
 
@@ -64,7 +64,7 @@ export const PasswordEyeSpan = styled.span`
   background-size: cover;
   background: url(${eyeOff});
 
-  @media ${({theme}) => theme.media.tablet} {
+  @media ${({ theme }) => theme.media.tablet} {
     top: 16px;
     left: 320px;
   } ;
@@ -74,73 +74,42 @@ export const ErrorMessage = styled.p`
   margin-top: 14px;
   position: absolute;
 
-  font-size: 13px;
-  line-height: 16px;
-  letter-spacing: -0.24px;
+  font-size: ${({ theme }) => theme.fonts.fontSize13};
+  line-height: ${({ theme }) => theme.fonts.lineHeight120};
 
-  color: ${({theme}) => theme.colors.errorTextColor};
+  color: ${({ theme }) => theme.colors.errorTextColor};
 `;
 
-export const Button = styled.button`
-  width: 118px;
-  margin-top: 32px;
+export const ButtonWrapper = styled.div`
+  margin: 64px 0 0 0;
+`;
+
+export const Button = styled(ButtonWithTextAndArrow)`
+  width: 122px;
   height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
-  border-radius: ${({theme}) => theme.borderRadius.borderRadius};
-  border: none;
-
-  background-color: ${({theme}) => theme.colors.accentColor};
-  color: ${({theme}) => theme.colors.inputBackgroundColor};
-
-  font-weight: ${({theme}) => theme.fonts.boldFontWeight};
-  font-size: ${({theme}) => theme.fonts.mobileFontSize};
-  line-height: 19px;
-
-  @media ${({theme}) => theme.media.tablet} {
-    margin-top: 64px;
+  @media ${({ theme }) => theme.media.tablet} {
     height: 56px;
-    width: 138px;
-
-    font-size: 17px;
-    line-height: 24px;
-  }
+    width: 146px;
+  } ;
 `;
 
 export const ButtonVector = styled.span`
   display: inline-block;
   width: 24px;
   height: 24px;
-  margin-left: ${({theme}) => theme.borderRadius.borderRadius};
+  margin-left: ${({ theme }) => theme.borderRadius.borderRadius};
 
   background: url(${angleRight});
   background-repeat: no-repeat;
 `;
 
-type AsideLinkTextProps = {
-  forgotPass?: boolean
-}
-
-
-
-export const AsideLinkText = styled.p<AsideLinkTextProps>`
-  margin: 0;
-  margin-right: 12px;
+export const ForgotPasswordLinkWrapper = styled.div`
   margin-top: 32px;
+`;
 
-  margin-top: ${({forgotPass}) => (forgotPass ? "32px" : "0px")};
-
-  font-size: ${({theme}) => theme.fonts.mobileFontSize};
-  line-height: 21px;
-
-  color: ${({theme}) => theme.colors.secondaryTextColor};
-
-  @media ${({theme}) => theme.media.tablet} {
-    font-size: ${({theme}) => theme.fonts.mobileFontSize};
-    line-height: 21px;
-  } ;
+export const LinkText = styled.div`
+  margin-right: 12px;
 `;
 
 export const AsideLinkWrapper = styled.div`
@@ -148,25 +117,11 @@ export const AsideLinkWrapper = styled.div`
   padding-bottom: 44px;
   margin-top: auto;
 
-  @media ${({theme}) => theme.media.tablet} {
+  @media ${({ theme }) => theme.media.tablet} {
     padding-top: 40px;
   }
 
   @media screen and (max-width: 330px) {
     flex-direction: column;
   }
-`;
-
-export const AsideLink = styled(Link)`
-  font-weight: ${({theme}) => theme.fonts.boldFontWeight};
-  font-size: ${({theme}) => theme.fonts.mobileFontSize};
-  line-height: 130%;
-  text-decoration: underline;
-
-  color: ${({theme}) => theme.colors.accentColor};
-
-  @media ${({theme}) => theme.media.tablet} {
-    margin-top: 0px;
-    line-height: 19px;
-  } ;
 `;
