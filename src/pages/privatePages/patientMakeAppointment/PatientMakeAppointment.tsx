@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import PATHS from "routes/paths";
 import TitleH2 from "components/TitleH2";
 import * as Styled from "./PatientMakeAppointmentStyles";
+import FormikForm from "./Components/Form/FormikForm";
 
 const PatientMakeAppointment = () => {
   const history = useHistory();
@@ -27,7 +28,7 @@ const PatientMakeAppointment = () => {
         <Styled.TitleWrapper>
           <TitleH2>Make an appointment</TitleH2>
         </Styled.TitleWrapper>
-        <Form />
+        <FormikForm />
       </section>
     </ViewPagesWrapper>
   );
