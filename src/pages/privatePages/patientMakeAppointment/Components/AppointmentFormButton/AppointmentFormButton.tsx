@@ -17,7 +17,7 @@ const AppointmentFormButton = ({ values, isFetching }: any) => {
     <>
       <Button
         type="submit"
-        disabled={isDisabled}
+        disabled={(isDisabled || isFetching)}
         width={"160px"}
         height={"56px"}
         data-testid="submitButton"
