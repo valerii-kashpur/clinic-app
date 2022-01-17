@@ -1,23 +1,27 @@
-import React from "react";
-import * as Styled from "./SelectComponentStyles";
+import React, { FC } from "react";
 import Select from "react-select";
+import * as Styled from "./SelectComponentStyles";
 import InputLabel from "components/InputLabel";
 
 type SelectProps = {
   text: string;
-  onChangeFn: (data: any) => void;
-  Disabled?: boolean;
-  optionsArray: { value: string; label: string }[];
+  onChange: (data: any) => void;
+  isDisabled?: boolean;
+  options: { value: string; label: string }[];
   placeholder: string;
+  value: { value: string; label: string };
+  isLoading: boolean;
 };
 
-const SelectComponent = ({
+const SelectComponent: FC<SelectProps> = ({
   text,
-  onChangeFn,
-  Disabled,
-  optionsArray,
+  onChange,
+  isDisabled,
+  options,
   placeholder,
-}: SelectProps) => {
+  value,
+  isLoading,
+}) => {
   return (
     <div>
       <Styled.SelectTitle>
@@ -25,13 +29,15 @@ const SelectComponent = ({
       </Styled.SelectTitle>
       <Select
         defaultValue={null}
-        onChange={onChangeFn}
-        options={optionsArray}
+        onChange={onChange}
+        value={value.label ? value : null}
+        options={options}
+        isDisabled={isDisabled}
         styles={Styled.customStyles}
-        isDisabled={Disabled}
-        inputId={text}
+        inputId={placeholder}
         data-testid={text}
         placeholder={placeholder}
+        isLoading={isLoading}
       />
     </div>
   );

@@ -19,7 +19,6 @@ import patientAppointmentsSlice from "./slices/patientAppointmentsSlice";
 import userSlice, { InitialUserState } from "./slices/userSlice";
 import createSagaMiddleware from "@redux-saga/core";
 import { rootSaga } from "./saga/rootSaga";
-import createAppointmentSlice from "./slices/createAppointmentSlice";
 import doctorsResolutionsSlice from "./slices/doctorsResolutionsSlice";
 import patientsResolutionsSlice from "./slices/patientsResolutionsSlice";
 import { callback } from "network/tokenService";
@@ -47,7 +46,6 @@ const rootReducer = combineReducers({
   doctorAppointments: doctorAppointmentsSlice,
   doctorsResolutions: doctorsResolutionsSlice,
   patientsResolutions: patientsResolutionsSlice,
-  createAppointment: createAppointmentSlice,
 });
 
 export const setupStore = () => {

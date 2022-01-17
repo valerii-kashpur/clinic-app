@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import ViewPagesWrapper from "../components/ViewPagesWrapper/ViewPagesWrapper";
 import NavWrapper from "./Components/NavWrapper/NavWrapper";
-import Form from "./Components/Form/Form";
-
 import { useSelector } from "react-redux";
 import { userRoleNameSelector } from "redux/selectors";
 import { useHistory } from "react-router-dom";
