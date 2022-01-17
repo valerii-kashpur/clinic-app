@@ -2,15 +2,11 @@ import React, { FC, useState, useEffect } from 'react';
 import { FieldProps } from "formik";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "./DatePickerForm.css";
 import moment from "moment";
-import { useAppDispatch } from "types/useAppDispatch";
-import { useAppSelector } from "types/useAppSelector";
-import { fetchDoctorsFreeTime, setSelectedDate } from "redux/slices/createAppointmentSlice";
 
 interface CustomInputComponent {
     type?: string;
-    placeholder: string;
-    optionsArray: [];
 }
 
 const FormikDatePiker: FC<CustomInputComponent & FieldProps> = ({
@@ -18,13 +14,9 @@ const FormikDatePiker: FC<CustomInputComponent & FieldProps> = ({
     form,
     ...props
 }) => {
-
-
     const [selected, setSelected] = useState(new Date());
+    const [selectedDoctor, setSelectedDoctor] = useState("")
     const today = new Date();
-    const dispatch = useAppDispatch();
-    const selectedDoctor = form.values.doctor
-    // const selectedDoctor = useAppSelector(selectedDoctorSelector);
 
     const dateCutter = (date: Date) => {
         return moment(date).toISOString();
@@ -35,17 +27,32 @@ const FormikDatePiker: FC<CustomInputComponent & FieldProps> = ({
     };
 
     useEffect(() => {
-        if (selectedDoctor) {
+        if (!form.values.doctor.value) {
+            setSelectedDoctor("");
+            setSelected(new Date());
+        }
+    }, [form.values.doctor.value])
+
+    useEffect(() => {
+        if (form.values.doctor.value && form.values.doctor.value !== selectedDoctor) {
+            return setSelectedDoctor(form.values.doctor.value)
+        }
+        // setSelected(new Date());  // reset selected date after occupation select changes (optional)
+    }, [form.values.doctor.value, selectedDoctor])
+
+    useEffect(() => {
+        if (selectedDoctor && form.values.selectedDate !== dateCutter(selected)) {
             const date = dateCutter(selected);
-            dispatch(fetchDoctorsFreeTime({ date, selectedDoctor }));
             form.setFieldValue("selectedDate", date);
         }
-    }, [selected, selectedDoctor, dispatch]);
+    }, [selected, form, selectedDoctor]);
+
 
     useEffect(() => {
         const date = dateCutter(selected);
-        dispatch(setSelectedDate(date));
-    }, [selected, dispatch]);
+        if (form.values.selectedDate !== date)
+            form.setFieldValue("selectedDate", date);
+    }, [selected, form]);
 
     return (
         <DatePicker
@@ -54,8 +61,7 @@ const FormikDatePiker: FC<CustomInputComponent & FieldProps> = ({
             formatWeekDay={(nameOfDay) => nameOfDay.substr(0, 1)}
             inline
             minDate={today}
-        // maxDate={selectedDoctor ? null : today}
-        />
+            maxDate={selectedDoctor ? null : today} />
     );
 };
 

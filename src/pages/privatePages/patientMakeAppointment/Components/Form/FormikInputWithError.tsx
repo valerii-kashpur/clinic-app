@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { FieldProps } from "formik";
+import * as Styled from "../VisitReasons/VisitReasonsStyles";
 
 interface CustomInputComponent {
     type?: string;
@@ -9,12 +10,12 @@ const FormikInputWithError: FC<CustomInputComponent & FieldProps> = ({ field,
     form,
     ...props }) => {
     return (
-        <div>
-            <input {...field} {...props} />
-            {form.errors[field.name] && form.touched[field.name] ? (
-                <p>{form.errors[field.name]}</p>
+        <>
+            <Styled.FormikInput {...field} {...props} />
+            {form.errors[field.name] ? (
+                <Styled.ErrorMessage>{form.errors[field.name]}</Styled.ErrorMessage>
             ) : null}
-        </div>
+        </>
     );
 };
 

@@ -1,68 +1,38 @@
 import React, { FC } from "react";
-import { FieldProps } from "formik";
-
-import { useAppDispatch } from "types/useAppDispatch";
-import { useAppSelector } from "types/useAppSelector";
 import moment from "moment";
-import { setSelectedTime } from "redux/slices/createAppointmentSlice";
-import {
-    availableTimeSelector,
-    selectedDateSelector,
-    selectedTimeSelector,
-} from "redux/selectors";
 import { v4 as uuid4 } from "uuid";
 import * as Styled from "../RadioBtns/RadioBtnsStyles";
 
+type FreeTime = [number] | [];
+
 interface CustomInputComponent {
     type?: string;
-    placeholder: string;
-    optionsArray: [];
+    time: string[];
+    onClick: (e: React.FormEvent<HTMLInputElement>) => void;
+    selectedDate: string;
+    availableTime: FreeTime;
+    selectedTime: string;
 }
 
-const time = [
-    "T05:00:00.000Z",
-    "T06:00:00.000Z",
-    "T07:00:00.000Z",
-    "T08:00:00.000Z",
-    "T09:00:00.000Z",
-    "T10:00:00.000Z",
-    "T11:00:00.000Z",
-    "T12:00:00.000Z",
-    "T13:00:00.000Z",
-    "T14:00:00.000Z",
-    "T15:00:00.000Z",
-    "T16:00:00.000Z",
-    "T17:00:00.000Z",
-];
-
-const FormikTimeRadioButtonsGroup: FC<CustomInputComponent & FieldProps> = ({ field,
-    form,
-    ...props }) => {
-    const selectedTime = useAppSelector(selectedTimeSelector);
-    const availableTime = useAppSelector(availableTimeSelector);
-    const pickedDate = useAppSelector(selectedDateSelector);
+const FormikTimeRadioButtonsGroup: FC<CustomInputComponent> = ({
+    time, onClick, selectedDate, availableTime, selectedTime
+}) => {
     const isSelectedRadio = (value: string) => selectedTime === value;
-    const dispatch = useAppDispatch();
-
-    const handleRadioClick = (e: React.FormEvent<HTMLInputElement>) => {
-        form.setFieldValue("selectedTime", e.currentTarget.value);
-        dispatch(setSelectedTime(e.currentTarget.value));
-    };
 
     const timeEditor = (date: string, modificator: string) => {
         return date.substr(0, 10) + modificator;
     };
 
     const getDisabled = (time: string) => {
-        if (pickedDate) {
-            const dateString = pickedDate.substring(0, 10) + time;
+        if (selectedDate) {
+            const dateString = selectedDate.substring(0, 10) + time;
             return !(availableTime as string[]).includes(dateString);
         }
         return true;
     };
 
     const getInputName = (inputTime: string) => {
-        return pickedDate ? timeEditor(pickedDate, inputTime) : inputTime;
+        return selectedDate ? timeEditor(selectedDate, inputTime) : inputTime;
     };
 
     return (
@@ -77,17 +47,15 @@ const FormikTimeRadioButtonsGroup: FC<CustomInputComponent & FieldProps> = ({ fi
                             id={getInputName(singleInput)}
                             value={getInputName(singleInput)}
                             checked={isSelectedRadio(getInputName(singleInput))}
-                            onChange={handleRadioClick}
+                            onChange={onClick}
                             key={uuid4()}
-                            disabled={false}
-                            // disabled={dis}
+                            disabled={dis}
                             role="radio"
                         />
                         <Styled.Label
                             htmlFor={getInputName(singleInput)}
                             key={uuid4()}
-                            notReady={false}
-                            // notReady={dis}
+                            notReady={dis}
                             current={
                                 selectedTime === getInputName(singleInput) ? true : false
                             }

@@ -77,7 +77,6 @@
 
 .react-datepicker__month {
   margin: 0;
-  margin-top: 16px;
 
   font-family: Poppins;
   font-style: normal;
@@ -104,4 +103,5 @@
   height: 48px;
   justify-content: center;
   align-items: center;
+  margin: 0;
 }

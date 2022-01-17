@@ -28,7 +28,7 @@ const PatientMakeAppointment = () => {
         <Styled.TitleWrapper>
           <TitleH2>Make an appointment</TitleH2>
         </Styled.TitleWrapper>
-        <Form />
+        <FormikForm />
       </section>
     </ViewPagesWrapper>
   );

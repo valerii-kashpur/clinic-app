@@ -1,88 +1,106 @@
-import React, { useEffect } from 'react';
-import { Formik, Field } from "formik";
-import FormikSelect from "./FormikSelect";
-import FormikInputWithError from "./FormikInputWithError";
-import FormikDatePicker from "./FormikDatePiker";
-import FormikTimeRadioButtonsGroup from "./FormikTimeRadioButtonsGroup";
+import React, { useState } from 'react';
+import { Formik, Field, Form } from "formik";
+import FormikVisitReasons from '../VisitReasons/FormikVisitReasons';
+import FormikDatePicker from "../DatePicker/FormikDatePiker";
+import FormikTimeRadioButtonsWrapper from "../RadioBtns/FormikTimeRadioButtonsWrapper";
+import FormikButton from "./FormikButton";
+import { useQuery } from 'react-query';
+import { errorNotification } from "notifications";
+import { appointmentSchema } from "utils/YupValidationSchemas";
+import TitleH4 from "components/TitleH4";
+import { createAppointment } from "network/fetchOperations";
 import {
-    fetchSpecializations,
-} from "redux/createAppointmentsActions";
-import { appointmentFormData } from "redux/selectors";
-import { fetchDoctors, setSelectedDoctor, setSelectedSpecialization } from "redux/slices/createAppointmentSlice";
-import { useAppDispatch } from "types/useAppDispatch";
-import { useAppSelector } from "types/useAppSelector";
+    CreateAppointmentRequestBody
+} from "types/fetchTypes";
+import * as Styled from "../../PatientMakeAppointmentStyles";
+import styled from "styled-components";
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+`;
+
+type RequestData = {
+    date: string,
+    reason: string,
+    note: string,
+    doctorID: string,
+};
 
 const FormikForm = () => {
-    const dispatch = useAppDispatch();
-    const state = useAppSelector(appointmentFormData);
+    const [requestData, setRequestData] = useState<React.SetStateAction<any>>(null);
 
-    useEffect(() => {
-        dispatch(fetchSpecializations());
-    }, [dispatch]);
+    const { isFetching } = useQuery(["makeAppointment", requestData],
+        () => console.log(requestData),
+        {
+            enabled: !!requestData, retry: 2,
+            onSuccess: () => console.log("success"),
+            onError: () => errorNotification()
+        }
+    )
 
-    const specializationsArray = state.specializations.map((object) => ({
-        value: object.id,
-        label: object.specialization_name,
-    }));
-
-    const doctorsArray = state.doctors.map((object) => ({
-        value: object.id,
-        label: `${object.first_name} ${object.last_name}`,
-    }));
-
-    const formicSubmit = (values: any) => {
-        console.log(values);
+    const formikSubmit = (values: any) => {
+        const newData = {
+            date: values.selectedTime,
+            reason: values.reason,
+            note: values.note,
+            doctorID: values.doctor.value,
+        };
+        setRequestData(newData);
     }
 
     return (
         <div>
             <Formik
                 initialValues={{
-                    specialization: {},
-                    doctor: null,
+                    specialization: { value: "", label: "" },
+                    doctor: { value: "", label: "" },
                     reason: "",
                     note: "",
                     selectedDate: "",
                     selectedTime: "",
                 }}
-                onSubmit={formicSubmit}
+                validateOnMount={true}
+                validationSchema={appointmentSchema}
+                onSubmit={(values) => formikSubmit(values)}
             >
-                {() => (
-                    <div>
-                        <Field
-                            name="specialization"
-                            type="select"
-                            component={FormikSelect}
-                            placeholder="specialization"
-                            optionsArray={specializationsArray}
-                        />
-                        <Field
-                            name="doctor"
-                            component={FormikSelect}
-                            placeholder="doctor"
-                            optionsArray={doctorsArray}
-                        />
-                        <Field
-                            name="reason"
-                            type="text"
-                            component={FormikInputWithError}
-                            placeholder="reason"
-                        />
-                        <Field
-                            name="note"
-                            type="text"
-                            component={FormikInputWithError}
-                            placeholder="note"
-                        />
-                        <Field
-                            name="selectedDate"
-                            component={FormikDatePicker}
-                        />
-                        <Field
-                            name="selectedTime"
-                            component={FormikTimeRadioButtonsGroup}
-                        />
-                    </div>
+                {({ values }) => (
+                    <Form>
+                        <Styled.List>
+                            <Styled.ListItem>
+                                <Styled.TextWrapper>
+                                    <Styled.Span>1</Styled.Span>
+                                    <TitleH4>
+                                        Select a doctor and define the reason of your visit
+                                    </TitleH4>
+                                </Styled.TextWrapper>
+                                <FormikVisitReasons />
+                            </Styled.ListItem>
+                            <Styled.ListItem>
+                                <Styled.TextWrapper>
+                                    <Styled.Span>2</Styled.Span>
+                                    <TitleH4>Choose a day for an appointment</TitleH4>
+                                </Styled.TextWrapper>
+                                <Field
+                                    name="selectedDate"
+                                    component={FormikDatePicker}
+                                />
+                            </Styled.ListItem>
+                            <Styled.ListItem>
+                                <Styled.TextWrapper>
+                                    <Styled.Span>3</Styled.Span>
+                                    <TitleH4>Select an available time slot</TitleH4>
+                                </Styled.TextWrapper>
+                                <Field
+                                    name="selectedTime"
+                                    component={FormikTimeRadioButtonsWrapper}
+                                />
+                            </Styled.ListItem>
+                        </Styled.List>
+                        <ButtonWrapper>
+                            <FormikButton values={values} isFetching={isFetching} />
+                        </ButtonWrapper>
+                    </Form>
                 )
                 }</Formik>
         </div>
