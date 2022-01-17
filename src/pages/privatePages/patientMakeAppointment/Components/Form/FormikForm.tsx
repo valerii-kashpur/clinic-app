@@ -7,7 +7,7 @@ import AppointmentFormDatePiker from "../DatePicker/AppointmentFormDatePiker";
 import FreeTimeRadioButtonsWrapper from "../FreeTimeRadioButtons/FreeTimeRadioButtonsWrapper";
 import AppointmentFormButton from "../AppointmentFormButton/AppointmentFormButton";
 import { useQuery } from "react-query";
-import { errorNotification } from "notifications";
+import { errorNotification, successNotification } from "notifications";
 import { appointmentSchema } from "utils/YupValidationSchemas";
 import TitleH4 from "components/TitleH4";
 import { createAppointment } from "network/fetchOperations";
@@ -20,31 +20,41 @@ const ButtonWrapper = styled.div`
   flex-direction: row-reverse;
 `;
 
-type RequestData = {
-  date: string;
+type FormikValues = {
+  specialization: { value: string; label: string };
+  doctor: { value: string; label: string };
   reason: string;
   note: string;
-  doctorID: string;
+  selectedDate: string;
+  selectedTime: string;
 };
 
 const FormikForm = () => {
   const [requestData, setRequestData] =
-    useState<React.SetStateAction<any>>(null);
+    useState<React.SetStateAction<CreateAppointmentRequestBody | null>>(null);
 
   const history = useHistory();
 
+  //   todo: check fetch process problem with errored request
   const { isFetching } = useQuery(
     ["makeAppointment", requestData],
-    () => console.log(requestData),
+    () => createAppointment(requestData),
     {
       enabled: !!requestData,
       retry: 2,
-      onSuccess: () => console.log("success"),
+      onSuccess: () => onRequestSuccess(),
       onError: () => errorNotification(),
     }
   );
 
-  const formSubmit = (values: any) => {
+  const onRequestSuccess = () => {
+    successNotification("Appointment has been created!");
+    history.push({
+      pathname: PATHS.doctorView,
+    });
+  };
+
+  const formSubmit = (values: FormikValues) => {
     const newData = {
       date: values.selectedTime,
       reason: values.reason,
@@ -52,10 +62,6 @@ const FormikForm = () => {
       doctorID: values.doctor.value,
     };
     setRequestData(newData);
-
-    // history.push({
-    //     pathname: PATHS.doctorView,
-    //   });
   };
 
   return (

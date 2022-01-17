@@ -166,7 +166,7 @@ export const getDoctorsFreeTimeByDateAndId = async (
 };
 
 export const createAppointment = (
-  credentials: CreateAppointmentRequestBody
+  credentials: React.SetStateAction<CreateAppointmentRequestBody | null>
 ) => {
   return axiosInstance.post(`appointments`, credentials);
 };
