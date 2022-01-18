@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-import { Formik, Field, Form } from "formik";
+import { Formik, FastField, Form } from "formik";
 import PATHS from "routes/paths";
 import VisitReasons from "../VisitReasons/VisitReasons";
 import AppointmentFormDatePiker from "../DatePicker/AppointmentFormDatePiker";
@@ -96,8 +96,8 @@ const FormikForm = () => {
                   <Styled.Span>2</Styled.Span>
                   <TitleH4>Choose a day for an appointment</TitleH4>
                 </Styled.TextWrapper>
-                <Field
-                  name="selectedDate"
+                <FastField
+                  name="doctor"
                   component={AppointmentFormDatePiker}
                 />
               </Styled.ListItem>
@@ -106,8 +106,8 @@ const FormikForm = () => {
                   <Styled.Span>3</Styled.Span>
                   <TitleH4>Select an available time slot</TitleH4>
                 </Styled.TextWrapper>
-                <Field
-                  name="selectedTime"
+                <FastField
+                  name="selectedDate"
                   component={FreeTimeRadioButtonsWrapper}
                 />
               </Styled.ListItem>

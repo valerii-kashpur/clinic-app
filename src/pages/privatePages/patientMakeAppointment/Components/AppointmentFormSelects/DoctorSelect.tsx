@@ -53,7 +53,7 @@ const DoctorSelect: FC<FieldProps> = ({
         options={doctors}
         value={form.values.doctor}
         onChange={onChangeHandler}
-        isDisabled={false}
+        isDisabled={!specializationID}
         isLoading={isFetching}
       />
     </div>

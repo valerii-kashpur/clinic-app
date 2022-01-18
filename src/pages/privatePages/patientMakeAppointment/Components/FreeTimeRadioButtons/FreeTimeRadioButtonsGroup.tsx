@@ -11,7 +11,7 @@ interface CustomInputComponent {
   onClick: (e: React.FormEvent<HTMLInputElement>) => void;
   selectedDate: string;
   availableTime: FreeTime;
-  selectedTime: string;
+  setSelectedTime: string;
 }
 
 const FreeTimeRadioButtonsGroup: FC<CustomInputComponent> = ({
@@ -19,9 +19,9 @@ const FreeTimeRadioButtonsGroup: FC<CustomInputComponent> = ({
   onClick,
   selectedDate,
   availableTime,
-  selectedTime,
+  setSelectedTime
 }) => {
-  const isSelectedRadio = (value: string) => selectedTime === value;
+  const isSelectedRadio = (value: string) => setSelectedTime === value;
 
   const timeEditor = (date: string, modificator: string) => {
     return date.substr(0, 10) + modificator;
@@ -61,7 +61,7 @@ const FreeTimeRadioButtonsGroup: FC<CustomInputComponent> = ({
               key={uuid4()}
               notReady={isDisabled}
               current={
-                selectedTime === getInputName(singleInput) ? true : false
+                setSelectedTime === getInputName(singleInput) ? true : false
               }
               data-testid={
                 isDisabled ? "radioIsDisabled" : "radioIsNotDisabled"

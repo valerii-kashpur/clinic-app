@@ -21,27 +21,23 @@ const AppointmentFormDatePiker: FC<FieldProps> = ({
 
   const onChangeHandler = (value: Date) => {
     setSelected(value);
+    form.setFieldValue("selectedTime", "");
   };
 
   useEffect(() => {
-    if (!doctorID) {
+    const date = dateCutter(selected);
+    if (!doctorID && selectedDate) {
       setSelected(new Date());
-    }
-  }, [doctorID]);
-
-  useEffect(() => {
-    if (doctorID && selectedDate !== dateCutter(selected)) {
-      const date = dateCutter(selected);
       form.setFieldValue("selectedDate", date);
     }
-  }, [selected, form, doctorID, selectedDate]);
+  }, [doctorID, form, selected, selectedDate]);
 
   useEffect(() => {
     const date = dateCutter(selected);
-    if (selectedDate !== date) {
+    if (doctorID && selectedDate !== date) {
       form.setFieldValue("selectedDate", date);
     }
-  }, [selected, form, selectedDate]);
+  }, [selected, form, doctorID, selectedDate]);
 
   return (
     <DatePicker

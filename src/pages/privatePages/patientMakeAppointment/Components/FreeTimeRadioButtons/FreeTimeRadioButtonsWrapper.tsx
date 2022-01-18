@@ -29,13 +29,16 @@ const FreeTimeRadioButtonsWrapper: FC<FieldProps> = ({
   ...props
 }) => {
   const [availableTime, setAvailableTime] = useState<FreeTime>([]);
+  const [selectedTime, setSelectedTime] = useState("");
+  let doctorID = form.values.doctor.value;
+  let selectedDate = form.values.selectedDate;
 
   const { refetch } = useQuery<FreeTime, Error>(
     "freeTime",
     () =>
       getDoctorsFreeTimeByDateAndId(
-        form.values.selectedDate,
-        form.values.doctor.value
+        selectedDate,
+        doctorID
       ),
     {
       enabled: false,
@@ -46,13 +49,14 @@ const FreeTimeRadioButtonsWrapper: FC<FieldProps> = ({
   );
 
   useEffect(() => {
-    if (form.values.doctor.value) {
+    if (doctorID) {
       refetch();
     }
     setAvailableTime([]);
-  }, [form.values.selectedDate, form.values.doctor.value, refetch]);
+  }, [doctorID, refetch, selectedDate]);
 
   const handleRadioClick = (e: React.FormEvent<HTMLInputElement>) => {
+    setSelectedTime(e.currentTarget.value);
     form.setFieldValue("selectedTime", e.currentTarget.value);
   };
 
@@ -61,9 +65,9 @@ const FreeTimeRadioButtonsWrapper: FC<FieldProps> = ({
       <FreeTimeRadioButtonsGroup
         time={time}
         onClick={handleRadioClick}
-        selectedDate={form.values.selectedDate}
+        selectedDate={selectedDate}
         availableTime={availableTime}
-        selectedTime={form.values.selectedTime}
+        setSelectedTime={selectedTime}
       />
     </div>
   );
