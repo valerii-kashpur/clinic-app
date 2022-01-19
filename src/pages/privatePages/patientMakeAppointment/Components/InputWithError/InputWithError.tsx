@@ -6,7 +6,7 @@ interface CustomInputComponent {
   type: string, placeholder: string
 }
 
-const FormikInputWithError: FC<CustomInputComponent> = ({ register, name, errors, type, placeholder }) => {
+const InputWithError: FC<CustomInputComponent> = ({ register, name, errors, type, placeholder }) => {
   return (
     <>
       <Styled.Input {...register(name)} placeholder={placeholder} type={type} />
@@ -17,4 +17,4 @@ const FormikInputWithError: FC<CustomInputComponent> = ({ register, name, errors
   );
 };
 
-export default React.memo(FormikInputWithError);
+export default React.memo(InputWithError);

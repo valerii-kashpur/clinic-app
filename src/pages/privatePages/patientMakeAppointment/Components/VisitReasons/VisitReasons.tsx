@@ -2,7 +2,7 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 import SpecializationSelect from "../AppointmentFormSelects/SpecializationSelect";
 import DoctorSelect from "../AppointmentFormSelects/DoctorSelect";
-import FormikInputWithError from "../FormikInputWithError/FormikInputWithError";
+import InputWithError from "../InputWithError/InputWithError";
 import * as Styled from "./VisitReasonsStyles";
 import InputLabel from "components/InputLabel";
 
@@ -17,7 +17,7 @@ const VisitReasons = () => {
         <Styled.InputLabel>
           <InputLabel htmlFor="reason">Reason for the visit</InputLabel>
         </Styled.InputLabel>
-        <FormikInputWithError register={register} name="reason"
+        <InputWithError register={register} name="reason"
           placeholder="reason" type="text" errors={errors}
         />
       </Styled.InputWrapper>
@@ -25,7 +25,7 @@ const VisitReasons = () => {
         <Styled.InputLabel>
           <InputLabel htmlFor="note">Note</InputLabel>{" "}
         </Styled.InputLabel>
-        <FormikInputWithError register={register} name="note"
+        <InputWithError register={register} name="note"
           type="text" errors={errors}
           placeholder="note"
         />

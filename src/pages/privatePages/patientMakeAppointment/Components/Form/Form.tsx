@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router";
-import { useForm, SubmitHandler, FormProvider, useFormContext } from "react-hook-form";
+import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import PATHS from "routes/paths";
 import VisitReasons from "../VisitReasons/VisitReasons";
@@ -21,15 +21,6 @@ const ButtonWrapper = styled.div`
   flex-direction: row-reverse;
 `;
 
-type FormikValues = {
-  specialization: { value: string; label: string };
-  doctor: { value: string; label: string };
-  reason: string;
-  note: string;
-  selectedDate: string;
-  selectedTime: string;
-};
-
 type Inputs = {
   specialization: { value: string, label: string },
   doctor: { value: string, label: string },
@@ -39,7 +30,7 @@ type Inputs = {
   selectedTime: string,
 };
 
-const FormikForm = () => {
+const Form = () => {
   const [requestData, setRequestData] =
     useState<React.SetStateAction<CreateAppointmentRequestBody | null>>(null);
 
@@ -62,8 +53,7 @@ const FormikForm = () => {
       note: data.note,
       doctorID: data.doctor.value,
     };
-    // setRequestData(newData);
-    console.log(data);
+    setRequestData(newData);
   };
 
   const history = useHistory();
@@ -125,4 +115,4 @@ const FormikForm = () => {
   );
 };
 
-export default React.memo(FormikForm);
+export default React.memo(Form);
