@@ -1,19 +1,16 @@
 import React, { FC, useState, useEffect } from "react";
-import { FieldProps } from "formik";
+import { useFormContext } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./AppointmentFormDatePicker.css";
 import moment from "moment";
 
-const AppointmentFormDatePiker: FC<FieldProps> = ({
-  field,
-  form,
-  ...props
-}) => {
+const AppointmentFormDatePiker = () => {
   const [selected, setSelected] = useState(new Date());
+  const { watch, setValue } = useFormContext();
   const today = new Date();
-  let doctorID = form.values.doctor.value;
-  let selectedDate = form.values.selectedDate;
+  const doctorID = watch("doctor").value;
+  const selectedDate = watch("selectedDate");
 
   const dateCutter = (date: Date) => {
     return moment(date).toISOString();
@@ -21,23 +18,23 @@ const AppointmentFormDatePiker: FC<FieldProps> = ({
 
   const onChangeHandler = (value: Date) => {
     setSelected(value);
-    form.setFieldValue("selectedTime", "");
+    setValue("selectedTime", "");
   };
 
   useEffect(() => {
     const date = dateCutter(selected);
     if (!doctorID && selectedDate) {
       setSelected(new Date());
-      form.setFieldValue("selectedDate", date);
+      setValue("selectedDate", date);
     }
-  }, [doctorID, form, selected, selectedDate]);
+  }, [doctorID, setValue, selected, selectedDate]);
 
   useEffect(() => {
     const date = dateCutter(selected);
     if (doctorID && selectedDate !== date) {
-      form.setFieldValue("selectedDate", date);
+      setValue("selectedDate", date);
     }
-  }, [selected, form, doctorID, selectedDate]);
+  }, [selected, setValue, doctorID, selectedDate]);
 
   return (
     <DatePicker

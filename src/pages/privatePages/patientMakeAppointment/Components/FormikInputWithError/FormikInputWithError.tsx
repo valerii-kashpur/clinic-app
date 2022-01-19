@@ -1,21 +1,17 @@
 import React, { FC } from "react";
-import { FieldProps } from "formik";
 import * as Styled from "../VisitReasons/VisitReasonsStyles";
 
 interface CustomInputComponent {
-  type?: string;
+  register: any, name: string, errors: any,
+  type: string, placeholder: string
 }
 
-const FormikInputWithError: FC<CustomInputComponent & FieldProps> = ({
-  field,
-  form,
-  ...props
-}) => {
+const FormikInputWithError: FC<CustomInputComponent> = ({ register, name, errors, type, placeholder }) => {
   return (
     <>
-      <Styled.FormikInput {...field} {...props} />
-      {form.errors[field.name] ? (
-        <Styled.ErrorMessage>{form.errors[field.name]}</Styled.ErrorMessage>
+      <Styled.Input {...register(`${name}`)} placeholder={placeholder} type={type} />
+      {errors[name] ? (
+        <Styled.ErrorMessage>{errors[name]?.message}</Styled.ErrorMessage>
       ) : null}
     </>
   );

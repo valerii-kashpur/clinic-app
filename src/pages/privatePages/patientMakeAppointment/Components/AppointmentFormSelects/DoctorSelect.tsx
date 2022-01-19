@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { FieldProps } from "formik";
+import { useFormContext } from "react-hook-form";
 import SelectComponent from "../SelectComponent/SelectComponent";
 import { getDoctorsByOccupationId } from "network/fetchOperations";
 import { useQuery } from "react-query";
@@ -8,13 +8,11 @@ import { Doctors } from "types/fetchTypes";
 
 type MyOption = { label: string; value: string };
 
-const DoctorSelect: FC<FieldProps> = ({
-  field,
-  form,
-  ...props
-}) => {
+const DoctorSelect = () => {
   const [doctors, setDoctors] = useState<MyOption[]>([]);
-  const specializationID = form.values.specialization.value;
+  const { watch, setValue } = useFormContext();
+  const specializationID = watch("specialization").value;
+  const currentValue = watch("doctor");
 
   const { isFetching, refetch } = useQuery<Doctors, Error>(
     "doctors",
@@ -42,7 +40,7 @@ const DoctorSelect: FC<FieldProps> = ({
   }, [refetch, specializationID]);
 
   const onChangeHandler = (selected?: MyOption | MyOption[] | null) => {
-    form.setFieldValue("doctor", selected);
+    setValue("doctor", selected);
   };
 
   return (
@@ -51,7 +49,7 @@ const DoctorSelect: FC<FieldProps> = ({
         text="Doctor's Name"
         placeholder="select doctor"
         options={doctors}
-        value={form.values.doctor}
+        value={currentValue}
         onChange={onChangeHandler}
         isDisabled={!specializationID}
         isLoading={isFetching}

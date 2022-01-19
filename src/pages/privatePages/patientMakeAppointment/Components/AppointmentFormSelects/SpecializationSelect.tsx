@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { FieldProps } from "formik";
+import { useFormContext } from "react-hook-form";
 import SelectComponent from "../SelectComponent/SelectComponent";
 import { getOccupations } from "network/fetchOperations";
 import { useQuery } from "react-query";
@@ -8,12 +8,10 @@ import { errorNotification } from "notifications";
 
 type MyOption = { label: string; value: string };
 
-const SpecializationSelect: FC<FieldProps> = ({
-  field,
-  form,
-  ...props
-}) => {
+const SpecializationSelect = () => {
   const [specializations, setSpecializations] = useState<MyOption[]>([]);
+  const { watch, setValue } = useFormContext();
+  const currentValue = watch("specialization");
 
   const { isFetching } = useQuery<SpecializationsResponseBody[], Error>(
     "specializations",
@@ -37,13 +35,13 @@ const SpecializationSelect: FC<FieldProps> = ({
   };
 
   const resetFormFields = () => {
-    form.setFieldValue("doctor", { value: "", label: "" });
-    form.setFieldValue("selectedTime", "");
+    setValue("doctor", { value: "", label: "" });
+    setValue("selectedTime", "");
   };
 
   const onChangeHandler = (selected?: MyOption | MyOption[] | null) => {
     resetFormFields();
-    form.setFieldValue("specialization", selected);
+    setValue("specialization", selected);
   };
 
   return (
@@ -53,7 +51,7 @@ const SpecializationSelect: FC<FieldProps> = ({
         placeholder="select occupation"
         options={specializations}
         onChange={onChangeHandler}
-        value={form.values.specialization}
+        value={currentValue}
         isDisabled={false}
         isLoading={isFetching}
       />

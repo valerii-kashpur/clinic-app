@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { FieldProps } from "formik";
+import { useFormContext } from "react-hook-form";
 import FreeTimeRadioButtonsGroup from "./FreeTimeRadioButtonsGroup";
 import { getDoctorsFreeTimeByDateAndId } from "network/fetchOperations";
 import { useQuery } from "react-query";
@@ -23,15 +23,12 @@ const time = [
 
 type FreeTime = [number] | [];
 
-const FreeTimeRadioButtonsWrapper: FC<FieldProps> = ({
-  field,
-  form,
-  ...props
-}) => {
+const FreeTimeRadioButtonsWrapper = () => {
   const [availableTime, setAvailableTime] = useState<FreeTime>([]);
   const [selectedTime, setSelectedTime] = useState("");
-  let doctorID = form.values.doctor.value;
-  let selectedDate = form.values.selectedDate;
+  const { watch, setValue } = useFormContext();
+  const selectedDate = watch("selectedDate");
+  const doctorID = watch("doctor").value;
 
   const { refetch } = useQuery<FreeTime, Error>(
     "freeTime",
@@ -49,7 +46,7 @@ const FreeTimeRadioButtonsWrapper: FC<FieldProps> = ({
   );
 
   useEffect(() => {
-    if (doctorID) {
+    if (doctorID && selectedDate) {
       refetch();
     }
     setAvailableTime([]);
@@ -57,7 +54,7 @@ const FreeTimeRadioButtonsWrapper: FC<FieldProps> = ({
 
   const handleRadioClick = (e: React.FormEvent<HTMLInputElement>) => {
     setSelectedTime(e.currentTarget.value);
-    form.setFieldValue("selectedTime", e.currentTarget.value);
+    setValue("selectedTime", e.currentTarget.value);
   };
 
   return (

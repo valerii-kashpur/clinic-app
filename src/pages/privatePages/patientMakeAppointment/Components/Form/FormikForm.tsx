@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { Formik, FastField, Form } from "formik";
+import { useForm, SubmitHandler, FormProvider, useFormContext } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
 import PATHS from "routes/paths";
 import VisitReasons from "../VisitReasons/VisitReasons";
 import AppointmentFormDatePiker from "../DatePicker/AppointmentFormDatePiker";
@@ -29,9 +30,40 @@ type FormikValues = {
   selectedTime: string;
 };
 
+type Inputs = {
+  specialization: { value: string, label: string },
+  doctor: { value: string, label: string },
+  reason: string,
+  note: string,
+  selectedDate: string,
+  selectedTime: string,
+};
+
 const FormikForm = () => {
   const [requestData, setRequestData] =
     useState<React.SetStateAction<CreateAppointmentRequestBody | null>>(null);
+
+  const methods = useForm<Inputs>({
+    defaultValues: {
+      specialization: { value: "", label: "" },
+      doctor: { value: "", label: "" },
+      reason: "",
+      note: "",
+      selectedDate: "",
+      selectedTime: "",
+    },
+    resolver: yupResolver(appointmentSchema)
+  });
+
+  const onSubmit: SubmitHandler<Inputs> = data => {
+    const newData = {
+      date: data.selectedTime,
+      reason: data.reason,
+      note: data.note,
+      doctorID: data.doctor.value,
+    };
+    setRequestData(newData);
+  };
 
   const history = useHistory();
 
@@ -54,71 +86,41 @@ const FormikForm = () => {
     });
   };
 
-  const formSubmit = (values: FormikValues) => {
-    const newData = {
-      date: values.selectedTime,
-      reason: values.reason,
-      note: values.note,
-      doctorID: values.doctor.value,
-    };
-    setRequestData(newData);
-  };
-
   return (
     <div>
-      <Formik
-        initialValues={{
-          specialization: { value: "", label: "" },
-          doctor: { value: "", label: "" },
-          reason: "",
-          note: "",
-          selectedDate: "",
-          selectedTime: "",
-        }}
-        validateOnMount={true}
-        validationSchema={appointmentSchema}
-        onSubmit={(values) => formSubmit(values)}
-      >
-        {({ values }) => (
-          <Form>
-            <Styled.List>
-              <Styled.ListItem>
-                <Styled.TextWrapper>
-                  <Styled.Span>1</Styled.Span>
-                  <TitleH4>
-                    Select a doctor and define the reason of your visit
-                  </TitleH4>
-                </Styled.TextWrapper>
-                <VisitReasons />
-              </Styled.ListItem>
-              <Styled.ListItem>
-                <Styled.TextWrapper>
-                  <Styled.Span>2</Styled.Span>
-                  <TitleH4>Choose a day for an appointment</TitleH4>
-                </Styled.TextWrapper>
-                <FastField
-                  name="doctor"
-                  component={AppointmentFormDatePiker}
-                />
-              </Styled.ListItem>
-              <Styled.ListItem>
-                <Styled.TextWrapper>
-                  <Styled.Span>3</Styled.Span>
-                  <TitleH4>Select an available time slot</TitleH4>
-                </Styled.TextWrapper>
-                <FastField
-                  name="selectedDate"
-                  component={FreeTimeRadioButtonsWrapper}
-                />
-              </Styled.ListItem>
-            </Styled.List>
-            <ButtonWrapper>
-              <AppointmentFormButton values={values} isFetching={isFetching} />
-            </ButtonWrapper>
-          </Form>
-        )}
-      </Formik>
-    </div>
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <Styled.List>
+            <Styled.ListItem>
+              <Styled.TextWrapper>
+                <Styled.Span>1</Styled.Span>
+                <TitleH4>
+                  Select a doctor and define the reason of your visit
+                </TitleH4>
+              </Styled.TextWrapper>
+              <VisitReasons />
+            </Styled.ListItem>
+            <Styled.ListItem>
+              <Styled.TextWrapper>
+                <Styled.Span>2</Styled.Span>
+                <TitleH4>Choose a day for an appointment</TitleH4>
+              </Styled.TextWrapper>
+              <AppointmentFormDatePiker />
+            </Styled.ListItem>
+            <Styled.ListItem>
+              <Styled.TextWrapper>
+                <Styled.Span>3</Styled.Span>
+                <TitleH4>Select an available time slot</TitleH4>
+              </Styled.TextWrapper>
+              <FreeTimeRadioButtonsWrapper />
+            </Styled.ListItem>
+          </Styled.List>
+          <ButtonWrapper>
+            <AppointmentFormButton isFetching={isFetching} />
+          </ButtonWrapper>
+        </form>
+      </FormProvider>
+    </div >
   );
 };
 

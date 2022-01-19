@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
 import Button from "components/Button";
 import LoaderForButtons from "components/LoaderForButtons";
 
-const AppointmentFormButton = ({ values, isFetching }: any) => {
+type buttonProps = {
+  isFetching: boolean
+}
+
+const AppointmentFormButton = ({ isFetching }: buttonProps) => {
   const [isDisabled, setIsDisabled] = useState(true);
-  const { reason, doctor, selectedTime } = values;
+  const { watch } = useFormContext();
+  const reason = watch("reason");
+  const doctor = watch("doctor").value;
+  const selectedTime = watch("selectedTime");
 
   useEffect(() => {
-    if (reason.length > 3 && doctor.value && selectedTime) {
+    if (reason.length > 3 && doctor && selectedTime) {
       return setIsDisabled(false);
     }
     !isDisabled && setIsDisabled(true);
-  }, [reason.length, doctor.value, selectedTime, isDisabled]);
+  }, [reason.length, doctor, selectedTime, isDisabled]);
 
   return (
     <>

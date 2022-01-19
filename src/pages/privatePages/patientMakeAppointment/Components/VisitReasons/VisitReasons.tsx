@@ -1,5 +1,5 @@
 import React from "react";
-import { FastField } from "formik";
+import { useFormContext } from "react-hook-form";
 import SpecializationSelect from "../AppointmentFormSelects/SpecializationSelect";
 import DoctorSelect from "../AppointmentFormSelects/DoctorSelect";
 import FormikInputWithError from "../FormikInputWithError/FormikInputWithError";
@@ -7,33 +7,26 @@ import * as Styled from "./VisitReasonsStyles";
 import InputLabel from "components/InputLabel";
 
 const VisitReasons = () => {
+  const { register, formState: { errors } } = useFormContext();
+
   return (
     <Styled.Wrapper>
-      <FastField
-        name="specialization"
-        type="select"
-        component={SpecializationSelect}
-      />
-      <FastField name="doctor" type="select" component={DoctorSelect} />
+      <SpecializationSelect />
+      <DoctorSelect />
       <Styled.InputWrapper>
         <Styled.InputLabel>
           <InputLabel htmlFor="reason">Reason for the visit</InputLabel>
         </Styled.InputLabel>
-        <FastField
-          name="reason"
-          type="text"
-          component={FormikInputWithError}
-          placeholder="reason"
+        <FormikInputWithError register={register} name="reason"
+          placeholder="reason" type="text" errors={errors}
         />
       </Styled.InputWrapper>
       <Styled.InputWrapper>
         <Styled.InputLabel>
           <InputLabel htmlFor="note">Note</InputLabel>{" "}
         </Styled.InputLabel>
-        <FastField
-          name="note"
-          type="text"
-          component={FormikInputWithError}
+        <FormikInputWithError register={register} name="note"
+          type="text" errors={errors}
           placeholder="note"
         />
       </Styled.InputWrapper>
