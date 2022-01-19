@@ -43,8 +43,8 @@ const Form = () => {
       selectedDate: "",
       selectedTime: "",
     },
-    mode: 'onChange',
-    reValidateMode: 'onChange',
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
     resolver: yupResolver(appointmentSchema)
   });
 
