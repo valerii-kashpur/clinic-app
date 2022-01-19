@@ -7,10 +7,14 @@ import * as Styled from "./VisitReasonsStyles";
 import InputLabel from "components/InputLabel";
 
 const VisitReasons = () => {
-  const { register, formState: { errors }, trigger } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+    trigger,
+  } = useFormContext();
 
   useEffect(() => {
-    trigger()
+    trigger();
   }, [trigger]);
 
   return (
@@ -21,15 +25,21 @@ const VisitReasons = () => {
         <Styled.InputLabel>
           <InputLabel htmlFor="reason">Reason for the visit</InputLabel>
         </Styled.InputLabel>
-        <InputWithError register={register} name="reason"
-          placeholder="reason" type="text" error={errors.reason?.message}
+        <InputWithError
+          register={register}
+          name="reason"
+          placeholder="reason"
+          type="text"
+          error={errors.reason?.message}
         />
       </Styled.InputWrapper>
       <Styled.InputWrapper>
         <Styled.InputLabel>
           <InputLabel htmlFor="note">Note</InputLabel>{" "}
         </Styled.InputLabel>
-        <InputWithError register={register} name="note"
+        <InputWithError
+          register={register}
+          name="note"
           type="text"
           placeholder="note"
         />

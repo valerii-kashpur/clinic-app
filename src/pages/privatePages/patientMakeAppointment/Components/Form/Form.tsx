@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from "@hookform/resolvers/yup";
 import PATHS from "routes/paths";
 import VisitReasons from "../VisitReasons/VisitReasons";
 import AppointmentFormDatePiker from "../DatePicker/AppointmentFormDatePiker";
@@ -22,12 +22,12 @@ const ButtonWrapper = styled.div`
 `;
 
 type Inputs = {
-  specialization: { value: string, label: string },
-  doctor: { value: string, label: string },
-  reason: string,
-  note: string,
-  selectedDate: string,
-  selectedTime: string,
+  specialization: { value: string; label: string };
+  doctor: { value: string; label: string };
+  reason: string;
+  note: string;
+  selectedDate: string;
+  selectedTime: string;
 };
 
 const Form = () => {
@@ -43,13 +43,12 @@ const Form = () => {
       selectedDate: "",
       selectedTime: "",
     },
-    mode: 'onBlur',
-    reValidateMode: 'onBlur',
-    resolver: yupResolver(appointmentSchema)
+    mode: "onBlur",
+    reValidateMode: "onBlur",
+    resolver: yupResolver(appointmentSchema),
   });
 
-
-  const onSubmit: SubmitHandler<Inputs> = data => {
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
     const newData = {
       date: data.selectedTime,
       reason: data.reason,
@@ -114,7 +113,7 @@ const Form = () => {
           </ButtonWrapper>
         </form>
       </FormProvider>
-    </div >
+    </div>
   );
 };
 

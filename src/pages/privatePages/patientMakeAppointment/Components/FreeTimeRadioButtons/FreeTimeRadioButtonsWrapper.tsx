@@ -32,11 +32,7 @@ const FreeTimeRadioButtonsWrapper = () => {
 
   const { refetch } = useQuery<FreeTime, Error>(
     "freeTime",
-    () =>
-      getDoctorsFreeTimeByDateAndId(
-        selectedDate,
-        doctorID
-      ),
+    () => getDoctorsFreeTimeByDateAndId(selectedDate, doctorID),
     {
       enabled: false,
       retry: 2,

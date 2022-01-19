@@ -19,7 +19,7 @@ const FreeTimeRadioButtonsGroup: FC<CustomInputComponent> = ({
   onClick,
   selectedDate,
   availableTime,
-  setSelectedTime
+  setSelectedTime,
 }) => {
   const isSelectedRadio = (value: string) => setSelectedTime === value;
 
