@@ -43,8 +43,11 @@ const Form = () => {
       selectedDate: "",
       selectedTime: "",
     },
+    mode: 'onChange',
+    reValidateMode: 'onChange',
     resolver: yupResolver(appointmentSchema)
   });
+
 
   const onSubmit: SubmitHandler<Inputs> = data => {
     const newData = {

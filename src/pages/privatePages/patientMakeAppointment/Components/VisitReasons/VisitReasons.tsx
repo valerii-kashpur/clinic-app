@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import SpecializationSelect from "../AppointmentFormSelects/SpecializationSelect";
 import DoctorSelect from "../AppointmentFormSelects/DoctorSelect";
@@ -7,7 +7,11 @@ import * as Styled from "./VisitReasonsStyles";
 import InputLabel from "components/InputLabel";
 
 const VisitReasons = () => {
-  const { register, formState: { errors } } = useFormContext();
+  const { register, formState: { errors }, trigger } = useFormContext();
+
+  useEffect(() => {
+    trigger()
+  }, [trigger]);
 
   return (
     <Styled.Wrapper>
@@ -18,7 +22,7 @@ const VisitReasons = () => {
           <InputLabel htmlFor="reason">Reason for the visit</InputLabel>
         </Styled.InputLabel>
         <InputWithError register={register} name="reason"
-          placeholder="reason" type="text" errors={errors}
+          placeholder="reason" type="text" error={errors.reason?.message}
         />
       </Styled.InputWrapper>
       <Styled.InputWrapper>
@@ -26,7 +30,7 @@ const VisitReasons = () => {
           <InputLabel htmlFor="note">Note</InputLabel>{" "}
         </Styled.InputLabel>
         <InputWithError register={register} name="note"
-          type="text" errors={errors}
+          type="text"
           placeholder="note"
         />
       </Styled.InputWrapper>
