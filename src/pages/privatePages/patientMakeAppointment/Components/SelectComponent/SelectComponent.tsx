@@ -43,4 +43,4 @@ const SelectComponent: FC<SelectProps> = ({
   );
 };
 
-export default SelectComponent;
+export default React.memo(SelectComponent);

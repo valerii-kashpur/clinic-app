@@ -1,5 +1,5 @@
-import React, { FC, useState, useEffect } from "react";
-import { useFormContext } from "react-hook-form";
+import React, { useState, useEffect } from "react";
+import { useFormContext, useWatch } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./AppointmentFormDatePicker.css";
@@ -7,10 +7,10 @@ import moment from "moment";
 
 const AppointmentFormDatePiker = () => {
   const [selected, setSelected] = useState(new Date());
-  const { watch, setValue } = useFormContext();
+  const { setValue } = useFormContext();
   const today = new Date();
-  const doctorID = watch("doctor").value;
-  const selectedDate = watch("selectedDate");
+  const doctorID = useWatch({ name: "doctor" }).value;
+  const selectedDate = useWatch({ name: "selectedDate" });
 
   const dateCutter = (date: Date) => {
     return moment(date).toISOString();
@@ -23,11 +23,11 @@ const AppointmentFormDatePiker = () => {
 
   useEffect(() => {
     const date = dateCutter(selected);
-    if (!doctorID && selectedDate) {
+    if (!selectedDate) {
       setSelected(new Date());
       setValue("selectedDate", date);
     }
-  }, [doctorID, setValue, selected, selectedDate]);
+  }, [setValue, selected, selectedDate]);
 
   useEffect(() => {
     const date = dateCutter(selected);
@@ -48,4 +48,4 @@ const AppointmentFormDatePiker = () => {
   );
 };
 
-export default AppointmentFormDatePiker;
+export default React.memo(AppointmentFormDatePiker);

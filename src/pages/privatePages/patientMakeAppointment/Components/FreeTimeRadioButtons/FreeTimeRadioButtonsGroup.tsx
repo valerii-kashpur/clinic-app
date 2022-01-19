@@ -76,4 +76,4 @@ const FreeTimeRadioButtonsGroup: FC<CustomInputComponent> = ({
   );
 };
 
-export default FreeTimeRadioButtonsGroup;
+export default React.memo(FreeTimeRadioButtonsGroup);

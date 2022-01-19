@@ -1,5 +1,5 @@
-import React, { FC, useState } from "react";
-import { useFormContext } from "react-hook-form";
+import React, { useState } from "react";
+import { useFormContext, useWatch } from "react-hook-form";
 import SelectComponent from "../SelectComponent/SelectComponent";
 import { getOccupations } from "network/fetchOperations";
 import { useQuery } from "react-query";
@@ -10,8 +10,8 @@ type MyOption = { label: string; value: string };
 
 const SpecializationSelect = () => {
   const [specializations, setSpecializations] = useState<MyOption[]>([]);
-  const { watch, setValue } = useFormContext();
-  const currentValue = watch("specialization");
+  const { setValue } = useFormContext();
+  const currentValue = useWatch({ name: "specialization" });
 
   const { isFetching } = useQuery<SpecializationsResponseBody[], Error>(
     "specializations",
@@ -36,6 +36,7 @@ const SpecializationSelect = () => {
 
   const resetFormFields = () => {
     setValue("doctor", { value: "", label: "" });
+    setValue("selectedDate", "");
     setValue("selectedTime", "");
   };
 

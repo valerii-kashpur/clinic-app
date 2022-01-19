@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useState } from "react";
-import { useFormContext } from "react-hook-form";
+import React, { useEffect, useState } from "react";
+import { useFormContext, useWatch } from "react-hook-form";
 import SelectComponent from "../SelectComponent/SelectComponent";
 import { getDoctorsByOccupationId } from "network/fetchOperations";
 import { useQuery } from "react-query";
@@ -10,9 +10,9 @@ type MyOption = { label: string; value: string };
 
 const DoctorSelect = () => {
   const [doctors, setDoctors] = useState<MyOption[]>([]);
-  const { watch, setValue } = useFormContext();
-  const specializationID = watch("specialization").value;
-  const currentValue = watch("doctor");
+  const { setValue } = useFormContext();
+  const specializationID = useWatch({ name: "specialization" }).value;
+  const currentValue = useWatch({ name: "doctor" });
 
   const { isFetching, refetch } = useQuery<Doctors, Error>(
     "doctors",
@@ -58,4 +58,4 @@ const DoctorSelect = () => {
   );
 };
 
-export default DoctorSelect;
+export default React.memo(DoctorSelect);

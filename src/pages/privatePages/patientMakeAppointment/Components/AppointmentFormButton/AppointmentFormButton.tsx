@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useFormContext } from "react-hook-form";
+import { useWatch } from "react-hook-form";
 import Button from "components/Button";
 import LoaderForButtons from "components/LoaderForButtons";
 
@@ -9,17 +9,15 @@ type buttonProps = {
 
 const AppointmentFormButton = ({ isFetching }: buttonProps) => {
   const [isDisabled, setIsDisabled] = useState(true);
-  const { watch } = useFormContext();
-  const reason = watch("reason");
-  const doctor = watch("doctor").value;
-  const selectedTime = watch("selectedTime");
+  const reason = useWatch({ name: "reason" });
+  const selectedTime = useWatch({ name: "selectedTime" });
 
   useEffect(() => {
-    if (reason.length > 3 && doctor && selectedTime) {
+    if (reason.length > 3 && selectedTime) {
       return setIsDisabled(false);
     }
     !isDisabled && setIsDisabled(true);
-  }, [reason.length, doctor, selectedTime, isDisabled]);
+  }, [reason.length, selectedTime, isDisabled]);
 
   return (
     <>
@@ -36,4 +34,4 @@ const AppointmentFormButton = ({ isFetching }: buttonProps) => {
   );
 };
 
-export default AppointmentFormButton;
+export default React.memo(AppointmentFormButton);

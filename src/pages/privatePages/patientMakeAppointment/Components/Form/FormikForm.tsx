@@ -62,7 +62,8 @@ const FormikForm = () => {
       note: data.note,
       doctorID: data.doctor.value,
     };
-    setRequestData(newData);
+    // setRequestData(newData);
+    console.log(data);
   };
 
   const history = useHistory();
@@ -124,4 +125,4 @@ const FormikForm = () => {
   );
 };
 
-export default FormikForm;
+export default React.memo(FormikForm);

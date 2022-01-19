@@ -34,4 +34,4 @@ const VisitReasons = () => {
   );
 };
 
-export default VisitReasons;
+export default React.memo(VisitReasons);

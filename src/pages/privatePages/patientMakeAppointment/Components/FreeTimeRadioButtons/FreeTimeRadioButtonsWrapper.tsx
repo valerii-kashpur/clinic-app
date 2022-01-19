@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useState } from "react";
-import { useFormContext } from "react-hook-form";
+import React, { useEffect, useState } from "react";
+import { useFormContext, useWatch } from "react-hook-form";
 import FreeTimeRadioButtonsGroup from "./FreeTimeRadioButtonsGroup";
 import { getDoctorsFreeTimeByDateAndId } from "network/fetchOperations";
 import { useQuery } from "react-query";
@@ -25,10 +25,10 @@ type FreeTime = [number] | [];
 
 const FreeTimeRadioButtonsWrapper = () => {
   const [availableTime, setAvailableTime] = useState<FreeTime>([]);
-  const [selectedTime, setSelectedTime] = useState("");
-  const { watch, setValue } = useFormContext();
-  const selectedDate = watch("selectedDate");
-  const doctorID = watch("doctor").value;
+  const { setValue } = useFormContext();
+  const selectedDate = useWatch({ name: "selectedDate" });
+  const selectedTime = useWatch({ name: "selectedTime" });
+  const doctorID = useWatch({ name: "doctor" }).value;
 
   const { refetch } = useQuery<FreeTime, Error>(
     "freeTime",
@@ -53,7 +53,6 @@ const FreeTimeRadioButtonsWrapper = () => {
   }, [doctorID, refetch, selectedDate]);
 
   const handleRadioClick = (e: React.FormEvent<HTMLInputElement>) => {
-    setSelectedTime(e.currentTarget.value);
     setValue("selectedTime", e.currentTarget.value);
   };
 
@@ -70,4 +69,4 @@ const FreeTimeRadioButtonsWrapper = () => {
   );
 };
 
-export default FreeTimeRadioButtonsWrapper;
+export default React.memo(FreeTimeRadioButtonsWrapper);
