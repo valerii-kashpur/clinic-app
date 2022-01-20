@@ -26,10 +26,12 @@ const DoctorSelect = () => {
   );
 
   const formatOptionsAndSetToState = (result: Doctors) => {
-    const doctorsArray: any = result.map((object: any) => ({
-      value: object.id,
-      label: `${object.first_name} ${object.last_name}`,
-    }));
+    const doctorsArray: { value: string; label: string }[] = result.map(
+      (object) => ({
+        value: object.id,
+        label: `${object.first_name} ${object.last_name}`,
+      })
+    );
     setDoctors(doctorsArray);
   };
 
